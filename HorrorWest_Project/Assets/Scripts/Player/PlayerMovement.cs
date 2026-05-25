@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private float currentLegAngle = 0f;
     private float targetLegAngle = 0f;
+    private float speedMultiplier = 1f;     // Modificado por PlayerAim al apuntar
 
     private void Awake()
     {
@@ -29,21 +30,23 @@ public class PlayerMovement : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 
+    public void SetAimSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
+    }
+
     private void FixedUpdate()
     {
-        rb.linearVelocity = moveInput.normalized * moveSpeed;
+        rb.linearVelocity = moveInput.normalized * moveSpeed * speedMultiplier;
     }
 
     public void UpdateLegAngle(float torsoAngle)
     {
-        // Usamos el mismo sistema de ángulo que el torso (sin offset -90)
         if (moveInput != Vector2.zero)
             targetLegAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
 
-        // Diferencia angular entre piernas y torso
         float angleDiff = Mathf.DeltaAngle(currentLegAngle, torsoAngle);
 
-        // Si supera el límite, empuja las piernas
         if (Mathf.Abs(angleDiff) > maxLegTorsoAngle)
         {
             float excess = angleDiff - Mathf.Sign(angleDiff) * maxLegTorsoAngle;

@@ -39,7 +39,7 @@ public class PlayerAiming : MonoBehaviour
     {
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
 
-        // torsoAngle sin offset, el offset -90 se aplica solo al rotar el sprite
+        
         torsoAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         if (torsoTransform != null)
