@@ -6,12 +6,15 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
+    [Header("Experience")]
+    [SerializeField] private float xpReward = 20f;      // XP que da al morir, ajustar por tipo de enemigo
+
     [Header("Drop Settings")]
-    [SerializeField] private GameObject[] coinPrefabs;  // 0 = moneda x1, 1 = moneda x5, 2 = moneda x10
-    [SerializeField] private float dropChance = 0.8f;   // Probabilidad de dropear algo
-    [SerializeField] private float dropChanceCoinOne = 70f;     // % moneda x1
-    [SerializeField] private float dropChanceCoinFive = 25f;    // % moneda x5
-    [SerializeField] private float dropChanceCoinTen = 5f;      // % moneda x10
+    [SerializeField] private GameObject[] coinPrefabs;
+    [SerializeField] private float dropChance = 0.8f;
+    [SerializeField] private float dropChanceCoinOne = 70f;
+    [SerializeField] private float dropChanceCoinFive = 25f;
+    [SerializeField] private float dropChanceCoinTen = 5f;
 
     private void Start()
     {
@@ -28,6 +31,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        ExperienceManager.Instance.AddXP(xpReward);
         TryDropCoin();
         Destroy(gameObject);
     }
@@ -41,9 +45,9 @@ public class Enemy : MonoBehaviour, IDamageable
         float roll = Random.Range(0f, total);
 
         int index;
-        if (roll < dropChanceCoinOne) index = 0;  // x1
-        else if (roll < dropChanceCoinOne + dropChanceCoinFive) index = 1;  // x5
-        else index = 2;  // x10
+        if (roll < dropChanceCoinOne) index = 0;
+        else if (roll < dropChanceCoinOne + dropChanceCoinFive) index = 1;
+        else index = 2;
 
         index = Mathf.Clamp(index, 0, coinPrefabs.Length - 1);
 

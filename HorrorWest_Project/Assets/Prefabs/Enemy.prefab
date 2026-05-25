@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
+  xpReward: 40
   coinPrefabs:
   - {fileID: 8305550355391945417, guid: ef2444d64f35f7c45bb7112a132ca9fa, type: 3}
   - {fileID: 7229546448470543570, guid: 7d95ee8484fa9894eb86c83e62598919, type: 3}
