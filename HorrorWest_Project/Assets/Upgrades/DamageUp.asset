@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DamageUp
   m_EditorClassIdentifier: 
   upgradeType: 0
-  upgradeName: 
-  description: 
-  tooltip: 
+  upgradeName: Extra Powder
+  description: +15% damage each shoot
+  tooltip: Increases the base damage of the bullets.
   icon: {fileID: 0}
   rarity: 0
   isUnique: 0
-  value: 0
+  value: 0.15

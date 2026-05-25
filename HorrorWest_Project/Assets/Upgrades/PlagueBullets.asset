@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: PlagueBullets
   m_EditorClassIdentifier: 
-  upgradeType: 0
-  upgradeName: 
-  description: 
-  tooltip: 
+  upgradeType: 11
+  upgradeName: Plague Round
+  description: Bullets apply plague, dealing damage over 3 seconds
+  tooltip: Inflicts a damage-over-time effect on hit enemies
   icon: {fileID: 0}
-  rarity: 0
+  rarity: 2
   isUnique: 0
   value: 0

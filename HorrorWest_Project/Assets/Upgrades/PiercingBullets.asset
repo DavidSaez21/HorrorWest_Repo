@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: PiercingBullets
   m_EditorClassIdentifier: 
-  upgradeType: 0
-  upgradeName: 
-  description: 
-  tooltip: 
+  upgradeType: 6
+  upgradeName: Piercing Shot
+  description: Bullets pierce through enemies
+  tooltip: Each bullet passes through one enemy before disappearing
   icon: {fileID: 0}
-  rarity: 0
+  rarity: 1
   isUnique: 0
   value: 0
