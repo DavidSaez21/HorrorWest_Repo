@@ -7,12 +7,14 @@ public class PlayerAiming : MonoBehaviour
     [SerializeField] private Transform torsoTransform;
     [SerializeField] private Transform weaponOrbitPivot;
     [SerializeField] private Transform weaponTransform;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [Header("Orbit Settings")]
     [SerializeField] private float orbitRadius = 0.6f;
 
     private Camera mainCamera;
     private Vector2 mouseWorldPosition;
+    private float torsoAngle = 0f;
 
     private void Awake()
     {
@@ -28,22 +30,27 @@ public class PlayerAiming : MonoBehaviour
     private void Update()
     {
         AimAtCursor();
+
+        if (playerMovement != null)
+            playerMovement.UpdateLegAngle(torsoAngle);
     }
 
     private void AimAtCursor()
     {
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // torsoAngle sin offset, el offset -90 se aplica solo al rotar el sprite
+        torsoAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         if (torsoTransform != null)
-            torsoTransform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+            torsoTransform.rotation = Quaternion.AngleAxis(torsoAngle - 90f, Vector3.forward);
 
         if (weaponOrbitPivot != null)
         {
             weaponOrbitPivot.position = (Vector2)transform.position + direction.normalized * orbitRadius;
 
             if (weaponTransform != null)
-                weaponTransform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+                weaponTransform.rotation = Quaternion.AngleAxis(torsoAngle - 90f, Vector3.forward);
         }
     }
 

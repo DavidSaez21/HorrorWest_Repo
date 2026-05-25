@@ -629,7 +629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -7560808230611391927, guid: 26953743bba099e4e81249d2392faa32, type: 3}
   m_Color: {r: 0.038127437, g: 0.061124623, b: 0.3962264, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1294,6 +1294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  legFollowSpeed: 8
+  maxLegTorsoAngle: 90
   legsTransform: {fileID: 1460432784}
 --- !u!50 &1956339856
 Rigidbody2D:
@@ -1354,6 +1356,7 @@ MonoBehaviour:
   torsoTransform: {fileID: 1451949012}
   weaponOrbitPivot: {fileID: 0}
   weaponTransform: {fileID: 0}
+  playerMovement: {fileID: 1956339855}
   orbitRadius: 0.6
 --- !u!114 &1956339859
 MonoBehaviour:
