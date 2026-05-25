@@ -13,15 +13,10 @@ public class CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private Vector3 originalScale;
     private bool isHovered = false;
-    private SpriteRenderer sr;
-    private Color normalColor;
-    public Color hoverColor = Color.yellow;
 
     void Start()
     {
         originalScale = transform.localScale;
-        sr = GetComponent<SpriteRenderer>();
-        normalColor = sr.color;
     }
 
     void Update()
@@ -30,24 +25,20 @@ public class CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * animSpeed);
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         isHovered = false;
         transform.localScale = originalScale;
-        if (sr != null)
-            sr.color = normalColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
-        sr.color = hoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
-        sr.color = normalColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)
