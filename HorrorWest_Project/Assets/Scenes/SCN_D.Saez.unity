@@ -4557,6 +4557,7 @@ GameObject:
   - component: {fileID: 1956339859}
   - component: {fileID: 1956339860}
   - component: {fileID: 1956339861}
+  - component: {fileID: 1956339862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4637,6 +4638,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 672f84dc-c0c9-46c4-acf8-ce94e6d64645
     m_ActionName: 'Player/Fire[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1956339862}
+        m_TargetAssemblyTypeName: PlayerAim, Assembly-CSharp
+        m_MethodName: OnAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 151bfce4-bae3-4d19-8044-3805fd3d062c
+    m_ActionName: 'Player/Aim[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4809,6 +4826,21 @@ MonoBehaviour:
   _currentFireRate: 0
   _currentReloadSpeed: 0
   _currentLuck: 0
+--- !u!114 &1956339862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956339853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e6b358d97a1664396e4cfa499a8a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimSpeedMultiplier: 0.5
+  aimCritMultiplier: 2
+  playerMovement: {fileID: 1956339855}
 --- !u!1001 &1966966059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5421,6 +5453,7 @@ GameObject:
   - component: {fileID: 2145360351}
   - component: {fileID: 2145360350}
   - component: {fileID: 2145360353}
+  - component: {fileID: 2145360354}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5546,6 +5579,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &2145360354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145360349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c065487d21e75fd45a76960781b36e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalSize: 5
+  aimSize: 3.5
+  zoomSpeed: 5
+  aimOffsetStrength: 0.3
+  offsetSpeed: 5
+  target: {fileID: 1956339857}
 --- !u!1001 &1611067599071866102
 PrefabInstance:
   m_ObjectHideFlags: 0
