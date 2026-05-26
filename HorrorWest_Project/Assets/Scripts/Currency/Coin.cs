@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public enum CoinValue { One = 1, Five = 5, Ten = 10 }
@@ -26,7 +26,7 @@ public class Coin : MonoBehaviour
     {
         Vector3 startPos = transform.position;
 
-        // Direcci�n aleatoria del salto
+        // Dirección aleatoria del salto
         Vector2 randomDir = Random.insideUnitCircle.normalized * Random.Range(0.2f, 0.5f);
         Vector3 peakPos = startPos + new Vector3(randomDir.x, jumpHeight, 0f);
         Vector3 landPos = startPos + new Vector3(randomDir.x, 0f, 0f);

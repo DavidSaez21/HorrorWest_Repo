@@ -13,9 +13,14 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseReloadSpeed = 1f;
     [SerializeField] private float baseLuck = 1f;
 
+    [Header("Critical Stats")]
+    [SerializeField] private float baseCritChance = 0f;         // 0% al inicio
+    [SerializeField] private float baseCritMultiplier = 1.25f;  // 25% más de daño
+
     [Header("References")]
     [SerializeField] private PlayerShoot playerShoot;
 
+    // Multiplicadores in-run
     private float damageMultiplier = 1f;
     private float moveSpeedMultiplier = 1f;
     private float maxHealthBonus = 0f;
@@ -23,6 +28,10 @@ public class PlayerStats : MonoBehaviour
     private float fireRateMultiplier = 1f;
     private float reloadSpeedMultiplier = 1f;
     private float luckMultiplier = 1f;
+
+    // Crítico — se mejora desde la tienda permanente
+    private float critChanceBonus = 0f;         // Bonus añadido desde la tienda
+    private float critMultiplierBonus = 0f;     // Bonus al multiplicador desde la tienda
 
     #region Debug
     [Header("Debug - Current Stats (Read Only)")]
@@ -33,6 +42,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentFireRate;
     [SerializeField] private float _currentReloadSpeed;
     [SerializeField] private float _currentLuck;
+    [SerializeField] private float _currentCritChance;
+    [SerializeField] private float _currentCritMultiplier;
     #endregion
 
     public bool hasPiercingBullets { get; private set; }
@@ -53,6 +64,24 @@ public class PlayerStats : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         UpdateDebugStats();
+    }
+
+    // Calcula si un disparo es crítico y devuelve el daño final
+    public float CalculateDamage(float baseDmg)
+    {
+        float critChance = GetCritChance();
+
+        // Bonus de apuntado
+        if (PlayerAim.Instance != null && PlayerAim.Instance.IsAiming)
+            critChance *= PlayerAim.Instance.GetCritMultiplier();
+
+        bool isCrit = Random.value < critChance;
+        float finalDamage = baseDmg * GetDamage();
+
+        if (isCrit)
+            finalDamage *= GetCritMultiplier();
+
+        return finalDamage;
     }
 
     public void ApplyUpgrade(UpgradeData upgrade)
@@ -88,6 +117,19 @@ public class PlayerStats : MonoBehaviour
         UpdateDebugStats();
     }
 
+    // Llamado desde la tienda permanente
+    public void AddCritChance(float amount)
+    {
+        critChanceBonus += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddCritMultiplier(float amount)
+    {
+        critMultiplierBonus += amount;
+        UpdateDebugStats();
+    }
+
     private void UpdateDebugStats()
     {
         _currentDamage = GetDamage();
@@ -97,6 +139,8 @@ public class PlayerStats : MonoBehaviour
         _currentFireRate = GetFireRate();
         _currentReloadSpeed = GetReloadSpeed();
         _currentLuck = GetLuckMultiplier();
+        _currentCritChance = GetCritChance();
+        _currentCritMultiplier = GetCritMultiplier();
     }
 
     public void ResetStats()
@@ -132,4 +176,6 @@ public class PlayerStats : MonoBehaviour
     public float GetFireRate() => baseFireRate * fireRateMultiplier;
     public float GetReloadSpeed() => baseReloadSpeed * reloadSpeedMultiplier;
     public float GetLuckMultiplier() => luckMultiplier;
+    public float GetCritChance() => baseCritChance + critChanceBonus;
+    public float GetCritMultiplier() => baseCritMultiplier + critMultiplierBonus;
 }

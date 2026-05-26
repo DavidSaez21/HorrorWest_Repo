@@ -42,6 +42,12 @@ public class Rifle : WeaponBase
             StartCoroutine(ReloadCoroutine());
     }
 
+    public override void ManualReload()
+    {
+        if (isReloading || currentAmmo == magazineSize) return;
+        StartCoroutine(ReloadCoroutine());
+    }
+
     private void SpawnBullet(Vector2 origin, Vector2 direction)
     {
         if (bulletPrefab == null) return;

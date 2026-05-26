@@ -5,8 +5,8 @@ public class Shotgun : WeaponBase
 {
     [Header("Shotgun Settings")]
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private int pelletsPerShot = 5;        // Perdigones por disparo
-    [SerializeField] private float spreadAngle = 30f;       // Ángulo total del abanico en grados
+    [SerializeField] private int pelletsPerShot = 5;
+    [SerializeField] private float spreadAngle = 30f;
     [SerializeField] private int magazineSize = 8;
     [SerializeField] private float reloadTime = 2f;
 
@@ -44,14 +44,18 @@ public class Shotgun : WeaponBase
             StartCoroutine(ReloadCoroutine());
     }
 
+    public override void ManualReload()
+    {
+        if (isReloading || currentAmmo == magazineSize) return;
+        StartCoroutine(ReloadCoroutine());
+    }
+
     private void SpawnPellets(Vector2 origin, Vector2 direction)
     {
         if (bulletPrefab == null) return;
 
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Distribuye los perdigones uniformemente dentro del ángulo de dispersión
-        // Ej: 5 perdigones con 30º -> -15, -7.5, 0, 7.5, 15
         for (int i = 0; i < pelletsPerShot; i++)
         {
             float t = pelletsPerShot == 1 ? 0.5f : (float)i / (pelletsPerShot - 1);

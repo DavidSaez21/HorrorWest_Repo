@@ -13,8 +13,6 @@ public class BulletProjectile : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
-    // range determina cuánto tiempo viaja la bala antes de destruirse
-    // a mayor speed y mayor range, más distancia recorre
     public void Init(Vector2 direction, float speed, float damage, float range)
     {
         this.damage = damage;
@@ -29,7 +27,14 @@ public class BulletProjectile : MonoBehaviour
         if (other.CompareTag("Player")) return;
 
         if (other.TryGetComponent(out IDamageable target))
-            target.TakeDamage(damage);
+        {
+            // Calcula daño con posible crítico
+            float finalDamage = PlayerStats.Instance != null
+                ? PlayerStats.Instance.CalculateDamage(damage)
+                : damage;
+
+            target.TakeDamage(finalDamage);
+        }
 
         Destroy(gameObject);
     }

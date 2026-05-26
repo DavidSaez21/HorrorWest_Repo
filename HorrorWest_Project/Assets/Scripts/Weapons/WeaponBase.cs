@@ -1,17 +1,13 @@
 using UnityEngine;
 
-public enum FireMode
-{
-    SemiAuto,
-    FullAuto
-}
+public enum FireMode { SemiAuto, FullAuto }
 
 public abstract class WeaponBase : MonoBehaviour
 {
     [Header("Weapon Config")]
     public string weaponName = "Unnamed Weapon";
     public FireMode fireMode = FireMode.SemiAuto;
-    public Sprite icon;                         // Icono para la UI
+    public Sprite icon;
 
     [Header("Stats")]
     [SerializeField] protected float fireRate = 1f;
@@ -25,14 +21,8 @@ public abstract class WeaponBase : MonoBehaviour
     protected float nextFireTime = 0f;
 
     public abstract void Fire(Vector2 origin, Vector2 direction);
+    public abstract void ManualReload();
 
-    protected bool CanFire()
-    {
-        return Time.time >= nextFireTime;
-    }
-
-    protected void ResetFireCooldown()
-    {
-        nextFireTime = Time.time + (1f / fireRate);
-    }
+    protected bool CanFire() => Time.time >= nextFireTime;
+    protected void ResetFireCooldown() => nextFireTime = Time.time + (1f / fireRate);
 }

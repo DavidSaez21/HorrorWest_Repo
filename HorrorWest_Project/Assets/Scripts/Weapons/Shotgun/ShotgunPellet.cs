@@ -7,7 +7,6 @@ public class ShotgunPellet : MonoBehaviour
     private float maxRange;
     private float speed;
     private Rigidbody2D rb;
-
     private Vector2 spawnPosition;
 
     private void Awake()
@@ -36,13 +35,15 @@ public class ShotgunPellet : MonoBehaviour
 
         if (other.TryGetComponent(out IDamageable target))
         {
-            // Calcula cuánto ha viajado el perdigón (0 = origen, 1 = rango máximo)
             float distanceTravelled = Vector2.Distance(spawnPosition, transform.position);
             float distanceRatio = Mathf.Clamp01(distanceTravelled / maxRange);
-
-            // A más distancia, menos daño — cae en curva para que sea más pronunciado
             float damageFalloff = 1f - Mathf.Pow(distanceRatio, 0.5f);
-            float finalDamage = Mathf.Max(1f, maxDamage * damageFalloff);
+            float baseDmg = Mathf.Max(1f, maxDamage * damageFalloff);
+
+            // Aplica crítico sobre el daño ya calculado con falloff
+            float finalDamage = PlayerStats.Instance != null
+                ? PlayerStats.Instance.CalculateDamage(baseDmg)
+                : baseDmg;
 
             target.TakeDamage(finalDamage);
         }

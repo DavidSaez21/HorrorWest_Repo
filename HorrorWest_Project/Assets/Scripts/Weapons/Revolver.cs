@@ -31,7 +31,6 @@ public class Revolver : WeaponBase
             return;
         }
 
-        // Si hay shootPoint usa su posición, si no usa el origen que manda PlayerShoot
         Vector2 spawnPosition = shootPoint != null ? (Vector2)shootPoint.position : origin;
         SpawnBullet(spawnPosition, direction);
 
@@ -41,6 +40,12 @@ public class Revolver : WeaponBase
 
         if (currentAmmo <= 0)
             StartCoroutine(ReloadCoroutine());
+    }
+
+    public override void ManualReload()
+    {
+        if (isReloading || currentAmmo == cylinderSize) return;
+        StartCoroutine(ReloadCoroutine());
     }
 
     private void SpawnBullet(Vector2 origin, Vector2 direction)
