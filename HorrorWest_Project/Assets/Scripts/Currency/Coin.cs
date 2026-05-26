@@ -12,26 +12,43 @@ public class Coin : MonoBehaviour
     [SerializeField] private float jumpDuration = 0.3f;
     [SerializeField] private float landDuration = 0.15f;
 
+    [Header("Imán")]
+    [SerializeField] private float magnetSpeed = 15f;
+
     private bool canPickup = false;
     private Collider2D col;
+    private Transform player;
+    private bool isBeingMagneted = false;
 
     private void Start()
     {
         col = GetComponent<Collider2D>();
-        col.enabled = false;    // No se puede recoger mientras salta
+        col.enabled = false;
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null) player = playerObj.transform;
+
         StartCoroutine(DropAnimation());
+    }
+
+    private void Update()
+    {
+        // Si el imán está activo vuela hacia el player
+        if (isBeingMagneted && player != null)
+        {
+            Vector2 direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
+            transform.position += (Vector3)(direction * magnetSpeed * Time.deltaTime);
+        }
     }
 
     private IEnumerator DropAnimation()
     {
         Vector3 startPos = transform.position;
 
-        // Dirección aleatoria del salto
         Vector2 randomDir = Random.insideUnitCircle.normalized * Random.Range(0.2f, 0.5f);
         Vector3 peakPos = startPos + new Vector3(randomDir.x, jumpHeight, 0f);
         Vector3 landPos = startPos + new Vector3(randomDir.x, 0f, 0f);
 
-        // Sube hasta el pico
         float t = 0f;
         while (t < 1f)
         {
@@ -40,7 +57,6 @@ public class Coin : MonoBehaviour
             yield return null;
         }
 
-        // Baja hasta el suelo
         t = 0f;
         while (t < 1f)
         {
@@ -49,9 +65,21 @@ public class Coin : MonoBehaviour
             yield return null;
         }
 
-        // Ya en el suelo, se puede recoger
         col.enabled = true;
         canPickup = true;
+
+        // Si el player ya tiene imán activo al aterrizar, activa el modo imán
+        CheckMagnet();
+    }
+
+    public void CheckMagnet()
+    {
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasCoinMagnet)
+        {
+            isBeingMagneted = true;
+            col.enabled = true;
+            canPickup = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

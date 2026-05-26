@@ -42,6 +42,15 @@ public class Rifle : WeaponBase
             StartCoroutine(ReloadCoroutine());
     }
 
+    public void InstantReload()
+    {
+        StopAllCoroutines();
+        currentAmmo = magazineSize;
+        isReloading = false;
+        OnEndReload?.Invoke();
+        OnAmmoChanged?.Invoke(currentAmmo);
+    }
+
     public override void ManualReload()
     {
         if (isReloading || currentAmmo == magazineSize) return;

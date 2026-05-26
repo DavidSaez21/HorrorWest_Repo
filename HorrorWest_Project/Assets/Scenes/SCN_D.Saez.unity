@@ -4132,7 +4132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6aedfd7fab45842a011a570e21ca0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseXPRequired: 100
+  baseXPRequired: 10
   exponentialFactor: 1.5
 --- !u!114 &1729078858
 MonoBehaviour:
@@ -4152,6 +4152,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 65f8b77bf4cfed64b961d35914885101, type: 2}
   - {fileID: 11400000, guid: 79673cff0ebf47a419139665dcfe4ad9, type: 2}
   - {fileID: 11400000, guid: 8b917377ae9b672418f386a0d5d68719, type: 2}
+  - {fileID: 11400000, guid: 9d051102b8ba97e429cc699936c67faa, type: 2}
+  - {fileID: 11400000, guid: b4852c275e67522478719afb3d9a485e, type: 2}
   commonWeight: 60
   uncommonWeight: 30
   rareWeight: 9
