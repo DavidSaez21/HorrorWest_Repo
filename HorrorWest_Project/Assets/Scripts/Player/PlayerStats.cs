@@ -17,10 +17,15 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseCritChance = 0f;
     [SerializeField] private float baseCritMultiplier = 1.25f;
 
+    [Header("Execute Settings")]
+    [SerializeField] private float executeThreshold = 0.05f;
+
+    [Header("Gunfighter's Curse Settings")]
+    [SerializeField] private float gunfightersCurseMaxBonus = 1f;
+
     [Header("References")]
     [SerializeField] private PlayerShoot playerShoot;
 
-    // Multiplicadores in-run
     private float damageMultiplier = 1f;
     private float moveSpeedMultiplier = 1f;
     private float maxHealthBonus = 0f;
@@ -29,8 +34,7 @@ public class PlayerStats : MonoBehaviour
     private float reloadSpeedMultiplier = 1f;
     private float luckMultiplier = 1f;
     private float reloadOnKillChance = 0f;
-
-    // Crítico
+    private float bulletSizeBonus = 0f;
     private float critChanceBonus = 0f;
     private float critMultiplierBonus = 0f;
 
@@ -51,6 +55,7 @@ public class PlayerStats : MonoBehaviour
     public bool hasPiercingBullets { get; private set; }
     public bool hasCoinMagnet { get; private set; }
     public bool hasReloadOnKill { get; private set; }
+    public bool hasExecute { get; private set; }
     public bool hasDoubleShot { get; private set; }
     public bool hasPlagueBullets { get; private set; }
     public bool hasPlagueChain { get; private set; }
@@ -60,12 +65,20 @@ public class PlayerStats : MonoBehaviour
     public bool hasSpecter { get; private set; }
     public bool hasLastBullet { get; private set; }
     public bool hasGunfightersCurse { get; private set; }
+    public bool hasInfiniteAmmo { get; private set; }
 
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         UpdateDebugStats();
+    }
+
+    private void Update()
+    {
+        // Actualiza el debug en tiempo real solo cuando la maldición está activa
+        if (hasGunfightersCurse)
+            UpdateDebugStats();
     }
 
     public float CalculateDamage(float baseDmg)
@@ -81,6 +94,13 @@ public class PlayerStats : MonoBehaviour
         if (isCrit)
             finalDamage *= GetCritMultiplier();
 
+        if (hasGunfightersCurse && PlayerHealth.Instance != null)
+        {
+            float healthPercent = PlayerHealth.Instance.GetCurrentHealth() / PlayerHealth.Instance.GetMaxHealth();
+            float curseMultiplier = 1f + (1f - healthPercent) * gunfightersCurseMaxBonus;
+            finalDamage *= curseMultiplier;
+        }
+
         return finalDamage;
     }
 
@@ -92,10 +112,12 @@ public class PlayerStats : MonoBehaviour
             case UpgradeType.MoveSpeedUp: moveSpeedMultiplier += upgrade.value; break;
             case UpgradeType.MaxHealthUp: maxHealthBonus += upgrade.value; break;
             case UpgradeType.BulletSpeedUp: bulletSpeedMultiplier += upgrade.value; break;
+            case UpgradeType.BulletSizeUp: bulletSizeBonus += upgrade.value; break;
             case UpgradeType.FireRateUp: fireRateMultiplier += upgrade.value; break;
             case UpgradeType.ReloadSpeedUp: reloadSpeedMultiplier += upgrade.value; break;
-
+            case UpgradeType.AimUp: critMultiplierBonus += upgrade.value; break;
             case UpgradeType.PiercingBullets: hasPiercingBullets = true; break;
+            case UpgradeType.InfiniteAmmo: hasInfiniteAmmo = true; break;
 
             case UpgradeType.CoinMagnet:
                 hasCoinMagnet = true;
@@ -108,6 +130,7 @@ public class PlayerStats : MonoBehaviour
                 reloadOnKillChance += upgrade.value;
                 break;
 
+            case UpgradeType.Execute: hasExecute = true; break;
             case UpgradeType.DoubleShot: hasDoubleShot = true; break;
             case UpgradeType.PlagueBullets: hasPlagueBullets = true; break;
             case UpgradeType.PlagueChain: hasPlagueChain = true; break;
@@ -127,17 +150,8 @@ public class PlayerStats : MonoBehaviour
         UpdateDebugStats();
     }
 
-    public void AddCritChance(float amount)
-    {
-        critChanceBonus += amount;
-        UpdateDebugStats();
-    }
-
-    public void AddCritMultiplier(float amount)
-    {
-        critMultiplierBonus += amount;
-        UpdateDebugStats();
-    }
+    public void AddCritChance(float amount) { critChanceBonus += amount; UpdateDebugStats(); }
+    public void AddCritMultiplier(float amount) { critMultiplierBonus += amount; UpdateDebugStats(); }
 
     private void UpdateDebugStats()
     {
@@ -163,10 +177,12 @@ public class PlayerStats : MonoBehaviour
         reloadSpeedMultiplier = 1f;
         luckMultiplier = baseLuck;
         reloadOnKillChance = 0f;
+        bulletSizeBonus = 0f;
 
         hasPiercingBullets = false;
         hasCoinMagnet = false;
         hasReloadOnKill = false;
+        hasExecute = false;
         hasDoubleShot = false;
         hasPlagueBullets = false;
         hasPlagueChain = false;
@@ -176,6 +192,7 @@ public class PlayerStats : MonoBehaviour
         hasSpecter = false;
         hasLastBullet = false;
         hasGunfightersCurse = false;
+        hasInfiniteAmmo = false;
 
         UpdateDebugStats();
     }
@@ -190,4 +207,6 @@ public class PlayerStats : MonoBehaviour
     public float GetCritChance() => baseCritChance + critChanceBonus;
     public float GetCritMultiplier() => baseCritMultiplier + critMultiplierBonus;
     public float GetReloadOnKillChance() => reloadOnKillChance;
+    public float GetExecuteThreshold() => executeThreshold;
+    public float GetBulletSizeBonus() => bulletSizeBonus;
 }

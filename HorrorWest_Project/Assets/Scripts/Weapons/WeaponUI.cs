@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -11,6 +11,7 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI reloadText;
 
     private WeaponBase subscribedWeapon;
+    private int maxAmmo = 0;
 
     private void Start()
     {
@@ -22,14 +23,16 @@ public class WeaponUI : MonoBehaviour
 
     private void Update()
     {
-        // Comprueba cada frame si el arma cambi�
         if (playerShoot != null && playerShoot.GetCurrentWeapon() != subscribedWeapon)
             RefreshWeapon();
+
+        // Actualiza el símbolo de infinito en tiempo real por si se coge la mejora
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo)
+            SetInfiniteAmmoUI();
     }
 
     private void RefreshWeapon()
     {
-        // Desuscribirse del arma anterior
         Unsubscribe();
 
         if (playerShoot == null) return;
@@ -37,34 +40,32 @@ public class WeaponUI : MonoBehaviour
         subscribedWeapon = playerShoot.GetCurrentWeapon();
         if (subscribedWeapon == null) return;
 
-        // Actualiza el icono
         if (weaponIcon != null && subscribedWeapon.icon != null)
             weaponIcon.sprite = subscribedWeapon.icon;
 
-        // Suscribirse al nuevo arma seg�n su tipo
         if (subscribedWeapon is Revolver revolver)
         {
             revolver.OnAmmoChanged += UpdateAmmo;
             revolver.OnStartReload += ShowReloading;
             revolver.OnEndReload += HideReloading;
+            maxAmmo = revolver.GetCylinderSize();
             UpdateAmmo(revolver.GetCurrentAmmo());
-            SetMaxAmmo(revolver.GetCylinderSize());
         }
         else if (subscribedWeapon is Shotgun shotgun)
         {
             shotgun.OnAmmoChanged += UpdateAmmo;
             shotgun.OnStartReload += ShowReloading;
             shotgun.OnEndReload += HideReloading;
+            maxAmmo = shotgun.GetMagazineSize();
             UpdateAmmo(shotgun.GetCurrentAmmo());
-            SetMaxAmmo(shotgun.GetMagazineSize());
         }
         else if (subscribedWeapon is Rifle rifle)
         {
             rifle.OnAmmoChanged += UpdateAmmo;
             rifle.OnStartReload += ShowReloading;
             rifle.OnEndReload += HideReloading;
+            maxAmmo = rifle.GetMagazineSize();
             UpdateAmmo(rifle.GetCurrentAmmo());
-            SetMaxAmmo(rifle.GetMagazineSize());
         }
     }
 
@@ -92,21 +93,37 @@ public class WeaponUI : MonoBehaviour
         subscribedWeapon = null;
     }
 
-    private int maxAmmo = 0;
-
-    private void SetMaxAmmo(int max)
-    {
-        maxAmmo = max;
-    }
-
     private void UpdateAmmo(int current)
     {
+        if (ammoText == null) return;
+
+        // Si tiene cargador ilimitado muestra el símbolo ∞
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo)
+        {
+            SetInfiniteAmmoUI();
+            return;
+        }
+
+        ammoText.text = $"{current} / {maxAmmo}";
+    }
+
+    private void SetInfiniteAmmoUI()
+    {
         if (ammoText != null)
-            ammoText.text = $"{current} / {maxAmmo}";
+            ammoText.text = "∞";
+
+        if (reloadText != null)
+            reloadText.gameObject.SetActive(false);
+
+        if (ammoText != null)
+            ammoText.gameObject.SetActive(true);
     }
 
     private void ShowReloading()
     {
+        // No mostrar "Recargando" si tiene cargador ilimitado
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo) return;
+
         if (reloadText != null)
             reloadText.gameObject.SetActive(true);
 

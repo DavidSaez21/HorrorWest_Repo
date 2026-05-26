@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
-  m_Name: PiercingBullets
+  m_Name: AimUp
   m_EditorClassIdentifier: 
-  upgradeType: 7
-  upgradeName: Piercing Shot
-  description: Bullets pierce through enemies
-  tooltip: Each bullet passes through one enemy before disappearing
+  upgradeType: 6
+  upgradeName: Steady Hand
+  description: +20% critical hit damage
+  tooltip: Increases the damage multiplier of your critical hits
   icon: {fileID: 0}
   rarity: 1
-  isUnique: 1
-  value: 0
+  isUnique: 0
+  value: 0.2

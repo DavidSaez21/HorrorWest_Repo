@@ -20,6 +20,9 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected float nextFireTime = 0f;
 
+    // True cuando el disparo actual es el último del cargador
+    public bool IsLastBullet { get; protected set; } = false;
+
     public abstract void Fire(Vector2 origin, Vector2 direction);
     public abstract void ManualReload();
 

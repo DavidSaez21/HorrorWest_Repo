@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ public class UpgradePanel : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private UpgradeCard[] cards;
+
+    [Header("Settings")]
+    [SerializeField] private float inputDelay = 0.8f;  // Segundos antes de poder seleccionar
 
     private void Start()
     {
@@ -30,6 +34,10 @@ public class UpgradePanel : MonoBehaviour
         float luck = PlayerStats.Instance != null ? PlayerStats.Instance.GetLuckMultiplier() : 1f;
         List<UpgradeData> upgrades = UpgradePool.Instance.GetRandomUpgrades(3, luck);
 
+        // Desactiva los clicks inicialmente
+        foreach (UpgradeCard card in cards)
+            card.SetInteractable(false);
+
         for (int i = 0; i < cards.Length; i++)
         {
             if (i < upgrades.Count)
@@ -44,6 +52,17 @@ public class UpgradePanel : MonoBehaviour
         }
 
         panelRoot.SetActive(true);
+
+        // Activa los clicks tras el delay
+        StartCoroutine(EnableCardsAfterDelay());
+    }
+
+    private IEnumerator EnableCardsAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(inputDelay);
+
+        foreach (UpgradeCard card in cards)
+            card.SetInteractable(true);
     }
 
     private void OnUpgradeSelected(UpgradeData upgrade)
@@ -55,6 +74,12 @@ public class UpgradePanel : MonoBehaviour
             PlayerStats.Instance.ApplyUpgrade(upgrade);
 
         panelRoot.SetActive(false);
+        StartCoroutine(ResumeAfterFrame());
+    }
+
+    private IEnumerator ResumeAfterFrame()
+    {
+        yield return new WaitForSecondsRealtime(0.05f);
         Time.timeScale = 1f;
     }
 }

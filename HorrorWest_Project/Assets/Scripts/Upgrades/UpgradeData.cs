@@ -19,13 +19,16 @@ public enum UpgradeType
     ReloadSpeedUp,
 
     // Poco comunes
+    AimUp,
     PiercingBullets,
     CoinMagnet,
     ReloadOnKill,
     DoubleShot,
     HealthRegen,
+    BulletSizeUp,
 
     // Raras
+    InfiniteAmmo,
     PlagueBullets,
     PlagueChain,
     ExplosiveBullets,

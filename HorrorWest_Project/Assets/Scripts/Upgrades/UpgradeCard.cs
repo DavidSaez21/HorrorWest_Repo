@@ -21,11 +21,15 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Vector3 originalScale;
     private Vector3 targetScale;
     private System.Action<UpgradeData> onSelected;
+    private bool interactable = false;
 
     private static readonly Color ColorCommon = new Color(0.75f, 0.75f, 0.75f);
     private static readonly Color ColorUncommon = new Color(0.12f, 0.56f, 1f);
     private static readonly Color ColorRare = new Color(0.63f, 0.13f, 0.94f);
     private static readonly Color ColorLegendary = new Color(1f, 0.75f, 0f);
+
+    // Color semitransparente cuando no es interactuable
+    private static readonly Color ColorDisabled = new Color(1f, 1f, 1f, 0.4f);
 
     private void Awake()
     {
@@ -34,14 +38,6 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (tooltipPanel != null)
             tooltipPanel.SetActive(false);
-
-        // Asegura que la tarjeta tenga un Image con Raycast Target para detectar clicks
-        if (GetComponent<Image>() == null)
-        {
-            Image img = gameObject.AddComponent<Image>();
-            img.color = new Color(0, 0, 0, 0); // Transparente
-            img.raycastTarget = true;
-        }
     }
 
     private void Update()
@@ -67,16 +63,22 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             tooltipText.text = data.tooltip;
     }
 
-    // IPointerClickHandler funciona aunque timeScale sea 0
+    public void SetInteractable(bool value)
+    {
+        interactable = value;
+
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerClick - data: {(data == null ? "NULL" : data.upgradeName)}");
+        if (!interactable) return;
         if (data == null) return;
         onSelected?.Invoke(data);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!interactable) return;
         targetScale = originalScale * hoverScale;
         if (tooltipPanel != null)
             tooltipPanel.SetActive(true);

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
-  m_Name: PiercingBullets
+  m_Name: InfiniteAmmo
   m_EditorClassIdentifier: 
-  upgradeType: 7
-  upgradeName: Piercing Shot
-  description: Bullets pierce through enemies
-  tooltip: Each bullet passes through one enemy before disappearing
+  upgradeType: 13
+  upgradeName: Infinite Ammo
+  description: Your weapon never needs to reload
+  tooltip: Unlimited ammunition for the rest of the run
   icon: {fileID: 0}
-  rarity: 1
+  rarity: 3
   isUnique: 1
   value: 0
