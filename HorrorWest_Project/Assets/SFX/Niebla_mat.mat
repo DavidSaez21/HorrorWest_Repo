@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -48,11 +48,11 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size_niebla: 161
+    - _Size_niebla: 117
     - _WorldSpace: 0
     m_Colors:
-    - _Color_Niebla: {r: 1, g: 1, b: 1, a: 0.1176471}
-    - _Velocidad: {r: 0.01, g: 0.001, b: 0, a: 0}
+    - _Color_Niebla: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 0.13333334}
+    - _Velocidad: {r: 0.01578065, g: 0.019382767, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &2770730565433072127
