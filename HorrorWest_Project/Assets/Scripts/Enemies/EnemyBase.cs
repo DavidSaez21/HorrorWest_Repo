@@ -6,7 +6,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] protected EnemyData data;
 
     [Header("References")]
-    [SerializeField] protected GameObject[] coinPrefabs;    // 0 = x1, 1 = x5, 2 = x10
+    [SerializeField] protected GameObject[] coinPrefabs;
 
     protected float currentHealth;
     protected float lastAttackTime;
@@ -17,7 +17,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         currentHealth = data.maxHealth;
 
-        // Busca al player automáticamente
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
@@ -27,7 +26,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (isDead) return;
 
-        // Aplica reducción de daño por defensa
         float finalDamage = Mathf.Max(1f, amount - data.defense);
         currentHealth -= finalDamage;
 
@@ -43,14 +41,34 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         ExperienceManager.Instance?.AddXP(data.xpReward);
         TryDropCoin();
+        TryInstantReload();
         OnDeath();
 
         Destroy(gameObject);
     }
 
-    // Métodos virtuales para que cada enemigo personalice su comportamiento
-    protected virtual void OnDamageReceived(float damage) { }   // Ej: reproducir animación de daño
-    protected virtual void OnDeath() { }                        // Ej: animación de muerte
+    private void TryInstantReload()
+    {
+        if (PlayerStats.Instance == null) return;
+        if (!PlayerStats.Instance.hasReloadOnKill) return;
+
+        // Comprueba probabilidad
+        if (Random.value > PlayerStats.Instance.GetReloadOnKillChance()) return;
+
+        // Recarga el arma actual instantáneamente
+        PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
+        if (playerShoot == null) return;
+
+        WeaponBase weapon = playerShoot.GetCurrentWeapon();
+        if (weapon == null) return;
+
+        if (weapon is Revolver revolver) revolver.InstantReload();
+        else if (weapon is Shotgun shotgun) shotgun.InstantReload();
+        else if (weapon is Rifle rifle) rifle.InstantReload();
+    }
+
+    protected virtual void OnDamageReceived(float damage) { }
+    protected virtual void OnDeath() { }
 
     protected float DistanceToPlayer()
     {
@@ -64,15 +82,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         return ((Vector2)player.position - (Vector2)transform.position).normalized;
     }
 
-    protected bool CanAttack()
-    {
-        return Time.time >= lastAttackTime + data.attackCooldown;
-    }
-
-    protected void ResetAttackCooldown()
-    {
-        lastAttackTime = Time.time;
-    }
+    protected bool CanAttack() => Time.time >= lastAttackTime + data.attackCooldown;
+    protected void ResetAttackCooldown() => lastAttackTime = Time.time;
 
     private void TryDropCoin()
     {

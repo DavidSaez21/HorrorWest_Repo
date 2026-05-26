@@ -42,6 +42,15 @@ public class Revolver : WeaponBase
             StartCoroutine(ReloadCoroutine());
     }
 
+    public void InstantReload()
+    {
+        StopAllCoroutines();
+        currentAmmo = cylinderSize;
+        isReloading = false;
+        OnEndReload?.Invoke();
+        OnAmmoChanged?.Invoke(currentAmmo);
+    }
+
     public override void ManualReload()
     {
         if (isReloading || currentAmmo == cylinderSize) return;

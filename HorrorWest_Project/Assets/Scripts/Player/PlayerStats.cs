@@ -14,8 +14,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseLuck = 1f;
 
     [Header("Critical Stats")]
-    [SerializeField] private float baseCritChance = 0f;         // 0% al inicio
-    [SerializeField] private float baseCritMultiplier = 1.25f;  // 25% más de daño
+    [SerializeField] private float baseCritChance = 0f;
+    [SerializeField] private float baseCritMultiplier = 1.25f;
 
     [Header("References")]
     [SerializeField] private PlayerShoot playerShoot;
@@ -28,10 +28,11 @@ public class PlayerStats : MonoBehaviour
     private float fireRateMultiplier = 1f;
     private float reloadSpeedMultiplier = 1f;
     private float luckMultiplier = 1f;
+    private float reloadOnKillChance = 0f;
 
-    // Crítico — se mejora desde la tienda permanente
-    private float critChanceBonus = 0f;         // Bonus añadido desde la tienda
-    private float critMultiplierBonus = 0f;     // Bonus al multiplicador desde la tienda
+    // Crítico
+    private float critChanceBonus = 0f;
+    private float critMultiplierBonus = 0f;
 
     #region Debug
     [Header("Debug - Current Stats (Read Only)")]
@@ -44,6 +45,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentLuck;
     [SerializeField] private float _currentCritChance;
     [SerializeField] private float _currentCritMultiplier;
+    [SerializeField] private float _currentReloadOnKillChance;
     #endregion
 
     public bool hasPiercingBullets { get; private set; }
@@ -66,12 +68,10 @@ public class PlayerStats : MonoBehaviour
         UpdateDebugStats();
     }
 
-    // Calcula si un disparo es crítico y devuelve el daño final
     public float CalculateDamage(float baseDmg)
     {
         float critChance = GetCritChance();
 
-        // Bonus de apuntado
         if (PlayerAim.Instance != null && PlayerAim.Instance.IsAiming)
             critChance *= PlayerAim.Instance.GetCritMultiplier();
 
@@ -96,8 +96,18 @@ public class PlayerStats : MonoBehaviour
             case UpgradeType.ReloadSpeedUp: reloadSpeedMultiplier += upgrade.value; break;
 
             case UpgradeType.PiercingBullets: hasPiercingBullets = true; break;
-            case UpgradeType.CoinMagnet: hasCoinMagnet = true; break;
-            case UpgradeType.ReloadOnKill: hasReloadOnKill = true; break;
+
+            case UpgradeType.CoinMagnet:
+                hasCoinMagnet = true;
+                foreach (Coin coin in FindObjectsByType<Coin>(FindObjectsSortMode.None))
+                    coin.CheckMagnet();
+                break;
+
+            case UpgradeType.ReloadOnKill:
+                hasReloadOnKill = true;
+                reloadOnKillChance += upgrade.value;
+                break;
+
             case UpgradeType.DoubleShot: hasDoubleShot = true; break;
             case UpgradeType.PlagueBullets: hasPlagueBullets = true; break;
             case UpgradeType.PlagueChain: hasPlagueChain = true; break;
@@ -117,7 +127,6 @@ public class PlayerStats : MonoBehaviour
         UpdateDebugStats();
     }
 
-    // Llamado desde la tienda permanente
     public void AddCritChance(float amount)
     {
         critChanceBonus += amount;
@@ -141,6 +150,7 @@ public class PlayerStats : MonoBehaviour
         _currentLuck = GetLuckMultiplier();
         _currentCritChance = GetCritChance();
         _currentCritMultiplier = GetCritMultiplier();
+        _currentReloadOnKillChance = GetReloadOnKillChance();
     }
 
     public void ResetStats()
@@ -152,6 +162,7 @@ public class PlayerStats : MonoBehaviour
         fireRateMultiplier = 1f;
         reloadSpeedMultiplier = 1f;
         luckMultiplier = baseLuck;
+        reloadOnKillChance = 0f;
 
         hasPiercingBullets = false;
         hasCoinMagnet = false;
@@ -178,4 +189,5 @@ public class PlayerStats : MonoBehaviour
     public float GetLuckMultiplier() => luckMultiplier;
     public float GetCritChance() => baseCritChance + critChanceBonus;
     public float GetCritMultiplier() => baseCritMultiplier + critMultiplierBonus;
+    public float GetReloadOnKillChance() => reloadOnKillChance;
 }
