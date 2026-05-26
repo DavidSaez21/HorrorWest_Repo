@@ -11,6 +11,7 @@ public abstract class WeaponBase : MonoBehaviour
     [Header("Weapon Config")]
     public string weaponName = "Unnamed Weapon";
     public FireMode fireMode = FireMode.SemiAuto;
+    public Sprite icon;                         // Icono para la UI
 
     [Header("Stats")]
     [SerializeField] protected float fireRate = 1f;
@@ -19,7 +20,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] protected float range = 10f;
 
     [Header("References")]
-    [SerializeField] protected Transform shootPoint;    // Punto desde donde salen las balas
+    [SerializeField] protected Transform shootPoint;
 
     protected float nextFireTime = 0f;
 

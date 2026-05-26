@@ -13,7 +13,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseReloadSpeed = 1f;
     [SerializeField] private float baseLuck = 1f;
 
-    // Multiplicadores in-run
+    [Header("References")]
+    [SerializeField] private PlayerShoot playerShoot;
+
     private float damageMultiplier = 1f;
     private float moveSpeedMultiplier = 1f;
     private float maxHealthBonus = 0f;
@@ -33,7 +35,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentLuck;
     #endregion
 
-    // Mejoras especiales activas
     public bool hasPiercingBullets { get; private set; }
     public bool hasCoinMagnet { get; private set; }
     public bool hasReloadOnKill { get; private set; }
@@ -72,11 +73,16 @@ public class PlayerStats : MonoBehaviour
             case UpgradeType.PlagueBullets: hasPlagueBullets = true; break;
             case UpgradeType.PlagueChain: hasPlagueChain = true; break;
             case UpgradeType.ExplosiveBullets: hasExplosiveBullets = true; break;
-            case UpgradeType.DualWield: hasDualWield = true; break;
-            case UpgradeType.TotalPlague: hasTotalPlague = true; break;
+            case UpgradeType.GunfightersCurse: hasGunfightersCurse = true; break;
             case UpgradeType.Specter: hasSpecter = true; break;
             case UpgradeType.LastBullet: hasLastBullet = true; break;
-            case UpgradeType.GunfightersCurse: hasGunfightersCurse = true; break;
+            case UpgradeType.TotalPlague: hasTotalPlague = true; break;
+
+            case UpgradeType.DualWield:
+                hasDualWield = true;
+                if (playerShoot != null)
+                    playerShoot.ActivateDualWield();
+                break;
         }
 
         UpdateDebugStats();

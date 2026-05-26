@@ -6,11 +6,17 @@ public class PlayerShoot : MonoBehaviour
     [Header("References")]
     [SerializeField] private PlayerAiming playerAiming;
 
-    [Header("Weapons")]
+    [Header("Primary Weapons")]
     [SerializeField] private WeaponBase[] weapons;
     private WeaponBase currentWeapon;
 
+    [Header("Secondary Weapons (Dual Wield)")]
+    [SerializeField] private WeaponBase[] secondaryWeapons;     // Mismo orden que weapons
+    [SerializeField] private Transform secondWeaponPivot;
+    private WeaponBase currentSecondaryWeapon;
+
     private bool isFiring = false;
+    private bool isDualWield = false;
 
     #region Debug
     [Header("Debug")]
@@ -19,7 +25,11 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
+        // Desactiva todas las armas al inicio
         foreach (WeaponBase w in weapons)
+            w.gameObject.SetActive(false);
+
+        foreach (WeaponBase w in secondaryWeapons)
             w.gameObject.SetActive(false);
 
         if (weapons.Length > 0)
@@ -33,7 +43,10 @@ public class PlayerShoot : MonoBehaviour
             isFiring = true;
 
             if (currentWeapon != null && currentWeapon.fireMode == FireMode.SemiAuto)
+            {
                 TryFire();
+                if (isDualWield) TryFireSecondary();
+            }
         }
 
         if (context.canceled)
@@ -43,7 +56,10 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         if (isFiring && currentWeapon != null && currentWeapon.fireMode == FireMode.FullAuto)
+        {
             TryFire();
+            if (isDualWield) TryFireSecondary();
+        }
 
         #region Debug
         if (debugMode)
@@ -61,8 +77,17 @@ public class PlayerShoot : MonoBehaviour
 
         Vector2 origin = playerAiming.GetWeaponPosition();
         Vector2 direction = playerAiming.GetAimDirection();
-
         currentWeapon.Fire(origin, direction);
+    }
+
+    private void TryFireSecondary()
+    {
+        if (currentSecondaryWeapon == null || playerAiming == null) return;
+
+        // La mano secundaria dispara desde su propia posición pero apunta igual
+        Vector2 origin = secondWeaponPivot != null ? (Vector2)secondWeaponPivot.position : (Vector2)transform.position;
+        Vector2 direction = playerAiming.GetAimDirection();
+        currentSecondaryWeapon.Fire(origin, direction);
     }
 
     public void EquipWeapon(int index)
@@ -72,9 +97,33 @@ public class PlayerShoot : MonoBehaviour
         if (currentWeapon != null)
             currentWeapon.gameObject.SetActive(false);
 
+        if (currentSecondaryWeapon != null)
+            currentSecondaryWeapon.gameObject.SetActive(false);
+
         currentWeapon = weapons[index];
         currentWeapon.gameObject.SetActive(true);
+
+        // Si el dual wield está activo, equipa también la secundaria
+        if (isDualWield && index < secondaryWeapons.Length)
+        {
+            currentSecondaryWeapon = secondaryWeapons[index];
+            currentSecondaryWeapon.gameObject.SetActive(true);
+        }
+
         isFiring = false;
+    }
+
+    public void ActivateDualWield()
+    {
+        isDualWield = true;
+
+        // Activa la secundaria del arma actual
+        int currentIndex = System.Array.IndexOf(weapons, currentWeapon);
+        if (currentIndex >= 0 && currentIndex < secondaryWeapons.Length)
+        {
+            currentSecondaryWeapon = secondaryWeapons[currentIndex];
+            currentSecondaryWeapon.gameObject.SetActive(true);
+        }
     }
 
     public WeaponBase GetCurrentWeapon() => currentWeapon;
