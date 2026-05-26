@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: DualWield
   m_EditorClassIdentifier: 
-  upgradeType: 16
+  upgradeType: 19
   upgradeName: Dual Wield
   description: Your weapon is duplicated in the other hand
   tooltip: Doubles your fire rate by equipping the same weapon in both hands

@@ -165,3 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f40b15b6dc4444ca43d14e1b28b95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plagueDamagePerSecond: 5
+  plagueDuration: 3
+  explosionRadius: 0.68
+  explosionDamage: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64

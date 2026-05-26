@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3279418797020906566}
   - component: {fileID: 5664049033065851406}
   - component: {fileID: 2275624040116430169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyFollow
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   - {fileID: 8305550355391945417, guid: ef2444d64f35f7c45bb7112a132ca9fa, type: 3}
   - {fileID: 7229546448470543570, guid: 7d95ee8484fa9894eb86c83e62598919, type: 3}
   - {fileID: 4657357222584236683, guid: ae1f4c3a1cee56143a802275448600bd, type: 3}
+  knockbackForce: 4
+  knockbackDuration: 0.15
 --- !u!114 &2275624040116430169
 MonoBehaviour:
   m_ObjectHideFlags: 0

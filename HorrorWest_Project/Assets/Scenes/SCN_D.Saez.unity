@@ -2132,6 +2132,7 @@ MonoBehaviour:
   - {fileID: 1390594459}
   - {fileID: 155284905}
   - {fileID: 2065219346}
+  inputDelay: 0.8
 --- !u!1001 &907961550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4154,6 +4155,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b917377ae9b672418f386a0d5d68719, type: 2}
   - {fileID: 11400000, guid: 9d051102b8ba97e429cc699936c67faa, type: 2}
   - {fileID: 11400000, guid: b4852c275e67522478719afb3d9a485e, type: 2}
+  - {fileID: 11400000, guid: 0d792cb8929a9504397b4341a67a6420, type: 2}
+  - {fileID: 11400000, guid: 5f820b6af0b694f4a92c53ff11e740d9, type: 2}
+  - {fileID: 11400000, guid: 413fab97b1a663f47bb56b079d673f39, type: 2}
+  - {fileID: 11400000, guid: 4bfabe7867347ab4b823291554e9a47e, type: 2}
+  - {fileID: 11400000, guid: f59c384cbdbc5f04099ec60b8f08aeb3, type: 2}
+  - {fileID: 11400000, guid: 966690c12ccd4874f8e1b3fb4018fcd9, type: 2}
+  - {fileID: 11400000, guid: 75f53b93782503d42bc4f26853684906, type: 2}
   commonWeight: 60
   uncommonWeight: 30
   rareWeight: 9
@@ -4846,6 +4854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelRoot: {fileID: 0}
   cards: []
+  inputDelay: 0.8
 --- !u!1 &2024593937
 GameObject:
   m_ObjectHideFlags: 0
@@ -5480,6 +5489,10 @@ PrefabInstance:
     - target: {fileID: 7361606280496257099, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391595218902316647, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

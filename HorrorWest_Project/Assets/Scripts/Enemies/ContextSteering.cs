@@ -1,34 +1,29 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Context-Based Steering Behavior para enemigos Top-Down 2D.
-/// Evalúa múltiples direcciones radiales y elige la mejor combinando interés y peligro.
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class ContextSteering : MonoBehaviour
 {
     [Header("Direcciones")]
-    [SerializeField] private int rayCount = 8;                  // Número de direcciones a evaluar (8 o 16)
+    [SerializeField] private int rayCount = 8;
 
     [Header("Movimiento")]
     [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float smoothSpeed = 8f;            // Suavizado del vector de movimiento
+    [SerializeField] private float smoothSpeed = 8f;
 
     [Header("Strafing (Flanqueo)")]
-    [SerializeField] private float strafeRange = 3f;            // Distancia a la que empieza a flanquear
-    [SerializeField] private float strafeStrength = 2f;         // Intensidad del flanqueo lateral
-    [SerializeField] private float followDistanceVariation = 0.5f; // Variación aleatoria de distancia (anti-simetría)
+    [SerializeField] private float strafeRange = 3f;
+    [SerializeField] private float strafeStrength = 2f;
+    [SerializeField] private float followDistanceVariation = 0.5f;
 
     [Header("Separación")]
-    [SerializeField] private float separationRadius = 1.2f;     // Radio de detección de aliados cercanos
-    [SerializeField] private float separationStrength = 2f;     // Fuerza de separación
-    [SerializeField] private float separationAngleOffset = 25f; // Ángulo oblicuo anti-jitter (grados)
+    [SerializeField] private float separationRadius = 1.2f;
+    [SerializeField] private float separationStrength = 2f;
+    [SerializeField] private float separationAngleOffset = 25f;
 
     [Header("Obstáculos")]
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float obstacleDetectionRange = 1.5f;
 
-    // Arrays de contexto
     private float[] interest;
     private float[] danger;
     private Vector2[] directions;
@@ -36,7 +31,10 @@ public class ContextSteering : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     private Vector2 currentVelocity;
-    private float personalFollowDistance;  // Distancia individual para romper simetría
+    private float personalFollowDistance;
+
+    // Knockback — controlado desde EnemyBase
+    private bool isKnockedBack = false;
 
     private void Awake()
     {
@@ -44,12 +42,10 @@ public class ContextSteering : MonoBehaviour
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
 
-        // Inicializa arrays
         interest = new float[rayCount];
         danger = new float[rayCount];
         directions = new Vector2[rayCount];
 
-        // Precalcula las direcciones radiales
         for (int i = 0; i < rayCount; i++)
         {
             float angle = i * (360f / rayCount) * Mathf.Deg2Rad;
@@ -62,13 +58,13 @@ public class ContextSteering : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
 
-        // Variación aleatoria individual para romper la simetría entre enemigos
         personalFollowDistance = Random.Range(-followDistanceVariation, followDistanceVariation);
     }
 
     private void FixedUpdate()
     {
-        if (player == null) return;
+        // Si está en knockback no mueve — EnemyBase gestiona la velocidad
+        if (isKnockedBack || player == null) return;
 
         UpdateInterest();
         UpdateDanger();
@@ -78,7 +74,15 @@ public class ContextSteering : MonoBehaviour
         rb.linearVelocity = currentVelocity;
     }
 
-    // ── Interés ───────────────────────────────────────────────────────────────
+    // Llamado desde EnemyBase al recibir knockback
+    public void SetKnockedBack(bool value)
+    {
+        isKnockedBack = value;
+
+        // Al salir del knockback resetea la velocidad actual para no acumular
+        if (!value) currentVelocity = Vector2.zero;
+    }
+
     private void UpdateInterest()
     {
         Vector2 toPlayer = ((Vector2)player.position - (Vector2)transform.position);
@@ -89,11 +93,8 @@ public class ContextSteering : MonoBehaviour
         {
             float dot = Vector2.Dot(directions[i], toPlayerNorm);
 
-            // Strafing — cuando está cerca aplica función de flanqueo lateral
             if (distToPlayer < strafeRange + personalFollowDistance)
             {
-                // Reduce el interés frontal/trasero y favorece los laterales
-                // dot cercano a 0 = lateral → alto interés; dot cercano a 1 = frontal → bajo interés
                 float strafeFactor = 1f - Mathf.Abs(dot);
                 dot = Mathf.Lerp(dot, strafeFactor * strafeStrength, 0.6f);
             }
@@ -102,23 +103,19 @@ public class ContextSteering : MonoBehaviour
         }
     }
 
-    // ── Peligro ───────────────────────────────────────────────────────────────
     private void UpdateDanger()
     {
         for (int i = 0; i < rayCount; i++)
         {
             danger[i] = 0f;
 
-            // Obstáculos — raycast en cada dirección
             RaycastHit2D hit = Physics2D.Raycast(transform.position, directions[i], obstacleDetectionRange, obstacleLayer);
             if (hit.collider != null)
             {
-                // Más cerca = más peligro
                 float proximityFactor = 1f - (hit.distance / obstacleDetectionRange);
                 danger[i] = proximityFactor;
             }
 
-            // Separación de otros enemigos con ángulo oblicuo anti-jitter
             Collider2D[] nearby = Physics2D.OverlapCircleAll(transform.position, separationRadius);
             foreach (Collider2D col in nearby)
             {
@@ -129,7 +126,6 @@ public class ContextSteering : MonoBehaviour
                 float dist = awayFromNeighbor.magnitude;
                 if (dist <= 0) continue;
 
-                // Aplica ángulo oblicuo para evitar jitter
                 float oblique = separationAngleOffset * Mathf.Deg2Rad;
                 Vector2 obliqueDir = new Vector2(
                     awayFromNeighbor.x * Mathf.Cos(oblique) - awayFromNeighbor.y * Mathf.Sin(oblique),
@@ -143,48 +139,55 @@ public class ContextSteering : MonoBehaviour
         }
     }
 
-    // ── Decisión final ────────────────────────────────────────────────────────
     private Vector2 GetBestDirection()
     {
-        Vector2 bestDir = Vector2.zero;
         float bestWeight = float.MinValue;
+        int bestIndex = 0;
 
         for (int i = 0; i < rayCount; i++)
         {
             float weight = interest[i] - danger[i];
-
             if (weight > bestWeight)
             {
                 bestWeight = weight;
-                bestDir = directions[i];
+                bestIndex = i;
             }
         }
 
-        return bestDir;
+        if (bestWeight < 0f)
+        {
+            float minDanger = float.MaxValue;
+            for (int i = 0; i < rayCount; i++)
+            {
+                if (danger[i] < minDanger)
+                {
+                    minDanger = danger[i];
+                    bestIndex = i;
+                }
+            }
+        }
+
+        return directions[bestIndex];
     }
 
-    // ── Gizmos ────────────────────────────────────────────────────────────────
     private void OnDrawGizmosSelected()
     {
         if (directions == null) return;
 
         for (int i = 0; i < rayCount; i++)
         {
-            // Verde = interés, Rojo = peligro
             Gizmos.color = Color.green;
             if (interest != null)
                 Gizmos.DrawLine(transform.position, transform.position + (Vector3)(directions[i] * interest[i]));
 
             Gizmos.color = Color.red;
             if (danger != null)
-                Gizmos.DrawLine(transform.position, transform.position + (Vector3)(directions[i] * danger[i]));
+                Gizmos.DrawLine(transform.position, transform.position + (Vector3)(directions[i] * danger[i] * 0.5f));
         }
 
-        // Radio de separación
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, separationRadius);
 
-        // Radio de strafing
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, strafeRange);
     }

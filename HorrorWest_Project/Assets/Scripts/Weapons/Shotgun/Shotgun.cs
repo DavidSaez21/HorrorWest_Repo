@@ -27,21 +27,29 @@ public class Shotgun : WeaponBase
     {
         if (isReloading || !CanFire()) return;
 
-        if (currentAmmo <= 0)
+        bool infiniteAmmo = PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo;
+
+        if (currentAmmo <= 0 && !infiniteAmmo)
         {
             StartCoroutine(ReloadCoroutine());
             return;
         }
 
+        IsLastBullet = currentAmmo == 1 && !infiniteAmmo;
+
         Vector2 spawnPosition = shootPoint != null ? (Vector2)shootPoint.position : origin;
         SpawnPellets(spawnPosition, direction);
 
-        currentAmmo--;
-        ResetFireCooldown();
-        OnAmmoChanged?.Invoke(currentAmmo);
+        if (!infiniteAmmo)
+        {
+            currentAmmo--;
+            OnAmmoChanged?.Invoke(currentAmmo);
 
-        if (currentAmmo <= 0)
-            StartCoroutine(ReloadCoroutine());
+            if (currentAmmo <= 0)
+                StartCoroutine(ReloadCoroutine());
+        }
+
+        ResetFireCooldown();
     }
 
     public void InstantReload()
@@ -49,6 +57,7 @@ public class Shotgun : WeaponBase
         StopAllCoroutines();
         currentAmmo = magazineSize;
         isReloading = false;
+        IsLastBullet = false;
         OnEndReload?.Invoke();
         OnAmmoChanged?.Invoke(currentAmmo);
     }
@@ -56,6 +65,7 @@ public class Shotgun : WeaponBase
     public override void ManualReload()
     {
         if (isReloading || currentAmmo == magazineSize) return;
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo) return;
         StartCoroutine(ReloadCoroutine());
     }
 
@@ -80,7 +90,10 @@ public class Shotgun : WeaponBase
             GameObject pellet = Instantiate(bulletPrefab, origin, rotation);
 
             if (pellet.TryGetComponent(out ShotgunPellet proj))
+            {
                 proj.Init(pelletDirection, bulletSpeed, damage, range);
+                proj.SetLastBullet(IsLastBullet);
+            }
         }
     }
 
@@ -93,6 +106,7 @@ public class Shotgun : WeaponBase
 
         currentAmmo = magazineSize;
         isReloading = false;
+        IsLastBullet = false;
         OnEndReload?.Invoke();
         OnAmmoChanged?.Invoke(currentAmmo);
     }

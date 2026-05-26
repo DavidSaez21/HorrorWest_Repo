@@ -8,26 +8,68 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [Header("References")]
     [SerializeField] protected GameObject[] coinPrefabs;
 
+    [Header("Knockback")]
+    [SerializeField] private float knockbackForce = 4f;
+    [SerializeField] private float knockbackDuration = 0.15f;
+
     protected float currentHealth;
     protected float lastAttackTime;
     protected Transform player;
     protected bool isDead = false;
 
+    private Rigidbody2D rb;
+    private ContextSteering steering;
+    private bool isKnockedBack = false;
+    private float knockbackTimer = 0f;
+    private Vector2 knockbackVelocity;
+
     protected virtual void Start()
     {
         currentHealth = data.maxHealth;
+        rb = GetComponent<Rigidbody2D>();
+        steering = GetComponent<ContextSteering>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
     }
 
-    public void TakeDamage(float amount)
+    private void FixedUpdate()
+    {
+        if (isKnockedBack)
+        {
+            knockbackTimer -= Time.fixedDeltaTime;
+
+            // Va frenando progresivamente hasta parar
+            knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, 10f * Time.fixedDeltaTime);
+            rb.linearVelocity = knockbackVelocity;
+
+            if (knockbackTimer <= 0f)
+            {
+                isKnockedBack = false;
+                rb.linearVelocity = Vector2.zero;
+                if (steering != null) steering.SetKnockedBack(false);
+            }
+        }
+    }
+
+    public void TakeDamage(float amount) => TakeDamage(amount, Vector2.zero);
+
+    public void TakeDamage(float amount, Vector2 hitDirection)
     {
         if (isDead) return;
 
         float finalDamage = Mathf.Max(1f, amount - data.defense);
         currentHealth -= finalDamage;
+
+        if (hitDirection != Vector2.zero)
+        {
+            isKnockedBack = true;
+            knockbackTimer = knockbackDuration;
+            knockbackVelocity = hitDirection.normalized * knockbackForce;
+            rb.linearVelocity = knockbackVelocity;
+            if (steering != null) steering.SetKnockedBack(true);
+        }
 
         OnDamageReceived(finalDamage);
 
@@ -38,12 +80,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void Die()
     {
         isDead = true;
-
         ExperienceManager.Instance?.AddXP(data.xpReward);
         TryDropCoin();
         TryInstantReload();
         OnDeath();
-
         Destroy(gameObject);
     }
 
@@ -51,17 +91,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (PlayerStats.Instance == null) return;
         if (!PlayerStats.Instance.hasReloadOnKill) return;
-
-        // Comprueba probabilidad
         if (Random.value > PlayerStats.Instance.GetReloadOnKillChance()) return;
 
-        // Recarga el arma actual instantáneamente
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         if (playerShoot == null) return;
 
         WeaponBase weapon = playerShoot.GetCurrentWeapon();
-        if (weapon == null) return;
-
         if (weapon is Revolver revolver) revolver.InstantReload();
         else if (weapon is Shotgun shotgun) shotgun.InstantReload();
         else if (weapon is Rifle rifle) rifle.InstantReload();
@@ -84,6 +119,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected bool CanAttack() => Time.time >= lastAttackTime + data.attackCooldown;
     protected void ResetAttackCooldown() => lastAttackTime = Time.time;
+    public float GetHealthPercent() => currentHealth / data.maxHealth;
 
     private void TryDropCoin()
     {

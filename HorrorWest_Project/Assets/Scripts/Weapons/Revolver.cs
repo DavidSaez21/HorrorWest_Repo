@@ -25,21 +25,29 @@ public class Revolver : WeaponBase
     {
         if (isReloading || !CanFire()) return;
 
-        if (currentAmmo <= 0)
+        bool infiniteAmmo = PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo;
+
+        if (currentAmmo <= 0 && !infiniteAmmo)
         {
             StartCoroutine(ReloadCoroutine());
             return;
         }
 
+        IsLastBullet = currentAmmo == 1 && !infiniteAmmo;
+
         Vector2 spawnPosition = shootPoint != null ? (Vector2)shootPoint.position : origin;
         SpawnBullet(spawnPosition, direction);
 
-        currentAmmo--;
-        ResetFireCooldown();
-        OnAmmoChanged?.Invoke(currentAmmo);
+        if (!infiniteAmmo)
+        {
+            currentAmmo--;
+            OnAmmoChanged?.Invoke(currentAmmo);
 
-        if (currentAmmo <= 0)
-            StartCoroutine(ReloadCoroutine());
+            if (currentAmmo <= 0)
+                StartCoroutine(ReloadCoroutine());
+        }
+
+        ResetFireCooldown();
     }
 
     public void InstantReload()
@@ -47,6 +55,7 @@ public class Revolver : WeaponBase
         StopAllCoroutines();
         currentAmmo = cylinderSize;
         isReloading = false;
+        IsLastBullet = false;
         OnEndReload?.Invoke();
         OnAmmoChanged?.Invoke(currentAmmo);
     }
@@ -54,6 +63,7 @@ public class Revolver : WeaponBase
     public override void ManualReload()
     {
         if (isReloading || currentAmmo == cylinderSize) return;
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo) return;
         StartCoroutine(ReloadCoroutine());
     }
 
@@ -67,7 +77,10 @@ public class Revolver : WeaponBase
         GameObject bullet = Instantiate(bulletPrefab, origin, rotation);
 
         if (bullet.TryGetComponent(out BulletProjectile proj))
+        {
             proj.Init(direction, bulletSpeed, damage, range);
+            proj.SetLastBullet(IsLastBullet);
+        }
     }
 
     private IEnumerator ReloadCoroutine()
@@ -79,6 +92,7 @@ public class Revolver : WeaponBase
 
         currentAmmo = cylinderSize;
         isReloading = false;
+        IsLastBullet = false;
         OnEndReload?.Invoke();
         OnAmmoChanged?.Invoke(currentAmmo);
     }

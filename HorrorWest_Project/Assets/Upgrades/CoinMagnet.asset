@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: CoinMagnet
   m_EditorClassIdentifier: 
-  upgradeType: 7
+  upgradeType: 8
   upgradeName: Coin Magnet
   description: Coins are automatically attracted to you
   tooltip: Coins on the ground are pulled toward you automatically
