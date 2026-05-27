@@ -6,10 +6,10 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     [Header("Balanceo idle")]
     public float idleAngle = 1.5f;
-    public float idleSpeed = 0.8f;
+    public float idleSpeed = 1.5f;
 
     [Header("Balanceo al pasar el raton")]
-    public float hoverAngle = 12f;
+    public float hoverAngle = 3f;
     public float swingSpeed = 2.2f;
     public float decaySpeed = 1.5f;
 
@@ -17,7 +17,7 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public float smoothness = 0.92f;
 
     [Header("Escala al pasar el raton")]
-    public float hoverScaleMultiplier = 1.1f;
+    public float hoverScaleMultiplier = 1.05f;
     public float scaleSpeed = 8f;
 
     [Header("Evento al hacer click")]
@@ -37,13 +37,13 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (_isHovered)
         {
-            _phase += Time.deltaTime * swingSpeed;
+            _phase += Time.unscaledDeltaTime * swingSpeed;
             float targetAngle = Mathf.Sin(_phase) * hoverAngle;
             _currentAngle = Mathf.Lerp(_currentAngle, targetAngle, 1f - smoothness);
         }
         else
         {
-            _currentAngle = Mathf.Lerp(_currentAngle, 0f, Time.deltaTime * decaySpeed);
+            _currentAngle = Mathf.Lerp(_currentAngle, 0f, Time.unscaledDeltaTime * decaySpeed);
         }
 
         transform.localRotation = Quaternion.Euler(0f, 0f, _currentAngle);
@@ -52,7 +52,7 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
             ? _originalScale * hoverScaleMultiplier
             : _originalScale;
 
-        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * scaleSpeed);
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.unscaledDeltaTime * scaleSpeed);
     }
 
     void OnDisable()
