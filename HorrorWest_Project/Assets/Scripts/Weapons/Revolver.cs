@@ -16,6 +16,8 @@ public class Revolver : WeaponBase
 
     public event System.Action OnStartReload;
     public event System.Action OnEndReload;
+
+    public float GetReloadTime() => reloadTime;
     public event System.Action<int> OnAmmoChanged;
 
     private void Start()

@@ -8,15 +8,24 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private PlayerShoot playerShoot;
     [SerializeField] private Image weaponIcon;
     [SerializeField] private TextMeshProUGUI ammoText;
-    [SerializeField] private TextMeshProUGUI reloadText;
+    [SerializeField] private GameObject reloadPanel;        // Panel que contiene el círculo de recarga
+    [SerializeField] private Image reloadCircle;            // Image con Fill Method Radial 360
+    [SerializeField] private float reloadTime = 0f;         // Se actualiza según el arma
+
+    [Header("Ammo Colors")]
+    [SerializeField] private Color fullAmmoColor = Color.white;
+    [SerializeField] private Color lowAmmoColor = Color.red;
+    [SerializeField] private float lowAmmoThreshold = 0.5f; // 50% de balas
 
     private WeaponBase subscribedWeapon;
     private int maxAmmo = 0;
+    private bool isReloading = false;
+    private float reloadTimer = 0f;
 
     private void Start()
     {
-        if (reloadText != null)
-            reloadText.gameObject.SetActive(false);
+        if (reloadPanel != null)
+            reloadPanel.SetActive(false);
 
         RefreshWeapon();
     }
@@ -26,9 +35,15 @@ public class WeaponUI : MonoBehaviour
         if (playerShoot != null && playerShoot.GetCurrentWeapon() != subscribedWeapon)
             RefreshWeapon();
 
-        // Actualiza el símbolo de infinito en tiempo real por si se coge la mejora
         if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo)
             SetInfiniteAmmoUI();
+
+        // Actualiza el círculo de recarga
+        if (isReloading && reloadCircle != null && reloadTime > 0f)
+        {
+            reloadTimer += Time.deltaTime;
+            reloadCircle.fillAmount = reloadTimer / reloadTime;
+        }
     }
 
     private void RefreshWeapon()
@@ -46,7 +61,7 @@ public class WeaponUI : MonoBehaviour
         if (subscribedWeapon is Revolver revolver)
         {
             revolver.OnAmmoChanged += UpdateAmmo;
-            revolver.OnStartReload += ShowReloading;
+            revolver.OnStartReload += () => ShowReloading(revolver.GetReloadTime());
             revolver.OnEndReload += HideReloading;
             maxAmmo = revolver.GetCylinderSize();
             UpdateAmmo(revolver.GetCurrentAmmo());
@@ -54,7 +69,7 @@ public class WeaponUI : MonoBehaviour
         else if (subscribedWeapon is Shotgun shotgun)
         {
             shotgun.OnAmmoChanged += UpdateAmmo;
-            shotgun.OnStartReload += ShowReloading;
+            shotgun.OnStartReload += () => ShowReloading(shotgun.GetReloadTime());
             shotgun.OnEndReload += HideReloading;
             maxAmmo = shotgun.GetMagazineSize();
             UpdateAmmo(shotgun.GetCurrentAmmo());
@@ -62,7 +77,7 @@ public class WeaponUI : MonoBehaviour
         else if (subscribedWeapon is Rifle rifle)
         {
             rifle.OnAmmoChanged += UpdateAmmo;
-            rifle.OnStartReload += ShowReloading;
+            rifle.OnStartReload += () => ShowReloading(rifle.GetReloadTime());
             rifle.OnEndReload += HideReloading;
             maxAmmo = rifle.GetMagazineSize();
             UpdateAmmo(rifle.GetCurrentAmmo());
@@ -74,19 +89,19 @@ public class WeaponUI : MonoBehaviour
         if (subscribedWeapon is Revolver revolver)
         {
             revolver.OnAmmoChanged -= UpdateAmmo;
-            revolver.OnStartReload -= ShowReloading;
+            revolver.OnStartReload -= () => ShowReloading(0f);
             revolver.OnEndReload -= HideReloading;
         }
         else if (subscribedWeapon is Shotgun shotgun)
         {
             shotgun.OnAmmoChanged -= UpdateAmmo;
-            shotgun.OnStartReload -= ShowReloading;
+            shotgun.OnStartReload -= () => ShowReloading(0f);
             shotgun.OnEndReload -= HideReloading;
         }
         else if (subscribedWeapon is Rifle rifle)
         {
             rifle.OnAmmoChanged -= UpdateAmmo;
-            rifle.OnStartReload -= ShowReloading;
+            rifle.OnStartReload -= () => ShowReloading(0f);
             rifle.OnEndReload -= HideReloading;
         }
 
@@ -97,7 +112,6 @@ public class WeaponUI : MonoBehaviour
     {
         if (ammoText == null) return;
 
-        // Si tiene cargador ilimitado muestra el símbolo ∞
         if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo)
         {
             SetInfiniteAmmoUI();
@@ -105,39 +119,53 @@ public class WeaponUI : MonoBehaviour
         }
 
         ammoText.text = $"{current} / {maxAmmo}";
+
+        // Cambia el color según el porcentaje de munición
+        float ammoPercent = maxAmmo > 0 ? (float)current / maxAmmo : 1f;
+        ammoText.color = ammoPercent <= lowAmmoThreshold ? lowAmmoColor : fullAmmoColor;
+    }
+
+    private void ShowReloading(float duration)
+    {
+        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo) return;
+
+        isReloading = true;
+        reloadTime = duration;
+        reloadTimer = 0f;
+
+        if (ammoText != null)
+            ammoText.gameObject.SetActive(false);
+
+        if (reloadPanel != null)
+        {
+            reloadPanel.SetActive(true);
+            if (reloadCircle != null)
+                reloadCircle.fillAmount = 0f;
+        }
+    }
+
+    private void HideReloading()
+    {
+        isReloading = false;
+
+        if (reloadPanel != null)
+            reloadPanel.SetActive(false);
+
+        if (ammoText != null)
+            ammoText.gameObject.SetActive(true);
     }
 
     private void SetInfiniteAmmoUI()
     {
         if (ammoText != null)
+        {
             ammoText.text = "∞";
-
-        if (reloadText != null)
-            reloadText.gameObject.SetActive(false);
-
-        if (ammoText != null)
+            ammoText.color = fullAmmoColor;
             ammoText.gameObject.SetActive(true);
-    }
+        }
 
-    private void ShowReloading()
-    {
-        // No mostrar "Recargando" si tiene cargador ilimitado
-        if (PlayerStats.Instance != null && PlayerStats.Instance.hasInfiniteAmmo) return;
-
-        if (reloadText != null)
-            reloadText.gameObject.SetActive(true);
-
-        if (ammoText != null)
-            ammoText.gameObject.SetActive(false);
-    }
-
-    private void HideReloading()
-    {
-        if (reloadText != null)
-            reloadText.gameObject.SetActive(false);
-
-        if (ammoText != null)
-            ammoText.gameObject.SetActive(true);
+        if (reloadPanel != null)
+            reloadPanel.SetActive(false);
     }
 
     private void OnDestroy()

@@ -362,6 +362,8 @@ GameObject:
   - component: {fileID: 3622544502657314692}
   - component: {fileID: 3279418797020906566}
   - component: {fileID: 1284248343558953795}
+  - component: {fileID: 6968693276057978730}
+  - component: {fileID: 5373921571018653223}
   m_Layer: 6
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -396,20 +398,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a09832a8191e89540bfe418d2337351e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rayCount: 16
-  dangerRadius: 1.2
+  dangerRadius: 3
+  enemySeparationRadius: 1.2
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  directionSmoothing: 0.6
+  directionSmoothing: 0.15
+  wallSteerRadius: 7.56
+  lateralBonus: 0.77
   showDebug: 1
 --- !u!212 &7313811940161950066
 SpriteRenderer:
@@ -546,7 +551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b3dbef55661fb844aaf759aff118d64, type: 3}
   m_Name: 
@@ -555,6 +560,48 @@ MonoBehaviour:
   coinPrefabs: []
   knockbackForce: 4
   knockbackDuration: 0.15
+--- !u!114 &6968693276057978730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18d115eb54fd8f4ab6c97d648e1a5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectorLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  detectorSize: {x: 30, y: 30}
+  detectorOriginOffset: {x: 0, y: 0}
+  detectionDelay: 0.3
+--- !u!114 &5373921571018653223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b589052f08e14788ac131c1244fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 4b31cada8f05e9a4b82c5536fc4e736e, type: 2}
+  coinPrefabs: []
+  knockbackForce: 4
+  knockbackDuration: 0.15
+  _obstacleCheckCircleRadius: 0.4
+  _obstacleCheckDistance: 0.8
+  _wallScanDistance: 8
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _rotationSpeed: 200
+  detector: {fileID: 0}
 --- !u!1 &8146848041466634728
 GameObject:
   m_ObjectHideFlags: 0

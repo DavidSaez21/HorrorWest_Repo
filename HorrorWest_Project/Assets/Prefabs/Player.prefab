@@ -196,6 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   fireMode: 0
+  icon: {fileID: 0}
   fireRate: 1
   damage: 10
   bulletSpeed: 10
@@ -204,7 +205,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
   spreadAngle: 30
-  magazineSize: 4
+  magazineSize: 2
   reloadTime: 2
 --- !u!1 &2959621942750902114
 GameObject:
@@ -340,13 +341,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Rifle
   fireMode: 0
+  icon: {fileID: 0}
   fireRate: 2
   damage: 10
   bulletSpeed: 10
   range: 10
   shootPoint: {fileID: 5586551376632850595}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
-  magazineSize: 30
+  magazineSize: 20
   reloadTime: 2.5
 --- !u!1 &4017495061281314283
 GameObject:
@@ -451,6 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   fireMode: 0
+  icon: {fileID: 0}
   fireRate: 1
   damage: 10
   bulletSpeed: 10
@@ -459,7 +462,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
   spreadAngle: 30
-  magazineSize: 4
+  magazineSize: 2
   reloadTime: 2
 --- !u!1 &4233202426675484041
 GameObject:
@@ -750,6 +753,7 @@ GameObject:
   - component: {fileID: 1233542285368260281}
   - component: {fileID: 4861946547401061254}
   - component: {fileID: 7555775729066527714}
+  - component: {fileID: 6841291344138584746}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -816,6 +820,7 @@ MonoBehaviour:
   moveSpeed: 5
   legFollowSpeed: 8
   maxLegTorsoAngle: 90
+  flipSpeed: 20
   legsTransform: {fileID: 5739784459839358403}
 --- !u!114 &5677680712758529919
 MonoBehaviour:
@@ -834,6 +839,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 0}
   playerMovement: {fileID: 633683917246300807}
   orbitRadius: 0.6
+  aimSmoothSpeed: 7
 --- !u!114 &177790242381157819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,6 +929,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 151bfce4-bae3-4d19-8044-3805fd3d062c
     m_ActionName: 'Player/Aim[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 436976793888286558}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8609cea2-e97e-4664-b7ac-13ca661ed7e7
+    m_ActionName: 'Player/Reload[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1016,6 +1038,10 @@ MonoBehaviour:
   baseFireRate: 1
   baseReloadSpeed: 1
   baseLuck: 1
+  baseCritChance: 0
+  baseCritMultiplier: 1.25
+  executeThreshold: 0.05
+  gunfightersCurseMaxBonus: 1
   playerShoot: {fileID: 436976793888286558}
   _currentDamage: 0
   _currentMoveSpeed: 0
@@ -1024,6 +1050,9 @@ MonoBehaviour:
   _currentFireRate: 0
   _currentReloadSpeed: 0
   _currentLuck: 0
+  _currentCritChance: 0
+  _currentCritMultiplier: 0
+  _currentReloadOnKillChance: 0
 --- !u!114 &7555775729066527714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,6 +1068,21 @@ MonoBehaviour:
   aimSpeedMultiplier: 0.5
   aimCritMultiplier: 2
   playerMovement: {fileID: 633683917246300807}
+--- !u!114 &6841291344138584746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7361606280496257099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76d60cd5868a9940b5d3c0b824bba24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthBarFill: {fileID: 0}
+  invincibilityTime: 0.5
 --- !u!1 &7391595218902316647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,13 +1186,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Rifle
   fireMode: 0
+  icon: {fileID: 0}
   fireRate: 2
   damage: 10
   bulletSpeed: 10
   range: 10
   shootPoint: {fileID: 1371070906374619859}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
-  magazineSize: 30
+  magazineSize: 20
   reloadTime: 2.5
 --- !u!1 &7623253567357173783
 GameObject:
@@ -1253,6 +1298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Revolver
   fireMode: 0
+  icon: {fileID: 0}
   fireRate: 4
   damage: 10
   bulletSpeed: 10
@@ -1261,6 +1307,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
   cylinderSize: 6
   reloadTime: 1.5
+  muzzleFlashFX: {fileID: 0}
 --- !u!1 &8270449750258638979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,6 +1445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Revolver
   fireMode: 0
+  icon: {fileID: 0}
   fireRate: 4
   damage: 10
   bulletSpeed: 10
@@ -1406,3 +1454,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
   cylinderSize: 6
   reloadTime: 1.5
+  muzzleFlashFX: {fileID: 0}

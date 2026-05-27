@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// Va directo al jugador usando CBS para esquivar obstáculos.
-// Inspector: moveSpeed ~2.5, maxHealth ~30, damage ~8
 public class EnemyPursuer : EnemyBase
 {
     private EnemyCBS cbs;
@@ -16,7 +14,6 @@ public class EnemyPursuer : EnemyBase
     {
         Vector2 desired = DirectionToPlayer();
         Vector2 dir = cbs != null ? cbs.GetBestDirection(desired) : desired;
-
         FaceDirection(dir);
 
         if (distToPlayer > data.attackRange)

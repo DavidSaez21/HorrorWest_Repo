@@ -15,6 +15,8 @@ public class Rifle : WeaponBase
     public event System.Action OnEndReload;
     public event System.Action<int> OnAmmoChanged;
 
+    public float GetReloadTime() => reloadTime;
+
     private void Start()
     {
         fireMode = FireMode.FullAuto;
