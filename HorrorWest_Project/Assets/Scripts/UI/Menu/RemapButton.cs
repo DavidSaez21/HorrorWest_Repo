@@ -49,9 +49,12 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
 
                 Debug.Log("Path completo: " + path);
                 Debug.Log("Nombre extraido: " + keyName);
+                Debug.Log("Buscando en: " + spritesPath + "/" + keyName.ToUpper());
 
-                Sprite[] sprites = Resources.LoadAll<Sprite>(spritesPath + "/" + keyName);
+                Sprite[] sprites = Resources.LoadAll<Sprite>(spritesPath + "/" + keyName.ToUpper());
                 Sprite newSprite = sprites.Length > 0 ? sprites[0] : null;
+
+                Debug.Log("Sprites encontrados: " + sprites.Length);
 
                 if (newSprite != null)
                     keySprite.sprite = newSprite;
