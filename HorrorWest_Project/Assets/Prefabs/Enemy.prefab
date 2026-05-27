@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6918484974023394030}
   - component: {fileID: 7112002553456822605}
   - component: {fileID: 5450527778870074379}
-  - component: {fileID: 8426555245030826475}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -135,25 +134,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8426555245030826475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17978270721069765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4298d443c0e234497b673fa40b7fa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 30
-  xpReward: 40
-  coinPrefabs:
-  - {fileID: 8305550355391945417, guid: ef2444d64f35f7c45bb7112a132ca9fa, type: 3}
-  - {fileID: 7229546448470543570, guid: 7d95ee8484fa9894eb86c83e62598919, type: 3}
-  - {fileID: 4657357222584236683, guid: ae1f4c3a1cee56143a802275448600bd, type: 3}
-  dropChance: 1
-  dropChanceCoinOne: 70
-  dropChanceCoinFive: 25
-  dropChanceCoinTen: 5

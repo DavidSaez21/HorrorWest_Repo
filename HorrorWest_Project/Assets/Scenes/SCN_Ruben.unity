@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 4388902}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5060001, y: 0, z: -0.0019993824}
+  m_LocalPosition: {x: 0.5060001, y: 0, z: -0.028}
   m_LocalScale: {x: 0.03772353, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 165071900}
   - component: {fileID: 165071903}
   - component: {fileID: 165071902}
-  - component: {fileID: 165071901}
+  - component: {fileID: 165071904}
   m_Layer: 0
   m_Name: Btn_Controls
   m_TagString: Untagged
@@ -381,35 +381,6 @@ Transform:
   - {fileID: 566147779}
   m_Father: {fileID: 158379084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &165071901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165071899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0229d44e5ab6a094ebd500b0db8809e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.15
-  animSpeed: 8
-  onClicked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 547980925}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ClickControls
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &165071902
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -511,6 +482,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &165071904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165071899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 1.5
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.05
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 547980925}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &206060343
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +528,7 @@ GameObject:
   - component: {fileID: 206060344}
   - component: {fileID: 206060347}
   - component: {fileID: 206060346}
-  - component: {fileID: 206060345}
+  - component: {fileID: 206060348}
   m_Layer: 0
   m_Name: Btn_Audio
   m_TagString: Untagged
@@ -546,35 +552,6 @@ Transform:
   - {fileID: 408272788}
   m_Father: {fileID: 158379084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &206060345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206060343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0229d44e5ab6a094ebd500b0db8809e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.15
-  animSpeed: 8
-  onClicked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 547980925}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ClickAudio
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &206060346
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -676,6 +653,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &206060348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206060343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 1.5
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.05
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 547980925}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &265860361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,7 +2997,7 @@ GameObject:
   - component: {fileID: 950629722}
   - component: {fileID: 950629725}
   - component: {fileID: 950629724}
-  - component: {fileID: 950629723}
+  - component: {fileID: 950629726}
   m_Layer: 0
   m_Name: Btn_Close
   m_TagString: Untagged
@@ -3009,35 +3021,6 @@ Transform:
   - {fileID: 1931954685}
   m_Father: {fileID: 158379084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &950629723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950629721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0229d44e5ab6a094ebd500b0db8809e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.15
-  animSpeed: 8
-  onClicked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 547980925}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: CloseOptions
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &950629724
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3139,6 +3122,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &950629726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950629721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 1.5
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.05
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 547980925}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: CloseOptions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &967067076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,7 +3200,7 @@ GameObject:
   - component: {fileID: 1003878522}
   - component: {fileID: 1003878523}
   - component: {fileID: 1003878525}
-  - component: {fileID: 1003878524}
+  - component: {fileID: 1003878526}
   m_Layer: 0
   m_Name: Btn_Close
   m_TagString: Untagged
@@ -3261,35 +3279,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1003878524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003878521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0229d44e5ab6a094ebd500b0db8809e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.15
-  animSpeed: 15
-  onClicked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 547980925}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: CloseAudio
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &1003878525
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3336,6 +3325,41 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1003878526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003878521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 1.5
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.05
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 547980925}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: CloseAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1105553444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,7 +3809,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 08dc5861daa25524f8cc9baad78170d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e56601e90feffaf488d5466e15f68be7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5565,7 +5589,7 @@ Transform:
   m_GameObject: {fileID: 1881817337}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09800001, y: -0.086, z: -0.0010001659}
+  m_LocalPosition: {x: 0.09800001, y: -0.086, z: 0}
   m_LocalScale: {x: 0.43000004, y: 0.030000003, z: 0.27522004}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5773,7 +5797,7 @@ Transform:
   m_GameObject: {fileID: 1921019807}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6462,7 +6486,7 @@ GameObject:
   - component: {fileID: 2063774353}
   - component: {fileID: 2063774354}
   - component: {fileID: 2063774356}
-  - component: {fileID: 2063774355}
+  - component: {fileID: 2063774357}
   m_Layer: 0
   m_Name: Btn_Close
   m_TagString: Untagged
@@ -6541,35 +6565,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2063774355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063774352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0229d44e5ab6a094ebd500b0db8809e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverScale: 1.15
-  animSpeed: 15
-  onClicked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 547980925}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: CloseControls
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &2063774356
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6616,6 +6611,41 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2063774357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063774352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 1.5
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.05
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 547980925}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: CloseControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2121415088
 GameObject:
   m_ObjectHideFlags: 0
