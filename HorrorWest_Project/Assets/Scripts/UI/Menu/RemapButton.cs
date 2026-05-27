@@ -12,14 +12,10 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
     [Header("Sprites")]
     public string spritesPath = "Keys";
 
-    private PlayerInputActions _inputActions;
-    private bool _isWaiting = false;
+    [Header("Input")]
+    public InputActionAsset inputActions;
 
-    void Start()
-    {
-        _inputActions = new PlayerInputActions();
-        _inputActions.Enable();
-    }
+    private bool _isWaiting = false;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -31,7 +27,7 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
     {
         _isWaiting = true;
 
-        InputAction action = _inputActions.asset.FindAction(actionName);
+        InputAction action = inputActions.FindAction(actionName);
         action.Disable();
 
         action.PerformInteractiveRebinding()
@@ -47,14 +43,8 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
                 string path = action.bindings[bindingIndex].effectivePath;
                 string keyName = path.Split('/')[1].ToLower();
 
-                Debug.Log("Path completo: " + path);
-                Debug.Log("Nombre extraido: " + keyName);
-                Debug.Log("Buscando en: " + spritesPath + "/" + keyName.ToUpper());
-
                 Sprite[] sprites = Resources.LoadAll<Sprite>(spritesPath + "/" + keyName.ToUpper());
                 Sprite newSprite = sprites.Length > 0 ? sprites[0] : null;
-
-                Debug.Log("Sprites encontrados: " + sprites.Length);
 
                 if (newSprite != null)
                     keySprite.sprite = newSprite;
@@ -69,10 +59,5 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
                 Debug.Log("Rebinding cancelado");
             })
             .Start();
-    }
-
-    void OnDestroy()
-    {
-        _inputActions.Dispose();
     }
 }
