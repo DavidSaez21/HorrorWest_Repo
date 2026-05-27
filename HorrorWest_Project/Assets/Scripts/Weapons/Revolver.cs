@@ -8,6 +8,9 @@ public class Revolver : WeaponBase
     [SerializeField] private int cylinderSize = 6;
     [SerializeField] private float reloadTime = 1.5f;
 
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem muzzleFlashFX; // Variable agregada para el destello
+
     private int currentAmmo;
     private bool isReloading = false;
 
@@ -37,6 +40,13 @@ public class Revolver : WeaponBase
 
         Vector2 spawnPosition = shootPoint != null ? (Vector2)shootPoint.position : origin;
         SpawnBullet(spawnPosition, direction);
+
+        // --- INICIO DE CÓDIGO AGREGADO PARA EL DESTELLO ---
+        if (muzzleFlashFX != null)
+        {
+            muzzleFlashFX.Play();
+        }
+        // --- FIN DE CÓDIGO AGREGADO ---
 
         if (!infiniteAmmo)
         {
