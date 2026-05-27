@@ -2,15 +2,6 @@
 using UnityEngine.UI;
 using TMPro;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// WeaponUI — muestra munición, icono y círculo de recarga del arma activa.
-//
-// ANTES: hacía cast manual a Revolver, Shotgun y Rifle por separado.
-//        Añadir un arma nueva rompía este script.
-// AHORA: usa únicamente la interfaz pública de WeaponBase (GetCurrentAmmo,
-//        GetMagazineSize, GetReloadTime, eventos). Añadir armas no requiere
-//        tocar este script.
-// ─────────────────────────────────────────────────────────────────────────────
 public class WeaponUI : MonoBehaviour
 {
     [Header("References")]
@@ -18,20 +9,18 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private Image weaponIcon;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private GameObject reloadPanel;
-    [SerializeField] private Image reloadCircle;   // Fill Method Radial 360
+    [SerializeField] private Image reloadCircle;
 
     [Header("Ammo Colors")]
     [SerializeField] private Color fullAmmoColor = Color.white;
+    [SerializeField] private Color mediumAmmoColor = Color.yellow;
     [SerializeField] private Color lowAmmoColor = Color.red;
-    [SerializeField][Range(0f, 1f)] private float lowAmmoThreshold = 0.5f;
 
-    // ── Estado interno ────────────────────────────────────────────────────────
     private WeaponBase subscribedWeapon;
     private bool isReloading = false;
     private float reloadTime = 0f;
     private float reloadTimer = 0f;
 
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Start()
     {
         if (reloadPanel != null) reloadPanel.SetActive(false);
@@ -40,15 +29,12 @@ public class WeaponUI : MonoBehaviour
 
     private void Update()
     {
-        // Detecta cambio de arma
         if (playerShoot != null && playerShoot.GetCurrentWeapon() != subscribedWeapon)
             RefreshWeapon();
 
-        // Munición infinita: sobreescribe UI en tiempo real
         if (PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo)
             SetInfiniteAmmoUI();
 
-        // Actualiza el círculo de recarga
         if (isReloading && reloadCircle != null && reloadTime > 0f)
         {
             reloadTimer += Time.deltaTime;
@@ -56,7 +42,6 @@ public class WeaponUI : MonoBehaviour
         }
     }
 
-    // ── Suscripción ───────────────────────────────────────────────────────────
     private void RefreshWeapon()
     {
         Unsubscribe();
@@ -65,11 +50,9 @@ public class WeaponUI : MonoBehaviour
         subscribedWeapon = playerShoot.GetCurrentWeapon();
         if (subscribedWeapon == null) return;
 
-        // Icono
         if (weaponIcon != null && subscribedWeapon.icon != null)
             weaponIcon.sprite = subscribedWeapon.icon;
 
-        // Suscribe a los eventos — ahora directamente desde WeaponBase
         subscribedWeapon.OnAmmoChanged += UpdateAmmo;
         subscribedWeapon.OnStartReload += ShowReloading;
         subscribedWeapon.OnEndReload += HideReloading;
@@ -86,7 +69,6 @@ public class WeaponUI : MonoBehaviour
         subscribedWeapon = null;
     }
 
-    // ── Callbacks ─────────────────────────────────────────────────────────────
     private void UpdateAmmo(int current)
     {
         if (ammoText == null) return;
@@ -101,7 +83,14 @@ public class WeaponUI : MonoBehaviour
         float ammoPercent = maxAmmo > 0 ? (float)current / maxAmmo : 1f;
 
         ammoText.text = $"{current} / {maxAmmo}";
-        ammoText.color = ammoPercent <= lowAmmoThreshold ? lowAmmoColor : fullAmmoColor;
+
+        // Blanco > 50%, Amarillo entre 25-50%, Rojo < 25%
+        if (ammoPercent > 0.5f)
+            ammoText.color = fullAmmoColor;
+        else if (ammoPercent > 0.25f)
+            ammoText.color = mediumAmmoColor;
+        else
+            ammoText.color = lowAmmoColor;
     }
 
     private void ShowReloading()
