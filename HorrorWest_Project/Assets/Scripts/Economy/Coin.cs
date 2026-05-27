@@ -74,7 +74,7 @@ public class Coin : MonoBehaviour
 
     public void CheckMagnet()
     {
-        if (PlayerStats.Instance != null && PlayerStats.Instance.hasCoinMagnet)
+        if (PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasCoinMagnet)
         {
             isBeingMagneted = true;
             col.enabled = true;

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2351484608465652550}
   - component: {fileID: 1417832866238713778}
   - component: {fileID: 7362743205879316119}
-  - component: {fileID: 6068330848054655530}
   - component: {fileID: 956955434328874569}
+  - component: {fileID: 4858898009546326394}
   m_Layer: 3
   m_Name: Bullet
   m_TagString: Untagged
@@ -98,25 +98,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.000000044703484}
   m_Radius: 0.10297023
---- !u!114 &6068330848054655530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611564316635216822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2162b36d5f18f8b44b94e21b711d6324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plagueDamagePerSecond: 5
-  plagueDuration: 3
-  explosionRadius: 0.68
-  explosionDamage: 15
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!212 &956955434328874569
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -172,3 +153,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4858898009546326394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611564316635216822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7ce2cb8424c4f42949cddf447c0ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDamageFalloff: 0
+  plagueDamagePerSecond: 5
+  plagueDuration: 3
+  explosionRadius: 1.5
+  explosionDamage: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64

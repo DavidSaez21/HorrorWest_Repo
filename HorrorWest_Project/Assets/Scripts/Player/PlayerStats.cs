@@ -1,9 +1,18 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// PlayerStats — gestiona todas las estadísticas y mejoras del jugador.
+//
+// ANTES: tenía su propio singleton (PlayerStats.Instance).
+// AHORA: vive en el prefab del jugador y se accede desde PlayerManager.
+//        Acceso externo: PlayerManager.Instance.Stats
+//
+// IMPORTANTE PARA LA MIGRACIÓN:
+//   Busca y reemplaza en todo el proyecto:
+//     PlayerStats.Instance  →  PlayerManager.Instance.Stats
+// ─────────────────────────────────────────────────────────────────────────────
 public class PlayerStats : MonoBehaviour
 {
-    public static PlayerStats Instance { get; private set; }
-
     [Header("Base Stats")]
     [SerializeField] private float baseDamage = 1f;
     [SerializeField] private float baseMoveSpeed = 5f;
@@ -17,15 +26,14 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseCritChance = 0f;
     [SerializeField] private float baseCritMultiplier = 1.25f;
 
-    [Header("Execute Settings")]
+    [Header("Special Settings")]
     [SerializeField] private float executeThreshold = 0.05f;
-
-    [Header("Gunfighter's Curse Settings")]
     [SerializeField] private float gunfightersCurseMaxBonus = 1f;
 
     [Header("References")]
     [SerializeField] private PlayerShoot playerShoot;
 
+    // ── Multiplicadores internos ──────────────────────────────────────────────
     private float damageMultiplier = 1f;
     private float moveSpeedMultiplier = 1f;
     private float maxHealthBonus = 0f;
@@ -38,20 +46,7 @@ public class PlayerStats : MonoBehaviour
     private float critChanceBonus = 0f;
     private float critMultiplierBonus = 0f;
 
-    #region Debug
-    [Header("Debug - Current Stats (Read Only)")]
-    [SerializeField] private float _currentDamage;
-    [SerializeField] private float _currentMoveSpeed;
-    [SerializeField] private float _currentMaxHealth;
-    [SerializeField] private float _currentBulletSpeed;
-    [SerializeField] private float _currentFireRate;
-    [SerializeField] private float _currentReloadSpeed;
-    [SerializeField] private float _currentLuck;
-    [SerializeField] private float _currentCritChance;
-    [SerializeField] private float _currentCritMultiplier;
-    [SerializeField] private float _currentReloadOnKillChance;
-    #endregion
-
+    // ── Flags de mejoras únicas ───────────────────────────────────────────────
     public bool hasPiercingBullets { get; private set; }
     public bool hasCoinMagnet { get; private set; }
     public bool hasReloadOnKill { get; private set; }
@@ -67,43 +62,48 @@ public class PlayerStats : MonoBehaviour
     public bool hasGunfightersCurse { get; private set; }
     public bool hasInfiniteAmmo { get; private set; }
 
+    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
+        luckMultiplier = baseLuck;
         UpdateDebugStats();
     }
 
     private void Update()
     {
-        // Actualiza el debug en tiempo real solo cuando la maldici�n est� activa
+        // Solo recalcula el debug si la maldición está activa (cambia cada frame)
         if (hasGunfightersCurse)
             UpdateDebugStats();
     }
 
+    // ── Cálculo de daño ───────────────────────────────────────────────────────
     public float CalculateDamage(float baseDmg)
     {
+        // Crítico
         float critChance = GetCritChance();
+        if (PlayerAiming.Instance != null && PlayerAiming.Instance.IsAiming)
+            critChance *= PlayerAiming.Instance.GetCritMultiplier();
 
-        if (PlayerAim.Instance != null && PlayerAim.Instance.IsAiming)
-            critChance *= PlayerAim.Instance.GetCritMultiplier();
-
-        bool isCrit = Random.value < critChance;
         float finalDamage = baseDmg * GetDamage();
-
-        if (isCrit)
+        if (Random.value < critChance)
             finalDamage *= GetCritMultiplier();
 
-        if (hasGunfightersCurse && PlayerHealth.Instance != null)
+        // Maldición del pistolero: más daño cuanto menos vida
+        if (hasGunfightersCurse)
         {
-            float healthPercent = PlayerHealth.Instance.GetCurrentHealth() / PlayerHealth.Instance.GetMaxHealth();
-            float curseMultiplier = 1f + (1f - healthPercent) * gunfightersCurseMaxBonus;
-            finalDamage *= curseMultiplier;
+            PlayerHealth ph = PlayerManager.Instance?.Health;
+            if (ph != null)
+            {
+                float healthPercent = ph.GetCurrentHealth() / ph.GetMaxHealth();
+                float curseMultiplier = 1f + (1f - healthPercent) * gunfightersCurseMaxBonus;
+                finalDamage *= curseMultiplier;
+            }
         }
 
         return finalDamage;
     }
 
+    // ── Aplicar mejoras ───────────────────────────────────────────────────────
     public void ApplyUpgrade(UpgradeData upgrade)
     {
         switch (upgrade.upgradeType)
@@ -142,31 +142,14 @@ public class PlayerStats : MonoBehaviour
 
             case UpgradeType.DualWield:
                 hasDualWield = true;
-                if (playerShoot != null)
-                    playerShoot.ActivateDualWield();
+                playerShoot?.ActivateDualWield();
                 break;
         }
 
         UpdateDebugStats();
     }
 
-    public void AddCritChance(float amount) { critChanceBonus += amount; UpdateDebugStats(); }
-    public void AddCritMultiplier(float amount) { critMultiplierBonus += amount; UpdateDebugStats(); }
-
-    private void UpdateDebugStats()
-    {
-        _currentDamage = GetDamage();
-        _currentMoveSpeed = GetMoveSpeed();
-        _currentMaxHealth = GetMaxHealth();
-        _currentBulletSpeed = GetBulletSpeed();
-        _currentFireRate = GetFireRate();
-        _currentReloadSpeed = GetReloadSpeed();
-        _currentLuck = GetLuckMultiplier();
-        _currentCritChance = GetCritChance();
-        _currentCritMultiplier = GetCritMultiplier();
-        _currentReloadOnKillChance = GetReloadOnKillChance();
-    }
-
+    // ── Reset (inicio de nueva run) ───────────────────────────────────────────
     public void ResetStats()
     {
         damageMultiplier = 1f;
@@ -178,6 +161,8 @@ public class PlayerStats : MonoBehaviour
         luckMultiplier = baseLuck;
         reloadOnKillChance = 0f;
         bulletSizeBonus = 0f;
+        critChanceBonus = 0f;
+        critMultiplierBonus = 0f;
 
         hasPiercingBullets = false;
         hasCoinMagnet = false;
@@ -197,6 +182,7 @@ public class PlayerStats : MonoBehaviour
         UpdateDebugStats();
     }
 
+    // ── Getters ───────────────────────────────────────────────────────────────
     public float GetDamage() => baseDamage * damageMultiplier;
     public float GetMoveSpeed() => baseMoveSpeed * moveSpeedMultiplier;
     public float GetMaxHealth() => baseMaxHealth + maxHealthBonus;
@@ -209,4 +195,35 @@ public class PlayerStats : MonoBehaviour
     public float GetReloadOnKillChance() => reloadOnKillChance;
     public float GetExecuteThreshold() => executeThreshold;
     public float GetBulletSizeBonus() => bulletSizeBonus;
+
+    public void AddCritChance(float amount) { critChanceBonus += amount; UpdateDebugStats(); }
+    public void AddCritMultiplier(float amount) { critMultiplierBonus += amount; UpdateDebugStats(); }
+
+    #region Debug
+    [Header("Debug — Stats en tiempo real (solo lectura)")]
+    [SerializeField] private float _currentDamage;
+    [SerializeField] private float _currentMoveSpeed;
+    [SerializeField] private float _currentMaxHealth;
+    [SerializeField] private float _currentBulletSpeed;
+    [SerializeField] private float _currentFireRate;
+    [SerializeField] private float _currentReloadSpeed;
+    [SerializeField] private float _currentLuck;
+    [SerializeField] private float _currentCritChance;
+    [SerializeField] private float _currentCritMultiplier;
+    [SerializeField] private float _currentReloadOnKillChance;
+
+    private void UpdateDebugStats()
+    {
+        _currentDamage = GetDamage();
+        _currentMoveSpeed = GetMoveSpeed();
+        _currentMaxHealth = GetMaxHealth();
+        _currentBulletSpeed = GetBulletSpeed();
+        _currentFireRate = GetFireRate();
+        _currentReloadSpeed = GetReloadSpeed();
+        _currentLuck = GetLuckMultiplier();
+        _currentCritChance = GetCritChance();
+        _currentCritMultiplier = GetCritMultiplier();
+        _currentReloadOnKillChance = GetReloadOnKillChance();
+    }
+    #endregion
 }

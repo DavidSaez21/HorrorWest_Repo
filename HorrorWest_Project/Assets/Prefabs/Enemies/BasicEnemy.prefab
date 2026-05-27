@@ -357,13 +357,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3612718075687496286}
-  - component: {fileID: 7870046793299989879}
-  - component: {fileID: 7313811940161950066}
-  - component: {fileID: 3622544502657314692}
-  - component: {fileID: 3279418797020906566}
-  - component: {fileID: 1284248343558953795}
   - component: {fileID: 6968693276057978730}
   - component: {fileID: 5373921571018653223}
+  - component: {fileID: 3279418797020906566}
+  - component: {fileID: 3622544502657314692}
+  - component: {fileID: 7313811940161950066}
   m_Layer: 6
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -391,31 +389,121 @@ Transform:
   - {fileID: 5076615403515539413}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7870046793299989879
+--- !u!114 &6968693276057978730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a09832a8191e89540bfe418d2337351e, type: 3}
+  m_Script: {fileID: 11500000, guid: d18d115eb54fd8f4ab6c97d648e1a5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayCount: 16
-  dangerRadius: 3
-  enemySeparationRadius: 1.2
-  obstacleLayer:
+  detectorLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  detectorSize: {x: 30, y: 30}
+  detectorOriginOffset: {x: 0, y: 0}
+  detectionDelay: 0.3
+--- !u!114 &5373921571018653223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b589052f08e14788ac131c1244fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 4b31cada8f05e9a4b82c5536fc4e736e, type: 2}
+  coinPrefabs: []
+  knockbackForce: 4
+  knockbackDuration: 0.15
+  _obstacleCheckCircleRadius: 0.4
+  _obstacleCheckDistance: 0.8
+  _wallScanDistance: 8
+  _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  enemyLayer:
+  _rotationSpeed: 200
+  detector: {fileID: 6968693276057978730}
+--- !u!61 &3279418797020906566
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
-  directionSmoothing: 0.15
-  wallSteerRadius: 7.56
-  lateralBonus: 0.77
-  showDebug: 1
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &3622544502657314692
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!212 &7313811940161950066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -471,137 +559,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &3622544502657314692
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781392927723494484}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &3279418797020906566
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &1284248343558953795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3dbef55661fb844aaf759aff118d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 4b31cada8f05e9a4b82c5536fc4e736e, type: 2}
-  coinPrefabs: []
-  knockbackForce: 4
-  knockbackDuration: 0.15
---- !u!114 &6968693276057978730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d18d115eb54fd8f4ab6c97d648e1a5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectorLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  detectorSize: {x: 30, y: 30}
-  detectorOriginOffset: {x: 0, y: 0}
-  detectionDelay: 0.3
---- !u!114 &5373921571018653223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a80b589052f08e14788ac131c1244fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 4b31cada8f05e9a4b82c5536fc4e736e, type: 2}
-  coinPrefabs: []
-  knockbackForce: 4
-  knockbackDuration: 0.15
-  _obstacleCheckCircleRadius: 0.4
-  _obstacleCheckDistance: 0.8
-  _wallScanDistance: 8
-  _obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _rotationSpeed: 200
-  detector: {fileID: 0}
 --- !u!1 &8146848041466634728
 GameObject:
   m_ObjectHideFlags: 0

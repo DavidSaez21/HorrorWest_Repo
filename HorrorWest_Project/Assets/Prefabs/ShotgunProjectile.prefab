@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1362831507363459123}
+  - component: {fileID: 1541629762118789209}
   - component: {fileID: 1567978048005853813}
   - component: {fileID: 8848085813913868841}
   - component: {fileID: 2980331547236253924}
-  - component: {fileID: 6788281564181399776}
   m_Layer: 3
   m_Name: ShotgunProjectile
   m_TagString: Untagged
@@ -35,6 +35,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541629762118789209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987934868915588522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7ce2cb8424c4f42949cddf447c0ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDamageFalloff: 1
+  plagueDamagePerSecond: 5
+  plagueDuration: 3
+  explosionRadius: 1.5
+  explosionDamage: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &1567978048005853813
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -153,22 +173,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &6788281564181399776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5987934868915588522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f40b15b6dc4444ca43d14e1b28b95e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plagueDamagePerSecond: 5
-  plagueDuration: 3
-  explosionRadius: 0.68
-  explosionDamage: 15
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64

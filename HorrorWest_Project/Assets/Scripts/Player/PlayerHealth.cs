@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -7,19 +7,20 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Health Settings")]
     [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
+    [SerializeField] private float invincibilityTime = 0.5f;
 
     [Header("UI")]
-    [SerializeField] private Image healthBarFill;           // Igual que la barra de XP, Image con Fill Method
+    [SerializeField] private Image healthBarFill;
 
-    [Header("Invincibility")]
-    [SerializeField] private float invincibilityTime = 0.5f;  // Segundos de invencibilidad tras recibir da�o
-    private float lastDamageTime = -999f;
-
-    // Eventos para conectar animaciones y otros sistemas
-    public event System.Action<float, float> OnHealthChanged;   // vida actual, vida m�xima
+    // ── Eventos ───────────────────────────────────────────────────────────────
+    public event System.Action<float, float> OnHealthChanged;   // actual, máxima
     public event System.Action OnDeath;
 
+    // ── Estado interno ────────────────────────────────────────────────────────
+    private float currentHealth;
+    private float lastDamageTime = -999f;
+
+    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -32,18 +33,17 @@ public class PlayerHealth : MonoBehaviour
         UpdateUI();
     }
 
+    // ── API pública ───────────────────────────────────────────────────────────
     public void TakeDamage(float amount)
     {
-        // Invencibilidad temporal tras recibir da�o
         if (Time.time < lastDamageTime + invincibilityTime) return;
-
         lastDamageTime = Time.time;
-        currentHealth = Mathf.Max(0, currentHealth - amount);
 
+        currentHealth = Mathf.Max(0f, currentHealth - amount);
         UpdateUI();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0f)
             Die();
     }
 
@@ -54,20 +54,10 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    private void Die()
-    {
-        OnDeath?.Invoke();
-        Debug.Log("Player ha muerto");
-        // Aqu� conectaremos el men� de tienda cuando lo hagamos
-    }
-
-    private void UpdateUI()
-    {
-        if (healthBarFill != null)
-            healthBarFill.fillAmount = currentHealth / maxHealth;
-    }
-
-    // Llamado desde PlayerStats al aplicar mejoras de vida m�xima
+    /// <summary>
+    /// Llamado desde PlayerStats al aplicar mejoras de vida máxima.
+    /// Mantiene el porcentaje de vida actual al escalar.
+    /// </summary>
     public void SetMaxHealth(float newMax)
     {
         float ratio = currentHealth / maxHealth;
@@ -78,4 +68,29 @@ public class PlayerHealth : MonoBehaviour
 
     public float GetCurrentHealth() => currentHealth;
     public float GetMaxHealth() => maxHealth;
+
+    // ── Privados ──────────────────────────────────────────────────────────────
+    private void Die()
+    {
+        OnDeath?.Invoke();
+        // GameManager.Instance.OnPlayerDied() — se conectará en el paso 5
+        Debug.Log("[PlayerHealth] Player ha muerto.");
+    }
+
+    private void UpdateUI()
+    {
+        if (healthBarFill != null)
+            healthBarFill.fillAmount = currentHealth / maxHealth;
+    }
+
+    #region Debug
+    [Header("Debug")]
+    [SerializeField] private bool debugLogDamage = false;
+
+    public void DebugTakeDamage(float amount)
+    {
+        if (!debugLogDamage) return;
+        Debug.Log($"[PlayerHealth] Daño recibido: {amount} | Vida: {currentHealth} / {maxHealth}");
+    }
+    #endregion
 }

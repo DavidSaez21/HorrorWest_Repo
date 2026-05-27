@@ -1,33 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// PlayerShoot — gestiona el disparo, cambio de arma y Dual Wield.
+// Referencia PlayerAiming (fusionado) en lugar de los dos scripts anteriores.
+// ─────────────────────────────────────────────────────────────────────────────
 public class PlayerShoot : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private PlayerAiming playerAiming;
-
     [Header("Primary Weapons")]
     [SerializeField] private WeaponBase[] weapons;
-    private WeaponBase currentWeapon;
 
     [Header("Secondary Weapons (Dual Wield)")]
     [SerializeField] private WeaponBase[] secondaryWeapons;
     [SerializeField] private Transform secondWeaponPivot;
-    private WeaponBase currentSecondaryWeapon;
 
+    [Header("References")]
+    [SerializeField] private PlayerAiming playerAiming;
+
+    // ── Estado interno ────────────────────────────────────────────────────────
+    private WeaponBase currentWeapon;
+    private WeaponBase currentSecondaryWeapon;
     private bool isFiring = false;
     private bool isDualWield = false;
 
-    #region Debug
-    [Header("Debug")]
-    [SerializeField] private bool debugMode = false;
-    #endregion
-
+    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Start()
     {
         foreach (WeaponBase w in weapons)
             w.gameObject.SetActive(false);
-
         foreach (WeaponBase w in secondaryWeapons)
             w.gameObject.SetActive(false);
 
@@ -35,32 +35,9 @@ public class PlayerShoot : MonoBehaviour
             EquipWeapon(0);
     }
 
-    public void OnReload(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-        if (currentWeapon != null) currentWeapon.ManualReload();
-        if (isDualWield && currentSecondaryWeapon != null) currentSecondaryWeapon.ManualReload();
-    }
-
-    public void OnFire(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            isFiring = true;
-
-            if (currentWeapon != null && currentWeapon.fireMode == FireMode.SemiAuto)
-            {
-                TryFire();
-                if (isDualWield) TryFireSecondary();
-            }
-        }
-
-        if (context.canceled)
-            isFiring = false;
-    }
-
     private void Update()
     {
+        // Disparo automático (FullAuto)
         if (isFiring && currentWeapon != null && currentWeapon.fireMode == FireMode.FullAuto)
         {
             TryFire();
@@ -77,31 +54,54 @@ public class PlayerShoot : MonoBehaviour
         #endregion
     }
 
+    // ── Input callbacks ───────────────────────────────────────────────────────
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isFiring = true;
+            if (currentWeapon != null && currentWeapon.fireMode == FireMode.SemiAuto)
+            {
+                TryFire();
+                if (isDualWield) TryFireSecondary();
+            }
+        }
+        else if (context.canceled)
+        {
+            isFiring = false;
+        }
+    }
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        currentWeapon?.ManualReload();
+        if (isDualWield) currentSecondaryWeapon?.ManualReload();
+    }
+
+    // ── Disparo ───────────────────────────────────────────────────────────────
     private void TryFire()
     {
         if (currentWeapon == null || playerAiming == null) return;
-        Vector2 origin = playerAiming.GetWeaponPosition();
-        Vector2 direction = playerAiming.GetAimDirection();
-        currentWeapon.Fire(origin, direction);
+        currentWeapon.Fire(playerAiming.GetWeaponPosition(), playerAiming.GetAimDirection());
     }
 
     private void TryFireSecondary()
     {
         if (currentSecondaryWeapon == null || playerAiming == null) return;
-        Vector2 origin = secondWeaponPivot != null ? (Vector2)secondWeaponPivot.position : (Vector2)transform.position;
-        Vector2 direction = playerAiming.GetAimDirection();
-        currentSecondaryWeapon.Fire(origin, direction);
+        Vector2 origin = secondWeaponPivot != null
+            ? (Vector2)secondWeaponPivot.position
+            : (Vector2)transform.position;
+        currentSecondaryWeapon.Fire(origin, playerAiming.GetAimDirection());
     }
 
+    // ── Gestión de armas ──────────────────────────────────────────────────────
     public void EquipWeapon(int index)
     {
         if (index < 0 || index >= weapons.Length) return;
 
-        if (currentWeapon != null)
-            currentWeapon.gameObject.SetActive(false);
-
-        if (currentSecondaryWeapon != null)
-            currentSecondaryWeapon.gameObject.SetActive(false);
+        currentWeapon?.gameObject.SetActive(false);
+        currentSecondaryWeapon?.gameObject.SetActive(false);
 
         currentWeapon = weapons[index];
         currentWeapon.gameObject.SetActive(true);
@@ -118,7 +118,6 @@ public class PlayerShoot : MonoBehaviour
     public void ActivateDualWield()
     {
         isDualWield = true;
-
         int currentIndex = System.Array.IndexOf(weapons, currentWeapon);
         if (currentIndex >= 0 && currentIndex < secondaryWeapons.Length)
         {
@@ -128,4 +127,9 @@ public class PlayerShoot : MonoBehaviour
     }
 
     public WeaponBase GetCurrentWeapon() => currentWeapon;
+
+    #region Debug
+    [Header("Debug")]
+    [SerializeField] private bool debugMode = false;
+    #endregion
 }

@@ -26,6 +26,11 @@ public class DestructibleProp : MonoBehaviour, IDamageable
             Break();
     }
 
+    public void TakeDamage(float amount, Vector2 hitDirection)
+    {
+        TakeDamage(amount);
+    }
+
     private void Break()
     {
         TryDropCoin();

@@ -31,7 +31,7 @@ public class UpgradePanel : MonoBehaviour
 
         Time.timeScale = 0f;
 
-        float luck = PlayerStats.Instance != null ? PlayerStats.Instance.GetLuckMultiplier() : 1f;
+        float luck = PlayerManager.Instance.Stats != null ? PlayerManager.Instance.Stats.GetLuckMultiplier() : 1f;
         List<UpgradeData> upgrades = UpgradePool.Instance.GetRandomUpgrades(3, luck);
 
         // Desactiva los clicks inicialmente
@@ -70,8 +70,8 @@ public class UpgradePanel : MonoBehaviour
         if (upgrade.isUnique)
             UpgradePool.Instance.RegisterUniqueUpgrade(upgrade.upgradeType);
 
-        if (PlayerStats.Instance != null)
-            PlayerStats.Instance.ApplyUpgrade(upgrade);
+        if (PlayerManager.Instance.Stats != null)
+            PlayerManager.Instance.Stats.ApplyUpgrade(upgrade);
 
         panelRoot.SetActive(false);
         StartCoroutine(ResumeAfterFrame());

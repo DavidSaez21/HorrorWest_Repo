@@ -153,9 +153,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     private void TryInstantReload()
     {
-        if (PlayerStats.Instance == null) return;
-        if (!PlayerStats.Instance.hasReloadOnKill) return;
-        if (Random.value > PlayerStats.Instance.GetReloadOnKillChance()) return;
+        if (PlayerManager.Instance.Stats == null) return;
+        if (!PlayerManager.Instance.Stats.hasReloadOnKill) return;
+        if (Random.value > PlayerManager.Instance.Stats.GetReloadOnKillChance()) return;
 
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         if (playerShoot == null) return;
