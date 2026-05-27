@@ -1569,9 +1569,9 @@ MonoBehaviour:
   ammoText: {fileID: 1368315869}
   reloadPanel: {fileID: 1807921100}
   reloadCircle: {fileID: 659759240}
-  fullAmmoColor: {r: 1, g: 0.74320835, b: 0, a: 1}
+  fullAmmoColor: {r: 1, g: 1, b: 1, a: 1}
+  mediumAmmoColor: {r: 1, g: 0.7986472, b: 0.015686274, a: 1}
   lowAmmoColor: {r: 1, g: 0, b: 0, a: 1}
-  lowAmmoThreshold: 0.5
   debugLogWeaponChange: 0
 --- !u!1 &507644554
 GameObject:
@@ -5580,6 +5580,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 590752524147763594, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 758b22ffa15863f42b975fd13a71726f, type: 3}
     - target: {fileID: 918447836027337663, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: pelletPrefab
       value: 
@@ -5656,6 +5660,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5220669997986168745, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: d97be42f741dc5547ae73653469ca043, type: 3}
     - target: {fileID: 5220669997986168745, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: pelletPrefab
       value: 
