@@ -301,8 +301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Fire
   bindingIndex: 0
-  keySprite: {fileID: 8023164}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 768279458}
+  spritesPath: Keys
 --- !u!1 &48583085
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,8 +801,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Reload
   bindingIndex: 0
-  keySprite: {fileID: 126739602}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 187149355}
+  spritesPath: Keys
 --- !u!1 &154225712
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 187149354}
   - component: {fileID: 187149355}
   m_Layer: 0
-  m_Name: Icon (3)
+  m_Name: Icon_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1600,8 +1600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Move
   bindingIndex: 3
-  keySprite: {fileID: 337368447}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 792322424}
+  spritesPath: Keys
 --- !u!1 &450224002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,8 +2253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Move
   bindingIndex: 1
-  keySprite: {fileID: 670584122}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 709024459}
+  spritesPath: Keys
 --- !u!1 &683085496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2266,7 @@ GameObject:
   - component: {fileID: 683085497}
   - component: {fileID: 683085498}
   m_Layer: 0
-  m_Name: Icon (2)
+  m_Name: Icon:CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2354,7 +2354,7 @@ GameObject:
   - component: {fileID: 709024458}
   - component: {fileID: 709024459}
   m_Layer: 0
-  m_Name: Icon
+  m_Name: Icon_W
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2618,7 +2618,7 @@ GameObject:
   - component: {fileID: 768279457}
   - component: {fileID: 768279458}
   m_Layer: 0
-  m_Name: Icon (1)
+  m_Name: Icon_CI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2706,7 +2706,7 @@ GameObject:
   - component: {fileID: 792322423}
   - component: {fileID: 792322424}
   m_Layer: 0
-  m_Name: Icon (5)
+  m_Name: Icon_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2772,12 +2772,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 13
-  m_Sprite: {fileID: 21300000, guid: 84336ead2bc884a4389f3d4e11093845, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69b8d86705c58d84ba11a844713422b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3631,8 +3631,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Aim
   bindingIndex: 0
-  keySprite: {fileID: 915064936}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 683085498}
+  spritesPath: Keys
 --- !u!1 &929767744
 GameObject:
   m_ObjectHideFlags: 0
@@ -6085,7 +6085,7 @@ GameObject:
   - component: {fileID: 1612322741}
   - component: {fileID: 1612322742}
   m_Layer: 0
-  m_Name: Icon (4)
+  m_Name: Icon_S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6742,8 +6742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Move
   bindingIndex: 4
-  keySprite: {fileID: 1748713841}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 2001111784}
+  spritesPath: Keys
 --- !u!1 &1750236327
 GameObject:
   m_ObjectHideFlags: 0
@@ -8055,8 +8055,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Move
   bindingIndex: 2
-  keySprite: {fileID: 1957885560}
-  spritesPath: Sprites/Keys
+  keySprite: {fileID: 1612322742}
+  spritesPath: Keys
 --- !u!1 &2001111782
 GameObject:
   m_ObjectHideFlags: 0
@@ -8068,7 +8068,7 @@ GameObject:
   - component: {fileID: 2001111783}
   - component: {fileID: 2001111784}
   m_Layer: 0
-  m_Name: Icon (3)
+  m_Name: Icon_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8179,7 +8179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.050006, y: -0.35}
+  m_AnchoredPosition: {x: 7.050006, y: -0.05}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2002414062
