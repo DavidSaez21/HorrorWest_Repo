@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class MenuManager : MonoBehaviour
 
     public void ClickPlay()
     {
-        Debug.Log("Boton play pulsado");
+        SceneManager.LoadScene("Test_Pausa");
     }
 
     public void ClickQuit()
@@ -24,6 +25,8 @@ public class MenuManager : MonoBehaviour
     public void CloseOptions()
     {
         panelOptions.SetActive(false);
+        panelControls.SetActive(false);
+        panelAudio.SetActive(false);
     }
 
     public void ClickControls()
