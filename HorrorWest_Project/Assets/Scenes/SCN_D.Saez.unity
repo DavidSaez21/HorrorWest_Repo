@@ -1084,7 +1084,11 @@ MonoBehaviour:
   iconContainer: {fileID: 290955162}
   iconPrefab: {fileID: 288370281867357133, guid: 837e75a41cff3d24086f6418bc51445c, type: 3}
   iconSize: 40
-  iconSpacing: 5
+  badgeX2: {fileID: 21300000, guid: fdbba227cb3c28f40be2d1547a1850d0, type: 3}
+  badgeX3: {fileID: 21300000, guid: d8ce2d872ff66a04286eee9137848d54, type: 3}
+  badgeX4: {fileID: 21300000, guid: eabe9d17544071d4cade43abff158e5e, type: 3}
+  badgeX5: {fileID: 21300000, guid: 665ee6197715bec4e97376f1989c9802, type: 3}
+  badgeX6: {fileID: 21300000, guid: 1dbd9a9c47d86d04ea4aa8b06dfc377a, type: 3}
 --- !u!1 &290661899
 GameObject:
   m_ObjectHideFlags: 0
