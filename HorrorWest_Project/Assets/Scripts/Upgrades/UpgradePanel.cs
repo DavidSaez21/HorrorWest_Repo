@@ -70,7 +70,7 @@ public class UpgradePanel : MonoBehaviour
 
         // Añade el icono al panel de mejoras activas
         if (UpgradeIconUI.Instance != null && upgrade.activeIcon != null)
-            UpgradeIconUI.Instance.AddIcon(upgrade.activeIcon);
+            UpgradeIconUI.Instance.AddIcon(upgrade.upgradeType, upgrade.activeIcon);
 
         panelRoot.SetActive(false);
         StartCoroutine(ResumeAfterFrame());
