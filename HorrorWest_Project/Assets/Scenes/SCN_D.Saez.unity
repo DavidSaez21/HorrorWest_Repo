@@ -5746,11 +5746,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1469922937297274619, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1469922937297274619, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469922937297274619, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469922937297274619, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 33384
       objectReference: {fileID: 0}
     - target: {fileID: 1469922937297274619, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.a
@@ -5759,6 +5767,10 @@ PrefabInstance:
     - target: {fileID: 1469922937297274619, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.a
       value: 0.22745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630980736740217499, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: m_Name
+      value: Dust
       objectReference: {fileID: 0}
     - target: {fileID: 6841291344138584746, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: healthBarFill
