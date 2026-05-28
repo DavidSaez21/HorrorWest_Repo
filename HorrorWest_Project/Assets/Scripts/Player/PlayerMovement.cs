@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float legFollowSpeed = 8f;
     [SerializeField] private float maxLegTorsoAngle = 90f;
     [SerializeField] private float flipSpeed = 20f;
+    [SerializeField] private ParticleSystem particulas;
 
     [Header("References")]
     [SerializeField] private Transform legsTransform;
