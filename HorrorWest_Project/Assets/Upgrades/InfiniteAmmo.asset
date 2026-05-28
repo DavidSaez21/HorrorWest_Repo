@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Your weapon never needs to reload
   tooltip: Unlimited ammunition for the rest of the run
   icon: {fileID: 0}
-  activeIcon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: aa0e85c82290c034389f0c190351dcdb, type: 3}
   rarity: 3
   isUnique: 1
   value: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Bullets explode on impact, dealing area damage
   tooltip: Each bullet creates a small explosion that damages nearby enemies
   icon: {fileID: 0}
-  activeIcon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: 12f86371753069742b565d2e04b5606b, type: 3}
   rarity: 3
   isUnique: 1
   value: 0

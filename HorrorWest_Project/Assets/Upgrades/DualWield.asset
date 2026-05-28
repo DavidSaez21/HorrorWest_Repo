@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Your weapon is duplicated in the other hand
   tooltip: Doubles your fire rate by equipping the same weapon in both hands
   icon: {fileID: 0}
-  activeIcon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: fc3e9e5039a9d114d846e8fee30501c6, type: 3}
   rarity: 3
   isUnique: 1
   value: 0

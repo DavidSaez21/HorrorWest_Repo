@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Instantly kill enemies below 5% health
   tooltip: Any hit on an enemy below 5% health will kill them instantly
   icon: {fileID: 0}
-  activeIcon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: ccba7b02e054952479aa30ae076dec05, type: 3}
   rarity: 2
   isUnique: 1
   value: 0

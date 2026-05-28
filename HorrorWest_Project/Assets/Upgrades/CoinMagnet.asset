@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Coins are automatically attracted to you
   tooltip: Coins on the ground are pulled toward you automatically
   icon: {fileID: 0}
-  activeIcon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: 27651a0ea32ef3b42b0a0f9cb6992105, type: 3}
   rarity: 1
   isUnique: 1
   value: 0
