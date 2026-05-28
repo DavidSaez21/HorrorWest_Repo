@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7040303370873753563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5586551376632850595}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048618281404426954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8567324859029377626}
   - component: {fileID: 8237386607347615801}
   - component: {fileID: 918447836027337663}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   magazineSize: 2
   reloadTime: 2
   shootPoint: {fileID: 2053770669316492006}
-  pelletPrefab: {fileID: 0}
+  pelletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
   spreadAngle: 30
 --- !u!1 &2959621942750902114
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053770669316492006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 3373533920032410899}
   - component: {fileID: 2241916519214575731}
   - component: {fileID: 590752524147763594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Rifle
   fireMode: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 758b22ffa15863f42b975fd13a71726f, type: 3}
   fireRate: 2
   damage: 10
   bulletSpeed: 10
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 4507835363696445692}
   - component: {fileID: 612241764318274061}
   - component: {fileID: 5220669997986168745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   fireMode: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d97be42f741dc5547ae73653469ca043, type: 3}
   fireRate: 1
   damage: 10
   bulletSpeed: 10
@@ -461,7 +461,7 @@ MonoBehaviour:
   magazineSize: 2
   reloadTime: 2
   shootPoint: {fileID: 1048618281404426954}
-  pelletPrefab: {fileID: 0}
+  pelletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
   spreadAngle: 30
 --- !u!1 &4233202426675484041
@@ -473,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 274175736320715913}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SecondWeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5739784459839358403}
   - component: {fileID: 8777218385661542243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4348343313807033083}
   - component: {fileID: 2218119247315878258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371070906374619859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1636371252558651144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 1233542285368260281}
   - component: {fileID: 6402054613424992336}
   - component: {fileID: 177790242381157819}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -776,6 +776,7 @@ Transform:
   m_Children:
   - {fileID: 5739784459839358403}
   - {fileID: 4348343313807033083}
+  - {fileID: 1632565515743205065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2413907889951162427
@@ -862,6 +863,7 @@ MonoBehaviour:
   legFollowSpeed: 8
   maxLegTorsoAngle: 90
   flipSpeed: 20
+  particulas: {fileID: 1469922937297274619}
   legsTransform: {fileID: 5739784459839358403}
   debugDrawMovement: 0
 --- !u!114 &5677680712758529919
@@ -1102,7 +1104,7 @@ GameObject:
   - component: {fileID: 7860735785265063986}
   - component: {fileID: 4501926204557836641}
   - component: {fileID: 4175212931157492862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1214,7 +1216,7 @@ GameObject:
   - component: {fileID: 2322597431326326692}
   - component: {fileID: 5975821219664895630}
   - component: {fileID: 1380914715135573699}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1325,7 +1327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8380064059058789366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1361,7 +1363,7 @@ GameObject:
   - component: {fileID: 7882753638497182938}
   - component: {fileID: 2714757681038103488}
   - component: {fileID: 8790558803376456057}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1453,7 +1455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Revolver
   fireMode: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 26e9607bad547e54699ef75890d18c74, type: 3}
   fireRate: 4
   damage: 10
   bulletSpeed: 10
@@ -1462,4 +1464,71 @@ MonoBehaviour:
   reloadTime: 1.5
   shootPoint: {fileID: 7040303370873753563}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
-  muzzleFlashFX: {fileID: 0}
+  muzzleFlashFX: {fileID: 7657518198234982648, guid: 0156c88c1b62ecc409aa9f397e160a75, type: 3}
+--- !u!1001 &1717567021674048658
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1111216154324832163}
+    m_Modifications:
+    - target: {fileID: 104829970813648393, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_Name
+      value: msVFX_Stylized Smoke 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+--- !u!198 &1469922937297274619 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+  m_PrefabInstance: {fileID: 1717567021674048658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1632565515743205065 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+  m_PrefabInstance: {fileID: 1717567021674048658}
+  m_PrefabAsset: {fileID: 0}
