@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: Gunfighter's Curse
   m_EditorClassIdentifier: 
-  upgradeType: 23
+  upgradeType: 22
   upgradeName: Gunfighter's Curse
   description: The less health you have, the more damage you deal
   tooltip: At full health no bonus. At 0% health, damage is doubled
   icon: {fileID: 0}
+  activeIcon: {fileID: 0}
   rarity: 3
   isUnique: 1
   value: 0

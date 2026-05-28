@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: AimUp
   m_EditorClassIdentifier: 
-  upgradeType: 6
+  upgradeType: 7
   upgradeName: Steady Hand
   description: +20% critical hit damage
   tooltip: Increases the damage multiplier of your critical hits
   icon: {fileID: 0}
+  activeIcon: {fileID: 1248068010935324249, guid: 4ef2c1d7412564844bd42b5191424e47, type: 3}
   rarity: 1
   isUnique: 0
   value: 0.2
