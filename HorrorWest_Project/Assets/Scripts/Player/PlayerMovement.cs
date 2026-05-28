@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float targetLegAngle = 0f;
     private float speedMultiplier = 1f;
     private bool isFlipping = false;
+    private bool isMoving = false;
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
@@ -35,6 +36,14 @@ public class PlayerMovement : MonoBehaviour
         // moveSpeed viene del Inspector; PlayerStats lo modifica vía SetAimSpeedMultiplier
         // En el paso 4 (PlayerManager) conectaremos GetMoveSpeed() de PlayerStats aquí
         rb.linearVelocity = moveInput.normalized * moveSpeed * speedMultiplier;
+
+        // Partículas
+        if (particulas != null)
+        {
+            bool moving = moveInput != Vector2.zero;
+            if (moving && !isMoving) { particulas.Play(); isMoving = true; }
+            if (!moving && isMoving) { particulas.Stop(); isMoving = false; }
+        }
     }
 
     // ── Input callbacks ───────────────────────────────────────────────────────
