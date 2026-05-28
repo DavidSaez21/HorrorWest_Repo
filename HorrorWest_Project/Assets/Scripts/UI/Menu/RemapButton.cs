@@ -17,6 +17,13 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
 
     private bool _isWaiting = false;
 
+    void Start()
+    {
+        string savedBindings = PlayerPrefs.GetString("rebindings", string.Empty);
+        if (!string.IsNullOrEmpty(savedBindings))
+            inputActions.LoadBindingOverridesFromJson(savedBindings);
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!_isWaiting)
@@ -32,13 +39,17 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
 
         action.PerformInteractiveRebinding()
             .WithTargetBinding(bindingIndex)
-            .WithControlsExcluding("Mouse")
             .WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation =>
             {
                 operation.Dispose();
                 action.Enable();
                 _isWaiting = false;
+
+                string bindings = inputActions.SaveBindingOverridesAsJson();
+                PlayerPrefs.SetString("rebindings", bindings);
+                PlayerPrefs.Save();
+                Debug.Log("Guardado: " + bindings);
 
                 string path = action.bindings[bindingIndex].effectivePath;
                 string keyName = path.Split('/')[1].ToLower();
