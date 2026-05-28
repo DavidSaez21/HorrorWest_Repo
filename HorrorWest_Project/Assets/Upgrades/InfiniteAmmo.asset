@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: InfiniteAmmo
   m_EditorClassIdentifier: 
-  upgradeType: 13
+  upgradeType: 23
   upgradeName: Infinite Ammo
   description: Your weapon never needs to reload
   tooltip: Unlimited ammunition for the rest of the run
   icon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: aa0e85c82290c034389f0c190351dcdb, type: 3}
   rarity: 3
   isUnique: 1
   value: 0

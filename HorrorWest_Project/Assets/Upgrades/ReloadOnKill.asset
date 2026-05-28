@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8101ae6c3ed414695b160d84dbfa9e, type: 3}
   m_Name: ReloadOnKill
   m_EditorClassIdentifier: 
-  upgradeType: 9
+  upgradeType: 10
   upgradeName: Quick Draw
   description: 30% chance to instantly reload on kill
   tooltip: Each kill has a chance to instantly refill your weapon
   icon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: b8eb04724524ce840b673874eaa80382, type: 3}
   rarity: 1
   isUnique: 0
   value: 0.3

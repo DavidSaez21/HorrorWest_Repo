@@ -1,46 +1,14 @@
 using UnityEngine;
 
-public enum UpgradeRarity
-{
-    Common,
-    Uncommon,
-    Rare,
-    Legendary
-}
+public enum UpgradeRarity { Common, Uncommon, Rare, Legendary }
 
 public enum UpgradeType
 {
-    // Repetibles
-    DamageUp,
-    MoveSpeedUp,
-    MaxHealthUp,
-    BulletSpeedUp,
-    FireRateUp,
-    ReloadSpeedUp,
-
-    // Poco comunes
-    AimUp,
-    PiercingBullets,
-    CoinMagnet,
-    ReloadOnKill,
-    DoubleShot,
-    HealthRegen,
-    BulletSizeUp,
-
-    // Raras
-    InfiniteAmmo,
-    PlagueBullets,
-    PlagueChain,
-    ExplosiveBullets,
-    Execute,
-    HealOnCrit,
-
-    // Legendarias (únicas)
-    DualWield,
-    TotalPlague,
-    Specter,
-    LastBullet,
-    GunfightersCurse
+    DamageUp, MoveSpeedUp, MaxHealthUp, BulletSpeedUp, FireRateUp,
+    ReloadSpeedUp, BulletSizeUp, AimUp,
+    PiercingBullets, CoinMagnet, ReloadOnKill, DoubleShot, HealthRegen,
+    PlagueBullets, PlagueChain, ExplosiveBullets, Execute, HealOnCrit,
+    DualWield, TotalPlague, Specter, LastBullet, GunfightersCurse, InfiniteAmmo
 }
 
 [CreateAssetMenu(fileName = "UpgradeData", menuName = "Game/Upgrade")]
@@ -50,13 +18,16 @@ public class UpgradeData : ScriptableObject
     public UpgradeType upgradeType;
     public string upgradeName;
     [TextArea] public string description;
-    [TextArea] public string tooltip;           // El cartelito que aparece al hacer hover
-    public Sprite icon;                         // Placeholder de momento
+    [TextArea] public string tooltip;
+
+    [Header("Icons")]
+    public Sprite icon;             // Icono que aparece en la tarjeta de selección
+    public Sprite activeIcon;       // Icono que aparece en el panel de mejoras activas (esquina superior derecha)
 
     [Header("Rareza")]
     public UpgradeRarity rarity;
 
     [Header("Comportamiento")]
-    public bool isUnique = false;               // Si es única no puede repetirse en la misma run
-    public float value = 0f;                    // El valor numérico de la mejora (ej. 0.15 para +15%)
+    public bool isUnique = false;
+    public float value = 0f;
 }

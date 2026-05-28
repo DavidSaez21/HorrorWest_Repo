@@ -9,7 +9,7 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private UpgradeCard[] cards;
 
     [Header("Settings")]
-    [SerializeField] private float inputDelay = 0.8f;  // Segundos antes de poder seleccionar
+    [SerializeField] private float inputDelay = 0.8f;
 
     private void Start()
     {
@@ -31,10 +31,9 @@ public class UpgradePanel : MonoBehaviour
 
         Time.timeScale = 0f;
 
-        float luck = PlayerManager.Instance.Stats != null ? PlayerManager.Instance.Stats.GetLuckMultiplier() : 1f;
+        float luck = PlayerManager.Instance?.Stats != null ? PlayerManager.Instance.Stats.GetLuckMultiplier() : 1f;
         List<UpgradeData> upgrades = UpgradePool.Instance.GetRandomUpgrades(3, luck);
 
-        // Desactiva los clicks inicialmente
         foreach (UpgradeCard card in cards)
             card.SetInteractable(false);
 
@@ -52,15 +51,12 @@ public class UpgradePanel : MonoBehaviour
         }
 
         panelRoot.SetActive(true);
-
-        // Activa los clicks tras el delay
         StartCoroutine(EnableCardsAfterDelay());
     }
 
     private IEnumerator EnableCardsAfterDelay()
     {
         yield return new WaitForSecondsRealtime(inputDelay);
-
         foreach (UpgradeCard card in cards)
             card.SetInteractable(true);
     }
@@ -70,8 +66,11 @@ public class UpgradePanel : MonoBehaviour
         if (upgrade.isUnique)
             UpgradePool.Instance.RegisterUniqueUpgrade(upgrade.upgradeType);
 
-        if (PlayerManager.Instance.Stats != null)
-            PlayerManager.Instance.Stats.ApplyUpgrade(upgrade);
+        PlayerManager.Instance?.ApplyUpgrade(upgrade);
+
+        // Añade el icono al panel de mejoras activas
+        if (UpgradeIconUI.Instance != null && upgrade.activeIcon != null)
+            UpgradeIconUI.Instance.AddIcon(upgrade.activeIcon);
 
         panelRoot.SetActive(false);
         StartCoroutine(ResumeAfterFrame());

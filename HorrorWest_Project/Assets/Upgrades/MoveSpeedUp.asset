@@ -17,6 +17,7 @@ MonoBehaviour:
   description: +10% movement speed.
   tooltip: Increases the character's base movement speed
   icon: {fileID: 0}
+  activeIcon: {fileID: 21300000, guid: 402bcade07d6f654eb0633df2a463063, type: 3}
   rarity: 0
   isUnique: 0
   value: 0.1
