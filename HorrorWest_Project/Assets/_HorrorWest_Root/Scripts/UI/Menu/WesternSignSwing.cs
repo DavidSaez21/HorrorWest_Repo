@@ -6,10 +6,10 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     [Header("Balanceo idle")]
     public float idleAngle = 1.5f;
-    public float idleSpeed = 1.5f;
+    public float idleSpeed = 0.8f;
 
     [Header("Balanceo al pasar el raton")]
-    public float hoverAngle = 3f;
+    public float hoverAngle = 12f;
     public float swingSpeed = 2.2f;
     public float decaySpeed = 1.5f;
 
@@ -17,7 +17,7 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public float smoothness = 0.92f;
 
     [Header("Escala al pasar el raton")]
-    public float hoverScaleMultiplier = 1.05f;
+    public float hoverScaleMultiplier = 1.1f;
     public float scaleSpeed = 8f;
 
     [Header("Evento al hacer click")]
@@ -27,10 +27,12 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private float _phase = 0f;
     private bool _isHovered = false;
     private Vector3 _originalScale;
+    private Quaternion _originalRotation;
 
     void Start()
     {
         _originalScale = transform.localScale;
+        _originalRotation = transform.localRotation;
     }
 
     void Update()
@@ -46,7 +48,7 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
             _currentAngle = Mathf.Lerp(_currentAngle, 0f, Time.unscaledDeltaTime * decaySpeed);
         }
 
-        transform.localRotation = Quaternion.Euler(0f, 0f, _currentAngle);
+        transform.localRotation = _originalRotation * Quaternion.Euler(0f, 0f, _currentAngle);
 
         Vector3 targetScale = _isHovered
             ? _originalScale * hoverScaleMultiplier
@@ -59,7 +61,7 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         _isHovered = false;
         transform.localScale = _originalScale;
-        transform.localRotation = Quaternion.identity;
+        transform.localRotation = _originalRotation;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
