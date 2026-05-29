@@ -13,6 +13,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private float knockbackForce = 4f;
     [SerializeField] private float knockbackDuration = 0.15f;
 
+    [Header("Separation")]
+    [Tooltip("Radio de separación — más pequeño que el sprite para que se vea denso")]
+    [SerializeField] private float separationRadius = 0.6f;
+    [Tooltip("Fuerza de separación — débil, solo persuade, no rebota")]
+    [SerializeField] private float separationForce = 1.5f;
+
     protected float currentHealth;
     protected float lastAttackTime;
     protected Transform player;
@@ -24,18 +30,21 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     private float knockbackTimer = 0f;
     private Vector2 knockbackVelocity;
 
+    private Collider2D[] _separationBuffer = new Collider2D[16];
+    private int _enemyLayerMask;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
+        _enemyLayerMask = LayerMask.GetMask("Enemy");
     }
 
     protected virtual void Start()
     {
         currentHealth = data.maxHealth;
-
-        rb.excludeLayers = LayerMask.GetMask("Player"); // <- aquí
+        rb.excludeLayers = LayerMask.GetMask("Player");
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -49,7 +58,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         float dist = DistanceToPlayer();
 
-        // Una vez detectado, persigue para siempre
         if (!hasDetectedPlayer && dist <= data.detectionRange)
             hasDetectedPlayer = true;
 
@@ -67,16 +75,50 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if (!isKnockedBack) return;
-
-        knockbackTimer -= Time.fixedDeltaTime;
-        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, 10f * Time.fixedDeltaTime);
-        rb.linearVelocity = knockbackVelocity;
-
-        if (knockbackTimer <= 0f)
+        if (isKnockedBack)
         {
-            isKnockedBack = false;
-            rb.linearVelocity = Vector2.zero;
+            knockbackTimer -= Time.fixedDeltaTime;
+            knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, 10f * Time.fixedDeltaTime);
+            rb.linearVelocity = knockbackVelocity;
+            if (knockbackTimer <= 0f)
+            {
+                isKnockedBack = false;
+                rb.linearVelocity = Vector2.zero;
+            }
+            return;
+        }
+
+        if (hasDetectedPlayer)
+            ApplySeparation();
+    }
+
+    // ── Separación suave estilo Vampire Survivors ─────────────────────────────
+    // Fuerza muy débil entre enemigos. El player no está en enemyLayerMask
+    // así que nunca recibe estas fuerzas.
+    private void ApplySeparation()
+    {
+        int count = Physics2D.OverlapCircleNonAlloc(
+            transform.position, separationRadius,
+            _separationBuffer, _enemyLayerMask
+        );
+
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D col = _separationBuffer[i];
+            if (col == null || col.gameObject == gameObject) continue;
+
+            Vector2 away = (Vector2)(transform.position - col.transform.position);
+            float dist = away.magnitude;
+
+            if (dist < 0.001f)
+            {
+                float a = GetInstanceID() * 0.1f;
+                away = new Vector2(Mathf.Sin(a), Mathf.Cos(a));
+                dist = 0.001f;
+            }
+
+            float strength = (1f - Mathf.Clamp01(dist / separationRadius)) * separationForce;
+            rb.linearVelocity += away.normalized * strength * Time.fixedDeltaTime;
         }
     }
 
@@ -153,7 +195,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     private void TryInstantReload()
     {
-        if (PlayerManager.Instance.Stats == null) return;
+        if (PlayerManager.Instance?.Stats == null) return;
         if (!PlayerManager.Instance.Stats.hasReloadOnKill) return;
         if (Random.value > PlayerManager.Instance.Stats.GetReloadOnKillChance()) return;
 
@@ -184,6 +226,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             Instantiate(coinPrefabs[index], transform.position, Quaternion.identity);
     }
 
+    #region Debug
     protected virtual void OnDrawGizmosSelected()
     {
         if (data == null) return;
@@ -191,5 +234,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(transform.position, data.detectionRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, data.attackRange);
+        Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
+        Gizmos.DrawWireSphere(transform.position, separationRadius);
     }
+    #endregion
 }
