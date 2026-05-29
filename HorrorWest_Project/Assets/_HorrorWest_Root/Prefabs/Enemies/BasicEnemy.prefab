@@ -404,9 +404,9 @@ MonoBehaviour:
   detectorLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  detectorSize: {x: 30, y: 30}
+  detectorSize: {x: 100, y: 100}
   detectorOriginOffset: {x: 0, y: 0}
-  detectionDelay: 0.3
+  detectionDelay: 0.2
 --- !u!114 &5373921571018653223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,13 +423,17 @@ MonoBehaviour:
   coinPrefabs: []
   knockbackForce: 4
   knockbackDuration: 0.15
+  separationRadius: 0.6
+  separationForce: 1.5
   _obstacleCheckCircleRadius: 0.4
   _obstacleCheckDistance: 0.8
   _wallScanDistance: 8
   _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _rotationSpeed: 200
+  _rotationSpeed: 156
+  _avoidanceRotationSpeed: 90
+  _wallFollowBlend: 0.012
   detector: {fileID: 6968693276057978730}
 --- !u!61 &3279418797020906566
 BoxCollider2D:

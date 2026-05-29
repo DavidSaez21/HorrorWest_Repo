@@ -15,8 +15,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     [Header("Separation")]
     [Tooltip("Radio de separación — más pequeño que el sprite para que se vea denso")]
+    [Range(0.3f, 2f)]
     [SerializeField] private float separationRadius = 0.6f;
     [Tooltip("Fuerza de separación — débil, solo persuade, no rebota")]
+    [Range(0.5f, 8f)]
     [SerializeField] private float separationForce = 1.5f;
 
     protected float currentHealth;

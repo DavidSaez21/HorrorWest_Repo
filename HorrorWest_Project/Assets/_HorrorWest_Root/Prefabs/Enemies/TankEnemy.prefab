@@ -227,7 +227,7 @@ MonoBehaviour:
   detectorLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  detectorSize: {x: 30, y: 30}
+  detectorSize: {x: 100, y: 100}
   detectorOriginOffset: {x: 0, y: 0}
   detectionDelay: 0.3
 --- !u!114 &591155873889616460
@@ -246,6 +246,8 @@ MonoBehaviour:
   coinPrefabs: []
   knockbackForce: 4
   knockbackDuration: 0.15
+  separationRadius: 0.6
+  separationForce: 1.5
   _obstacleCheckCircleRadius: 0.4
   _obstacleCheckDistance: 0.8
   _wallScanDistance: 6
