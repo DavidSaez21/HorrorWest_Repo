@@ -183,9 +183,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3612718075687496286}
-  - component: {fileID: 4042938023425856073}
   - component: {fileID: 591155873889616460}
-  - component: {fileID: 3279418797020906566}
+  - component: {fileID: 4889475489190271467}
   - component: {fileID: 3622544502657314692}
   - component: {fileID: 7313811940161950066}
   m_Layer: 6
@@ -212,24 +211,6 @@ Transform:
   - {fileID: 1255210858223433598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4042938023425856073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d18d115eb54fd8f4ab6c97d648e1a5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectorLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  detectorSize: {x: 100, y: 100}
-  detectorOriginOffset: {x: 0, y: 0}
-  detectionDelay: 0.3
 --- !u!114 &591155873889616460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,22 +223,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80b589052f08e14788ac131c1244fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9da2eba76789e7045a055497702a5c6e, type: 2}
+  data: {fileID: 11400000, guid: 4b31cada8f05e9a4b82c5536fc4e736e, type: 2}
   coinPrefabs: []
   knockbackForce: 4
   knockbackDuration: 0.15
   separationRadius: 0.6
   separationForce: 1.5
-  _rayCount: 5
-  _fanHalfAngle: 60
-  _rayLength: 1.2
-  _avoidanceStrength: 4
+  _contextSlots: 32
+  _probeLength: 1.851
+  _dangerThreshold: 0.05
   _steerSmoothing: 8
   _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
---- !u!61 &3279418797020906566
-BoxCollider2D:
+--- !u!58 &4889475489190271467
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -290,18 +270,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.009750009, y: 0.0032666922}
+  m_Radius: 0.47065002
 --- !u!50 &3622544502657314692
 Rigidbody2D:
   serializedVersion: 5
