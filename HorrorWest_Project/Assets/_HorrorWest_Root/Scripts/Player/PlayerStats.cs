@@ -2,14 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PlayerStats — gestiona todas las estadísticas y mejoras del jugador.
-//
-// ANTES: tenía su propio singleton (PlayerStats.Instance).
-// AHORA: vive en el prefab del jugador y se accede desde PlayerManager.
-//        Acceso externo: PlayerManager.Instance.Stats
-//
-// IMPORTANTE PARA LA MIGRACIÓN:
-//   Busca y reemplaza en todo el proyecto:
-//     PlayerStats.Instance  →  PlayerManager.Instance.Stats
+// Acceso externo: PlayerManager.Instance.Stats
 // ─────────────────────────────────────────────────────────────────────────────
 public class PlayerStats : MonoBehaviour
 {
@@ -33,7 +26,18 @@ public class PlayerStats : MonoBehaviour
     [Header("References")]
     [SerializeField] private PlayerShoot playerShoot;
 
-    // ── Multiplicadores internos ──────────────────────────────────────────────
+    // ── Bonuses permanentes (de la tienda) ────────────────────────────────────
+    // Se aplican en ResetStats() desde PermanentUpgradeManager.
+    // Separados de los multiplicadores in-run para no mezclarse.
+    private float _permDamageBonus = 0f;
+    private float _permReloadSpeedBonus = 0f;
+    private float _permMaxHealthBonus = 0f;
+    private float _permArmor = 0f;
+    private float _permLuckBonus = 0f;
+    private float _permXPBonus = 0f;
+    private float _permLootBonus = 0f;
+
+    // ── Multiplicadores in-run ────────────────────────────────────────────────
     private float damageMultiplier = 1f;
     private float moveSpeedMultiplier = 1f;
     private float maxHealthBonus = 0f;
@@ -71,7 +75,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        // Solo recalcula el debug si la maldición está activa (cambia cada frame)
         if (hasGunfightersCurse)
             UpdateDebugStats();
     }
@@ -79,7 +82,6 @@ public class PlayerStats : MonoBehaviour
     // ── Cálculo de daño ───────────────────────────────────────────────────────
     public float CalculateDamage(float baseDmg)
     {
-        // Crítico
         float critChance = GetCritChance();
         if (PlayerAiming.Instance != null && PlayerAiming.Instance.IsAiming)
             critChance *= PlayerAiming.Instance.GetCritMultiplier();
@@ -88,7 +90,6 @@ public class PlayerStats : MonoBehaviour
         if (Random.value < critChance)
             finalDamage *= GetCritMultiplier();
 
-        // Maldición del pistolero: más daño cuanto menos vida
         if (hasGunfightersCurse)
         {
             PlayerHealth ph = PlayerManager.Instance?.Health;
@@ -103,7 +104,7 @@ public class PlayerStats : MonoBehaviour
         return finalDamage;
     }
 
-    // ── Aplicar mejoras ───────────────────────────────────────────────────────
+    // ── Mejoras in-run ────────────────────────────────────────────────────────
     public void ApplyUpgrade(UpgradeData upgrade)
     {
         switch (upgrade.upgradeType)
@@ -149,9 +150,20 @@ public class PlayerStats : MonoBehaviour
         UpdateDebugStats();
     }
 
-    // ── Reset (inicio de nueva run) ───────────────────────────────────────────
+    // ── Reset al inicio de cada run ───────────────────────────────────────────
+    // Limpia los bonuses in-run y aplica los permanentes desde la tienda.
     public void ResetStats()
     {
+        // Limpia permanentes anteriores
+        _permDamageBonus = 0f;
+        _permReloadSpeedBonus = 0f;
+        _permMaxHealthBonus = 0f;
+        _permArmor = 0f;
+        _permLuckBonus = 0f;
+        _permXPBonus = 0f;
+        _permLootBonus = 0f;
+
+        // Limpia in-run
         damageMultiplier = 1f;
         moveSpeedMultiplier = 1f;
         maxHealthBonus = 0f;
@@ -179,25 +191,76 @@ public class PlayerStats : MonoBehaviour
         hasGunfightersCurse = false;
         hasInfiniteAmmo = false;
 
+        // Aplica permanentes desde la tienda
+        PermanentUpgradeManager.Instance?.ApplyToPlayerStats(this);
+
         UpdateDebugStats();
     }
 
-    // ── Getters ───────────────────────────────────────────────────────────────
-    public float GetDamage() => baseDamage * damageMultiplier;
+    // ── API para PermanentUpgradeManager ─────────────────────────────────────
+    public void AddPermanentDamageBonus(float amount)
+    {
+        _permDamageBonus += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddPermanentReloadSpeedBonus(float amount)
+    {
+        _permReloadSpeedBonus += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddPermanentMaxHealthBonus(float amount)
+    {
+        _permMaxHealthBonus += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddPermanentArmor(float amount)
+    {
+        _permArmor += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddPermanentLuckBonus(float amount)
+    {
+        _permLuckBonus += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddPermanentXPBonus(float amount)
+    {
+        _permXPBonus += amount;
+        UpdateDebugStats();
+    }
+
+    public void AddPermanentLootBonus(float amount)
+    {
+        _permLootBonus += amount;
+        UpdateDebugStats();
+    }
+
+    // ── Getters in-run ────────────────────────────────────────────────────────
+    public void AddCritChance(float amount) { critChanceBonus += amount; UpdateDebugStats(); }
+    public void AddCritMultiplier(float amount) { critMultiplierBonus += amount; UpdateDebugStats(); }
+
+    // ── Getters de stats finales ──────────────────────────────────────────────
+    // Cada getter combina base + permanente + in-run
+    public float GetDamage() => (baseDamage + _permDamageBonus) * damageMultiplier;
     public float GetMoveSpeed() => baseMoveSpeed * moveSpeedMultiplier;
-    public float GetMaxHealth() => baseMaxHealth + maxHealthBonus;
+    public float GetMaxHealth() => baseMaxHealth + _permMaxHealthBonus + maxHealthBonus;
     public float GetBulletSpeed() => baseBulletSpeed * bulletSpeedMultiplier;
     public float GetFireRate() => baseFireRate * fireRateMultiplier;
-    public float GetReloadSpeed() => baseReloadSpeed * reloadSpeedMultiplier;
-    public float GetLuckMultiplier() => luckMultiplier;
+    public float GetReloadSpeed() => (baseReloadSpeed + _permReloadSpeedBonus) * reloadSpeedMultiplier;
+    public float GetLuckMultiplier() => luckMultiplier + _permLuckBonus;
     public float GetCritChance() => baseCritChance + critChanceBonus;
     public float GetCritMultiplier() => baseCritMultiplier + critMultiplierBonus;
+    public float GetArmor() => _permArmor;
+    public float GetXPBonus() => _permXPBonus;
+    public float GetLootBonus() => _permLootBonus;
     public float GetReloadOnKillChance() => reloadOnKillChance;
     public float GetExecuteThreshold() => executeThreshold;
     public float GetBulletSizeBonus() => bulletSizeBonus;
-
-    public void AddCritChance(float amount) { critChanceBonus += amount; UpdateDebugStats(); }
-    public void AddCritMultiplier(float amount) { critMultiplierBonus += amount; UpdateDebugStats(); }
 
     #region Debug
     [Header("Debug — Stats en tiempo real (solo lectura)")]
@@ -211,6 +274,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentCritChance;
     [SerializeField] private float _currentCritMultiplier;
     [SerializeField] private float _currentReloadOnKillChance;
+    [SerializeField] private float _currentArmor;
+    [SerializeField] private float _currentXPBonus;
+    [SerializeField] private float _currentLootBonus;
 
     private void UpdateDebugStats()
     {
@@ -224,6 +290,9 @@ public class PlayerStats : MonoBehaviour
         _currentCritChance = GetCritChance();
         _currentCritMultiplier = GetCritMultiplier();
         _currentReloadOnKillChance = GetReloadOnKillChance();
+        _currentArmor = GetArmor();
+        _currentXPBonus = GetXPBonus();
+        _currentLootBonus = GetLootBonus();
     }
     #endregion
 }
