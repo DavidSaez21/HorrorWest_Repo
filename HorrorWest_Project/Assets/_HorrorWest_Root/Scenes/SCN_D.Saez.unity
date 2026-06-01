@@ -1455,7 +1455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.023395833, y: 0.032878824}
   m_AnchorMax: {x: 0.3026042, y: 0.12737373}
-  m_AnchoredPosition: {x: 0, y: -1.999939}
+  m_AnchoredPosition: {x: 0, y: -2}
   m_SizeDelta: {x: -436, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328981276
@@ -3844,7 +3844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.023395833, y: 0.032878824}
   m_AnchorMax: {x: 0.3026042, y: 0.12737373}
-  m_AnchoredPosition: {x: 0, y: -1.999939}
+  m_AnchoredPosition: {x: 0, y: -2}
   m_SizeDelta: {x: -436, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1583909623
@@ -4682,7 +4682,11 @@ MonoBehaviour:
   - waveName: ' Wave 1'
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
-      count: 10
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
+      count: 2
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 7f44fcc943196f545a0d5af733b1e44a, type: 3}
+      count: 2
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 1692245413}

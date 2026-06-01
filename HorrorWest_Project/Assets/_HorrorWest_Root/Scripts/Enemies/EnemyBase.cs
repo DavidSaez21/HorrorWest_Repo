@@ -70,7 +70,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void Start()
     {
         currentHealth = data.maxHealth;
-        rb.excludeLayers = LayerMask.GetMask("Player"); // enemies never push the player
+        //rb.excludeLayers = LayerMask.GetMask("Player"); // enemies never push the player
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)

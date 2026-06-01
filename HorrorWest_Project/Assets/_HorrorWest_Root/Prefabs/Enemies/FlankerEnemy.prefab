@@ -284,16 +284,16 @@ MonoBehaviour:
   knockbackDuration: 0.18
   separationRadius: 0.55
   separationForce: 2
-  _bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
+  _bulletPrefab: {fileID: 1611564316635216822, guid: d9627dbb88a91094b96b384a55215384, type: 3}
   _muzzle: {fileID: 4259131719803947277}
-  _preferredRange: 4.5
-  _rangeDeadZone: 1
-  _rangeKeepingStrength: 1.5
-  _lateralDriftStrength: 1.2
-  _driftChangeInterval: 2.5
-  _driftChangeVariance: 0.8
-  _recoilStrength: 1.5
-  _recoilDuration: 0.3
+  _minRange: 3
+  _maxRange: 6
+  _rotationSpeed: 90
+  _shootAngleTolerance: 15
+  _postShotPause: 0.4
+  _wanderRadius: 3
+  _waypointReachedDist: 0.6
+  _wanderSpeedFraction: 0.6
   _contextSlots: 32
   _probeLength: 1.851
   _dangerThreshold: 0.05
