@@ -39,7 +39,11 @@ public class PlayerHealth : MonoBehaviour
         if (Time.time < lastDamageTime + invincibilityTime) return;
         lastDamageTime = Time.time;
 
-        currentHealth = Mathf.Max(0f, currentHealth - amount);
+        // Aplica armadura permanente
+        float armor = PlayerManager.Instance?.Stats?.GetArmor() ?? 0f;
+        float reduced = Mathf.Max(0f, amount - armor);
+
+        currentHealth = Mathf.Max(0f, currentHealth - reduced);
         UpdateUI();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
