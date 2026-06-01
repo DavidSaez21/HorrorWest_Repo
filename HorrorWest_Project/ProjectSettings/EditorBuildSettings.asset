@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_HorrorWest_Root/Scenes/Niveles/SCN_MainMenu.unity
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_MainMenu.unity
     guid: 45e52710924e91e4a8ced9225ef88cff
   - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Test_Pausa.unity
