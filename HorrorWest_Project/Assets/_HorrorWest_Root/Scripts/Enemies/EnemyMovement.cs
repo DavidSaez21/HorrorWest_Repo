@@ -1,162 +1,192 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Enemy movement using a two-layer approach:
+///
+///   Layer 1 — Flow Field (global navigation)
+///     Reads the pre-computed FlowFieldManager gradient to know which direction
+///     leads to the player even when walls are in the way. Enemies always know
+///     where you are and can navigate around any static obstacle.
+///
+///   Layer 2 — Context Steering (local avoidance)
+///     Samples directions around the enemy and masks out any that are too close
+///     to an immediate obstacle or another enemy. Prevents clipping and stacking.
+///
+/// The two layers are blended: flow field gives the global goal, context steering
+/// picks the best local direction that aligns with it.
+/// </summary>
 public class EnemyMovement : EnemyBase
 {
-    [Header("Evasión de Obstáculos")]
-    [Range(0.1f, 1f)]
-    [SerializeField] private float _obstacleCheckCircleRadius = 0.4f;
+    // ── Inspector ─────────────────────────────────────────────────────────────
+
+    [Header("Context Steering")]
+    [Tooltip("Directions sampled each frame. 16 works well with flow field — " +
+             "flow field handles global nav so local steering can be lighter.")]
+    [Range(8, 32)]
+    [SerializeField] private int _contextSlots = 16;
+
+    [Tooltip("Ray length for local obstacle probes. Keep around sprite width.")]
     [Range(0.3f, 2f)]
-    [SerializeField] private float _obstacleCheckDistance = 0.8f;
-    [Range(1f, 15f)]
-    [SerializeField] private float _wallScanDistance = 6f;
+    [SerializeField] private float _probeLength = 0.9f;
+
+    [Tooltip("Slots with danger above this are masked. Lower = reacts sooner to obstacles.")]
+    [Range(0f, 1f)]
+    [SerializeField] private float _dangerThreshold = 0.2f;
+
+    [Tooltip("How fast the heading smooths toward the chosen direction. " +
+             "8-12 feels physical without being sluggish.")]
+    [Range(3f, 20f)]
+    [SerializeField] private float _steerSmoothing = 10f;
+
     [SerializeField] private LayerMask _obstacleLayerMask;
 
-    [Range(60f, 360f)]
-    [Tooltip("Velocidad de giro normal hacia el player")]
-    [SerializeField] private float _rotationSpeed = 180f;
+    // ── Context steering arrays ───────────────────────────────────────────────
 
-    [Range(30f, 180f)]
-    [Tooltip("Velocidad de giro mientras esquiva")]
-    [SerializeField] private float _avoidanceRotationSpeed = 90f;
+    private Vector2[] _slotDirections;
+    private float[] _interest;
+    private float[] _danger;
+    private Vector2 _currentHeading;
 
-    [Range(0f, 1f)]
-    [Tooltip("0 = sigue la pared puro, 1 = tira hacia el player. Empieza en 0.2")]
-    [SerializeField] private float _wallFollowBlend = 0.2f;
-
-    [Header("Referencias")]
-    [SerializeField] private BoxDetector2D detector;
-
-    private Vector2 _currentMoveDir;
-    private Vector2 _wallSlideDir;
-    private Vector2 _wallNormal;
-    private bool _isAvoiding = false;
+    // ── Lifecycle ─────────────────────────────────────────────────────────────
 
     protected override void Awake()
     {
         base.Awake();
-        if (detector == null)
-            detector = GetComponent<BoxDetector2D>();
+        AllocateContextArrays();
     }
 
-    protected override void UpdateMovement(float distToPlayer)
+    private void AllocateContextArrays()
     {
-        if (detector == null || !detector.PlayerDetected)
+        _slotDirections = new Vector2[_contextSlots];
+        _interest = new float[_contextSlots];
+        _danger = new float[_contextSlots];
+
+        float step = 360f / _contextSlots;
+        for (int i = 0; i < _contextSlots; i++)
         {
-            rb.linearVelocity = Vector2.zero;
+            float rad = i * step * Mathf.Deg2Rad;
+            _slotDirections[i] = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+        }
+    }
+
+    // ── EnemyBase override ────────────────────────────────────────────────────
+
+    protected override void UpdateSteering()
+    {
+        float dist = DistanceToPlayer();
+
+        // Stop inside attack range — crowd the edge, don't push through.
+        if (dist <= data.attackRange)
+        {
+            DesiredVelocity = Vector2.zero;
             return;
         }
 
-        Vector2 toPlayer = DirectionToPlayer();
+        // ── 1. Get global direction from flow field ────────────────────────
+        // This direction already knows how to navigate around walls.
+        Vector2 flowDir = FlowFieldManager.Instance != null
+            ? FlowFieldManager.Instance.GetDirection(transform.position)
+            : DirectionToPlayer(); // fallback if manager not in scene
 
-        // ── Detección de pared ────────────────────────────────────────────────
-        // SIEMPRE mira hacia el player para detectar si hay pared en medio.
-        // Separado del _currentMoveDir para evitar retroalimentación.
-        RaycastHit2D wallHit = Physics2D.CircleCast(
-            transform.position, _obstacleCheckCircleRadius,
-            toPlayer,                        // <- hacia el player, no hacia _currentMoveDir
-            _obstacleCheckDistance, _obstacleLayerMask
-        );
+        // ── 2. Apply context steering — pick the best local slot ──────────
+        Vector2 steerDir = ApplyContextSteering(flowDir);
 
-        if (wallHit.collider != null)
-        {
-            // Hay pared entre el enemigo y el player
-            if (!_isAvoiding)
-            {
-                // Primera vez que detecta — elige el lado por el que hay más espacio
-                // y que más se acerca al player
-                _wallNormal = wallHit.normal;
-                Vector2 left = new Vector2(-_wallNormal.y, _wallNormal.x);
-                Vector2 right = new Vector2(_wallNormal.y, -_wallNormal.x);
+        // ── 3. Smooth heading ──────────────────────────────────────────────
+        _currentHeading = Vector2.Lerp(
+            _currentHeading,
+            steerDir,
+            _steerSmoothing * Time.fixedDeltaTime
+        ).normalized;
 
-                float scoreLeft = MeasureFreeSpace(left) + Vector2.Dot(left, toPlayer) * 2f;
-                float scoreRight = MeasureFreeSpace(right) + Vector2.Dot(right, toPlayer) * 2f;
-
-                _wallSlideDir = scoreLeft > scoreRight ? left : right;
-                _isAvoiding = true;
-            }
-
-            // Wall following: mezcla el slide con ir al player
-            // El blend bajo (0.2) hace que siga la pared casi puro
-            // pero con una ligera tracción hacia el player para no quedarse atascado
-            Vector2 targetDir = Vector2.Lerp(_wallSlideDir, toPlayer, _wallFollowBlend).normalized;
-
-            _currentMoveDir = Vector2.MoveTowards(
-                _currentMoveDir, targetDir,
-                _avoidanceRotationSpeed * Mathf.Deg2Rad * Time.deltaTime
-            );
-        }
-        else
-        {
-            // Sin obstáculo hacia el player — va directo
-            _isAvoiding = false;
-            _wallSlideDir = Vector2.zero;
-
-            _currentMoveDir = Vector2.MoveTowards(
-                _currentMoveDir, toPlayer,
-                _rotationSpeed * Mathf.Deg2Rad * Time.deltaTime
-            );
-        }
-
-        FaceDirection(_currentMoveDir);
-
-        if (distToPlayer > data.attackRange)
-            rb.linearVelocity = _currentMoveDir * data.moveSpeed;
-        else
-            rb.linearVelocity = Vector2.zero;
+        FaceDirection(_currentHeading);
+        DesiredVelocity = _currentHeading * data.moveSpeed;
     }
 
-    private float MeasureFreeSpace(Vector2 direction)
+    // ── Context steering ──────────────────────────────────────────────────────
+
+    private Vector2 ApplyContextSteering(Vector2 desiredDir)
     {
-        RaycastHit2D hit = Physics2D.Raycast(
-            transform.position, direction, _wallScanDistance, _obstacleLayerMask
-        );
-        return hit.collider != null ? hit.distance : _wallScanDistance;
+        // Interest: alignment with the flow field direction
+        for (int i = 0; i < _contextSlots; i++)
+            _interest[i] = Mathf.Max(0f, Vector2.Dot(_slotDirections[i], desiredDir));
+
+        // Danger: proximity to obstacles in each slot direction
+        for (int i = 0; i < _contextSlots; i++)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(
+                transform.position, _slotDirections[i], _probeLength, _obstacleLayerMask);
+
+            _danger[i] = hit.collider != null
+                ? 1f - Mathf.Clamp01(hit.distance / _probeLength)
+                : 0f;
+        }
+
+        // Pick best unmasked slot
+        Vector2 best = desiredDir;
+        float bestScore = -1f;
+        bool anyValid = false;
+
+        for (int i = 0; i < _contextSlots; i++)
+        {
+            if (_danger[i] > _dangerThreshold) continue;
+
+            if (_interest[i] > bestScore)
+            {
+                bestScore = _interest[i];
+                best = _slotDirections[i];
+                anyValid = true;
+            }
+        }
+
+        // Fallback: completely surrounded — pick safest slot (slide along wall)
+        if (!anyValid)
+        {
+            float lowestDanger = float.MaxValue;
+            for (int i = 0; i < _contextSlots; i++)
+            {
+                if (_danger[i] < lowestDanger)
+                {
+                    lowestDanger = _danger[i];
+                    best = _slotDirections[i];
+                }
+            }
+        }
+
+        return best;
     }
 
-    #region Debug
+    // ── Gizmos ────────────────────────────────────────────────────────────────
+
     protected override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
 
-        if (_currentMoveDir == Vector2.zero) return;
+        if (!Application.isPlaying || _slotDirections == null) return;
 
-        // Dirección actual
-        Gizmos.color = _isAvoiding ? Color.red : Color.yellow;
-        Vector3 castEnd = transform.position + (Vector3)(_currentMoveDir * _obstacleCheckDistance);
-        Gizmos.DrawWireSphere(castEnd, _obstacleCheckCircleRadius);
-        Gizmos.DrawLine(transform.position, castEnd);
-
-        if (_isAvoiding)
+        // Flow field direction (cyan)
+        if (FlowFieldManager.Instance != null)
         {
-            // Normal de la pared (cian)
             Gizmos.color = Color.cyan;
-            Gizmos.DrawRay(transform.position, _wallNormal * 0.8f);
-
-            // Dirección de slide elegida (magenta)
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawRay(transform.position, _wallSlideDir * 1.2f);
-
-            // Cast de detección hacia el player (naranja)
-            if (player != null)
-            {
-                Gizmos.color = new Color(1f, 0.5f, 0f);
-                Gizmos.DrawRay(transform.position, DirectionToPlayer() * _obstacleCheckDistance);
-            }
-
-#if UNITY_EDITOR
-            UnityEditor.Handles.Label(
-                transform.position + Vector3.up * 0.8f,
-                $"Wall Following | blend: {_wallFollowBlend:F2}"
-            );
-#endif
+            Gizmos.DrawRay(transform.position,
+                (Vector3)FlowFieldManager.Instance.GetDirection(transform.position) * 1.2f);
         }
 
-        // Dirección al player (azul)
-        if (player != null)
+        // Context slots
+        for (int i = 0; i < _contextSlots; i++)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position, DirectionToPlayer() * 1.5f);
+            bool masked = _danger[i] > _dangerThreshold;
+            Gizmos.color = masked
+                ? new Color(1f, 0.1f, 0.1f, 0.7f)
+                : new Color(1f - _interest[i], _interest[i], 0f, 0.4f);
+            Gizmos.DrawRay(transform.position,
+                _slotDirections[i] * _probeLength * (masked ? 0.5f : Mathf.Max(_interest[i], 0.15f)));
+        }
+
+        // Final heading (white)
+        if (_currentHeading != Vector2.zero)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawRay(transform.position, _currentHeading * 1.5f);
         }
     }
-    #endregion
 }

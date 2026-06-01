@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "Game/Enemy")]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "Game/Enemy Data")]
 public class EnemyData : ScriptableObject
 {
-    [Header("Info")]
+    [Header("Identity")]
     public string enemyName = "Enemy";
 
     [Header("Stats")]
@@ -12,8 +12,7 @@ public class EnemyData : ScriptableObject
     public float damage = 10f;
     public float defense = 0f;
 
-    [Header("Detection")]
-    public float detectionRange = 8f;
+    [Header("Combat")]
     public float attackRange = 1.5f;
     public float attackCooldown = 1f;
 

@@ -220,7 +220,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7781392927723494484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d18d115eb54fd8f4ab6c97d648e1a5f6, type: 3}
   m_Name: 
@@ -249,14 +249,14 @@ MonoBehaviour:
   knockbackDuration: 0.15
   separationRadius: 0.6
   separationForce: 1.5
-  _obstacleCheckCircleRadius: 0.4
-  _obstacleCheckDistance: 0.8
-  _wallScanDistance: 8
+  _rayCount: 5
+  _fanHalfAngle: 60
+  _rayLength: 1.2
+  _avoidanceStrength: 4
+  _steerSmoothing: 8
   _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _rotationSpeed: 200
-  detector: {fileID: 4975391901552519980}
 --- !u!61 &3279418797020906566
 BoxCollider2D:
   m_ObjectHideFlags: 0
