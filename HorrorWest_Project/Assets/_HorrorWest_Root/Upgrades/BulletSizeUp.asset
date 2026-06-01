@@ -17,7 +17,7 @@ MonoBehaviour:
   description: +20% bullet size
   tooltip: Increases the size of all projectiles, making them easier to hit with
   icon: {fileID: 0}
-  activeIcon: {fileID: 21300000, guid: 921e76737f499ab49bab8fa8e0e96d2f, type: 3}
+  activeIcon: {fileID: 21300000, guid: 3855918bdc6aeae4786be667ed7565b0, type: 3}
   rarity: 2
   isUnique: 1
   value: 0.2

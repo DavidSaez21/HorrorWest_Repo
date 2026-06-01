@@ -17,7 +17,7 @@ MonoBehaviour:
   description: +15% damage each shoot
   tooltip: Increases the base damage of the bullets.
   icon: {fileID: 0}
-  activeIcon: {fileID: 21300000, guid: 90238cd62538c9149be59f8d51a3d281, type: 3}
+  activeIcon: {fileID: 21300000, guid: c39221011b0767d42aa747e33f10e984, type: 3}
   rarity: 0
   isUnique: 0
   value: 0.15
