@@ -90,7 +90,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (isDead) return;
 
