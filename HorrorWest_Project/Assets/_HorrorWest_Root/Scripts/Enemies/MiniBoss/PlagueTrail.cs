@@ -1,58 +1,59 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Zona de veneno que deja el miniboss al cargar.
-/// Ralentiza al player mientras está dentro y desaparece tras X segundos.
-/// </summary>
 public class PlagueTrail : MonoBehaviour
 {
     [SerializeField] private float duration = 3f;
-    [SerializeField] private float slowMultiplier = 0.5f;   // 0.5 = la mitad de velocidad
+    [SerializeField] private float slowMultiplier = 0.5f;
     [SerializeField] private float damagePerSecond = 5f;
-
-    private bool _playerInside = false;
+    [SerializeField] private float slowDuration = 3f;   // El slow dura X segundos tras salir
 
     private void Start()
     {
         StartCoroutine(DestroyAfterDuration());
     }
 
-    private void Update()
-    {
-        if (_playerInside)
-        {
-            PlayerHealth ph = PlayerManager.Instance?.Health;
-            ph?.TakeDamage(damagePerSecond * Time.deltaTime);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        _playerInside = true;
-
-        // Ralentiza al player
-        PlayerManager.Instance?.Movement.SetAimSpeedMultiplier(slowMultiplier);
+        StopAllCoroutines();
+        StartCoroutine(DamageAndSlowRoutine(other));
+        StartCoroutine(DestroyAfterDuration());
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private IEnumerator DamageAndSlowRoutine(Collider2D playerCol)
     {
-        if (!other.CompareTag("Player")) return;
-        _playerInside = false;
+        // Aplica slow
+        PlayerManager.Instance?.Movement.SetAimSpeedMultiplier(slowMultiplier);
 
-        // Restaura velocidad normal
+        float elapsed = 0f;
+
+        // Hace daño mientras el player esté dentro o hasta que se destruya
+        while (playerCol != null && elapsed < duration)
+        {
+            // Comprueba si el player sigue dentro
+            Collider2D overlap = Physics2D.OverlapCircle(
+                transform.position,
+                GetComponent<CircleCollider2D>()?.radius ?? 0.5f,
+                LayerMask.GetMask("Player")
+            );
+
+            if (overlap != null)
+                PlayerManager.Instance?.Health.TakeDamage(damagePerSecond * Time.deltaTime);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Mantiene el slow X segundos después de salir
+        yield return new WaitForSeconds(slowDuration);
         PlayerManager.Instance?.Movement.SetAimSpeedMultiplier(1f);
     }
 
     private IEnumerator DestroyAfterDuration()
     {
         yield return new WaitForSeconds(duration);
-
-        // Si el player sigue dentro al destruirse, restaura velocidad
-        if (_playerInside)
-            PlayerManager.Instance?.Movement.SetAimSpeedMultiplier(1f);
-
+        PlayerManager.Instance?.Movement.SetAimSpeedMultiplier(1f);
         Destroy(gameObject);
     }
 }
