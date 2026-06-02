@@ -22,4 +22,4 @@ public class EnemyData : ScriptableObject
     public float dropChanceCoinOne = 70f;
     public float dropChanceCoinFive = 25f;
     public float dropChanceCoinTen = 5f;
-}
+}    
