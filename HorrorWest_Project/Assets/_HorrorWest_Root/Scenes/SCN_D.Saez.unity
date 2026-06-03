@@ -1529,6 +1529,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 590752524147763594, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: eb99aaf5f7e8e8942a6290c0313bc952, type: 3}
+    - target: {fileID: 590752524147763594, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d8ac10dbc6f47a448e9dc8fb1568e26, type: 3}
     - target: {fileID: 1111216154324832163, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -1573,6 +1581,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.41
       objectReference: {fileID: 0}
+    - target: {fileID: 5220669997986168745, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a6a2eb6b26e60b40982b2fed896d36a, type: 3}
+    - target: {fileID: 5220669997986168745, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ff8321d7a4cd7745adcc759598819f0, type: 3}
     - target: {fileID: 6841291344138584746, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: healthBarFill
       value: 
@@ -1581,6 +1597,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8790558803376456057, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 38facca8fd4c6b84e949cc4c7ed30097, type: 3}
+    - target: {fileID: 8790558803376456057, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bf623ebe48083e64db8997ca4f5d9474, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
