@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject panelOptions;
     public GameObject panelControls;
     public GameObject panelAudio;
+    public ButtonSound buttonSound;
 
     public void ClickPlay()
     {
@@ -53,11 +55,21 @@ public class MenuManager : MonoBehaviour
 
     public void ClickPlayFromShop()
     {
-        SceneManager.LoadScene("Test_Pausa");
+        StartCoroutine(LoadAfterSound("Test_Pausa"));
     }
 
     public void ClickBackToMenu()
     {
-        SceneManager.LoadScene("SCN_MainMenu");
+        StartCoroutine(LoadAfterSound("SCN_MainMenu"));
+    }
+
+    private IEnumerator LoadAfterSound(string sceneName)
+    {
+        if (buttonSound != null)
+        {
+            buttonSound.PlayClick();
+            yield return new WaitForSeconds(buttonSound.clickSound.length);
+        }
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ButtonSound : MonoBehaviour
 {
@@ -15,5 +16,17 @@ public class ButtonSound : MonoBehaviour
             float sfxVolume = audioManager != null ? audioManager.GetSFXVolume() : 1f;
             audioSource.PlayOneShot(clickSound, volume * sfxVolume);
         }
+    }
+
+    public void PlayClickAndLoad(string sceneName)
+    {
+        StartCoroutine(LoadAfterSound(sceneName));
+    }
+
+    private IEnumerator LoadAfterSound(string sceneName)
+    {
+        PlayClick();
+        yield return new WaitForSeconds(clickSound != null ? clickSound.length : 0f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }
