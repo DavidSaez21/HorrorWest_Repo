@@ -3070,8 +3070,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20952085, y: 0}
   m_AnchorMax: {x: 0.70014596, y: 0.526516}
-  m_AnchoredPosition: {x: -0.49993896, y: -108.19971}
-  m_SizeDelta: {x: -1.8500977, y: 220.20062}
+  m_AnchoredPosition: {x: -0.49993896, y: -95.132935}
+  m_SizeDelta: {x: -1.8501, y: 194.0671}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1488295428
 MonoBehaviour:
@@ -3214,10 +3214,10 @@ RectTransform:
   - {fileID: 4961388}
   m_Father: {fileID: 1737161236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460.8, y: 0}
-  m_SizeDelta: {x: 921.6, y: 1150.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1609380158
 MonoBehaviour:
@@ -3516,7 +3516,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1331.0046}
+  m_SizeDelta: {x: 0, y: 1699.6992}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1737161237
 MonoBehaviour:
@@ -3540,8 +3540,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 921.6, y: 1150.5}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!224 &1794405317 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
