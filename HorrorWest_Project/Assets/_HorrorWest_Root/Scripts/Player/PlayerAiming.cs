@@ -5,8 +5,7 @@ public class PlayerAiming : MonoBehaviour
 {
     public static PlayerAiming Instance { get; private set; }
 
-    [Header("Torso & Weapon Orbit")]
-    [SerializeField] private Transform torsoTransform;
+    [Header("Weapon Orbit")]
     [SerializeField] private Transform weaponOrbitPivot;
     [SerializeField] private Transform weaponTransform;
     [SerializeField] private float orbitRadius = 0.6f;
@@ -18,17 +17,15 @@ public class PlayerAiming : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private Animator torsoAnimator;
 
-    // ── Estado público ────────────────────────────────────────────────────────
     public bool IsAiming { get; private set; } = false;
 
-    // ── Estado interno ────────────────────────────────────────────────────────
     private Camera mainCamera;
     private Vector2 mouseScreenPosition;
     private float targetAngle = 0f;
     private float currentAngle = 0f;
 
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -39,12 +36,7 @@ public class PlayerAiming : MonoBehaviour
     private void Update()
     {
         UpdateAim();
-
-        if (playerMovement != null)
-            playerMovement.UpdateLegAngle(currentAngle);
     }
-
-    // ── Input callbacks ───────────────────────────────────────────────────────
 
     public void OnLook(InputAction.CallbackContext context)
     {
@@ -65,23 +57,17 @@ public class PlayerAiming : MonoBehaviour
         }
     }
 
-    // ── Lógica de apuntado ────────────────────────────────────────────────────
     private void UpdateAim()
     {
         if (mainCamera == null) return;
 
-        // ✅ Recalcula world position cada frame aunque el ratón no se mueva
         Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
-
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
         targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         currentAngle = Mathf.LerpAngle(currentAngle, targetAngle, aimSmoothSpeed * Time.deltaTime);
 
-        // Rota el torso
-        if (torsoTransform != null)
-            torsoTransform.rotation = Quaternion.AngleAxis(currentAngle - 90f, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(currentAngle - 90f, Vector3.forward);
 
-        // Órbita del arma alrededor del personaje
         if (weaponOrbitPivot != null)
         {
             Vector2 smoothDir = new Vector2(
@@ -93,9 +79,11 @@ public class PlayerAiming : MonoBehaviour
             if (weaponTransform != null)
                 weaponTransform.rotation = Quaternion.AngleAxis(currentAngle - 90f, Vector3.forward);
         }
-    }
 
-    // ── API pública ───────────────────────────────────────────────────────────
+        // ✅ Animación del torso
+        if (torsoAnimator != null && playerMovement != null)
+            torsoAnimator.SetBool("isWalking", playerMovement.IsMoving());
+    }
 
     public Vector2 GetAimDirection() => new Vector2(
         Mathf.Cos(currentAngle * Mathf.Deg2Rad),
@@ -116,8 +104,7 @@ public class PlayerAiming : MonoBehaviour
         if (!debugDrawAimRay || !Application.isPlaying) return;
 
         Gizmos.color = IsAiming ? Color.red : Color.yellow;
-        Vector2 dir = GetAimDirection();
-        Gizmos.DrawRay(transform.position, dir * 3f);
+        Gizmos.DrawRay(transform.position, GetAimDirection() * 3f);
 
         if (weaponOrbitPivot != null)
         {

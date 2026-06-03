@@ -913,7 +913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1902079127
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1418,6 +1418,7 @@ MonoBehaviour:
   zoomSpeed: 5
   aimOffsetStrength: 0.3
   offsetSpeed: 5
+  smoothTime: 0.08
   target: {fileID: 1956339857}
   debugDrawTarget: 0
 --- !u!1001 &1973022071335996579
@@ -1537,6 +1538,18 @@ PrefabInstance:
       propertyPath: reloadSound
       value: 
       objectReference: {fileID: 8300000, guid: 8d8ac10dbc6f47a448e9dc8fb1568e26, type: 3}
+    - target: {fileID: 633683917246300807, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: legFollowSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 633683917246300807, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: maxLegTorsoAngle
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 633683917246300807, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: debugDrawMovement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1111216154324832163, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -1589,6 +1602,14 @@ PrefabInstance:
       propertyPath: reloadSound
       value: 
       objectReference: {fileID: 8300000, guid: 4ff8321d7a4cd7745adcc759598819f0, type: 3}
+    - target: {fileID: 5677680712758529919, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: debugDrawAimRay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402054613424992336, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6841291344138584746, guid: 851c8fc1ffc081e4eb3e0a7b74d4838b, type: 3}
       propertyPath: healthBarFill
       value: 

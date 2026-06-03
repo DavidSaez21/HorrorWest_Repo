@@ -6,27 +6,20 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private ParticleSystem particulas;
 
     [Header("Leg Settings")]
     [SerializeField] private float legFollowSpeed = 8f;
-    [SerializeField] private float maxLegTorsoAngle = 90f;
-    [SerializeField] private float flipSpeed = 20f;
-    [SerializeField] private ParticleSystem particulas;
-
-    [Header("References")]
     [SerializeField] private Transform legsTransform;
+    [SerializeField] private Transform hatTransform;
     [SerializeField] private Animator legsAnimator;
 
-    // ── Estado interno ────────────────────────────────────────────────────────
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    private float currentLegAngle = 0f;
-    private float targetLegAngle = 0f;
     private float speedMultiplier = 1f;
-    private bool isFlipping = false;
     private bool isMoving = false;
+    private float currentLegAngle = 0f;
 
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,11 +31,9 @@ public class PlayerMovement : MonoBehaviour
 
         bool moving = moveInput != Vector2.zero;
 
-        // Animación
         if (legsAnimator != null)
             legsAnimator.SetBool("isWalking", moving);
 
-        // Partículas
         if (particulas != null)
         {
             if (moving && !isMoving) { particulas.Play(); isMoving = true; }
@@ -50,47 +41,29 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // ── Input callbacks ───────────────────────────────────────────────────────
+    private void Update()
+    {
+        float targetAngle = transform.eulerAngles.z;
+        currentLegAngle = Mathf.LerpAngle(currentLegAngle, targetAngle, legFollowSpeed * Time.deltaTime);
+
+        if (legsTransform != null)
+            legsTransform.rotation = Quaternion.AngleAxis(currentLegAngle, Vector3.forward);
+
+        if (hatTransform != null)
+            hatTransform.rotation = Quaternion.AngleAxis(currentLegAngle, Vector3.forward);
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
-
-    // ── API pública ───────────────────────────────────────────────────────────
 
     public void SetAimSpeedMultiplier(float multiplier)
     {
         speedMultiplier = multiplier;
     }
 
-    public void UpdateLegAngle(float torsoAngle)
-    {
-        if (moveInput != Vector2.zero && !isFlipping)
-        {
-            float moveAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
-            float diff = Mathf.DeltaAngle(currentLegAngle, moveAngle);
-
-            // Solo actualiza el target si el movimiento no contradice demasiado las piernas
-            if (Mathf.Abs(diff) < maxLegTorsoAngle)
-                targetLegAngle = moveAngle;
-        }
-
-        float angleDiff = Mathf.DeltaAngle(currentLegAngle, torsoAngle);
-        if (Mathf.Abs(angleDiff) > maxLegTorsoAngle && !isFlipping)
-        {
-            targetLegAngle = torsoAngle;
-            isFlipping = true;
-        }
-
-        float speed = isFlipping ? flipSpeed : legFollowSpeed;
-        currentLegAngle = Mathf.LerpAngle(currentLegAngle, targetLegAngle, speed * Time.deltaTime);
-
-        if (isFlipping && Mathf.Abs(Mathf.DeltaAngle(currentLegAngle, targetLegAngle)) < 1f)
-            isFlipping = false;
-
-        if (legsTransform != null)
-            legsTransform.rotation = Quaternion.AngleAxis(currentLegAngle - 90f, Vector3.forward);
-    }
+    public bool IsMoving() => moveInput != Vector2.zero;
 
     #region Debug
     [Header("Debug")]
@@ -102,12 +75,6 @@ public class PlayerMovement : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, moveInput.normalized * 1.5f);
-
-        if (legsTransform != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position, legsTransform.up * 1.2f);
-        }
     }
     #endregion
 }

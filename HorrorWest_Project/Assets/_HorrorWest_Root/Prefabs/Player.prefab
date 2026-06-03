@@ -916,11 +916,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  legFollowSpeed: 8
-  maxLegTorsoAngle: 90
-  flipSpeed: 20
   particulas: {fileID: 1469922937297274619}
+  legFollowSpeed: 8
   legsTransform: {fileID: 5739784459839358403}
+  hatTransform: {fileID: 2277886381935739403}
   legsAnimator: {fileID: 109026617293875205}
   debugDrawMovement: 0
 --- !u!114 &5677680712758529919
@@ -935,7 +934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60afdac2dbf0577478c94b7ce45604d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torsoTransform: {fileID: 4348343313807033083}
   weaponOrbitPivot: {fileID: 0}
   weaponTransform: {fileID: 0}
   orbitRadius: 0.6
@@ -943,6 +941,7 @@ MonoBehaviour:
   aimSpeedMultiplier: 0.5
   aimCritMultiplier: 2
   playerMovement: {fileID: 633683917246300807}
+  torsoAnimator: {fileID: 5655146511454440714}
   debugDrawAimRay: 0
 --- !u!114 &436976793888286558
 MonoBehaviour:
