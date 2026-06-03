@@ -1,15 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PlayerAiming — fusión de PlayerAim y PlayerAiming.
-//
-// ANTES: dos scripts con nombres casi idénticos haciendo cosas distintas
-//   · PlayerAiming  → rotación del torso, órbita del arma, dirección de disparo
-//   · PlayerAim     → estado de apuntado (RMB), multiplicador de velocidad y crít
-//
-// AHORA: un solo script, un solo singleton, cero dependencias circulares.
-// ─────────────────────────────────────────────────────────────────────────────
 public class PlayerAiming : MonoBehaviour
 {
     public static PlayerAiming Instance { get; private set; }
@@ -33,7 +24,7 @@ public class PlayerAiming : MonoBehaviour
 
     // ── Estado interno ────────────────────────────────────────────────────────
     private Camera mainCamera;
-    private Vector2 mouseWorldPosition;
+    private Vector2 mouseScreenPosition;
     private float targetAngle = 0f;
     private float currentAngle = 0f;
 
@@ -53,17 +44,13 @@ public class PlayerAiming : MonoBehaviour
             playerMovement.UpdateLegAngle(currentAngle);
     }
 
-    // ── Input callbacks (asignados desde el PlayerInput component) ────────────
+    // ── Input callbacks ───────────────────────────────────────────────────────
 
-    /// <summary>Recibe la posición del ratón desde el Input System.</summary>
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (mainCamera == null) return;
-        Vector2 screenPos = context.ReadValue<Vector2>();
-        mouseWorldPosition = mainCamera.ScreenToWorldPoint(screenPos);
+        mouseScreenPosition = context.ReadValue<Vector2>();
     }
 
-    /// <summary>Click derecho — entra y sale del modo apuntado.</summary>
     public void OnAim(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -81,6 +68,11 @@ public class PlayerAiming : MonoBehaviour
     // ── Lógica de apuntado ────────────────────────────────────────────────────
     private void UpdateAim()
     {
+        if (mainCamera == null) return;
+
+        // ✅ Recalcula world position cada frame aunque el ratón no se mueva
+        Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
+
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
         targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         currentAngle = Mathf.LerpAngle(currentAngle, targetAngle, aimSmoothSpeed * Time.deltaTime);
@@ -105,20 +97,14 @@ public class PlayerAiming : MonoBehaviour
 
     // ── API pública ───────────────────────────────────────────────────────────
 
-    /// <summary>Dirección normalizada hacia el cursor. Usada por PlayerShoot.</summary>
     public Vector2 GetAimDirection() => new Vector2(
         Mathf.Cos(currentAngle * Mathf.Deg2Rad),
         Mathf.Sin(currentAngle * Mathf.Deg2Rad)
     );
 
-    /// <summary>Posición mundial del pivot del arma. Usada por PlayerShoot.</summary>
     public Vector2 GetWeaponPosition() =>
         weaponOrbitPivot != null ? (Vector2)weaponOrbitPivot.position : (Vector2)transform.position;
 
-    /// <summary>
-    /// Multiplicador de crítico al apuntar. Usado por PlayerStats.CalculateDamage.
-    /// Devuelve el multiplicador si está apuntando, 1 si no.
-    /// </summary>
     public float GetCritMultiplier() => IsAiming ? aimCritMultiplier : 1f;
 
     #region Debug
@@ -129,12 +115,10 @@ public class PlayerAiming : MonoBehaviour
     {
         if (!debugDrawAimRay || !Application.isPlaying) return;
 
-        // Rayo hacia el cursor
         Gizmos.color = IsAiming ? Color.red : Color.yellow;
         Vector2 dir = GetAimDirection();
         Gizmos.DrawRay(transform.position, dir * 3f);
 
-        // Pivot del arma
         if (weaponOrbitPivot != null)
         {
             Gizmos.color = Color.cyan;

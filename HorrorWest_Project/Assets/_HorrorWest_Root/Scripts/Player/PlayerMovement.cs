@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform legsTransform;
+    [SerializeField] private Animator legsAnimator;
 
     // ── Estado interno ────────────────────────────────────────────────────────
     private Rigidbody2D rb;
@@ -33,14 +34,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // moveSpeed viene del Inspector; PlayerStats lo modifica vía SetAimSpeedMultiplier
-        // En el paso 4 (PlayerManager) conectaremos GetMoveSpeed() de PlayerStats aquí
         rb.linearVelocity = moveInput.normalized * moveSpeed * speedMultiplier;
+
+        bool moving = moveInput != Vector2.zero;
+
+        // Animación
+        if (legsAnimator != null)
+            legsAnimator.SetBool("isWalking", moving);
 
         // Partículas
         if (particulas != null)
         {
-            bool moving = moveInput != Vector2.zero;
             if (moving && !isMoving) { particulas.Play(); isMoving = true; }
             if (!moving && isMoving) { particulas.Stop(); isMoving = false; }
         }
@@ -54,24 +58,23 @@ public class PlayerMovement : MonoBehaviour
 
     // ── API pública ───────────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Llamado desde PlayerAiming para ralentizar al entrar en modo apuntado.
-    /// </summary>
     public void SetAimSpeedMultiplier(float multiplier)
     {
         speedMultiplier = multiplier;
     }
 
-    /// <summary>
-    /// Llamado desde PlayerAiming cada frame para sincronizar la rotación de piernas.
-    /// </summary>
     public void UpdateLegAngle(float torsoAngle)
     {
-        // Si hay input de movimiento, las piernas apuntan hacia donde se mueve
         if (moveInput != Vector2.zero && !isFlipping)
-            targetLegAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
+        {
+            float moveAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
+            float diff = Mathf.DeltaAngle(currentLegAngle, moveAngle);
 
-        // Si el torso gira demasiado respecto a las piernas, las piernas flipean
+            // Solo actualiza el target si el movimiento no contradice demasiado las piernas
+            if (Mathf.Abs(diff) < maxLegTorsoAngle)
+                targetLegAngle = moveAngle;
+        }
+
         float angleDiff = Mathf.DeltaAngle(currentLegAngle, torsoAngle);
         if (Mathf.Abs(angleDiff) > maxLegTorsoAngle && !isFlipping)
         {
@@ -97,11 +100,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!debugDrawMovement || !Application.isPlaying) return;
 
-        // Dirección de movimiento actual
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, moveInput.normalized * 1.5f);
 
-        // Dirección de las piernas
         if (legsTransform != null)
         {
             Gizmos.color = Color.blue;
