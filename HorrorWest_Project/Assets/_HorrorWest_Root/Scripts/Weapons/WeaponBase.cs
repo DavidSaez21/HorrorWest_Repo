@@ -31,6 +31,11 @@ public abstract class WeaponBase : MonoBehaviour
     [Header("References")]
     [SerializeField] protected Transform shootPoint;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip fireSound;
+    [SerializeField] private AudioClip reloadSound;
+    private AudioSource _audioSource;
+
     // ── Eventos — WeaponUI se suscribe a estos ────────────────────────────────
     public event System.Action<int> OnAmmoChanged;
     public event System.Action OnStartReload;
@@ -46,6 +51,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected virtual void Start()
     {
         currentAmmo = magazineSize;
+        _audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     // ── API pública ───────────────────────────────────────────────────────────
@@ -98,6 +104,9 @@ public abstract class WeaponBase : MonoBehaviour
 
         SpawnProjectiles(origin, direction);
 
+        if (fireSound != null)
+            _audioSource.PlayOneShot(fireSound);
+
         if (!HasInfiniteAmmo)
         {
             currentAmmo--;
@@ -121,6 +130,9 @@ public abstract class WeaponBase : MonoBehaviour
     {
         isReloading = true;
         OnStartReload?.Invoke();
+
+        if (reloadSound != null)
+            _audioSource.PlayOneShot(reloadSound);
 
         float adjustedReloadTime = reloadTime;
         if (PlayerManager.Instance.Stats != null)
