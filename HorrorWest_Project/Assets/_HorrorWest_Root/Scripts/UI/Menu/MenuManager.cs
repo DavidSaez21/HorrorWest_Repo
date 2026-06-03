@@ -50,4 +50,14 @@ public class MenuManager : MonoBehaviour
     {
         panelAudio.SetActive(false);
     }
+
+    public void ClickPlayFromShop()
+    {
+        SceneManager.LoadScene("Test_Pausa");
+    }
+
+    public void ClickBackToMenu()
+    {
+        SceneManager.LoadScene("SCN_MainMenu");
+    }
 }

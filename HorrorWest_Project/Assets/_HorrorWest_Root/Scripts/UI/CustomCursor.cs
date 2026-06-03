@@ -9,6 +9,11 @@ public class CustomCursor : MonoBehaviour
     public Color normalColor = Color.white;
     public Color enemyColor = Color.red;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         Cursor.visible = false;
