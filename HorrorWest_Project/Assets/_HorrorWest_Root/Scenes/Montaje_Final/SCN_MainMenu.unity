@@ -2916,6 +2916,7 @@ MonoBehaviour:
   panelOptions: {fileID: 189580213}
   panelControls: {fileID: 1846790425}
   panelAudio: {fileID: 526853483}
+  buttonSound: {fileID: 0}
 --- !u!4 &564077645
 Transform:
   m_ObjectHideFlags: 0

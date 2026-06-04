@@ -85,6 +85,12 @@ public abstract class WeaponBase : MonoBehaviour
     protected bool HasInfiniteAmmo =>
         PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo;
 
+    // Lee el volumen SFX guardado en PlayerPrefs por el AudioManager
+    private float GetSFXVolume()
+    {
+        return PlayerPrefs.GetFloat("sfxVolume", 1f);
+    }
+
     /// <summary>
     /// Lógica de disparo compartida: comprueba munición, actualiza IsLastBullet,
     /// llama a SpawnProjectiles y gestiona la recarga automática.
@@ -105,7 +111,7 @@ public abstract class WeaponBase : MonoBehaviour
         SpawnProjectiles(origin, direction);
 
         if (fireSound != null)
-            _audioSource.PlayOneShot(fireSound);
+            _audioSource.PlayOneShot(fireSound, GetSFXVolume());
 
         if (!HasInfiniteAmmo)
         {
@@ -132,7 +138,7 @@ public abstract class WeaponBase : MonoBehaviour
         OnStartReload?.Invoke();
 
         if (reloadSound != null)
-            _audioSource.PlayOneShot(reloadSound);
+            _audioSource.PlayOneShot(reloadSound, GetSFXVolume());
 
         float adjustedReloadTime = reloadTime;
         if (PlayerManager.Instance.Stats != null)

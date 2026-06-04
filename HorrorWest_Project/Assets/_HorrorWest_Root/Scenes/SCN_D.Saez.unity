@@ -990,6 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 7cfb0e49fb44302438dd358ff862b7b0, type: 2}
+  animator: {fileID: 0}
   coinPrefabs: []
   knockbackForce: 5
   knockbackDuration: 0.18
@@ -1502,10 +1503,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1001453079265010471, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 341262d85748e624f9e5bf281dfb3195, type: 3}
     - target: {fileID: 2604335714088740721, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
       propertyPath: healthBarFill
       value: 
       objectReference: {fileID: 1583909623}
+    - target: {fileID: 3907188639070992715, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 52bbe19ed06d0ab4e9c2b22d118679b2, type: 3}
     - target: {fileID: 3937401366071451042, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -1550,6 +1559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8871862081772910721, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c1b5cbba33fb54439cd1f362debf8eb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

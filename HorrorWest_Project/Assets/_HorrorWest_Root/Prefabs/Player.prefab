@@ -229,7 +229,7 @@ MonoBehaviour:
   magazineSize: 2
   reloadTime: 2
   shootPoint: {fileID: 7079484411122552230}
-  fireSound: {fileID: 8300000, guid: 2a6a2eb6b26e60b40982b2fed896d36a, type: 3}
+  fireSound: {fileID: 8300000, guid: 4c1b5cbba33fb54439cd1f362debf8eb, type: 3}
   reloadSound: {fileID: 8300000, guid: 4ff8321d7a4cd7745adcc759598819f0, type: 3}
   pelletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
@@ -407,7 +407,7 @@ MonoBehaviour:
   magazineSize: 20
   reloadTime: 2.5
   shootPoint: {fileID: 24707323221433051}
-  fireSound: {fileID: 8300000, guid: eb99aaf5f7e8e8942a6290c0313bc952, type: 3}
+  fireSound: {fileID: 8300000, guid: 341262d85748e624f9e5bf281dfb3195, type: 3}
   reloadSound: {fileID: 8300000, guid: 8d8ac10dbc6f47a448e9dc8fb1568e26, type: 3}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
 --- !u!1 &2795937732679501469
@@ -1579,7 +1579,7 @@ MonoBehaviour:
   magazineSize: 6
   reloadTime: 1.5
   shootPoint: {fileID: 7253706795048711386}
-  fireSound: {fileID: 8300000, guid: 38facca8fd4c6b84e949cc4c7ed30097, type: 3}
+  fireSound: {fileID: 8300000, guid: 52bbe19ed06d0ab4e9c2b22d118679b2, type: 3}
   reloadSound: {fileID: 8300000, guid: bf623ebe48083e64db8997ca4f5d9474, type: 3}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
   muzzleFlashFX: {fileID: 7657518198234982648, guid: 0156c88c1b62ecc409aa9f397e160a75, type: 3}
