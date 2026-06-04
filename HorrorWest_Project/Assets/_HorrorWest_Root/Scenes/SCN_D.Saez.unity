@@ -859,7 +859,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812002673}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2ae936ec78be164583f77e7fc663b76, type: 3}
   m_Name: 
@@ -868,10 +868,8 @@ MonoBehaviour:
   - waveName: ' Wave 1'
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
-      count: 3
+      count: 0
     - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
-      count: 2
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 7f44fcc943196f545a0d5af733b1e44a, type: 3}
       count: 2
     timeLimit: 30
     timeBetweenSpawns: 0.8
@@ -990,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 7cfb0e49fb44302438dd358ff862b7b0, type: 2}
+  animator: {fileID: 0}
   coinPrefabs: []
   knockbackForce: 5
   knockbackDuration: 0.18
