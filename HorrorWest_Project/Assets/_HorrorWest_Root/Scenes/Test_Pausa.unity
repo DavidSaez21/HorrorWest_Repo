@@ -4608,7 +4608,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1123994107}
   - component: {fileID: 1123994110}
-  - component: {fileID: 1123994109}
   - component: {fileID: 1123994108}
   - component: {fileID: 1123994111}
   - component: {fileID: 1123994112}
@@ -4681,41 +4680,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.674205, y: 3.254204}
   m_EdgeRadius: 0
---- !u!114 &1123994109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123994106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 0.8
-  hoverAngle: 12
-  swingSpeed: 2.2
-  decaySpeed: 1.5
-  smoothness: 0.92
-  hoverScaleMultiplier: 1.1
-  scaleSpeed: 8
-  onClicked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1846254255}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!212 &1123994110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5156,7 +5120,7 @@ MonoBehaviour:
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
-  smoothness: 0.9203
+  smoothness: 0.92
   hoverScaleMultiplier: 1.1
   scaleSpeed: 8
   onClicked:
