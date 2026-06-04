@@ -7,7 +7,7 @@ public class WeaponShopCard : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI priceText;      // Precio si bloqueada, X si seleccionada, nada si desbloqueada no seleccionada
+    [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Button actionButton;
     [SerializeField] private Image selectedBorder;
 
@@ -20,6 +20,12 @@ public class WeaponShopCard : MonoBehaviour
     private int _price;
     private System.Action _onBuy;
     private System.Action _onSelect;
+    private ButtonSound _buySound;
+
+    public void SetBuySound(ButtonSound sound)
+    {
+        _buySound = sound;
+    }
 
     public void Setup(int weaponIndex, bool isUnlocked, int price, System.Action onBuy, System.Action onSelect)
     {
@@ -42,8 +48,6 @@ public class WeaponShopCard : MonoBehaviour
     private void SetupUnlocked()
     {
         _isUnlocked = true;
-
-        // Sin precio — el texto se limpia, solo aparece X al seleccionar
         if (priceText != null) priceText.text = "";
         if (iconImage != null) iconImage.color = unlockedColor;
 
@@ -53,7 +57,6 @@ public class WeaponShopCard : MonoBehaviour
 
     private void SetupLocked()
     {
-        // Muestra el precio directamente
         if (priceText != null) priceText.text = $"{_price} $";
         if (iconImage != null) iconImage.color = lockedColor;
 
@@ -69,14 +72,11 @@ public class WeaponShopCard : MonoBehaviour
         actionButton.interactable = canAfford;
     }
 
-    // ── Selección ─────────────────────────────────────────────────────────────
     public void SetSelected(bool isSelected)
     {
         if (selectedBorder != null)
             selectedBorder.gameObject.SetActive(isSelected);
 
-        // X si seleccionada, nada si desbloqueada pero no seleccionada
-        // Si está bloqueada mantiene el precio
         if (priceText != null && _isUnlocked)
             priceText.text = isSelected ? " X" : "";
     }
@@ -91,7 +91,11 @@ public class WeaponShopCard : MonoBehaviour
     private void OnActionClicked()
     {
         if (_isUnlocked) _onSelect?.Invoke();
-        else _onBuy?.Invoke();
+        else
+        {
+            _buySound?.PlayClick();
+            _onBuy?.Invoke();
+        }
     }
 
     #region Debug

@@ -57,6 +57,9 @@ public class PlayerShoot : MonoBehaviour
     // ── Input callbacks ───────────────────────────────────────────────────────
     public void OnFire(InputAction.CallbackContext context)
     {
+        // No dispara si el juego está pausado
+        if (Time.timeScale == 0f) return;
+
         if (context.performed)
         {
             isFiring = true;

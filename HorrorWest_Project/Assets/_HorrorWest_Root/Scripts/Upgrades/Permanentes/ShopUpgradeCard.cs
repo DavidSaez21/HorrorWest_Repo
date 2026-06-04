@@ -11,9 +11,9 @@ public class ShopUpgradeCard : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private TextMeshProUGUI levelText;       // Nivel actual
-    [SerializeField] private TextMeshProUGUI romanLevelText;  // I II III IV V
-    [SerializeField] private TextMeshProUGUI priceText;       // Precio o ✗
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI romanLevelText;
+    [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Button buyButton;
     [SerializeField] private Image cardBackground;
 
@@ -22,8 +22,13 @@ public class ShopUpgradeCard : MonoBehaviour
     [SerializeField] private Color maxLevelColor = new Color(0.05f, 0.3f, 0.05f);
     [SerializeField] private Color cantAffordColor = new Color(0.3f, 0.1f, 0.1f);
 
-    // Numeración romana hasta 5 niveles
     private static readonly string[] RomanNumerals = { "", "I", "II", "III", "IV", "V" };
+    private ButtonSound _buySound;
+
+    public void SetBuySound(ButtonSound sound)
+    {
+        _buySound = sound;
+    }
 
     private void Start()
     {
@@ -62,13 +67,11 @@ public class ShopUpgradeCard : MonoBehaviour
         bool isMaxLevel = currentLevel >= upgradeData.maxLevel;
         bool canAfford = PermanentUpgradeManager.Instance.CanPurchase(upgradeData);
 
-        // Nivel numérico
         if (levelText != null)
             levelText.text = isMaxLevel
                 ? $"{upgradeData.maxLevel} / {upgradeData.maxLevel}"
                 : $"{currentLevel} / {upgradeData.maxLevel}";
 
-        // Nivel en romano — muestra el nivel actual (o MAX si está al máximo)
         if (romanLevelText != null)
         {
             int clampedLevel = Mathf.Clamp(currentLevel, 0, RomanNumerals.Length - 1);
@@ -77,17 +80,14 @@ public class ShopUpgradeCard : MonoBehaviour
                 : (currentLevel == 0 ? " " : RomanNumerals[clampedLevel]);
         }
 
-        // Precio o ✗ si está al máximo
         if (priceText != null)
             priceText.text = isMaxLevel
                 ? " X"
                 : $"{upgradeData.GetCostForLevel(currentLevel + 1)} $";
 
-        // Botón
         if (buyButton != null)
             buyButton.interactable = !isMaxLevel && canAfford;
 
-        // Color del fondo
         if (cardBackground != null)
         {
             if (isMaxLevel) cardBackground.color = maxLevelColor;
@@ -99,7 +99,10 @@ public class ShopUpgradeCard : MonoBehaviour
     private void OnBuyClicked()
     {
         if (upgradeData == null || PermanentUpgradeManager.Instance == null) return;
-        PermanentUpgradeManager.Instance.TryPurchaseUpgrade(upgradeData);
+        if (PermanentUpgradeManager.Instance.TryPurchaseUpgrade(upgradeData))
+        {
+            _buySound?.PlayClick();
+        }
     }
 
     #region Debug

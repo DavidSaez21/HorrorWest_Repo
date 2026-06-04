@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 4961384}
   playButton: {fileID: 0}
   backButton: {fileID: 0}
+  buySound: {fileID: 1469788693}
   debugMode: 1
 --- !u!1 &27694327
 GameObject:
@@ -4559,6 +4560,8 @@ GameObject:
   - component: {fileID: 731474755}
   - component: {fileID: 731474754}
   - component: {fileID: 731474753}
+  - component: {fileID: 731474757}
+  - component: {fileID: 731474756}
   m_Layer: 5
   m_Name: Btn_Exit
   m_TagString: Untagged
@@ -4680,6 +4683,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731474751}
   m_CullTransparentMesh: 1
+--- !u!114 &731474756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731474751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 0.8
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.1
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &731474757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731474751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab2960df95915f4d9158451d94b70c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 260c925fce6e5364daa9c610796162ca, type: 3}
+  audioSource: {fileID: 1071213793}
+  audioManager: {fileID: 1071213792}
+  volume: 1
 --- !u!1 &753034968
 GameObject:
   m_ObjectHideFlags: 0
@@ -7828,6 +7870,54 @@ MonoBehaviour:
   title: Max Health
   description: Battered and engraved. Increases your maximum health, giving you more
     room to take risks and survive.
+--- !u!1 &1469788692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469788694}
+  - component: {fileID: 1469788693}
+  m_Layer: 0
+  m_Name: ButtonSound_Coin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1469788693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469788692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab2960df95915f4d9158451d94b70c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: ebef9fd327a318a4c8a4acc18b39fb3f, type: 3}
+  audioSource: {fileID: 1071213793}
+  audioManager: {fileID: 1071213792}
+  volume: 1
+--- !u!4 &1469788694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469788692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 57.39451, y: 478.8036, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1488295426
 GameObject:
   m_ObjectHideFlags: 0
@@ -12711,6 +12801,7 @@ GameObject:
   - component: {fileID: 2085606486}
   - component: {fileID: 2085606485}
   - component: {fileID: 2085606488}
+  - component: {fileID: 2085606489}
   m_Layer: 5
   m_Name: Btn_Play
   m_TagString: Untagged
@@ -12848,6 +12939,29 @@ MonoBehaviour:
   audioSource: {fileID: 1071213793}
   audioManager: {fileID: 1071213792}
   volume: 1
+--- !u!114 &2085606489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085606483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAngle: 1.5
+  idleSpeed: 0.8
+  hoverAngle: 3
+  swingSpeed: 2.2
+  decaySpeed: 1.5
+  smoothness: 0.92
+  hoverScaleMultiplier: 1.1
+  scaleSpeed: 8
+  onClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2112052534
 GameObject:
   m_ObjectHideFlags: 0
@@ -13117,3 +13231,4 @@ SceneRoots:
   - {fileID: 1091915769}
   - {fileID: 1936866348}
   - {fileID: 1739870342}
+  - {fileID: 1469788694}
