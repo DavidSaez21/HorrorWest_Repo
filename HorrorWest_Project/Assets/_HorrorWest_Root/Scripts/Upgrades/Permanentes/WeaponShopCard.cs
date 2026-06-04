@@ -2,82 +2,88 @@
 using UnityEngine.UI;
 using TMPro;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// WeaponShopCard — card de arma en la tienda.
-// Muestra el estado del arma: seleccionada, desbloqueada o con precio.
-// ─────────────────────────────────────────────────────────────────────────────
 public class WeaponShopCard : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI statusText;     // "SELECCIONADA", "COMPRAR 150$", etc.
-    [SerializeField] private Button actionButton;   // Comprar o Seleccionar
-    [SerializeField] private Image selectedBorder; // Borde que se activa al seleccionar
+    [SerializeField] private TextMeshProUGUI priceText;      // Muestra el precio o nada si está desbloqueada
+    [SerializeField] private TextMeshProUGUI selectedText;   // Asigna en Inspector — aparece con X al seleccionar
+    [SerializeField] private Button actionButton;
+    [SerializeField] private Image selectedBorder;
 
     [Header("Colors")]
-    [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Color unlockedColor = Color.white;
     [SerializeField] private Color lockedColor = Color.gray;
 
     private int _weaponIndex;
     private bool _isUnlocked;
+    private int _price;
     private System.Action _onBuy;
     private System.Action _onSelect;
 
-    // ── Setup ─────────────────────────────────────────────────────────────────
     public void Setup(int weaponIndex, bool isUnlocked, int price, System.Action onBuy, System.Action onSelect)
     {
         _weaponIndex = weaponIndex;
         _isUnlocked = isUnlocked;
+        _price = price;
         _onBuy = onBuy;
         _onSelect = onSelect;
 
         actionButton?.onClick.RemoveAllListeners();
 
+        // El texto seleccionado empieza oculto
+        if (selectedText != null) selectedText.gameObject.SetActive(false);
+
         if (_isUnlocked)
             SetupUnlocked();
         else
-            SetupLocked(price);
+            SetupLocked();
     }
 
     private void SetupUnlocked()
     {
         _isUnlocked = true;
 
-        if (statusText != null) statusText.text = "SELECCIONAR";
+        // Sin precio al estar desbloqueada
+        if (priceText != null) priceText.gameObject.SetActive(false);
         if (iconImage != null) iconImage.color = unlockedColor;
 
         actionButton?.onClick.AddListener(() => _onSelect?.Invoke());
         if (actionButton != null) actionButton.interactable = true;
     }
 
-    private void SetupLocked(int price)
+    private void SetupLocked()
     {
-        if (statusText != null) statusText.text = $"COMPRAR\n{price} $";
+        // Muestra el precio directamente
+        if (priceText != null)
+        {
+            priceText.gameObject.SetActive(true);
+            priceText.text = $"{_price} $";
+        }
         if (iconImage != null) iconImage.color = lockedColor;
 
-        // Botón de compra — solo si hay suficientes monedas
         actionButton?.onClick.AddListener(OnActionClicked);
-        RefreshAffordability(price);
+        RefreshAffordability();
     }
 
-    private void RefreshAffordability(int price)
+    private void RefreshAffordability()
     {
         if (actionButton == null) return;
         bool canAfford = CurrencyManager.Instance != null
-            && CurrencyManager.Instance.GetCoins() >= price;
+            && CurrencyManager.Instance.GetCoins() >= _price;
         actionButton.interactable = canAfford;
     }
 
-    // ── Estado ────────────────────────────────────────────────────────────────
+    // ── Selección ─────────────────────────────────────────────────────────────
     public void SetSelected(bool isSelected)
     {
         if (selectedBorder != null)
             selectedBorder.gameObject.SetActive(isSelected);
 
-        if (statusText != null && _isUnlocked)
-            statusText.text = isSelected ? "SELECCIONADA" : "SELECCIONAR";
+        // Muestra el texto asignado en el Inspector con " ✗" al seleccionar
+        if (selectedText != null)
+            selectedText.gameObject.SetActive(isSelected);
     }
 
     public void SetUnlocked()
@@ -87,13 +93,10 @@ public class WeaponShopCard : MonoBehaviour
         SetupUnlocked();
     }
 
-    // ── Acción ────────────────────────────────────────────────────────────────
     private void OnActionClicked()
     {
-        if (_isUnlocked)
-            _onSelect?.Invoke();
-        else
-            _onBuy?.Invoke();
+        if (_isUnlocked) _onSelect?.Invoke();
+        else _onBuy?.Invoke();
     }
 
     #region Debug
