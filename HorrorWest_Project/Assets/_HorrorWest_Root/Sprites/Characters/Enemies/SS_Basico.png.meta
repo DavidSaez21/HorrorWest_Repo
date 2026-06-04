@@ -138,8 +138,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b4bd7eb5106cd4409f963fffa517bb0
-      internalID: -1743176873
+      spriteID: b7eb82508328a5747abe04031cdd0599
+      internalID: 1339414285
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64ddabebfa2e9d64ba0506c0b44fa410
-      internalID: 1245913477
+      spriteID: b5c522e596d12c742b831fc64456078e
+      internalID: 2141330072
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55654ebf9c41021489811dc4eb4f5c25
-      internalID: 1766021790
+      spriteID: f017e4344b12513429575b4d303a0896
+      internalID: 1405521222
       vertices: []
       indices: 
       edges: []
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea9a5871c72aff14c97506b1014ca047
-      internalID: -1937361866
+      spriteID: 93490d5139e2dc346b76a871e51bfb5c
+      internalID: -1758140554
       vertices: []
       indices: 
       edges: []
@@ -226,14 +226,190 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09c7157cd8940e0448f3bf963a0c76f7
-      internalID: 1321681210
+      spriteID: 1814bedfdf346e047aba2032264383ce
+      internalID: -336839863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: SS_Basico_5
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74233305c74f94b41b8dc6288b85e315
+      internalID: -1334948294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_6
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9b4d4f9290d66c40a8e8e9eb893e868
+      internalID: -1013429371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_7
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10da9f8a517c8bb4e83f0a154b646429
+      internalID: 2056669194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_8
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490965b149ad9db4a9af5389b8249588
+      internalID: -985367223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_9
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd876f8965149e74980f7876e8368613
+      internalID: -1985055375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_10
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 514233770e10d5e4a99aad72e9aca176
+      internalID: -407290523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_11
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 026b5bfab87c2f946801305782b1846d
+      internalID: -822326595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_12
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 1600
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d9e512730711b1448dfe887caee9ad0
+      internalID: 427382523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_13
       rect:
         serializedVersion: 2
         x: 0
@@ -248,14 +424,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cc2ad52ae37b8d4ca577c34bc00404a
-      internalID: -1367724756
+      spriteID: 88f3cfafcc67d7b4e8874c01998c2f82
+      internalID: 266944779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_6
+      name: SS_Basico_14
       rect:
         serializedVersion: 2
         x: 320
@@ -270,14 +446,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23131d1c006efa043877bdcb0af102f5
-      internalID: -400689491
+      spriteID: 587fe210d8116004b944e616a025a9cd
+      internalID: 78153361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_7
+      name: SS_Basico_15
       rect:
         serializedVersion: 2
         x: 640
@@ -292,14 +468,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e63c2053406b6b4eae8f175ee9414ae
-      internalID: -930550242
+      spriteID: f3a6505e978ba2b4095bb443c55a92dc
+      internalID: 373558262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_8
+      name: SS_Basico_16
       rect:
         serializedVersion: 2
         x: 960
@@ -314,14 +490,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b04e40949043cdb449d4983bfbd18304
-      internalID: -1462854483
+      spriteID: 600f480e26c96d04ea2010181ea3052d
+      internalID: -1054316661
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_9
+      name: SS_Basico_17
       rect:
         serializedVersion: 2
         x: 1280
@@ -336,14 +512,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f2c60de747d4f942947f69251702cdc
-      internalID: -1333486384
+      spriteID: 1aeffa74d26e8b24199de81cf933be58
+      internalID: 840980418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_10
+      name: SS_Basico_18
       rect:
         serializedVersion: 2
         x: 1600
@@ -358,14 +534,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f5e09afda596444e8f381ea90c2de0a
-      internalID: 167436268
+      spriteID: 965014db89b29d141ae8edb8aa6bbb2b
+      internalID: 2016912770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_11
+      name: SS_Basico_19
       rect:
         serializedVersion: 2
         x: 1920
@@ -380,14 +556,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da9669455a439d74397d8828f3427412
-      internalID: -529160932
+      spriteID: 15c14c8909d23d543b51dae5fa985564
+      internalID: 1829727869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_12
+      name: SS_Basico_20
       rect:
         serializedVersion: 2
         x: 2240
@@ -402,14 +578,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40e0eeaee14381241930afabfea57a11
-      internalID: 649424248
+      spriteID: 8a7ee2ad17a8f014fbe7452054a0f9c2
+      internalID: 12017047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_13
+      name: SS_Basico_21
       rect:
         serializedVersion: 2
         x: 2560
@@ -424,14 +600,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95512f8653ca734429178d975e9c00b4
-      internalID: -1351828577
+      spriteID: 5cfad8fd400112c489145419743d71d1
+      internalID: 687367362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_14
+      name: SS_Basico_22
       rect:
         serializedVersion: 2
         x: 2880
@@ -446,14 +622,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b584ed8d22277dc418c97387c0b7112e
-      internalID: 1129200948
+      spriteID: 30606fd07724d1a49882be878e500fac
+      internalID: -1077600979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_15
+      name: SS_Basico_23
       rect:
         serializedVersion: 2
         x: 3200
@@ -468,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93794fcf8b426d249a2e6867dade0526
-      internalID: -1739111811
+      spriteID: 6c3b06922ecf0664a82681eeb38a46cd
+      internalID: -1299954747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_16
+      name: SS_Basico_24
       rect:
         serializedVersion: 2
         x: 3520
@@ -490,14 +666,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04f5a18c5981a6c4da224d7415791bc9
-      internalID: -1360840803
+      spriteID: 205da9584033713488936fb387ac6b21
+      internalID: -83071026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_17
+      name: SS_Basico_25
       rect:
         serializedVersion: 2
         x: 3840
@@ -512,14 +688,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f85deba8286c09478e5a95e278e9227
-      internalID: 1023751929
+      spriteID: 7ac64659d71463847bde854c616ff930
+      internalID: 807872691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_18
+      name: SS_Basico_26
       rect:
         serializedVersion: 2
         x: 4160
@@ -534,14 +710,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20cf86250ecc05049aee8175603aa5f0
-      internalID: -1586577703
+      spriteID: 5c09d8d7aa7c7d347b01b23f6b0db392
+      internalID: -1797966450
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_19
+      name: SS_Basico_27
       rect:
         serializedVersion: 2
         x: 4480
@@ -556,14 +732,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78cb299df7607b246a587af14ffdb36d
-      internalID: -266127298
+      spriteID: 2d17968d12702234aa9553128b985305
+      internalID: -840069159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_20
+      name: SS_Basico_28
       rect:
         serializedVersion: 2
         x: 4800
@@ -578,184 +754,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cecab7d802052b24785b4b7f8c1011c7
-      internalID: -1545761305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_21
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 960
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03847236030882d4d846488ae0db60b2
-      internalID: -843853849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_22
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 960
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 75a63a6aa2de4cc4494e3b6206da6d2a
-      internalID: -1445784091
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_23
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 960
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 493452b099d94904d9cd99c6a08dc1d2
-      internalID: -535235554
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_24
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 960
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0cd374571580474483a164276b34e0f
-      internalID: -716831114
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_25
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 960
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ddd8d222146b279458e50542fb5e4735
-      internalID: -1323794874
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_26
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 640
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e533d7ade4437b64ea97cd3a99111e09
-      internalID: -170191337
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_27
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 640
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c8d2281b779650498e84388a1ba9f1e
-      internalID: 1009054424
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Basico_28
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 640
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45d24ce16fbd17042b4da8caa814889c
-      internalID: -1703195438
+      spriteID: 610307ba49ae8ae439a209566e483d3e
+      internalID: 851923003
       vertices: []
       indices: 
       edges: []
@@ -764,6 +764,182 @@ TextureImporter:
       name: SS_Basico_29
       rect:
         serializedVersion: 2
+        x: 0
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7466e4177e78e934a8d1f3bb7300bc68
+      internalID: 1693418681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_30
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6dcf1e455ae71d4ab0aa885b8ff5816
+      internalID: 912691093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_31
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1059ca714fbf04cb3df844030f50e7
+      internalID: -1344807494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_32
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 142169d5667d2ee47af048995757efa5
+      internalID: -719197539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_33
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 960
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e901718560c2b314c9bad0e27e457a6c
+      internalID: -218070261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9502e7c749be9144f8cea61f6941bcd0
+      internalID: -618014532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_35
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9ad378c55304e45a0d2fd5d66fa05c
+      internalID: 1177347824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_36
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3939ddaa28118a04991a6e413efd00f5
+      internalID: 1295783723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Basico_37
+      rect:
+        serializedVersion: 2
         x: 960
         y: 640
         width: 320
@@ -776,14 +952,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a87529c46de3a2240a4dbc540cfa1e06
-      internalID: 283972052
+      spriteID: ce9b2314db50c104d808b9c397eb2e27
+      internalID: 652597305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_30
+      name: SS_Basico_38
       rect:
         serializedVersion: 2
         x: 1280
@@ -798,14 +974,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af0a2c82768326346a049a1d1def05dd
-      internalID: 727001818
+      spriteID: c02ef1b396631ba4cb8c0aef8f817aa7
+      internalID: 1705099409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_31
+      name: SS_Basico_39
       rect:
         serializedVersion: 2
         x: 0
@@ -820,14 +996,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df4a8a1599fcef141ad8924d2a74cd1e
-      internalID: 1760827599
+      spriteID: 8925f79345c3e3249a32ad2784b78318
+      internalID: 400280473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Basico_32
+      name: SS_Basico_40
       rect:
         serializedVersion: 2
         x: 0
@@ -842,8 +1018,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a763f23593e9c084cb078251a67e822c
-      internalID: 1417775357
+      spriteID: 448b3de7d20475e40849ea6710c79f4f
+      internalID: 1454049600
       vertices: []
       indices: 
       edges: []
@@ -852,7 +1028,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b937ba7cfd11c834c8cbaca2e7e515a8
+    spriteID: d38804468d943b845b1d409cd8f829dd
     internalID: 0
     vertices: []
     indices: 
@@ -864,39 +1040,47 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":320.0,"y":320.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      SS_Basico_0: -1743176873
-      SS_Basico_1: 1245913477
-      SS_Basico_10: 167436268
-      SS_Basico_11: -529160932
-      SS_Basico_12: 649424248
-      SS_Basico_13: -1351828577
-      SS_Basico_14: 1129200948
-      SS_Basico_15: -1739111811
-      SS_Basico_16: -1360840803
-      SS_Basico_17: 1023751929
-      SS_Basico_18: -1586577703
-      SS_Basico_19: -266127298
-      SS_Basico_2: 1766021790
-      SS_Basico_20: -1545761305
-      SS_Basico_21: -843853849
-      SS_Basico_22: -1445784091
-      SS_Basico_23: -535235554
-      SS_Basico_24: -716831114
-      SS_Basico_25: -1323794874
-      SS_Basico_26: -170191337
-      SS_Basico_27: 1009054424
-      SS_Basico_28: -1703195438
-      SS_Basico_29: 283972052
-      SS_Basico_3: -1937361866
-      SS_Basico_30: 727001818
-      SS_Basico_31: 1760827599
-      SS_Basico_32: 1417775357
-      SS_Basico_4: 1321681210
-      SS_Basico_5: -1367724756
-      SS_Basico_6: -400689491
-      SS_Basico_7: -930550242
-      SS_Basico_8: -1462854483
-      SS_Basico_9: -1333486384
+      SS_Basico_0: 1339414285
+      SS_Basico_1: 2141330072
+      SS_Basico_10: -407290523
+      SS_Basico_11: -822326595
+      SS_Basico_12: 427382523
+      SS_Basico_13: 266944779
+      SS_Basico_14: 78153361
+      SS_Basico_15: 373558262
+      SS_Basico_16: -1054316661
+      SS_Basico_17: 840980418
+      SS_Basico_18: 2016912770
+      SS_Basico_19: 1829727869
+      SS_Basico_2: 1405521222
+      SS_Basico_20: 12017047
+      SS_Basico_21: 687367362
+      SS_Basico_22: -1077600979
+      SS_Basico_23: -1299954747
+      SS_Basico_24: -83071026
+      SS_Basico_25: 807872691
+      SS_Basico_26: -1797966450
+      SS_Basico_27: -840069159
+      SS_Basico_28: 851923003
+      SS_Basico_29: 1693418681
+      SS_Basico_3: -1758140554
+      SS_Basico_30: 912691093
+      SS_Basico_31: -1344807494
+      SS_Basico_32: -719197539
+      SS_Basico_33: -218070261
+      SS_Basico_34: -618014532
+      SS_Basico_35: 1177347824
+      SS_Basico_36: 1295783723
+      SS_Basico_37: 652597305
+      SS_Basico_38: 1705099409
+      SS_Basico_39: 400280473
+      SS_Basico_4: -336839863
+      SS_Basico_40: 1454049600
+      SS_Basico_5: -1334948294
+      SS_Basico_6: -1013429371
+      SS_Basico_7: 2056669194
+      SS_Basico_8: -985367223
+      SS_Basico_9: -1985055375
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

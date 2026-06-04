@@ -871,6 +871,8 @@ MonoBehaviour:
       count: 0
     - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
       count: 2
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 7f44fcc943196f545a0d5af733b1e44a, type: 3}
+      count: 2
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 1692245413}
@@ -988,7 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 7cfb0e49fb44302438dd358ff862b7b0, type: 2}
-  animator: {fileID: 0}
+  animators: []
   coinPrefabs: []
   knockbackForce: 5
   knockbackDuration: 0.18
