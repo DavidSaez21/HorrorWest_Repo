@@ -609,11 +609,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105863576}
   m_CullTransparentMesh: 1
---- !u!1 &106583690 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 634870947}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &112347744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1254,7 @@ GameObject:
   - component: {fileID: 150060953}
   - component: {fileID: 150060952}
   - component: {fileID: 150060951}
+  - component: {fileID: 150060954}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -1340,6 +1336,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150060949}
   m_CullTransparentMesh: 1
+--- !u!114 &150060954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150060949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Reload Speed
+  description: A well-worn bandolier, always full and always ready. Reload your weapons
+    faster between shots.
 --- !u!1 &154293662 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -1369,21 +1380,6 @@ MonoBehaviour:
   selectedBorder: {fileID: 0}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
---- !u!114 &154293668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154293662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Revolver
-  description: A trusty six-shooter. Fast, reliable, and deadly up close. Unlock
-    a new weapon for your run.
 --- !u!114 &154293669 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -1636,10 +1632,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 373533249}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1585150485}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &168194800
 GameObject:
@@ -1716,11 +1709,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168194800}
   m_CullTransparentMesh: 1
---- !u!1 &168927333 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 992786513}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &172867408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1873,15 +1861,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 154293667}
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 154293668}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
---- !u!1 &253253563 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 290311462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &281113558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2044,10 +2024,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1750296696}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1183907402}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1001 &290311462
 PrefabInstance:
@@ -2215,10 +2192,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2010662653}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1794405322}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &314241659
 GameObject:
@@ -2729,33 +2703,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 992786513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168927333}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &440463425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168927333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Base Damage
-  description: Simple, cold and final. Each shot deals more base damage, making every
-    bullet count even more.
 --- !u!114 &440463426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 992786513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168927333}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -2996,6 +2955,7 @@ GameObject:
   - component: {fileID: 477417678}
   - component: {fileID: 477417677}
   - component: {fileID: 477417676}
+  - component: {fileID: 477417679}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -3077,6 +3037,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477417674}
   m_CullTransparentMesh: 1
+--- !u!114 &477417679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477417674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Base Damage
+  description: Simple, cold and final. Each shot deals more base damage, making every
+    bullet count even more.
 --- !u!1 &491207551
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,43 +3198,23 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 634870947}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106583690}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &496941426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106583690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Luck
-  description: Found on an old trail, still warm. Tip the odds in your favor across
-    all random events and drops.
 --- !u!114 &496941427 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 634870947}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106583690}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &514621123 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 167280945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &544616382
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,17 +3497,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 914813288}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199149758}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &596409320 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 2067406720}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &602377248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,6 +3515,7 @@ GameObject:
   - component: {fileID: 602377252}
   - component: {fileID: 602377251}
   - component: {fileID: 602377250}
+  - component: {fileID: 602377253}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -3646,6 +3597,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602377248}
   m_CullTransparentMesh: 1
+--- !u!114 &602377253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602377248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Heal On Run Start
+  description: Clean linen, tightly wrapped. Start every run with a little extra
+    health already restored.
 --- !u!1 &629975163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3887,10 +3853,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 147462029}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 496941426}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1001 &644511916
 PrefabInstance:
@@ -4058,10 +4021,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1172910650}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2133544693}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &646688445
 GameObject:
@@ -4148,33 +4108,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 2067406720}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596409320}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &657496245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596409320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Heal On Run Start
-  description: Clean linen, tightly wrapped. Start every run with a little extra
-    health already restored.
 --- !u!114 &657496246 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 2067406720}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596409320}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -4316,11 +4261,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678061747}
   m_CullTransparentMesh: 1
---- !u!1 &678162757 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 1687647744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705482139
 GameObject:
   m_ObjectHideFlags: 0
@@ -4408,7 +4348,7 @@ GameObject:
   - component: {fileID: 707266852}
   - component: {fileID: 707266853}
   m_Layer: 5
-  m_Name: Dinero
+  m_Name: Txt_Dinero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4421,17 +4361,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707266850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.65629506, y: 0.80396146, z: 0.80396146}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1488295427}
+  m_Father: {fileID: 2030492953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52, y: 822}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.11000001, y: 0.027719218}
+  m_AnchorMax: {x: 0.73, y: 0.6791231}
+  m_AnchoredPosition: {x: 14.16, y: 0.5000305}
+  m_SizeDelta: {x: 34.2341, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &707266852
 CanvasRenderer:
@@ -4461,10 +4401,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10000
+  m_text: 1000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 45e384faf23e84548a181685689b4574, type: 2}
+  m_sharedMaterial: {fileID: -2301157543169306370, guid: 45e384faf23e84548a181685689b4574, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4495,8 +4435,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4951,11 +4891,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799576552}
   m_CullTransparentMesh: 1
---- !u!1 &805203621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 1691680322}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &840769415
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,10 +5132,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2066335283}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1199149759}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &923812903
 GameObject:
@@ -5498,7 +5430,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 281113558}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183907401}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
@@ -5791,10 +5723,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1324580878}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 440463425}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1029802252
 GameObject:
@@ -5881,33 +5810,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 1691680322}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805203621}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1038944629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805203621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Armor
-  description: Old leather and iron stitching. This vest absorbs the hits so you
-    don't have to feel them as much.
 --- !u!114 &1038944630 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 1691680322}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805203621}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -6140,9 +6054,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1688930718}
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1688930719}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1071213791
 GameObject:
@@ -6654,6 +6565,7 @@ RectTransform:
   m_Children:
   - {fileID: 646688446}
   - {fileID: 1358285014}
+  - {fileID: 2030492953}
   - {fileID: 2085606484}
   - {fileID: 731474752}
   - {fileID: 1488295427}
@@ -6752,6 +6664,7 @@ GameObject:
   - component: {fileID: 1171320001}
   - component: {fileID: 1171320000}
   - component: {fileID: 1171319999}
+  - component: {fileID: 1171320002}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -6833,6 +6746,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171319997}
   m_CullTransparentMesh: 1
+--- !u!114 &1171320002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171319997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Health Regen
+  description: Slow smoke, steady mind. Passively recover a small amount of health
+    over time as you push forward.
 --- !u!1 &1172910649
 GameObject:
   m_ObjectHideFlags: 0
@@ -6969,63 +6897,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172910649}
   m_CullTransparentMesh: 1
---- !u!1 &1183907401 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 281113558}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1183907402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183907401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Crit Chance
-  description: One sharp eye is all it takes. Increases your chance to land a critical
-    hit with every shot fired.
 --- !u!114 &1183907403 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 281113558}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183907401}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1199149758 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 914813288}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1199149759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199149758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Health Regen
-  description: Slow smoke, steady mind. Passively recover a small amount of health
-    over time as you push forward.
 --- !u!114 &1199149760 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 914813288}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199149758}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -7518,6 +7406,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293631616}
   m_CullTransparentMesh: 1
+--- !u!1 &1293817094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293817095}
+  - component: {fileID: 1293817097}
+  - component: {fileID: 1293817096}
+  m_Layer: 5
+  m_Name: Coin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1293817095
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293817094}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15234485, y: 0.18662244, z: 0.18662244}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2030492953}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -25.07, y: -6.904297}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1293817096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293817094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 6b72163a75606a449b8145ba47c01ed7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1293817097
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293817094}
+  m_CullTransparentMesh: 1
 --- !u!1 &1324580877
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,33 +7627,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 1687647744}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678162757}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1326252290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678162757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: XP Bonus
-  description: A worn notebook full of hard-earned lessons. Gain bonus experience
-    from every enemy you put down.
 --- !u!114 &1326252291 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 1687647744}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678162757}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -7783,6 +7731,7 @@ GameObject:
   - component: {fileID: 1374013161}
   - component: {fileID: 1374013160}
   - component: {fileID: 1374013159}
+  - component: {fileID: 1374013162}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -7864,6 +7813,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374013157}
   m_CullTransparentMesh: 1
+--- !u!114 &1374013162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374013157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Max Health
+  description: Battered and engraved. Increases your maximum health, giving you more
+    room to take risks and survive.
 --- !u!1 &1488295426
 GameObject:
   m_ObjectHideFlags: 0
@@ -7898,7 +7862,6 @@ RectTransform:
   m_Children:
   - {fileID: 1219756382}
   - {fileID: 2014297525}
-  - {fileID: 707266851}
   m_Father: {fileID: 1124547656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20952085, y: 0}
@@ -8075,6 +8038,7 @@ GameObject:
   - component: {fileID: 1538983289}
   - component: {fileID: 1538983288}
   - component: {fileID: 1538983287}
+  - component: {fileID: 1538983290}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -8156,6 +8120,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538983285}
   m_CullTransparentMesh: 1
+--- !u!114 &1538983290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538983285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Revolver
+  description: A trusty six-shooter. Fast, reliable, and deadly up close. Unlock
+    a new weapon for your run.
 --- !u!1 &1540900749
 GameObject:
   m_ObjectHideFlags: 0
@@ -8168,6 +8147,7 @@ GameObject:
   - component: {fileID: 1540900753}
   - component: {fileID: 1540900752}
   - component: {fileID: 1540900751}
+  - component: {fileID: 1540900754}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -8249,6 +8229,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540900749}
   m_CullTransparentMesh: 1
+--- !u!114 &1540900754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540900749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Armor
+  description: Old leather and iron stitching. This vest absorbs the hits so you
+    don't have to feel them as much.
 --- !u!1 &1567982019
 GameObject:
   m_ObjectHideFlags: 0
@@ -8443,33 +8438,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 167280945}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514621123}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1585150485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514621123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Max Health
-  description: Battered and engraved. Increases your maximum health, giving you more
-    room to take risks and survive.
 --- !u!114 &1585150486 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 167280945}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514621123}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -8792,6 +8772,7 @@ GameObject:
   - component: {fileID: 1628449257}
   - component: {fileID: 1628449256}
   - component: {fileID: 1628449255}
+  - component: {fileID: 1628449258}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -8873,6 +8854,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628449253}
   m_CullTransparentMesh: 1
+--- !u!114 &1628449258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628449253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: XP Bonus
+  description: A worn notebook full of hard-earned lessons. Gain bonus experience
+    from every enemy you put down.
 --- !u!1 &1668862435
 GameObject:
   m_ObjectHideFlags: 0
@@ -9021,6 +9017,7 @@ GameObject:
   - component: {fileID: 1675231059}
   - component: {fileID: 1675231058}
   - component: {fileID: 1675231057}
+  - component: {fileID: 1675231060}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -9102,6 +9099,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675231055}
   m_CullTransparentMesh: 1
+--- !u!114 &1675231060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675231055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Loot Bonus
+  description: A heavy sack that always seems to have room for more. Find extra loot
+    from fallen enemies and hidden corners.
 --- !u!1001 &1687647744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9268,10 +9280,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 678061748}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1326252290}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1688930713 stripped
 GameObject:
@@ -9302,21 +9311,6 @@ MonoBehaviour:
   selectedBorder: {fileID: 0}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
---- !u!114 &1688930719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688930713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Shotgun
-  description: Short, loud and merciless. Unlock a shotgun that devastates everything
-    in close range.
 --- !u!114 &1688930720 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -9494,10 +9488,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1567982020}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1038944629}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1700405527
 GameObject:
@@ -9511,6 +9502,7 @@ GameObject:
   - component: {fileID: 1700405531}
   - component: {fileID: 1700405530}
   - component: {fileID: 1700405529}
+  - component: {fileID: 1700405532}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -9592,6 +9584,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700405527}
   m_CullTransparentMesh: 1
+--- !u!114 &1700405532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700405527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Crit Chance
+  description: One sharp eye is all it takes. Increases your chance to land a critical
+    hit with every shot fired.
 --- !u!1 &1706864246
 GameObject:
   m_ObjectHideFlags: 0
@@ -9696,21 +9703,6 @@ MonoBehaviour:
   selectedBorder: {fileID: 0}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
---- !u!114 &1718137014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718137008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Rifle
-  description: A long barrel for a long reach. Unlock a precise rifle that keeps
-    enemies at a safe distance.
 --- !u!114 &1718137015 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -10054,6 +10046,7 @@ GameObject:
   - component: {fileID: 1758391404}
   - component: {fileID: 1758391403}
   - component: {fileID: 1758391402}
+  - component: {fileID: 1758391405}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -10135,6 +10128,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758391400}
   m_CullTransparentMesh: 1
+--- !u!114 &1758391405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758391400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Rifle
+  description: A long barrel for a long reach. Unlock a precise rifle that keeps
+    enemies at a safe distance.
 --- !u!224 &1794405317 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -10145,33 +10153,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 290311462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253253563}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1794405322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253253563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Crit Multiplier
-  description: Worn leather, steady grip. When you land a critical hit, these gloves
-    make sure it hits a whole lot harder.
 --- !u!114 &1794405323 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 290311462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253253563}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -10418,6 +10411,7 @@ GameObject:
   - component: {fileID: 1907767561}
   - component: {fileID: 1907767560}
   - component: {fileID: 1907767559}
+  - component: {fileID: 1907767562}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -10499,6 +10493,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907767557}
   m_CullTransparentMesh: 1
+--- !u!114 &1907767562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907767557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Luck
+  description: Found on an old trail, still warm. Tip the odds in your favor across
+    all random events and drops.
 --- !u!1 &1914807393
 GameObject:
   m_ObjectHideFlags: 0
@@ -10647,6 +10656,7 @@ GameObject:
   - component: {fileID: 1916107032}
   - component: {fileID: 1916107031}
   - component: {fileID: 1916107030}
+  - component: {fileID: 1916107033}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -10728,6 +10738,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916107028}
   m_CullTransparentMesh: 1
+--- !u!114 &1916107033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916107028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Crit Multiplier
+  description: Worn leather, steady grip. When you land a critical hit, these gloves
+    make sure it hits a whole lot harder.
 --- !u!1 &1921130071
 GameObject:
   m_ObjectHideFlags: 0
@@ -11273,11 +11298,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976906434}
   m_CullTransparentMesh: 1
---- !u!1 &2000067970 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-  m_PrefabInstance: {fileID: 644511916}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2005771096
 GameObject:
   m_ObjectHideFlags: 0
@@ -11427,6 +11447,7 @@ GameObject:
   - component: {fileID: 2010642498}
   - component: {fileID: 2010642497}
   - component: {fileID: 2010642496}
+  - component: {fileID: 2010642499}
   m_Layer: 5
   m_Name: HitArea
   m_TagString: Untagged
@@ -11508,6 +11529,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010642494}
   m_CullTransparentMesh: 1
+--- !u!114 &2010642499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010642494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Shotgun
+  description: Short, loud and merciless. Unlock a shotgun that devastates everything
+    in close range.
 --- !u!1 &2010662652
 GameObject:
   m_ObjectHideFlags: 0
@@ -11933,6 +11969,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024188742}
+  m_CullTransparentMesh: 1
+--- !u!1 &2030492952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2030492953}
+  - component: {fileID: 2030492955}
+  - component: {fileID: 2030492954}
+  m_Layer: 5
+  m_Name: Cartel_Dinero
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2030492953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030492952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.9211028, y: 3.2009, z: 3.2009}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 707266851}
+  - {fileID: 1293817095}
+  m_Father: {fileID: 1124547656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -55.2, y: 445.1}
+  m_SizeDelta: {x: 100, y: 61.4221}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2030492954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030492952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 35ea744c11d84ad4bad653977e7c9e79, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2030492955
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030492952}
   m_CullTransparentMesh: 1
 --- !u!1 &2033383539
 GameObject:
@@ -12583,10 +12696,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 491207552}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 657496245}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &2085606483
 GameObject:
@@ -12965,9 +13075,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1718137013}
-    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1718137014}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!224 &2133544688 stripped
 RectTransform:
@@ -12979,33 +13086,18 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 644511916}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2000067970}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2133544693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2000067970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Loot Bonus
-  description: A heavy sack that always seems to have room for more. Find extra loot
-    from fallen enemies and hidden corners.
 --- !u!114 &2133544694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 644511916}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2000067970}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
