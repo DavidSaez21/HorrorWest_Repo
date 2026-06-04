@@ -1,15 +1,5 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Base class for all enemies.
-/// 
-/// Movement philosophy (Vampire Survivors / Hotline Miami):
-///   - Enemies always know where the player is. No detection range, no line of sight.
-///   - All movement is resolved as steering forces in FixedUpdate.
-///   - Enemies never push the player (rb.excludeLayers includes Player).
-///   - Separation between enemies is a soft steering force, never a hard velocity override.
-///   - Knockback is the only hard velocity override and blocks the steering pipeline.
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -17,6 +7,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     [Header("Data")]
     [SerializeField] protected EnemyData data;
+
+    [Header("Animation")]
+    [SerializeField] protected Animator animator;
 
     [Header("Drops")]
     [SerializeField] protected GameObject[] coinPrefabs;
@@ -26,11 +19,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private float knockbackDuration = 0.18f;
 
     [Header("Separation")]
-    [Tooltip("Overlap radius for enemy-to-enemy separation checks. Keep smaller than sprite so clusters look dense.")]
     [Range(0.2f, 2f)]
     [SerializeField] private float separationRadius = 0.55f;
-
-    [Tooltip("Max separation force magnitude. Keeps enemies from stacking without bouncing.")]
     [Range(0.5f, 8f)]
     [SerializeField] private float separationForce = 2f;
 
@@ -42,17 +32,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected bool isDead;
     protected Rigidbody2D rb;
 
-    // Knockback
     private bool _isKnockedBack;
     private float _knockbackTimer;
     private Vector2 _knockbackVelocity;
 
-    // Steering
-    // Subclasses write their desired move velocity here every FixedUpdate.
-    // EnemyBase then blends separation on top and applies the result.
     protected Vector2 DesiredVelocity { get; set; }
 
-    // Separation buffer (reused to avoid per-frame allocation)
     private readonly Collider2D[] _separationBuffer = new Collider2D[16];
     private int _enemyLayerMask;
 
@@ -70,7 +55,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void Start()
     {
         currentHealth = data.maxHealth;
-        //rb.excludeLayers = LayerMask.GetMask("Player"); // enemies never push the player
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -82,7 +66,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (isDead || player == null) return;
         if (_isKnockedBack) return;
 
-        // Attack check (can run every frame — uses a cooldown gate)
         if (DistanceToPlayer() <= data.attackRange && CanAttack())
         {
             PerformAttack();
@@ -94,7 +77,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (isDead) return;
 
-        // ── Knockback override — highest priority ──────────────────────────
+        // ── Knockback override ────────────────────────────────────────────────
         if (_isKnockedBack)
         {
             _knockbackTimer -= Time.fixedDeltaTime;
@@ -106,32 +89,33 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
                 _isKnockedBack = false;
                 rb.linearVelocity = Vector2.zero;
             }
+
+            // ✅ Animación también durante knockback
+            if (animator != null)
+                animator.SetBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
+
             return;
         }
 
         if (player == null) return;
 
-        // ── Normal steering pipeline ───────────────────────────────────────
-        // 1. Subclass writes DesiredVelocity in UpdateSteering().
+        // ── Normal steering pipeline ──────────────────────────────────────────
         UpdateSteering();
 
-        // 2. Add separation force on top of desired velocity.
         Vector2 finalVelocity = DesiredVelocity + ComputeSeparationForce();
 
-        // 3. Clamp to max speed so separation doesn't over-accelerate.
         if (finalVelocity.magnitude > data.moveSpeed * 1.4f)
             finalVelocity = finalVelocity.normalized * data.moveSpeed * 1.4f;
 
         rb.linearVelocity = finalVelocity;
+
+        // ✅ Animación según velocidad real
+        if (animator != null)
+            animator.SetBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
     }
 
-    // ── Abstract / virtual API for subclasses ─────────────────────────────────
+    // ── Abstract / virtual API ────────────────────────────────────────────────
 
-    /// <summary>
-    /// Called every FixedUpdate (while alive and not knocked back).
-    /// Subclass must set <see cref="DesiredVelocity"/> here.
-    /// Do NOT write to rb.linearVelocity directly — EnemyBase handles that.
-    /// </summary>
     protected abstract void UpdateSteering();
 
     protected virtual void PerformAttack()
@@ -140,13 +124,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             ph.TakeDamage(data.damage);
     }
 
-    // ── Separation (Vampire Survivors style) ──────────────────────────────────
+    // ── Separation ────────────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Returns a steering force that nudges this enemy away from overlapping neighbours.
-    /// Force is proportional to overlap depth — very light touch so clusters look natural.
-    /// Player is on a different layer so it is never included.
-    /// </summary>
     private Vector2 ComputeSeparationForce()
     {
         int count = Physics2D.OverlapCircleNonAlloc(
@@ -165,13 +144,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
             if (dist < 0.001f)
             {
-                // Perfectly overlapping — use a deterministic pseudo-random offset
                 float a = GetInstanceID() * 0.1f;
                 away = new Vector2(Mathf.Sin(a), Mathf.Cos(a));
                 dist = 0.001f;
             }
 
-            // Overlap depth → 0..1 weight; closer neighbours push harder
             float weight = 1f - Mathf.Clamp01(dist / separationRadius);
             steer += away.normalized * (weight * separationForce);
         }
@@ -219,7 +196,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void OnDamageReceived(float damage) { }
     protected virtual void OnDeath() { }
 
-    // ── Utilities for subclasses ──────────────────────────────────────────────
+    // ── Utilities ─────────────────────────────────────────────────────────────
 
     protected float DistanceToPlayer()
         => player == null ? Mathf.Infinity : Vector2.Distance(transform.position, player.position);
@@ -227,7 +204,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected Vector2 DirectionToPlayer()
         => player == null ? Vector2.zero : ((Vector2)(player.position - transform.position)).normalized;
 
-    /// <summary>Rotates the sprite to face <paramref name="direction"/> (up = forward convention).</summary>
     protected void FaceDirection(Vector2 direction)
     {
         if (direction.sqrMagnitude < 0.001f) return;
