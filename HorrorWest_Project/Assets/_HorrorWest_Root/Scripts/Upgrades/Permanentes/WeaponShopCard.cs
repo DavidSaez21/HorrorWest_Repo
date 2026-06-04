@@ -7,8 +7,7 @@ public class WeaponShopCard : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI priceText;      // Muestra el precio o nada si está desbloqueada
-    [SerializeField] private TextMeshProUGUI selectedText;   // Asigna en Inspector — aparece con X al seleccionar
+    [SerializeField] private TextMeshProUGUI priceText;      // Precio si bloqueada, X si seleccionada, nada si desbloqueada no seleccionada
     [SerializeField] private Button actionButton;
     [SerializeField] private Image selectedBorder;
 
@@ -32,8 +31,7 @@ public class WeaponShopCard : MonoBehaviour
 
         actionButton?.onClick.RemoveAllListeners();
 
-        // El texto seleccionado empieza oculto
-        if (selectedText != null) selectedText.gameObject.SetActive(false);
+        if (priceText != null) priceText.text = "";
 
         if (_isUnlocked)
             SetupUnlocked();
@@ -45,8 +43,8 @@ public class WeaponShopCard : MonoBehaviour
     {
         _isUnlocked = true;
 
-        // Sin precio al estar desbloqueada
-        if (priceText != null) priceText.gameObject.SetActive(false);
+        // Sin precio — el texto se limpia, solo aparece X al seleccionar
+        if (priceText != null) priceText.text = "";
         if (iconImage != null) iconImage.color = unlockedColor;
 
         actionButton?.onClick.AddListener(() => _onSelect?.Invoke());
@@ -56,11 +54,7 @@ public class WeaponShopCard : MonoBehaviour
     private void SetupLocked()
     {
         // Muestra el precio directamente
-        if (priceText != null)
-        {
-            priceText.gameObject.SetActive(true);
-            priceText.text = $"{_price} $";
-        }
+        if (priceText != null) priceText.text = $"{_price} $";
         if (iconImage != null) iconImage.color = lockedColor;
 
         actionButton?.onClick.AddListener(OnActionClicked);
@@ -81,9 +75,10 @@ public class WeaponShopCard : MonoBehaviour
         if (selectedBorder != null)
             selectedBorder.gameObject.SetActive(isSelected);
 
-        // Muestra el texto asignado en el Inspector con " ✗" al seleccionar
-        if (selectedText != null)
-            selectedText.gameObject.SetActive(isSelected);
+        // X si seleccionada, nada si desbloqueada pero no seleccionada
+        // Si está bloqueada mantiene el precio
+        if (priceText != null && _isUnlocked)
+            priceText.text = isSelected ? " X" : "";
     }
 
     public void SetUnlocked()

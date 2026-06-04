@@ -74,13 +74,13 @@ public class ShopUpgradeCard : MonoBehaviour
             int clampedLevel = Mathf.Clamp(currentLevel, 0, RomanNumerals.Length - 1);
             romanLevelText.text = isMaxLevel
                 ? RomanNumerals[upgradeData.maxLevel <= RomanNumerals.Length - 1 ? upgradeData.maxLevel : RomanNumerals.Length - 1]
-                : (currentLevel == 0 ? "—" : RomanNumerals[clampedLevel]);
+                : (currentLevel == 0 ? " " : RomanNumerals[clampedLevel]);
         }
 
         // Precio o ✗ si está al máximo
         if (priceText != null)
             priceText.text = isMaxLevel
-                ? " ✗"
+                ? " X"
                 : $"{upgradeData.GetCostForLevel(currentLevel + 1)} $";
 
         // Botón
