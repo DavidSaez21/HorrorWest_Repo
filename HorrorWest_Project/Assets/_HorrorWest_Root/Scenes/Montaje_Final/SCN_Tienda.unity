@@ -124,7 +124,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 462367491}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 404723408}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 105863579}
   - component: {fileID: 105863578}
   m_Layer: 5
-  m_Name: Precio (1)
+  m_Name: Precio_Armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,6 +571,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105863576}
   m_CullTransparentMesh: 1
+--- !u!1 &106583690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 634870947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &112347744
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +588,7 @@ GameObject:
   - component: {fileID: 112347747}
   - component: {fileID: 112347746}
   m_Layer: 5
-  m_Name: Precio (3)
+  m_Name: Precio_LootBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,7 +799,7 @@ GameObject:
   - component: {fileID: 119020194}
   - component: {fileID: 119020193}
   m_Layer: 5
-  m_Name: Precio
+  m_Name: Precio_Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1191,6 +1196,21 @@ MonoBehaviour:
   selectedColor: {r: 0, g: 1, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!114 &154293668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154293662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Revolver
+  description: A trusty six-shooter. Fast, reliable, and deadly up close. Unlock
+    a new weapon for your run.
 --- !u!1 &163580227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1407,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 1585150486}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 953784260}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: d0ea5d896c35eca41955ec8848ce3cb1, type: 2}
@@ -1409,7 +1437,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1374013158}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1585150485}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &168194800
 GameObject:
@@ -1486,6 +1517,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168194800}
   m_CullTransparentMesh: 1
+--- !u!1 &168927333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 992786513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &172867408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1634,7 +1670,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 154293667}
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 154293668}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+--- !u!1 &253253563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 290311462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &281113558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1752,6 +1796,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 1183907403}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 1976663534}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: b688ab65dc8fcdb418ea5273d48487b2, type: 2}
@@ -1774,7 +1826,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1700405528}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1183907402}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1001 &290311462
 PrefabInstance:
@@ -1897,6 +1952,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 1794405323}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 1247599868}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: fed639a4a056a4649be3eb74cbe3f071, type: 2}
@@ -1919,7 +1982,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1916107029}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1794405322}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &314241659
 GameObject:
@@ -1933,7 +1999,7 @@ GameObject:
   - component: {fileID: 314241662}
   - component: {fileID: 314241661}
   m_Layer: 5
-  m_Name: Precio
+  m_Name: Precio_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2069,7 +2135,7 @@ GameObject:
   - component: {fileID: 396922586}
   - component: {fileID: 396922585}
   m_Layer: 5
-  m_Name: Precio (2)
+  m_Name: Precio_HealOnRunStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2193,6 +2259,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396922583}
   m_CullTransparentMesh: 1
+--- !u!1 &404723408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 462367491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &404723409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404723408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Reload Speed
+  description: A well-worn bandolier, always full and always ready. Reload your weapons
+    faster between shots.
+--- !u!114 &404723410 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 462367491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404723408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &440463420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -2203,10 +2300,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 992786513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 168927333}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &440463425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168927333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Base Damage
+  description: Simple, cold and final. Each shot deals more base damage, making every
+    bullet count even more.
+--- !u!114 &440463426 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 992786513}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168927333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &462367491
@@ -2330,6 +2453,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 404723410}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 799576554}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: 80e0184980ee4c74080ba768af322472, type: 2}
@@ -2352,8 +2483,63 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 150060950}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 404723409}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+--- !u!1 &469798361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469798362}
+  - component: {fileID: 469798363}
+  m_Layer: 5
+  m_Name: ToolTip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &469798362
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469798361}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2018327831}
+  m_Father: {fileID: 1124547656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -160, y: 149}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &469798363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469798361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e865852dec78a4c91c097db5768872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPanel: {fileID: 2018327830}
+  titleText: {fileID: 1925673170}
+  descriptionText: {fileID: 555711164}
 --- !u!1 &477417674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,12 +2643,43 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 634870947}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 106583690}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &496941426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106583690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Luck
+  description: Found on an old trail, still warm. Tip the odds in your favor across
+    all random events and drops.
+--- !u!114 &496941427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 634870947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106583690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &514621123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 167280945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &544616382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2692,7 @@ GameObject:
   - component: {fileID: 544616385}
   - component: {fileID: 544616384}
   m_Layer: 5
-  m_Name: Precio (4)
+  m_Name: Precio_Luck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2599,6 +2816,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 544616382}
   m_CullTransparentMesh: 1
+--- !u!1 &555711162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555711163}
+  - component: {fileID: 555711165}
+  - component: {fileID: 555711164}
+  m_Layer: 5
+  m_Name: Tooltip_Description
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &555711163
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555711162}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.09987515, y: -0.16647778, z: 0.11111111}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2018327831}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.2223206, y: 1.6647835}
+  m_SizeDelta: {x: 831.6432, y: 98.6563}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &555711164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555711162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 45e384faf23e84548a181685689b4574, type: 2}
+  m_sharedMaterial: {fileID: -2301157543169306370, guid: 45e384faf23e84548a181685689b4574, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 45
+  m_fontSizeBase: 45
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &555711165
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555711162}
+  m_CullTransparentMesh: 1
 --- !u!224 &572405218 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
@@ -2609,12 +2962,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 914813288}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1199149758}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &596409320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 2067406720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &602377248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,6 +3262,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 496941427}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 544616384}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: c750bc19922815841b3b111d7633037c, type: 2}
@@ -2926,7 +3292,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1907767558}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 496941426}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1001 &644511916
 PrefabInstance:
@@ -3049,6 +3418,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 2133544694}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 112347746}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: 0a51296dfa513b7409edcd649efe8900, type: 2}
@@ -3071,7 +3448,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1675231056}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2133544693}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &646688445
 GameObject:
@@ -3158,12 +3538,43 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 2067406720}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 596409320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &657496245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596409320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Heal On Run Start
+  description: Clean linen, tightly wrapped. Start every run with a little extra
+    health already restored.
+--- !u!114 &657496246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 2067406720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596409320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &678162757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 1687647744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705482139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,10 +3759,10 @@ RectTransform:
   - {fileID: 1976906435}
   m_Father: {fileID: 1124547656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -819.92883, y: 442.41992}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchorMin: {x: 0.030604169, y: 0.87214744}
+  m_AnchorMax: {x: 0.11825, y: 0.9743366}
+  m_AnchoredPosition: {x: -1.928833, y: -14.080078}
+  m_SizeDelta: {x: -140, y: -81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &731474753
 MonoBehaviour:
@@ -3534,7 +3945,7 @@ GameObject:
   - component: {fileID: 799576555}
   - component: {fileID: 799576554}
   m_Layer: 5
-  m_Name: Precio (3)
+  m_Name: Precio_ReloadSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3658,6 +4069,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799576552}
   m_CullTransparentMesh: 1
+--- !u!1 &805203621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 1691680322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &840769415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,6 +4270,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 1199149760}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 1588992067}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: 76a666b1c00d4e84b94c05fdbfa537fe, type: 2}
@@ -3876,7 +4300,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1171319998}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1199149759}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &919087751
 GameObject:
@@ -3954,7 +4381,7 @@ GameObject:
   - component: {fileID: 923812906}
   - component: {fileID: 923812905}
   m_Layer: 5
-  m_Name: Etiqueta_Precio (6)
+  m_Name: 'Etiqueta_Precio '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4029,7 +4456,7 @@ GameObject:
   - component: {fileID: 953784261}
   - component: {fileID: 953784260}
   m_Layer: 5
-  m_Name: Precio (5)
+  m_Name: Precio_MaxHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4238,7 +4665,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 281113558}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1183907401}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
@@ -4486,6 +4913,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 440463426}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 1914807395}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: 7dffd17a291ff654c8ac08dd2c624fc4, type: 2}
@@ -4508,7 +4943,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 477417675}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 440463425}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1029802252
 GameObject:
@@ -4595,10 +5033,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 1691680322}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 805203621}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1038944629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805203621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Armor
+  description: Old leather and iron stitching. This vest absorbs the hits so you
+    don't have to feel them as much.
+--- !u!114 &1038944630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 1691680322}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805203621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1054556853
@@ -4778,7 +5242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: m_Name
-      value: ButtonShootgun
+      value: ButtonShotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5270534223262867542, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: m_Type
@@ -4824,6 +5288,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1688930718}
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1688930719}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1071213791
 GameObject:
@@ -5113,7 +5580,7 @@ GameObject:
   - component: {fileID: 1102518480}
   - component: {fileID: 1102518479}
   m_Layer: 5
-  m_Name: Precio
+  m_Name: Precio_Carabina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5336,6 +5803,7 @@ RectTransform:
   - {fileID: 2085606484}
   - {fileID: 731474752}
   - {fileID: 1488295427}
+  - {fileID: 469798362}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5511,6 +5979,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171319997}
   m_CullTransparentMesh: 1
+--- !u!1 &1183907401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 281113558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1183907402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183907401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Crit Chance
+  description: One sharp eye is all it takes. Increases your chance to land a critical
+    hit with every shot fired.
+--- !u!114 &1183907403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 281113558}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183907401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1199149758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 914813288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1199149759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199149758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Health Regen
+  description: Slow smoke, steady mind. Passively recover a small amount of health
+    over time as you push forward.
+--- !u!114 &1199149760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 914813288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199149758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1219756381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5799,7 +6329,7 @@ GameObject:
   - component: {fileID: 1247599869}
   - component: {fileID: 1247599868}
   m_Layer: 5
-  m_Name: Precio (4)
+  m_Name: Precio_CritMultiplier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6008,10 +6538,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 1687647744}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 678162757}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1326252290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678162757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: XP Bonus
+  description: A worn notebook full of hard-earned lessons. Gain bonus experience
+    from every enemy you put down.
+--- !u!114 &1326252291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 1687647744}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678162757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1358285013
@@ -6624,10 +7180,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 167280945}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 514621123}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1585150485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514621123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Max Health
+  description: Battered and engraved. Increases your maximum health, giving you more
+    room to take risks and survive.
+--- !u!114 &1585150486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 167280945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514621123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1588992065
@@ -6642,7 +7224,7 @@ GameObject:
   - component: {fileID: 1588992068}
   - component: {fileID: 1588992067}
   m_Layer: 5
-  m_Name: Precio (3)
+  m_Name: Precio_HealthRegen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7062,7 +7644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1.7081851}
+  m_AnchoredPosition: {x: 0, y: -1.7081833}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668862437
@@ -7378,6 +7960,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 1326252291}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 2033383541}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: f93a8fa58085f5e4bbf528cd01a561f1, type: 2}
@@ -7400,7 +7990,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1628449254}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1326252290}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1688930713 stripped
 GameObject:
@@ -7432,6 +8025,21 @@ MonoBehaviour:
   selectedColor: {r: 0, g: 1, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!114 &1688930719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688930713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Shotgun
+  description: Short, loud and merciless. Unlock a shotgun that devastates everything
+    in close range.
 --- !u!1001 &1691680322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7553,6 +8161,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 1038944630}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 105863578}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: 0e63a0b7dfdfc7c43bf56ea82f54435d, type: 2}
@@ -7575,7 +8191,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1540900750}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1038944629}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &1700405527
 GameObject:
@@ -7775,6 +8394,21 @@ MonoBehaviour:
   selectedColor: {r: 0, g: 1, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!114 &1718137014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718137008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Rifle
+  description: A long barrel for a long reach. Unlock a precise rifle that keeps
+    enemies at a safe distance.
 --- !u!1 &1737161235
 GameObject:
   m_ObjectHideFlags: 0
@@ -8062,10 +8696,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 290311462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 253253563}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1794405322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253253563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Crit Multiplier
+  description: Worn leather, steady grip. When you land a critical hit, these gloves
+    make sure it hits a whole lot harder.
+--- !u!114 &1794405323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 290311462}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253253563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1820662151
@@ -8402,7 +9062,7 @@ GameObject:
   - component: {fileID: 1914807396}
   - component: {fileID: 1914807395}
   m_Layer: 5
-  m_Name: Precio (4)
+  m_Name: Precio_BaseDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8694,6 +9354,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921130071}
   m_CullTransparentMesh: 1
+--- !u!1 &1925673168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925673169}
+  - component: {fileID: 1925673171}
+  - component: {fileID: 1925673170}
+  m_Layer: 5
+  m_Name: Tooltip_Title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1925673169
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925673168}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.09987515, y: -0.16647778, z: 0.11111111}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2018327831}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -13.202866, y: -15.315956}
+  m_SizeDelta: {x: 539.6121, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1925673170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925673168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 45e384faf23e84548a181685689b4574, type: 2}
+  m_sharedMaterial: {fileID: -2301157543169306370, guid: 45e384faf23e84548a181685689b4574, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 60
+  m_fontSizeBase: 60
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1925673171
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925673168}
+  m_CullTransparentMesh: 1
 --- !u!1 &1936866346
 GameObject:
   m_ObjectHideFlags: 0
@@ -8829,7 +9625,7 @@ GameObject:
   - component: {fileID: 1976663535}
   - component: {fileID: 1976663534}
   m_Layer: 5
-  m_Name: Precio (5)
+  m_Name: Precio_CritChance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9028,6 +9824,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976906434}
   m_CullTransparentMesh: 1
+--- !u!1 &2000067970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 644511916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2005771096
 GameObject:
   m_ObjectHideFlags: 0
@@ -9396,6 +10197,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014297524}
   m_CullTransparentMesh: 1
+--- !u!1 &2018327830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2018327831}
+  - component: {fileID: 2018327833}
+  - component: {fileID: 2018327832}
+  m_Layer: 5
+  m_Name: Tooltip_Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2018327831
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018327830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10.0125, y: 6.0068073, z: 9}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1925673169}
+  - {fileID: 555711163}
+  m_Father: {fileID: 469798362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -56, y: -33}
+  m_SizeDelta: {x: 100, y: 45}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2018327832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018327830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cdd042ae296a9184a8e1ff8fef15beb6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2018327833
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018327830}
+  m_CullTransparentMesh: 1
 --- !u!1 &2024188742
 GameObject:
   m_ObjectHideFlags: 0
@@ -9483,7 +10361,7 @@ GameObject:
   - component: {fileID: 2033383542}
   - component: {fileID: 2033383541}
   m_Layer: 5
-  m_Name: Precio (2)
+  m_Name: Precio_ExperienceBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9803,6 +10681,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: buyButton
+      value: 
+      objectReference: {fileID: 657496246}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 396922585}
+    - target: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       propertyPath: upgradeData
       value: 
       objectReference: {fileID: 11400000, guid: 313f23bdf7c2be142a65819436ddcd49, type: 2}
@@ -9825,7 +10711,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 732609398806000418, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 602377249}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 657496245}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!1 &2085606483
 GameObject:
@@ -9862,10 +10751,10 @@ RectTransform:
   - {fileID: 1668862436}
   m_Father: {fileID: 1124547656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -442.3, y: 463.8}
-  m_SizeDelta: {x: 93, y: 30}
+  m_AnchorMin: {x: 0.17385419, y: 0.87214744}
+  m_AnchorMax: {x: 0.36983332, y: 0.9864104}
+  m_AnchoredPosition: {x: -0.50354004, y: 0.2999878}
+  m_SizeDelta: {x: -282, y: -93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085606485
 MonoBehaviour:
@@ -10200,6 +11089,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1718137013}
+    - targetCorrespondingSourceObject: {fileID: 4184156065166165099, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1718137014}
   m_SourcePrefab: {fileID: 100100000, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
 --- !u!224 &2133544688 stripped
 RectTransform:
@@ -10211,10 +11103,36 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7539960043439886628, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
   m_PrefabInstance: {fileID: 644511916}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2000067970}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2133544693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000067970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282534123ce23246a0d5c8ae93d56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Loot Bonus
+  description: A heavy sack that always seems to have room for more. Find extra loot
+    from fallen enemies and hidden corners.
+--- !u!114 &2133544694 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1458562765579671792, guid: 4804114061cd3644f86287c5e1ecc1c1, type: 3}
+  m_PrefabInstance: {fileID: 644511916}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000067970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
