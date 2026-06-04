@@ -23,6 +23,7 @@ public class ShopManager : MonoBehaviour
     [Header("Botones")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button backButton;
+    [SerializeField] private ButtonSound buySound;
 
     private void Start()
     {
@@ -34,6 +35,12 @@ public class ShopManager : MonoBehaviour
             CurrencyManager.Instance.OnCoinsChanged += _ => UpdateCoinsText();
 
         SetupWeaponCards();
+
+        revolverCard?.SetBuySound(buySound);
+        shotgunCard?.SetBuySound(buySound);
+        rifleCard?.SetBuySound(buySound);
+        foreach (var card in upgradeCards)
+            card?.SetBuySound(buySound);
 
         if (PermanentUpgradeManager.Instance != null)
             PermanentUpgradeManager.Instance.OnWeaponChanged += RefreshWeaponCards;
