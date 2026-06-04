@@ -229,7 +229,7 @@ MonoBehaviour:
   magazineSize: 2
   reloadTime: 2
   shootPoint: {fileID: 7079484411122552230}
-  fireSound: {fileID: 8300000, guid: 4c1b5cbba33fb54439cd1f362debf8eb, type: 3}
+  fireSound: {fileID: 8300000, guid: fa7ff611cc0a918419791bc8d3ecc0af, type: 3}
   reloadSound: {fileID: 8300000, guid: b1cac244aa897ce4b88eae17661d43dd, type: 3}
   pelletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
