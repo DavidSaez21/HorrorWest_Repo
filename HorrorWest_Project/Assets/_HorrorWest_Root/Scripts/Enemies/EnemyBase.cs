@@ -9,7 +9,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] protected EnemyData data;
 
     [Header("Animation")]
-    [SerializeField] protected Animator animator;
+    [SerializeField] protected Animator[] animators;
 
     [Header("Drops")]
     [SerializeField] protected GameObject[] coinPrefabs;
@@ -40,6 +40,20 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     private readonly Collider2D[] _separationBuffer = new Collider2D[16];
     private int _enemyLayerMask;
+
+    // ── Animation helpers ─────────────────────────────────────────────────────
+
+    protected void SetAnimBool(string param, bool value)
+    {
+        foreach (var anim in animators)
+            if (anim != null) anim.SetBool(param, value);
+    }
+
+    protected void SetAnimTrigger(string param)
+    {
+        foreach (var anim in animators)
+            if (anim != null) anim.SetTrigger(param);
+    }
 
     // ── Unity lifecycle ───────────────────────────────────────────────────────
 
@@ -90,10 +104,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
                 rb.linearVelocity = Vector2.zero;
             }
 
-            // ✅ Animación también durante knockback
-            if (animator != null)
-                animator.SetBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
-
+            SetAnimBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
             return;
         }
 
@@ -110,8 +121,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         rb.linearVelocity = finalVelocity;
 
         // ✅ Animación según velocidad real
-        if (animator != null)
-            animator.SetBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
+        SetAnimBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
     }
 
     // ── Abstract / virtual API ────────────────────────────────────────────────
@@ -122,6 +132,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (player.TryGetComponent(out PlayerHealth ph))
             ph.TakeDamage(data.damage);
+
+        // ✅ Trigger en todos los animators
+        SetAnimTrigger("isAttacking");
     }
 
     // ── Separation ────────────────────────────────────────────────────────────

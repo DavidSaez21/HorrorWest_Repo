@@ -509,7 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 2d9951c1341a7124c9375d13590868a7, type: 2}
-  animator: {fileID: 2627048456437229087}
+  animators:
+  - {fileID: 2627048456437229087}
   coinPrefabs: []
   knockbackForce: 5
   knockbackDuration: 0.18
