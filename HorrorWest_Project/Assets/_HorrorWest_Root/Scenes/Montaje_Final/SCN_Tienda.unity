@@ -1190,10 +1190,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconImage: {fileID: 0}
   nameText: {fileID: 0}
-  statusText: {fileID: 0}
+  priceText: {fileID: 0}
+  selectedText: {fileID: 0}
   actionButton: {fileID: 0}
   selectedBorder: {fileID: 0}
-  selectedColor: {r: 0, g: 1, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &154293668
@@ -4354,6 +4354,7 @@ MonoBehaviour:
   - {fileID: 4961384}
   playButton: {fileID: 0}
   backButton: {fileID: 0}
+  debugMode: 1
 --- !u!4 &919087753
 Transform:
   m_ObjectHideFlags: 0
@@ -5553,6 +5554,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 80e0184980ee4c74080ba768af322472, type: 2}
   shotgunCost: 150
   rifleCost: 300
+  _debugUpgrade: {fileID: 0}
+  _debugTargetLevel: 0
 --- !u!4 &1091915769
 Transform:
   m_ObjectHideFlags: 0
@@ -7474,10 +7477,10 @@ RectTransform:
   - {fileID: 966193735}
   m_Father: {fileID: 1737161236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460.8, y: 0}
-  m_SizeDelta: {x: 921.6, y: 1150.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1609380158
 MonoBehaviour:
@@ -8019,10 +8022,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconImage: {fileID: 0}
   nameText: {fileID: 0}
-  statusText: {fileID: 0}
+  priceText: {fileID: 0}
+  selectedText: {fileID: 0}
   actionButton: {fileID: 0}
   selectedBorder: {fileID: 0}
-  selectedColor: {r: 0, g: 1, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1688930719
@@ -8388,10 +8391,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconImage: {fileID: 0}
   nameText: {fileID: 0}
-  statusText: {fileID: 0}
+  priceText: {fileID: 0}
+  selectedText: {fileID: 0}
   actionButton: {fileID: 0}
   selectedBorder: {fileID: 0}
-  selectedColor: {r: 0, g: 1, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1718137014

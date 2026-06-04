@@ -3,10 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ShopManager — gestiona la escena de tienda.
-// Las cards de mejora se asignan manualmente en el Inspector.
-// ─────────────────────────────────────────────────────────────────────────────
 public class ShopManager : MonoBehaviour
 {
     [Header("Navegación")]
@@ -21,7 +17,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private WeaponShopCard shotgunCard;
     [SerializeField] private WeaponShopCard rifleCard;
 
-    [Header("Mejoras — asigna las 11 cards aquí")]
+    [Header("Mejoras")]
     [SerializeField] private ShopUpgradeCard[] upgradeCards;
 
     [Header("Botones")]
@@ -121,7 +117,24 @@ public class ShopManager : MonoBehaviour
     private void OnBackClicked() => SceneManager.LoadScene(menuSceneName);
 
     #region Debug
+    [Header("Debug")]
+    [SerializeField] private bool debugMode = false;
+
+    [ContextMenu("Debug — Añadir 100 monedas")]
+    private void DebugAdd100() => CurrencyManager.Instance?.AddCoins(100);
+
     [ContextMenu("Debug — Añadir 500 monedas")]
-    private void DebugAddCoins() => CurrencyManager.Instance?.AddCoins(500);
+    private void DebugAdd500() => CurrencyManager.Instance?.AddCoins(500);
+
+    [ContextMenu("Debug — Añadir 1000 monedas")]
+    private void DebugAdd1000() => CurrencyManager.Instance?.AddCoins(1000);
+
+    [ContextMenu("Debug — Reset monedas")]
+    private void DebugResetCoins()
+    {
+        PlayerPrefs.SetInt("TotalCoins", 0);
+        PlayerPrefs.Save();
+        UpdateCoinsText();
+    }
     #endregion
 }
