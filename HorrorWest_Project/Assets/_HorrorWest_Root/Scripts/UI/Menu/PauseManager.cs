@@ -10,6 +10,11 @@ public class PauseManager : MonoBehaviour
 
     private bool _isPaused = false;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))

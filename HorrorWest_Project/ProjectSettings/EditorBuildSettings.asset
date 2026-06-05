@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_MainMenu.unity
     guid: 45e52710924e91e4a8ced9225ef88cff
   - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_LVL1.unity
+    guid: 05eee0c1c6f47ea488cdf2404dcf2cc7
+  - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_Tienda.unity
     guid: 9239ee8319dd7924c992c2a3f0ee1ff7
-  - enabled: 1
-    path: Assets/_HorrorWest_Root/Scenes/Test_Pausa.unity
-    guid: 7085bf71302ad2c4a8a24be0dc62a6a7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
