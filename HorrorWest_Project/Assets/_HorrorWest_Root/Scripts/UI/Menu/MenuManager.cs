@@ -11,12 +11,12 @@ public class MenuManager : MonoBehaviour
 
     public void ClickPlay()
     {
-        SceneManager.LoadScene("Test_Pausa");
+        SceneManager.LoadScene("SCN_LVL1");
     }
 
     public void ClickQuit()
     {
-        Debug.Log("Boton quit pulsado");
+        Debug.Log("Has cerrado el juego");
     }
 
     public void ClickOptions()
@@ -55,7 +55,7 @@ public class MenuManager : MonoBehaviour
 
     public void ClickPlayFromShop()
     {
-        StartCoroutine(LoadAfterSound("Test_Pausa"));
+        StartCoroutine(LoadAfterSound("SCN_LVL1"));
     }
 
     public void ClickBackToMenu()
