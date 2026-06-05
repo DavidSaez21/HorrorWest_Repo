@@ -9,10 +9,14 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         float savedVolume = PlayerPrefs.GetFloat("sfxVolume", 1f);
-        sfxSlider.onValueChanged.RemoveAllListeners();
-        sfxSlider.value = savedVolume;
         _sfxVolume = savedVolume;
-        sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+
+        if (sfxSlider != null)
+        {
+            sfxSlider.onValueChanged.RemoveAllListeners();
+            sfxSlider.value = savedVolume;
+            sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        }
     }
 
     public void OnSFXVolumeChanged(float value)

@@ -13,7 +13,7 @@ public class ButtonSound : MonoBehaviour
     {
         if (clickSound != null && audioSource != null)
         {
-            float sfxVolume = audioManager != null ? audioManager.GetSFXVolume() : 1f;
+            float sfxVolume = audioManager != null ? audioManager.GetSFXVolume() : PlayerPrefs.GetFloat("sfxVolume", 1f);
             audioSource.PlayOneShot(clickSound, volume * sfxVolume);
         }
     }
