@@ -4720,7 +4720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: 260c925fce6e5364daa9c610796162ca, type: 3}
   audioSource: {fileID: 1071213793}
-  audioManager: {fileID: 1071213792}
+  audioManager: {fileID: 0}
   volume: 1
 --- !u!1 &753034968
 GameObject:
@@ -12937,7 +12937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: 349fde663730bd04284f2a4c94218f32, type: 3}
   audioSource: {fileID: 1071213793}
-  audioManager: {fileID: 1071213792}
+  audioManager: {fileID: 0}
   volume: 1
 --- !u!114 &2085606489
 MonoBehaviour:
