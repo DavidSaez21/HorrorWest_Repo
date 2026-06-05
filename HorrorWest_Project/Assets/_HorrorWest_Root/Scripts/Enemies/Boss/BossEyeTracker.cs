@@ -2,151 +2,108 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Rotates the boss's eye transforms to track the player every frame.
-/// When an attack is telegraphed, briefly redirects the eyes toward the
-/// attack's origin zone as a subtle (but readable) visual tell.
+/// Mueve los ojos del boss siguiendo al jugador mediante traslación.
+/// Cada ojo se desplaza dentro de un radio máximo (eyeSocketRadius) 
+/// relativo a su posición de reposo, sin salirse del linework.
 ///
 /// Setup:
-///   Assign leftEye and rightEye in the Inspector.
-///   Both Transforms should be children of the boss sprite.
-///   The "forward" direction of each eye is assumed to be its local Up (+Y).
+///   - leftEye / rightEye: los Transform de Ojo_Izq y Ojo_Der
+///   - eyeSocketRadius: radio máximo de desplazamiento en unidades de mundo
+///     (ajústalo hasta que visualmente no salgan del contorno del linework)
 /// </summary>
 public class BossEyeTracker : MonoBehaviour
 {
     // ── Inspector ──────────────────────────────────────────────────────────────
 
-    [Header("Eye Transforms")]
+    [Header("Ojos")]
     [SerializeField] private Transform leftEye;
     [SerializeField] private Transform rightEye;
 
-    [Header("Tracking")]
-    [Tooltip("How quickly the eyes snap toward their target direction.")]
-    [SerializeField] private float trackingSpeed = 8f;
+    [Tooltip("Radio máximo de desplazamiento de cada ojo desde su posición de reposo. " +
+             "Ajusta hasta que el ojo no salga del linework.")]
+    [SerializeField] private float eyeSocketRadius = 0.15f;
 
-    [Header("Telegraph")]
-    [Tooltip("Duration the eyes hold on the attack zone before resuming player tracking.")]
-    [SerializeField] private float telegraphHoldDuration = 0.5f;
+    [Tooltip("Qué tan rápido el ojo sigue al jugador. Más alto = más reactivo.")]
+    [SerializeField] private float trackingSpeed = 6f;
 
-    [Header("Zone World Positions")]
-    [Tooltip("World position hint for the Tongue attack zone (front-centre of the altar).")]
-    [SerializeField] private Transform tongueZone;
-    [Tooltip("World position hint for the left Tentacle zone.")]
-    [SerializeField] private Transform tentacleLeftZone;
-    [Tooltip("World position hint for the right Tentacle zone.")]
-    [SerializeField] private Transform tentacleRightZone;
-    [Tooltip("World position hint for the south entrance (Minion spawn).")]
-    [SerializeField] private Transform minionZone;
-    [Tooltip("World position hint for the centre of the aisle (Ground Mouth zone).")]
-    [SerializeField] private Transform mouthZone;
+    [Tooltip("A qué distancia del jugador el ojo llega al límite máximo del socket. " +
+             "Más bajo = el ojo se va al extremo aunque el jugador esté cerca.")]
+    [SerializeField] private float maxTrackingDistance = 10f;
 
     // ── Runtime ───────────────────────────────────────────────────────────────
 
     private Transform _player;
-    private Transform _leftTarget;
-    private Transform _rightTarget;
-    private bool _isTelegraphing = false;
-    private Coroutine _telegraphCoroutine;
 
-    // ── Init ──────────────────────────────────────────────────────────────────
+    // Posiciones de reposo de cada ojo (se guardan en Start, nunca cambian)
+    private Vector3 _leftEyeRestPos;
+    private Vector3 _rightEyeRestPos;
+
+    // Posición actual suavizada de cada ojo
+    private Vector3 _leftEyeCurrent;
+    private Vector3 _rightEyeCurrent;
+
+    // ── Init (llamado por ChurchBoss) ─────────────────────────────────────────
 
     public void Initialise(Transform player)
     {
         _player = player;
-        ResumeTracking();
-    }
 
-    // ── Per-frame tracking ────────────────────────────────────────────────────
-
-    private void LateUpdate()
-    {
-        if (leftEye != null && _leftTarget != null)
-            RotateEyeToward(leftEye, _leftTarget.position);
-
-        if (rightEye != null && _rightTarget != null)
-            RotateEyeToward(rightEye, _rightTarget.position);
-    }
-
-    private void RotateEyeToward(Transform eye, Vector3 worldTarget)
-    {
-        Vector2 dir = (worldTarget - eye.position).normalized;
-        if (dir.sqrMagnitude < 0.001f) return;
-
-        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-        float currentAngle = eye.rotation.eulerAngles.z;
-
-        // Shortest-path interpolation
-        float delta = Mathf.DeltaAngle(currentAngle, targetAngle);
-        float newAngle = currentAngle + delta * Mathf.Clamp01(trackingSpeed * Time.deltaTime);
-
-        eye.rotation = Quaternion.Euler(0f, 0f, newAngle);
-    }
-
-    // ── Telegraph ─────────────────────────────────────────────────────────────
-
-    /// <summary>
-    /// Redirects the eyes toward the attack zone for <see cref="telegraphHoldDuration"/> seconds,
-    /// then resumes player tracking. Called by BossActionQueue before launching an attack.
-    /// </summary>
-    public void TelegraphAttack(BossActionQueue.AttackId attackId)
-    {
-        if (_telegraphCoroutine != null)
-            StopCoroutine(_telegraphCoroutine);
-
-        _telegraphCoroutine = StartCoroutine(TelegraphRoutine(attackId));
-    }
-
-    private IEnumerator TelegraphRoutine(BossActionQueue.AttackId attackId)
-    {
-        _isTelegraphing = true;
-        SetEyeTargets(attackId);
-        yield return new WaitForSeconds(telegraphHoldDuration);
-        _isTelegraphing = false;
-        ResumeTracking();
-        _telegraphCoroutine = null;
-    }
-
-    private void SetEyeTargets(BossActionQueue.AttackId attackId)
-    {
-        switch (attackId)
+        // Guardar posiciones de reposo al inicio
+        if (leftEye != null)
         {
-            case BossActionQueue.AttackId.Tongue:
-                // Both eyes look straight ahead (toward the player / south)
-                SetBothEyes(GetPlayerProxyTransform());
-                break;
-
-            case BossActionQueue.AttackId.Tentacle:
-                // Each eye looks toward its own flank
-                _leftTarget  = tentacleLeftZone  != null ? tentacleLeftZone  : GetPlayerProxyTransform();
-                _rightTarget = tentacleRightZone != null ? tentacleRightZone : GetPlayerProxyTransform();
-                break;
-
-            case BossActionQueue.AttackId.GroundMouth:
-                // Eyes look slightly downward (toward the aisle floor)
-                SetBothEyes(mouthZone != null ? mouthZone : GetPlayerProxyTransform());
-                break;
-
-            case BossActionQueue.AttackId.Minion:
-                // Eyes look toward the south entrance
-                SetBothEyes(minionZone != null ? minionZone : GetPlayerProxyTransform());
-                break;
+            _leftEyeRestPos = leftEye.position;
+            _leftEyeCurrent = leftEye.position;
+        }
+        if (rightEye != null)
+        {
+            _rightEyeRestPos = rightEye.position;
+            _rightEyeCurrent = rightEye.position;
         }
     }
 
-    private void SetBothEyes(Transform target)
-    {
-        _leftTarget = target;
-        _rightTarget = target;
-    }
+    // ── Tracking ──────────────────────────────────────────────────────────────
 
-    private void ResumeTracking()
+    private void LateUpdate()
     {
         if (_player == null) return;
-        SetBothEyes(_player);
+
+        TrackEye(leftEye, _leftEyeRestPos, ref _leftEyeCurrent);
+        TrackEye(rightEye, _rightEyeRestPos, ref _rightEyeCurrent);
     }
 
-    // ── Utility: proxy transform that matches the player's position ────────────
+    private void TrackEye(Transform eye, Vector3 restPos, ref Vector3 current)
+    {
+        if (eye == null) return;
 
-    // We use the player Transform directly when available.
-    // This method exists so SetEyeTargets always has a non-null fallback.
-    private Transform GetPlayerProxyTransform() => _player;
+        // Dirección desde la posición de reposo del ojo hacia el jugador
+        Vector3 toPlayer = _player.position - restPos;
+
+        // Normalizar la influencia según distancia (más lejos = más al límite)
+        float influence = Mathf.Clamp01(toPlayer.magnitude / maxTrackingDistance);
+
+        // Posición objetivo = reposo + dirección normalizada * radio * influencia
+        Vector3 targetPos = restPos + toPlayer.normalized * (eyeSocketRadius * influence);
+
+        // Suavizar el movimiento
+        current = Vector3.Lerp(current, targetPos, trackingSpeed * Time.deltaTime);
+        eye.position = current;
+    }
+
+    // ── Telegraph (para cuando añadamos zonas más adelante) ──────────────────
+
+    public void TelegraphAttack(BossActionQueue.AttackId attackId)
+    {
+        // De momento los ojos siguen al player siempre.
+        // Aquí se añadirá la redirección temporal cuando tengamos las zonas.
+    }
+
+    // ── Debug ─────────────────────────────────────────────────────────────────
+
+    private void OnDrawGizmosSelected()
+    {
+        // Dibuja el radio del socket de cada ojo en el Scene View
+        Gizmos.color = new Color(0f, 1f, 1f, 0.4f);
+        if (leftEye != null) Gizmos.DrawWireSphere(leftEye.position, eyeSocketRadius);
+        if (rightEye != null) Gizmos.DrawWireSphere(rightEye.position, eyeSocketRadius);
+    }
 }

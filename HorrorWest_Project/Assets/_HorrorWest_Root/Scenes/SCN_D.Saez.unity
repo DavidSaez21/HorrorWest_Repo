@@ -870,7 +870,7 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
       count: 4
     - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
-      count: 3
+      count: 1
     - enemyPrefab: {fileID: 7781392927723494484, guid: 7f44fcc943196f545a0d5af733b1e44a, type: 3}
       count: 1
     - enemyPrefab: {fileID: 7781392927723494484, guid: f9908e3d246d08b47bab786a06d90f91, type: 3}
@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c065487d21e75fd45a76960781b36e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSize: 5
+  normalSize: 7
   aimSize: 3.5
   zoomSpeed: 5
   aimOffsetStrength: 0.3
