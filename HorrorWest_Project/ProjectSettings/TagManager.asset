@@ -42,5 +42,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI_Pause
+    uniqueID: 1790778269
+    locked: 0
   m_RenderingLayers:
   - Default
