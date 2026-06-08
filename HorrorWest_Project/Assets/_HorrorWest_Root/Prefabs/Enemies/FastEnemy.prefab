@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7790209058959782403}
   - component: {fileID: 588685913458174170}
   - component: {fileID: 3237797795894647684}
+  - component: {fileID: 7564991092234194484}
   m_Layer: 0
   m_Name: Brazos
   m_TagString: Untagged
@@ -110,6 +111,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7564991092234194484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53380276731214851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &1173720992789210640
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +136,7 @@ GameObject:
   - component: {fileID: 363259417500206653}
   - component: {fileID: 2473862969217741119}
   - component: {fileID: 4510518630998111884}
+  - component: {fileID: 5230978662788164162}
   m_Layer: 0
   m_Name: Piernas
   m_TagString: Untagged
@@ -220,6 +236,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5230978662788164162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173720992789210640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &1314853121559947065
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8525582835199993183}
   - component: {fileID: 7155057756685967713}
+  - component: {fileID: 8013576938608099103}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -307,6 +338,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8013576938608099103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314853121559947065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &2310589875213870979
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +363,7 @@ GameObject:
   - component: {fileID: 1851112342824449477}
   - component: {fileID: 7474746073194664504}
   - component: {fileID: 5003331571282344123}
+  - component: {fileID: 4074757052122363690}
   m_Layer: 0
   m_Name: Cabeza
   m_TagString: Untagged
@@ -417,6 +463,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4074757052122363690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310589875213870979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &7781392927723494484
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +490,7 @@ GameObject:
   - component: {fileID: -921292633119871553}
   - component: {fileID: 3622544502657314692}
   - component: {fileID: 7313811940161950066}
+  - component: {fileID: 2754631584963228834}
   m_Layer: 6
   m_Name: FastEnemy
   m_TagString: Enemy
@@ -600,6 +661,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2754631584963228834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 2100000, guid: a304c27fc6d662544a67c81175fa0de1, type: 2}
 --- !u!1 &9020042151471032278
 GameObject:
   m_ObjectHideFlags: 0

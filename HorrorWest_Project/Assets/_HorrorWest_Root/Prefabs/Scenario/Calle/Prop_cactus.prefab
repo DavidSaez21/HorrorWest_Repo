@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8729362101732623329}
   - component: {fileID: 1112644083491528732}
   - component: {fileID: 4894831680115618861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Prop_cactus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

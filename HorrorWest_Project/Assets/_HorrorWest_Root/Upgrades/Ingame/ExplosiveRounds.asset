@@ -16,8 +16,8 @@ MonoBehaviour:
   upgradeName: Explosive Rounds
   description: Bullets explode on impact, dealing area damage
   tooltip: Each bullet creates a small explosion that damages nearby enemies
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 12f86371753069742b565d2e04b5606b, type: 3}
   activeIcon: {fileID: 21300000, guid: eff07ead02a1f674f93c851483560d03, type: 3}
-  rarity: 3
+  rarity: 2
   isUnique: 1
   value: 0

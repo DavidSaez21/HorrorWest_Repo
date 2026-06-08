@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1841621849324521326}
   - component: {fileID: 4523141667447749138}
   - component: {fileID: 3140811710118541559}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: barrotes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

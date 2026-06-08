@@ -16,7 +16,7 @@ MonoBehaviour:
   upgradeName: Quick Draw
   description: +10% movement speed.
   tooltip: Increases the character's base movement speed
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 402bcade07d6f654eb0633df2a463063, type: 3}
   activeIcon: {fileID: 21300000, guid: 30fe3fc55cd1ad342b53a6850c5ae5f7, type: 3}
   rarity: 0
   isUnique: 0

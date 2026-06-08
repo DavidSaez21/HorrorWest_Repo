@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6687714757762388315}
   - component: {fileID: 6577266458727372443}
   - component: {fileID: 3580154002004641343}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Roca2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

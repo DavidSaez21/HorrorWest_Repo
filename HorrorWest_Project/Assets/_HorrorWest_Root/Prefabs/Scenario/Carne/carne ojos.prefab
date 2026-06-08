@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7553316573295605139}
   - component: {fileID: 7458961719194955673}
   - component: {fileID: 8024615434811064109}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: carne ojos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

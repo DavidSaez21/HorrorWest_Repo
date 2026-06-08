@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5518771169296394101}
   - component: {fileID: 4793711534374675485}
   - component: {fileID: 8223467333538525505}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cama_ carcel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

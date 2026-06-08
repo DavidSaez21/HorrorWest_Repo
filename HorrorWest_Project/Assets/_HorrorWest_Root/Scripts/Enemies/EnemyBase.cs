@@ -3,8 +3,6 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
-    // ── Inspector ─────────────────────────────────────────────────────────────
-
     [Header("Data")]
     [SerializeField] protected EnemyData data;
 
@@ -24,8 +22,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [Range(0.5f, 8f)]
     [SerializeField] private float separationForce = 2f;
 
-    // ── State ─────────────────────────────────────────────────────────────────
-
     protected float currentHealth;
     protected float lastAttackTime;
     protected Transform player;
@@ -35,13 +31,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     private bool _isKnockedBack;
     private float _knockbackTimer;
     private Vector2 _knockbackVelocity;
+    private HitFlash _hitFlash;
 
     protected Vector2 DesiredVelocity { get; set; }
 
     private readonly Collider2D[] _separationBuffer = new Collider2D[16];
     private int _enemyLayerMask;
-
-    // ── Animation helpers ─────────────────────────────────────────────────────
 
     protected void SetAnimBool(string param, bool value)
     {
@@ -55,25 +50,23 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             if (anim != null) anim.SetTrigger(param);
     }
 
-    // ── Unity lifecycle ───────────────────────────────────────────────────────
-
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
-
         _enemyLayerMask = LayerMask.GetMask("Enemy");
     }
 
     protected virtual void Start()
     {
         currentHealth = data.maxHealth;
-
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
     }
+
+
 
     protected virtual void Update()
     {
@@ -91,7 +84,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (isDead) return;
 
-        // ── Knockback override ────────────────────────────────────────────────
         if (_isKnockedBack)
         {
             _knockbackTimer -= Time.fixedDeltaTime;
@@ -110,21 +102,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         if (player == null) return;
 
-        // ── Normal steering pipeline ──────────────────────────────────────────
         UpdateSteering();
 
         Vector2 finalVelocity = DesiredVelocity + ComputeSeparationForce();
-
         if (finalVelocity.magnitude > data.moveSpeed * 1.4f)
             finalVelocity = finalVelocity.normalized * data.moveSpeed * 1.4f;
 
         rb.linearVelocity = finalVelocity;
-
-        // ✅ Animación según velocidad real
         SetAnimBool("isWalking", rb.linearVelocity.sqrMagnitude > 0.01f);
     }
-
-    // ── Abstract / virtual API ────────────────────────────────────────────────
 
     protected abstract void UpdateSteering();
 
@@ -132,12 +118,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (player.TryGetComponent(out PlayerHealth ph))
             ph.TakeDamage(data.damage);
-
-        // ✅ Trigger en todos los animators
         SetAnimTrigger("isAttacking");
     }
-
-    // ── Separation ────────────────────────────────────────────────────────────
 
     private Vector2 ComputeSeparationForce()
     {
@@ -169,8 +151,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         return steer;
     }
 
-    // ── Damage / death ────────────────────────────────────────────────────────
-
     public void TakeDamage(float amount) => TakeDamage(amount, Vector2.zero);
 
     public virtual void TakeDamage(float amount, Vector2 hitDirection)
@@ -179,6 +159,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         float finalDamage = Mathf.Max(1f, amount - data.defense);
         currentHealth -= finalDamage;
+
+        // Flash blanco al recibir daño
+        if (_hitFlash == null) _hitFlash = GetComponentInChildren<HitFlash>(true);
+        _hitFlash?.Flash();
 
         if (hitDirection != Vector2.zero)
         {
@@ -209,8 +193,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void OnDamageReceived(float damage) { }
     protected virtual void OnDeath() { }
 
-    // ── Utilities ─────────────────────────────────────────────────────────────
-
     protected float DistanceToPlayer()
         => player == null ? Mathf.Infinity : Vector2.Distance(transform.position, player.position);
 
@@ -226,10 +208,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected bool CanAttack() => Time.time >= lastAttackTime + data.attackCooldown;
     protected void ResetAttackCooldown() => lastAttackTime = Time.time;
-
     public float GetHealthPercent() => currentHealth / data.maxHealth;
-
-    // ── Reward helpers ────────────────────────────────────────────────────────
 
     private void TryInstantReload()
     {
@@ -263,8 +242,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (coinPrefabs[index] != null)
             Instantiate(coinPrefabs[index], transform.position, Quaternion.identity);
     }
-
-    // ── Debug gizmos ──────────────────────────────────────────────────────────
 
     protected virtual void OnDrawGizmosSelected()
     {

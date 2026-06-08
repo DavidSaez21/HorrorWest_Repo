@@ -4,8 +4,8 @@ public class CameraConfiner : MonoBehaviour
 {
     [Header("Límites de la cámara")]
     [SerializeField] private bool isActive = false;
-    [SerializeField] private Vector2 minBounds;   // esquina inferior izquierda
-    [SerializeField] private Vector2 maxBounds;   // esquina superior derecha
+    [SerializeField] private Vector2 minBounds;
+    [SerializeField] private Vector2 maxBounds;
 
     private Camera _cam;
 
@@ -18,6 +18,8 @@ public class CameraConfiner : MonoBehaviour
     {
         if (!isActive) return;
 
+        
+
         float camHeight = _cam.orthographicSize;
         float camWidth = _cam.orthographicSize * _cam.aspect;
 
@@ -27,7 +29,6 @@ public class CameraConfiner : MonoBehaviour
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
     }
 
-    // Llamar desde BarEntrance al entrar al bar
     public void SetBounds(Vector2 min, Vector2 max)
     {
         minBounds = min;
@@ -40,7 +41,6 @@ public class CameraConfiner : MonoBehaviour
         isActive = false;
     }
 
-    // Dibuja el área en la escena para ajustar visualmente
     private void OnDrawGizmosSelected()
     {
         if (!isActive) return;

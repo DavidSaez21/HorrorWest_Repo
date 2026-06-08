@@ -20,22 +20,6 @@ public class PauseManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (Camera.main != null)
-            transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, transform.position.z);
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))

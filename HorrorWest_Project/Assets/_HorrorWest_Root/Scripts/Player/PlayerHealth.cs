@@ -12,15 +12,12 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image healthBarFill;
 
-    // ── Eventos ───────────────────────────────────────────────────────────────
-    public event System.Action<float, float> OnHealthChanged;   // actual, máxima
+    public event System.Action<float, float> OnHealthChanged;
     public event System.Action OnDeath;
 
-    // ── Estado interno ────────────────────────────────────────────────────────
     private float currentHealth;
     private float lastDamageTime = -999f;
 
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -33,17 +30,17 @@ public class PlayerHealth : MonoBehaviour
         UpdateUI();
     }
 
-    // ── API pública ───────────────────────────────────────────────────────────
     public void TakeDamage(float amount)
     {
         if (Time.time < lastDamageTime + invincibilityTime) return;
         lastDamageTime = Time.time;
 
-        // Aplica armadura permanente
         float armor = PlayerManager.Instance?.Stats?.GetArmor() ?? 0f;
         float reduced = Mathf.Max(0f, amount - armor);
-
         currentHealth = Mathf.Max(0f, currentHealth - reduced);
+
+        CameraShaker.Instance?.Shake(0.08f, 0.15f);
+
         UpdateUI();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
@@ -58,10 +55,6 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    /// <summary>
-    /// Llamado desde PlayerStats al aplicar mejoras de vida máxima.
-    /// Mantiene el porcentaje de vida actual al escalar.
-    /// </summary>
     public void SetMaxHealth(float newMax)
     {
         float ratio = currentHealth / maxHealth;
@@ -73,11 +66,9 @@ public class PlayerHealth : MonoBehaviour
     public float GetCurrentHealth() => currentHealth;
     public float GetMaxHealth() => maxHealth;
 
-    // ── Privados ──────────────────────────────────────────────────────────────
     private void Die()
     {
         OnDeath?.Invoke();
-        // GameManager.Instance.OnPlayerDied() — se conectará en el paso 5
         Debug.Log("[PlayerHealth] Player ha muerto.");
     }
 

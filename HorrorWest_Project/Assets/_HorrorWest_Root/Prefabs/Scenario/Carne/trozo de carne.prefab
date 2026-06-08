@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5504957692992420845}
   - component: {fileID: 6732908119180169635}
   - component: {fileID: 7915255028364324423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: trozo de carne
   m_TagString: Untagged
   m_Icon: {fileID: 0}

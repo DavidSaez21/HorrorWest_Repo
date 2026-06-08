@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1249492537332402874}
   - component: {fileID: 6365896428274464546}
   - component: {fileID: 9075424899639132418}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: silla_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
