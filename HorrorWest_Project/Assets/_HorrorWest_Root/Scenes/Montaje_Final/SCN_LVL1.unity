@@ -27794,6 +27794,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1967644970963620831, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967644970963620831, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967644970963620831, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967644970963620831, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
@@ -29337,10 +29349,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: enemyColor.b
+      value: 0.139
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: enemyColor.g
+      value: 0.139
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: enemyColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: normalColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: normalColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: normalColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2305825977858000336, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Name
       value: Cursor_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3626752991295375492, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a7f1228b138726b419d04039a8e5a264, type: 3}
     - target: {fileID: 8568063941464378930, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
