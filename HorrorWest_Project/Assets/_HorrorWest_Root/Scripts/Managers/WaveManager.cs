@@ -121,16 +121,30 @@ public class WaveManager : MonoBehaviour
         activeEnemies.Add(enemy);
     }
 
+    [Header("Obstáculos")]
+    [SerializeField] private LayerMask obstacleLayerMask;   // Layer con tag Obstacle
+    [SerializeField] private float obstacleCheckRadius = 0.5f;
+
     private Vector2 GetValidSpawnPosition()
     {
         Vector2 center = spawnAreaCenter != null ? (Vector2)spawnAreaCenter.position : Vector2.zero;
-        for (int i = 0; i < 10; i++)
+
+        for (int i = 0; i < 20; i++)
         {
             Vector2 randomPos = center + Random.insideUnitCircle * spawnRadius;
-            if (player == null) return randomPos;
-            if (Vector2.Distance(randomPos, player.position) >= minSpawnDistance)
-                return randomPos;
+
+            // Comprueba distancia al player
+            if (player != null && Vector2.Distance(randomPos, player.position) < minSpawnDistance)
+                continue;
+
+            // Comprueba que no hay obstáculos
+            Collider2D hit = Physics2D.OverlapCircle(randomPos, obstacleCheckRadius, obstacleLayerMask);
+            if (hit != null) continue;
+
+            return randomPos;
         }
+
+        // Fallback si no encuentra posición válida
         return center + Random.insideUnitCircle * spawnRadius;
     }
 

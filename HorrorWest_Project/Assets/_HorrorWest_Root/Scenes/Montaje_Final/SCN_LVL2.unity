@@ -845,6 +845,10 @@ MonoBehaviour:
   minSpawnDistance: 4
   timeBetweenWaves: 3
   autoStart: 0
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleCheckRadius: 0.5
 --- !u!4 &177862861
 Transform:
   m_ObjectHideFlags: 0
@@ -1512,12 +1516,14 @@ MonoBehaviour:
   streetTilemap: {fileID: 1523025446}
   streetProps: {fileID: 1952965106}
   streetWaveManager: {fileID: 1805715138}
+  streetDoorBlocker: {fileID: 0}
   barTilemap: {fileID: 182389387}
   barProps: {fileID: 1039223810}
   playerSpawnInside: {fileID: 0}
   doorBlocker: {fileID: 1678083184}
   barWaveManager: {fileID: 177862860}
   sceneChangeTrigger: {fileID: 2111357485}
+  reactivateStreetOnClear: 0
   streetCamMin: {x: -18.8, y: -14.3}
   streetCamMax: {x: 18.8, y: 69.5}
   barCamMin: {x: 12, y: 17.91}
@@ -104142,6 +104148,10 @@ MonoBehaviour:
   minSpawnDistance: 4
   timeBetweenWaves: 3
   autoStart: 1
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleCheckRadius: 0.5
 --- !u!4 &1805715139
 Transform:
   m_ObjectHideFlags: 0

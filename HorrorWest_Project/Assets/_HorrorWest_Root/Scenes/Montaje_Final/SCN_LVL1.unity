@@ -27757,6 +27757,10 @@ MonoBehaviour:
   minSpawnDistance: 4
   timeBetweenWaves: 3
   autoStart: 1
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleCheckRadius: 0.5
 --- !u!4 &1439981664
 Transform:
   m_ObjectHideFlags: 0
