@@ -25,6 +25,12 @@ public class CameraConfiner : MonoBehaviour
         float clampedY = Mathf.Clamp(transform.position.y, minBounds.y + camHeight, maxBounds.y - camHeight);
 
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+
+        {
+            if (!isActive) return;
+            Debug.Log($"[Confiner] pos: {transform.position} | min: {minBounds} | max: {maxBounds}");
+            ApplyConfine();
+        }
     }
 
     // Llamar desde BarEntrance al entrar al bar
