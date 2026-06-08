@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 368654383687997405}
   - component: {fileID: 8364835225947672715}
   - component: {fileID: 6914647509508687002}
+  - component: {fileID: 8811293228348745708}
   m_Layer: 0
   m_Name: Brazos
   m_TagString: Untagged
@@ -729,3 +730,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8811293228348745708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614946658729028756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cd0000fb1558540b8eb9b318731ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

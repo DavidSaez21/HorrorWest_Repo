@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class PauseManager : MonoBehaviour
     public GameObject panelAudio;
 
     private bool _isPaused = false;
+    private PlayerInput _playerInput;
 
     void Awake()
     {
@@ -24,34 +26,39 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (_isPaused)
-                Resume();
-            else
-                Pause();
+            if (_isPaused) Resume();
+            else Pause();
         }
     }
 
     public void Pause()
     {
+        if (_playerInput == null)
+            _playerInput = FindFirstObjectByType<PlayerInput>();
+
         panelPause.SetActive(true);
         Time.timeScale = 0f;
         _isPaused = true;
+
+        if (_playerInput != null) _playerInput.DeactivateInput();
     }
 
     public void Resume()
     {
+        if (_playerInput == null)
+            _playerInput = FindFirstObjectByType<PlayerInput>();
+
         panelPause.SetActive(false);
         if (panelOptions != null) panelOptions.SetActive(false);
         if (panelControls != null) panelControls.SetActive(false);
         if (panelAudio != null) panelAudio.SetActive(false);
         Time.timeScale = 1f;
         _isPaused = false;
+
+        if (_playerInput != null) _playerInput.ActivateInput();
     }
 
-    public void ClickOptions()
-    {
-        panelOptions.SetActive(true);
-    }
+    public void ClickOptions() { panelOptions.SetActive(true); }
 
     public void CloseOptions()
     {
@@ -66,10 +73,7 @@ public class PauseManager : MonoBehaviour
         panelAudio.SetActive(false);
     }
 
-    public void CloseControls()
-    {
-        panelControls.SetActive(false);
-    }
+    public void CloseControls() { panelControls.SetActive(false); }
 
     public void ClickAudio()
     {
@@ -77,10 +81,7 @@ public class PauseManager : MonoBehaviour
         panelAudio.SetActive(true);
     }
 
-    public void CloseAudio()
-    {
-        panelAudio.SetActive(false);
-    }
+    public void CloseAudio() { panelAudio.SetActive(false); }
 
     public void Surrender()
     {

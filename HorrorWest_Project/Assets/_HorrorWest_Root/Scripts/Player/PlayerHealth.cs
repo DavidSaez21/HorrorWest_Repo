@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     private float currentHealth;
     private float lastDamageTime = -999f;
+    private PlayerHitFlash _hitFlash;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateUI();
+        _hitFlash = GetComponentInChildren<PlayerHitFlash>(true);
     }
 
     public void TakeDamage(float amount)
@@ -40,6 +42,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Max(0f, currentHealth - reduced);
 
         CameraShaker.Instance?.Shake(0.08f, 0.15f);
+        _hitFlash?.StartInvincibilityFlash(invincibilityTime);
 
         UpdateUI();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);

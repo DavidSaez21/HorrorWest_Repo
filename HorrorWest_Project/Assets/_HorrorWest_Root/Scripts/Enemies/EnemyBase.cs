@@ -116,9 +116,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void PerformAttack()
     {
+        // Solo lanza la animación — el daño se aplica desde el Animation Event
+        SetAnimTrigger("isAttacking");
+    }
+
+    // Llamar desde Animation Event en el frame del golpe
+    public void DealDamageToPlayer()
+    {
+        if (isDead) return;
+        if (DistanceToPlayer() > data.attackRange * 1.5f) return; // margen de seguridad
         if (player.TryGetComponent(out PlayerHealth ph))
             ph.TakeDamage(data.damage);
-        SetAnimTrigger("isAttacking");
     }
 
     private Vector2 ComputeSeparationForce()
