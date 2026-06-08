@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6280944367853066416}
   - component: {fileID: 2666880242943992542}
+  - component: {fileID: 4912062537267564349}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -87,6 +88,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4912062537267564349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642847477919603865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &2851975913049208661
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +113,7 @@ GameObject:
   - component: {fileID: 8644658755812244393}
   - component: {fileID: 5602119355767734562}
   - component: {fileID: 6334077091789903248}
+  - component: {fileID: 8686404750313600573}
   m_Layer: 0
   m_Name: Hat
   m_TagString: Untagged
@@ -197,6 +213,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8686404750313600573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851975913049208661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &5266733110108061013
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +272,7 @@ GameObject:
   - component: {fileID: 2625644991129468188}
   - component: {fileID: 2645333283093648231}
   - component: {fileID: 6685942521233529472}
+  - component: {fileID: 1942108960490164984}
   m_Layer: 0
   m_Name: Manos
   m_TagString: Untagged
@@ -341,6 +372,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1942108960490164984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656007094909066728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 0}
 --- !u!1 &7781392927723494484
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +399,7 @@ GameObject:
   - component: {fileID: 4889475489190271467}
   - component: {fileID: 3622544502657314692}
   - component: {fileID: 7313811940161950066}
+  - component: {fileID: 5815645126712709339}
   m_Layer: 6
   m_Name: TankEnemy
   m_TagString: Enemy
@@ -523,3 +569,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5815645126712709339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781392927723494484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 2100000, guid: a304c27fc6d662544a67c81175fa0de1, type: 2}

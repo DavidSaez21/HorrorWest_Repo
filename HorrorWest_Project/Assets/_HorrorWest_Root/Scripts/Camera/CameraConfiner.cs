@@ -18,7 +18,7 @@ public class CameraConfiner : MonoBehaviour
     {
         if (!isActive) return;
 
-        Debug.Log($"[Confiner] pos: {transform.position} | min: {minBounds} | max: {maxBounds} | isActive: {isActive}");
+        
 
         float camHeight = _cam.orthographicSize;
         float camWidth = _cam.orthographicSize * _cam.aspect;
