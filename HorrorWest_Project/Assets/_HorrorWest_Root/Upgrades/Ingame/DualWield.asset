@@ -16,7 +16,7 @@ MonoBehaviour:
   upgradeName: Dual Wield
   description: Your weapon is duplicated in the other hand
   tooltip: Doubles your fire rate by equipping the same weapon in both hands
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fc3e9e5039a9d114d846e8fee30501c6, type: 3}
   activeIcon: {fileID: 21300000, guid: 9985c24972b2c634b8d8cfdae07c33d9, type: 3}
   rarity: 3
   isUnique: 1

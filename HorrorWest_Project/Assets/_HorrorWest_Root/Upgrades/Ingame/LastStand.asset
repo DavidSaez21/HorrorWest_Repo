@@ -16,7 +16,7 @@ MonoBehaviour:
   upgradeName: Last Stand
   description: The last bullet in your magazine deals x3 damage
   tooltip: Make every last shot count
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 86f69cb5e65fbcd469a376b0c6f4098f, type: 3}
   activeIcon: {fileID: 21300000, guid: 9ac0e6e28e037394a8278778e2054e32, type: 3}
   rarity: 2
   isUnique: 1
