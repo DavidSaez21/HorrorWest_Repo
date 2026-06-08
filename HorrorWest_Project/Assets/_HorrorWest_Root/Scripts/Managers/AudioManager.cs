@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     [Header("SFX")]
     public Slider sfxSlider;
+    public AudioSource sfxSource;
     private float _sfxVolume = 1f;
 
     [Header("Música")]
@@ -18,10 +19,13 @@ public class AudioManager : MonoBehaviour
         float savedSFX = PlayerPrefs.GetFloat("sfxVolume", 1f);
         _sfxVolume = savedSFX;
 
+        if (sfxSource != null)
+            sfxSource.volume = savedSFX;
+
         if (sfxSlider != null)
         {
             sfxSlider.onValueChanged.RemoveAllListeners();
-            sfxSlider.value = savedSFX;
+            sfxSlider.SetValueWithoutNotify(savedSFX);
             sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         }
 
@@ -29,20 +33,22 @@ public class AudioManager : MonoBehaviour
         float savedMusic = PlayerPrefs.GetFloat("musicVolume", 1f);
         _musicVolume = savedMusic;
 
+        if (musicSource != null)
+            musicSource.volume = savedMusic;
+
         if (musicSlider != null)
         {
             musicSlider.onValueChanged.RemoveAllListeners();
-            musicSlider.value = savedMusic;
+            musicSlider.SetValueWithoutNotify(savedMusic);
             musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         }
-
-        if (musicSource != null)
-            musicSource.volume = _musicVolume;
     }
 
     public void OnSFXVolumeChanged(float value)
     {
         _sfxVolume = value;
+        if (sfxSource != null)
+            sfxSource.volume = value;
         PlayerPrefs.SetFloat("sfxVolume", value);
         PlayerPrefs.Save();
     }
@@ -50,20 +56,19 @@ public class AudioManager : MonoBehaviour
     public void OnMusicVolumeChanged(float value)
     {
         _musicVolume = value;
-        PlayerPrefs.SetFloat("musicVolume", value);
-        PlayerPrefs.Save();
-
         if (musicSource != null)
             musicSource.volume = value;
+        PlayerPrefs.SetFloat("musicVolume", value);
+        PlayerPrefs.Save();
     }
 
     public float GetSFXVolume()
     {
-        return _sfxVolume;
+        return PlayerPrefs.GetFloat("sfxVolume", 1f);
     }
 
     public float GetMusicVolume()
     {
-        return _musicVolume;
+        return PlayerPrefs.GetFloat("musicVolume", 1f);
     }
 }
