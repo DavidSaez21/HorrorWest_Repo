@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2378314147539183724}
   - component: {fileID: 2277826640554759549}
   - component: {fileID: 8096169992150892889}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cama_carcel_sangre
   m_TagString: Untagged
   m_Icon: {fileID: 0}

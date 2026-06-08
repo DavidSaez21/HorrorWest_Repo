@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3047877445981142561}
   - component: {fileID: 6271837641910807215}
   - component: {fileID: 4963213117702917827}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "le\xF1a"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

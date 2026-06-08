@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8186299971678280598}
   - component: {fileID: 5535680744967515317}
   - component: {fileID: 4960440052255508181}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: silla_Bar_Sangre
   m_TagString: Untagged
   m_Icon: {fileID: 0}

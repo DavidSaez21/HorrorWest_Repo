@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8752934696353320700}
   - component: {fileID: 94659667454686594}
   - component: {fileID: 8153814322239973659}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesa_Prop_Sangre
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7942890334000937874}
   - component: {fileID: 4735091284819437292}
   - component: {fileID: 2500336337262988169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: barra_bar_sangre_v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

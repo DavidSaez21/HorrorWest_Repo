@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8287698369441557861}
   - component: {fileID: 3147183992365769884}
   - component: {fileID: 5665991211216021128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barril_prop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

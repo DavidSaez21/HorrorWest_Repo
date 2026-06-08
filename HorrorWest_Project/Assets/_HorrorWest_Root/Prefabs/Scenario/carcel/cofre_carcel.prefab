@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 760869005353467061}
   - component: {fileID: 6021989953776650851}
   - component: {fileID: 8077823632368761961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cofre_carcel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

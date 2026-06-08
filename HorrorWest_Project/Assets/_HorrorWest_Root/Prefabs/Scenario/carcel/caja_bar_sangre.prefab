@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7375265888972079395}
   - component: {fileID: 3581570459203128004}
   - component: {fileID: 8724042487247644147}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: caja_bar_sangre
   m_TagString: Untagged
   m_Icon: {fileID: 0}

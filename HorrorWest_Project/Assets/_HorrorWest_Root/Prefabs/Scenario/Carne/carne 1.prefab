@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3957636265886295265}
   - component: {fileID: 4452979332513775203}
   - component: {fileID: 9138507200469475574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: carne 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

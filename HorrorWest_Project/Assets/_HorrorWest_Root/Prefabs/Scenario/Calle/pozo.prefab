@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2731739476085539553}
   - component: {fileID: 2190769687482015097}
   - component: {fileID: 198153688873405318}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pozo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

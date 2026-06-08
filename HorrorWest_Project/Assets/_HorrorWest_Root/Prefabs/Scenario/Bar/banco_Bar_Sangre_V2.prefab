@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7217445978238932360}
   - component: {fileID: 4257223456477509883}
   - component: {fileID: 2624440825012510358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: banco_Bar_Sangre_V2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

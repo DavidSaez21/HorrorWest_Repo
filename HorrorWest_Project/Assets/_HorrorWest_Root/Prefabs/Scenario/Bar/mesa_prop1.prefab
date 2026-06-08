@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4792040019519581430}
   - component: {fileID: 3925358770703351851}
   - component: {fileID: 6918394831139676059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mesa_prop1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
