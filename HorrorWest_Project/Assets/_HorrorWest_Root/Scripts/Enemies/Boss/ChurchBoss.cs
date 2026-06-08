@@ -1,34 +1,16 @@
 using UnityEngine;
 
 /// <summary>
-/// Main script for the Church Boss — La Iglesia.
-///
-/// Inherits from EnemyBase which provides:
-///   • Health, damage, knockback, death, drops, XP reward
-///   • IDamageable interface (TakeDamage)
-///   • Separation steering (unused here — boss is static)
-///
-/// This script's responsibilities:
-///   1. Override UpdateSteering() to do nothing (boss never moves).
-///   2. Initialise all attack components with data from ChurchBossData.
-///   3. Tick BossActionQueue every Update.
-///   4. Override OnDamageReceived for hit feedback (flash).
-///   5. Override OnDeath to stop all attacks cleanly.
-///
-/// ── HOW TO SET UP IN UNITY ────────────────────────────────────────────────────
-///   1. Place the boss sprite at the altar position in your scene.
-///   2. Add this component. It requires a Rigidbody2D (from EnemyBase).
-///   3. Assign a ChurchBossData ScriptableObject to the "Data" field (inherited).
-///   4. Add child GameObjects / components for each attack and assign them below.
-///   5. Set the Rigidbody2D to Kinematic so the boss cannot be moved by physics.
-///   6. Tag the boss GameObject as "Enemy" (or whatever your layer setup expects).
+/// Script principal del Church Boss — La Iglesia.
+/// Hereda de EnemyBase (vida, daño, muerte, drops, XP).
+/// Toda la configuración de ataques se hace desde el Inspector.
 /// </summary>
 [RequireComponent(typeof(BossActionQueue))]
 public class ChurchBoss : EnemyBase
 {
     // ── Inspector ──────────────────────────────────────────────────────────────
 
-    [Header("── Church Boss Components ───────────────────")]
+    [Header("── Componentes de ataque ───────────────────")]
     [SerializeField] private BossEyeTracker eyeTracker;
     [SerializeField] private TongueAttack tongueAttack;
     [SerializeField] private TentacleAttack tentacleAttack;
@@ -36,16 +18,14 @@ public class ChurchBoss : EnemyBase
     [SerializeField] private MinionSpawner minionSpawner;
 
     [Header("Hit Flash")]
-    [SerializeField] private SpriteRenderer[] spriteRenderers; // all renderers to flash
+    [SerializeField] private SpriteRenderer[] spriteRenderers;
     [SerializeField] private float flashDuration = 0.08f;
     [SerializeField] private Color flashColor = Color.white;
 
-    // ── Cached components ─────────────────────────────────────────────────────
+    // ── Cached ────────────────────────────────────────────────────────────────
 
     private BossActionQueue _actionQueue;
     private ChurchBossData _bossData;
-
-    // Flash coroutine state
     private Coroutine _flashCoroutine;
 
     // ── EnemyBase overrides ───────────────────────────────────────────────────
@@ -54,8 +34,6 @@ public class ChurchBoss : EnemyBase
     {
         base.Awake();
         _actionQueue = GetComponent<BossActionQueue>();
-
-        // Make the Rigidbody2D kinematic — boss never moves via physics
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
@@ -63,23 +41,18 @@ public class ChurchBoss : EnemyBase
     {
         base.Start();
 
-        // Cast EnemyData to ChurchBossData for extended stats
         _bossData = data as ChurchBossData;
         if (_bossData == null)
         {
-            Debug.LogError("[ChurchBoss] 'data' must be a ChurchBossData ScriptableObject!");
+            Debug.LogError("[ChurchBoss] El campo 'Data' debe ser un ChurchBossData ScriptableObject.");
             return;
         }
 
         InitialiseAttacks();
 
         _actionQueue.Initialise(
-            player,
-            tongueAttack,
-            tentacleAttack,
-            groundMouthAttack,
-            minionSpawner,
-            eyeTracker);
+            player, tongueAttack, tentacleAttack,
+            groundMouthAttack, minionSpawner, eyeTracker);
 
         eyeTracker?.Initialise(player);
     }
@@ -87,18 +60,12 @@ public class ChurchBoss : EnemyBase
     protected override void Update()
     {
         if (isDead || player == null) return;
-        // EnemyBase.Update() handles attack range + PerformAttack() calls.
-        // We skip that entirely for the boss — BossActionQueue manages attacks.
-        // So we do NOT call base.Update().
-
         _actionQueue.Tick();
     }
 
-    /// <summary>
-    /// Boss is static — override UpdateSteering and set DesiredVelocity to zero.
-    /// </summary>
     public override void TakeDamage(float amount, Vector2 hitDirection)
     {
+        // Sin knockback — el boss es estático
         base.TakeDamage(amount, Vector2.zero);
     }
 
@@ -107,15 +74,10 @@ public class ChurchBoss : EnemyBase
         DesiredVelocity = Vector2.zero;
     }
 
-    /// <summary>
-    /// Boss attacks are driven by BossActionQueue, not by EnemyBase's range check.
-    /// This override is intentionally empty.
-    /// </summary>
     protected override void PerformAttack() { }
 
     protected override void OnDamageReceived(float damage)
     {
-        // Flash all sprite renderers white
         if (_flashCoroutine != null) StopCoroutine(_flashCoroutine);
         _flashCoroutine = StartCoroutine(FlashRoutine());
     }
@@ -123,28 +85,27 @@ public class ChurchBoss : EnemyBase
     protected override void OnDeath()
     {
         _actionQueue.StopAll();
-        // Add death animation trigger, sfx, scene transition here
     }
 
-    // ── Initialisation ────────────────────────────────────────────────────────
+    // ── Inicialización de ataques ─────────────────────────────────────────────
 
     private void InitialiseAttacks()
     {
         if (tongueAttack != null)
         {
-            tongueAttack.windupDuration = _bossData.tongueWindupDuration;
-            tongueAttack.lungeDuration = _bossData.tongueLungeDuration;
-            tongueAttack.lingerDuration = _bossData.tongueLingerDuration; // Note: property name matches field
-            tongueAttack.retractDuration = _bossData.tongueRetractDuration;
-            tongueAttack.damage = _bossData.tongueDamage;
+            tongueAttack.biteDamage = _bossData.tongueBiteDamage;
+            tongueAttack.sweepDamage = _bossData.tongueSweepDamage;
+            tongueAttack.biteDuration = _bossData.tongueBiteDuration;
+            tongueAttack.sweepDuration = _bossData.tongueSweepDuration;
         }
 
         if (tentacleAttack != null)
         {
-            tentacleAttack.telegraphDuration = _bossData.tentacleTelegraphDuration;
-            tentacleAttack.sweepDuration = _bossData.tentacleSweepDuration;
-            tentacleAttack.retractDuration = _bossData.tentacleRetractDuration;
             tentacleAttack.damage = _bossData.tentacleDamage;
+            tentacleAttack.emergeDuration = _bossData.tentacleEmergeDuration;
+            tentacleAttack.waitAtTargetDuration = _bossData.tentacleWaitAtTargetDuration;
+            tentacleAttack.attackAnimDuration = _bossData.tentacleAttackAnimDuration;
+            tentacleAttack.retractDuration = _bossData.tentacleRetractDuration;
         }
 
         if (groundMouthAttack != null)
@@ -157,9 +118,7 @@ public class ChurchBoss : EnemyBase
         }
 
         if (minionSpawner != null)
-        {
             minionSpawner.staggerOverride = _bossData.minionSpawnStagger;
-        }
     }
 
     // ── Hit flash ─────────────────────────────────────────────────────────────
@@ -168,7 +127,7 @@ public class ChurchBoss : EnemyBase
     {
         SetFlashColor(flashColor);
         yield return new WaitForSeconds(flashDuration);
-        SetFlashColor(Color.white); // restore normal tint
+        SetFlashColor(Color.white);
         _flashCoroutine = null;
     }
 
@@ -179,13 +138,10 @@ public class ChurchBoss : EnemyBase
             if (sr != null) sr.color = color;
     }
 
-    // ── Debug gizmos ──────────────────────────────────────────────────────────
-
     protected override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
         Gizmos.color = new Color(1f, 0f, 0f, 0.15f);
-        // Draw a rough footprint of the boss
         Gizmos.DrawWireCube(transform.position, new Vector3(3f, 2f, 0f));
     }
 }

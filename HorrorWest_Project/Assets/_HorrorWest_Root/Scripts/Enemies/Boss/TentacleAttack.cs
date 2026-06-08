@@ -5,69 +5,68 @@ using UnityEngine;
 /// <summary>
 /// Tentacle sweep attack for the Church Boss.
 ///
-/// Sequence per side:
-///   1. EMERGE  — tentacle tip becomes visible at the flank edge (telegraph window).
-///   2. SWEEP   — tentacle moves horizontally across the aisle. Hitbox active.
-///   3. RETRACT — tentacle pulls back out of frame.
-///
-/// The attack can run on the left, right, or both flanks simultaneously.
-/// Which side(s) are used is chosen randomly, weighted toward single-side at low difficulty.
-///
-/// Setup in Inspector:
-///   • leftTentacleRoot  — parent Transform that starts off-screen to the left.
-///   • rightTentacleRoot — parent Transform that starts off-screen to the right.
-///   • Each root has a child Collider2D (trigger) that is enabled during the sweep phase.
+/// Flujo:
+///   1. EMERGE    — aparece en el borde, animación Idle, se mueve hacia TargetPosition.
+///   2. ESPERA    — llega al target, se queda quieto waitAtTargetDuration segundos.
+///   3. ATTACKING — lanza trigger "Attack" en el Animator, hitbox activa,
+///                  espera a que termine la animación.
+///   4. RETRACT   — último frame congelado, vuelve al punto de inicio y se oculta.
 /// </summary>
 public class TentacleAttack : MonoBehaviour
 {
     // ── Inspector ──────────────────────────────────────────────────────────────
 
-    [Header("References")]
+    [Header("Tentáculo Izquierdo")]
     [SerializeField] private Transform leftTentacleRoot;
-    [SerializeField] private Transform rightTentacleRoot;
+    [SerializeField] private Transform leftTarget;
     [SerializeField] private Collider2D leftHitbox;
+    [SerializeField] private Animator leftAnimator;
+
+    [Header("Tentáculo Derecho")]
+    [SerializeField] private Transform rightTentacleRoot;
+    [SerializeField] private Transform rightTarget;
     [SerializeField] private Collider2D rightHitbox;
+    [SerializeField] private Animator rightAnimator;
 
-    [Header("Positions (X axis, world space)")]
-    [Tooltip("X position the tentacle starts from (off-screen left edge).")]
-    [SerializeField] private float leftHiddenX = -12f;
-    [Tooltip("X position the left tentacle tip appears during telegraph.")]
-    [SerializeField] private float leftTelegraphX = -5f;
-    [Tooltip("X position the left tentacle reaches at full sweep.")]
-    [SerializeField] private float leftSweepTargetX = 2f;
-
-    [SerializeField] private float rightHiddenX = 12f;
-    [SerializeField] private float rightTelegraphX = 5f;
-    [SerializeField] private float rightSweepTargetX = -2f;
-
-    [Header("Dual-side probability")]
-    [Tooltip("0 = always single side. 1 = always both sides simultaneously.")]
-    [Range(0f, 1f)]
+    [Header("Tiempos")]
+    [Tooltip("Segundos que tarda en llegar desde el borde hasta el target.")]
     [SerializeField] private float bothSidesChance = 0.3f;
 
-    [Header("Game Feel")]
+    [Header("Probabilidad doble")]
+    [Range(0f, 1f)]
+    [Tooltip("0 = siempre un lado. 1 = siempre los dos a la vez.")]
     [SerializeField] private float hitStopFrames = 3f;
-    [SerializeField] private float screenShakeMagnitude = 0.15f;
-    [SerializeField] private float screenShakeDuration = 0.2f;
+
+    [Header("Game Feel")]
     [SerializeField] private GameObject impactParticlePrefab;
 
-    // Set by ChurchBoss from ChurchBossData
-    [HideInInspector] public float telegraphDuration = 0.4f;
-    [HideInInspector] public float sweepDuration = 0.35f;
-    [HideInInspector] public float retractDuration = 0.5f;
+    // Configurados por ChurchBoss desde ChurchBossData
     [HideInInspector] public float damage = 18f;
+    [HideInInspector] public float emergeDuration = 0.8f;
+    [HideInInspector] public float waitAtTargetDuration = 0.5f;
+    [HideInInspector] public float attackAnimDuration = 0.6f;
+    [HideInInspector] public float retractDuration = 0.5f;
+
+    // ── Animator hashes ───────────────────────────────────────────────────────
+
+    private static readonly int AnimAttack = Animator.StringToHash("Attack");
 
     // ── Runtime ───────────────────────────────────────────────────────────────
 
     private Action _onComplete;
     private Coroutine _attackCoroutine;
+    private Vector3 _leftStartPos;
+    private Vector3 _rightStartPos;
 
     // ── Init ──────────────────────────────────────────────────────────────────
 
     private void Awake()
     {
+        if (leftTentacleRoot != null) _leftStartPos = leftTentacleRoot.position;
+        if (rightTentacleRoot != null) _rightStartPos = rightTentacleRoot.position;
+
         SetHitboxesEnabled(false);
-        HideTentacles();
+        SetVisible(false, false);
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -79,7 +78,7 @@ public class TentacleAttack : MonoBehaviour
         _attackCoroutine = StartCoroutine(TentacleRoutine());
     }
 
-    // ── Coroutine ─────────────────────────────────────────────────────────────
+    // ── Coroutine principal ───────────────────────────────────────────────────
 
     private IEnumerator TentacleRoutine()
     {
@@ -87,54 +86,58 @@ public class TentacleAttack : MonoBehaviour
         bool doRight = UnityEngine.Random.value < bothSidesChance;
         if (!doRight && UnityEngine.Random.value < 0.5f)
         {
-            // Flip: only right
             doLeft = false;
             doRight = true;
         }
 
         SetHitboxesEnabled(false);
 
-        // ── Phase 1: EMERGE (telegraph) ────────────────────────────────────────
-        if (doLeft) MoveTentacleX(leftTentacleRoot, leftTelegraphX);
-        if (doRight) MoveTentacleX(rightTentacleRoot, rightTelegraphX);
-
-        // Tip-pulse visual feedback (animator trigger or simple scale ping if no animator)
-        yield return new WaitForSeconds(telegraphDuration);
-
-        // ── Phase 2: SWEEP (hitbox active) ────────────────────────────────────
-        if (doLeft) leftHitbox.enabled = true;
-        if (doRight) rightHitbox.enabled = true;
+        // ── FASE 1: EMERGE ────────────────────────────────────────────────────
+        if (doLeft && leftTentacleRoot != null)
+        {
+            leftTentacleRoot.position = _leftStartPos;
+            leftAnimator?.Play("AC_Idle_TentaculoIZQ");
+            SetVisible(true, false);
+        }
+        if (doRight && rightTentacleRoot != null)
+        {
+            rightTentacleRoot.position = _rightStartPos;
+            rightAnimator?.Play("AC_Idle_TentaculoDER");
+            SetVisible(false, true);
+        }
 
         float elapsed = 0f;
-        float leftStartX = doLeft ? leftTelegraphX : leftHiddenX;
-        float rightStartX = doRight ? rightTelegraphX : rightHiddenX;
-
-        while (elapsed < sweepDuration)
+        while (elapsed < emergeDuration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, elapsed / sweepDuration);
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / emergeDuration);
 
-            if (doLeft && leftTentacleRoot != null)
-            {
-                Vector3 pos = leftTentacleRoot.position;
-                pos.x = Mathf.Lerp(leftStartX, leftSweepTargetX, t);
-                leftTentacleRoot.position = pos;
-            }
-            if (doRight && rightTentacleRoot != null)
-            {
-                Vector3 pos = rightTentacleRoot.position;
-                pos.x = Mathf.Lerp(rightStartX, rightSweepTargetX, t);
-                rightTentacleRoot.position = pos;
-            }
+            if (doLeft && leftTentacleRoot != null && leftTarget != null)
+                leftTentacleRoot.position = Vector3.Lerp(_leftStartPos, leftTarget.position, t);
+            if (doRight && rightTentacleRoot != null && rightTarget != null)
+                rightTentacleRoot.position = Vector3.Lerp(_rightStartPos, rightTarget.position, t);
+
             yield return null;
         }
 
-        // ── Phase 3: RETRACT ──────────────────────────────────────────────────
+        // ── FASE 2: ESPERA ────────────────────────────────────────────────────
+        yield return new WaitForSeconds(waitAtTargetDuration);
+
+        // ── FASE 3: ATTACKING ─────────────────────────────────────────────────
+        if (doLeft) leftHitbox.enabled = true;
+        if (doRight) rightHitbox.enabled = true;
+
+        if (doLeft) leftAnimator?.SetTrigger(AnimAttack);
+        if (doRight) rightAnimator?.SetTrigger(AnimAttack);
+
+        yield return new WaitForSeconds(attackAnimDuration);
+
+        // ── FASE 4: RETRACT ───────────────────────────────────────────────────
         SetHitboxesEnabled(false);
 
         elapsed = 0f;
-        float leftCurrent = doLeft ? leftSweepTargetX : leftHiddenX;
-        float rightCurrent = doRight ? rightSweepTargetX : rightHiddenX;
+        Vector3 leftCurrentPos = doLeft ? leftTentacleRoot.position : _leftStartPos;
+        Vector3 rightCurrentPos = doRight ? rightTentacleRoot.position : _rightStartPos;
 
         while (elapsed < retractDuration)
         {
@@ -142,25 +145,22 @@ public class TentacleAttack : MonoBehaviour
             float t = Mathf.SmoothStep(0f, 1f, elapsed / retractDuration);
 
             if (doLeft && leftTentacleRoot != null)
-            {
-                Vector3 pos = leftTentacleRoot.position;
-                pos.x = Mathf.Lerp(leftCurrent, leftHiddenX, t);
-                leftTentacleRoot.position = pos;
-            }
+                leftTentacleRoot.position = Vector3.Lerp(leftCurrentPos, _leftStartPos, t);
             if (doRight && rightTentacleRoot != null)
-            {
-                Vector3 pos = rightTentacleRoot.position;
-                pos.x = Mathf.Lerp(rightCurrent, rightHiddenX, t);
-                rightTentacleRoot.position = pos;
-            }
+                rightTentacleRoot.position = Vector3.Lerp(rightCurrentPos, _rightStartPos, t);
+
             yield return null;
         }
 
-        HideTentacles();
+        SetVisible(false, false);
+        if (leftTentacleRoot != null) leftTentacleRoot.position = _leftStartPos;
+        if (rightTentacleRoot != null) rightTentacleRoot.position = _rightStartPos;
+
+        _attackCoroutine = null;
         _onComplete?.Invoke();
     }
 
-    // ── Trigger handling (hitbox deals damage) ────────────────────────────────
+    // ── Daño al player ────────────────────────────────────────────────────────
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -169,11 +169,10 @@ public class TentacleAttack : MonoBehaviour
 
         ph.TakeDamage(damage);
         StartCoroutine(HitStop());
-        SpawnImpactParticles(other.transform.position, Vector2.right); // rough direction
-        // CameraShaker.Instance?.Shake(screenShakeMagnitude, screenShakeDuration);
+        SpawnImpactParticles(other.transform.position);
     }
 
-    // ── Game feel helpers ─────────────────────────────────────────────────────
+    // ── Game feel ─────────────────────────────────────────────────────────────
 
     private IEnumerator HitStop()
     {
@@ -182,19 +181,13 @@ public class TentacleAttack : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private void SpawnImpactParticles(Vector3 position, Vector2 hitDirection)
+    private void SpawnImpactParticles(Vector3 position)
     {
         if (impactParticlePrefab == null) return;
-        GameObject fx = Instantiate(impactParticlePrefab, position, Quaternion.identity);
-        // Rotate particles to fly away from the hit direction
-        if (hitDirection != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(-hitDirection.y, -hitDirection.x) * Mathf.Rad2Deg;
-            fx.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        }
+        Instantiate(impactParticlePrefab, position, Quaternion.identity);
     }
 
-    // ── Utilities ─────────────────────────────────────────────────────────────
+    // ── Utilidades ────────────────────────────────────────────────────────────
 
     private void SetHitboxesEnabled(bool value)
     {
@@ -202,17 +195,17 @@ public class TentacleAttack : MonoBehaviour
         if (rightHitbox != null) rightHitbox.enabled = value;
     }
 
-    private void HideTentacles()
+    private void SetVisible(bool left, bool right)
     {
-        if (leftTentacleRoot != null) MoveTentacleX(leftTentacleRoot, leftHiddenX);
-        if (rightTentacleRoot != null) MoveTentacleX(rightTentacleRoot, rightHiddenX);
-    }
-
-    private static void MoveTentacleX(Transform t, float x)
-    {
-        if (t == null) return;
-        Vector3 pos = t.position;
-        pos.x = x;
-        t.position = pos;
+        if (leftTentacleRoot != null)
+        {
+            var sr = leftTentacleRoot.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = left;
+        }
+        if (rightTentacleRoot != null)
+        {
+            var sr = rightTentacleRoot.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = right;
+        }
     }
 }
