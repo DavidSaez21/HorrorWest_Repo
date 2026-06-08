@@ -5,12 +5,21 @@ public class BarEntrance : MonoBehaviour
     [Header("Calle")]
     [SerializeField] private GameObject streetTilemap;
     [SerializeField] private GameObject streetProps;
+    [SerializeField] private WaveManager streetWaveManager;
+
+    [Header("Bloqueador entrada (se quita al limpiar la calle)")]
+    [SerializeField] private GameObject streetDoorBlocker;
 
     [Header("Bar / Interior")]
     [SerializeField] private GameObject barTilemap;
     [SerializeField] private GameObject barProps;
     [SerializeField] private Transform playerSpawnInside;
     [SerializeField] private GameObject doorBlocker;
+    [SerializeField] private WaveManager barWaveManager;
+    [SerializeField] private GameObject sceneChangeTrigger;
+
+    [Header("Al salir del interior (solo cárcel)")]
+    [SerializeField] private bool reactivateStreetOnClear = false;
 
     [Header("Confiner calle")]
     [SerializeField] private Vector2 streetCamMin;
@@ -21,6 +30,8 @@ public class BarEntrance : MonoBehaviour
     [SerializeField] private Vector2 barCamMax;
 
     private bool _insideBar = false;
+    private bool _streetCleared = false;
+    private bool _barCleared = false;
     private CameraConfiner _confiner;
 
     private void Start()
@@ -28,17 +39,28 @@ public class BarEntrance : MonoBehaviour
         barTilemap.SetActive(false);
         barProps.SetActive(false);
         if (doorBlocker != null) doorBlocker.SetActive(false);
+        if (streetDoorBlocker != null) streetDoorBlocker.SetActive(true);
+        if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(false);
 
         _confiner = Camera.main.GetComponent<CameraConfiner>();
-
-        // Activa el confiner del pueblo al inicio
         if (_confiner != null)
             _confiner.SetBounds(streetCamMin, streetCamMax);
+
+        if (streetWaveManager != null)
+            streetWaveManager.OnAllWavesCompleted += OnStreetCleared;
+    }
+
+    private void OnStreetCleared()
+    {
+        _streetCleared = true;
+        if (streetDoorBlocker != null) streetDoorBlocker.SetActive(false);
     }
 
     public void EnterBar()
     {
         if (_insideBar) return;
+        if (!_streetCleared) return;
+
         _insideBar = true;
 
         streetTilemap.SetActive(false);
@@ -52,8 +74,57 @@ public class BarEntrance : MonoBehaviour
         if (playerSpawnInside != null)
             PlayerManager.Instance.transform.position = playerSpawnInside.position;
 
-        // Cambia al confiner del interior
         if (_confiner != null)
             _confiner.SetBounds(barCamMin, barCamMax);
+
+        if (barWaveManager != null)
+        {
+            barWaveManager.OnAllWavesCompleted += OnBarCleared;
+            barWaveManager.StartWaves();
+        }
+    }
+
+    private void OnBarCleared()
+    {
+        _barCleared = true;
+
+        // Solo desbloquea la puerta — el player sale manualmente
+        if (doorBlocker != null) doorBlocker.SetActive(false);
+
+        if (barWaveManager != null)
+            barWaveManager.OnAllWavesCompleted -= OnBarCleared;
+    }
+
+    // Llamar desde el trigger de salida de la puerta
+    public void ExitInterior()
+    {
+        if (!_barCleared) return;
+
+        if (reactivateStreetOnClear)
+        {
+            barTilemap.SetActive(false);
+            barProps.SetActive(false);
+
+            streetTilemap.SetActive(true);
+            streetProps.SetActive(true);
+
+            if (_confiner != null)
+                _confiner.SetBounds(streetCamMin, streetCamMax);
+
+            // Relanzar oleadas de la calle
+            if (streetWaveManager != null)
+            {
+                streetWaveManager.ResetWaves();
+                streetWaveManager.StartWaves();
+            }
+        }
+
+        if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        if (streetWaveManager != null)
+            streetWaveManager.OnAllWavesCompleted -= OnStreetCleared;
     }
 }
