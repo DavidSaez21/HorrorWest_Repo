@@ -36,8 +36,8 @@ public class BarEntrance : MonoBehaviour
 
     private void Start()
     {
-        barTilemap.SetActive(false);
-        barProps.SetActive(false);
+        if (barTilemap != null) barTilemap.SetActive(false);
+        if (barProps != null) barProps.SetActive(false);
         if (doorBlocker != null) doorBlocker.SetActive(false);
         if (streetDoorBlocker != null) streetDoorBlocker.SetActive(true);
         if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(false);
@@ -63,11 +63,11 @@ public class BarEntrance : MonoBehaviour
 
         _insideBar = true;
 
-        streetTilemap.SetActive(false);
-        streetProps.SetActive(false);
+        if (streetTilemap != null) streetTilemap.SetActive(false);
+        if (streetProps != null) streetProps.SetActive(false);
 
-        barTilemap.SetActive(true);
-        barProps.SetActive(true);
+        if (barTilemap != null) barTilemap.SetActive(true);
+        if (barProps != null) barProps.SetActive(true);
 
         if (doorBlocker != null) doorBlocker.SetActive(true);
 
@@ -102,11 +102,11 @@ public class BarEntrance : MonoBehaviour
 
         if (reactivateStreetOnClear)
         {
-            barTilemap.SetActive(false);
-            barProps.SetActive(false);
+            if (barTilemap != null) barTilemap.SetActive(false);
+            if (barProps != null) barProps.SetActive(false);
 
-            streetTilemap.SetActive(true);
-            streetProps.SetActive(true);
+            if (streetTilemap != null) streetTilemap.SetActive(true);
+            if (streetProps != null) streetProps.SetActive(true);
 
             if (_confiner != null)
                 _confiner.SetBounds(streetCamMin, streetCamMax);
