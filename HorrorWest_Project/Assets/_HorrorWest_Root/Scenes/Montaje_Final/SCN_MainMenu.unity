@@ -7313,6 +7313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxSlider: {fileID: 0}
+  sfxSource: {fileID: 0}
   musicSlider: {fileID: 931033332}
   musicSource: {fileID: 1686361268}
 --- !u!82 &1686361268
@@ -8206,6 +8207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxSlider: {fileID: 780830224}
+  sfxSource: {fileID: 1884247362}
   musicSlider: {fileID: 0}
   musicSource: {fileID: 0}
 --- !u!1 &1914785908
