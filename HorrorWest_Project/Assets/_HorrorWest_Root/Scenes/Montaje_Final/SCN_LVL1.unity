@@ -29350,6 +29350,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: handSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 41244e50faba00a40823b6eb2ea62c97, type: 3}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: enemyColor.b
       value: 0.139
       objectReference: {fileID: 0}
@@ -29373,6 +29377,10 @@ PrefabInstance:
       propertyPath: normalColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: crosshairSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b5a1d8064cc0085428666f41018752bc, type: 3}
     - target: {fileID: 2305825977858000336, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Name
       value: Cursor_Canvas
@@ -29380,7 +29388,7 @@ PrefabInstance:
     - target: {fileID: 3626752991295375492, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a7f1228b138726b419d04039a8e5a264, type: 3}
+      objectReference: {fileID: 21300000, guid: b5a1d8064cc0085428666f41018752bc, type: 3}
     - target: {fileID: 8568063941464378930, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Pivot.x
       value: 0

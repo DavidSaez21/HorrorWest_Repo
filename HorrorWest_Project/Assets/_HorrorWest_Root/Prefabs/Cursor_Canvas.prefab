@@ -118,8 +118,15 @@ MonoBehaviour:
   cursorVisual: {fileID: 8388943217181471022}
   hotspot: {x: 0, y: 0}
   cursorImage: {fileID: 3626752991295375492}
+  crosshairSprite: {fileID: 21300000, guid: b5a1d8064cc0085428666f41018752bc, type: 3}
+  handSprite: {fileID: 21300000, guid: 41244e50faba00a40823b6eb2ea62c97, type: 3}
   normalColor: {r: 0, g: 0, b: 0, a: 1}
   enemyColor: {r: 1, g: 0, b: 0, a: 1}
+  gameplayScenes:
+  - SCN_LVL1
+  - SCN_LVL2
+  - SCN_LVL3
+  - SCN_LVL4
 --- !u!1 &5742283669790033333
 GameObject:
   m_ObjectHideFlags: 0
