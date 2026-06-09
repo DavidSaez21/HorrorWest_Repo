@@ -9,7 +9,6 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private Image rarityBorder;
     [SerializeField] private RarityBorderAnimator rarityAnimator;
     [SerializeField] private GameObject tooltipPanel;
     [SerializeField] private TextMeshProUGUI tooltipText;
@@ -18,64 +17,55 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private float hoverScale = 1.08f;
     [SerializeField] private float hoverSpeed = 8f;
 
-    private UpgradeData data;
-    private Vector3 originalScale;
-    private Vector3 targetScale;
-    private System.Action<UpgradeData> onSelected;
-    private bool interactable = false;
+    private UpgradeData _data;
+    private Vector3 _originalScale;
+    private Vector3 _targetScale;
+    private System.Action<UpgradeData> _onSelected;
+    private bool _interactable = false;
 
     private void Awake()
     {
-        originalScale = transform.localScale;
-        targetScale = originalScale;
-        if (tooltipPanel != null)
-            tooltipPanel.SetActive(false);
+        _originalScale = transform.localScale;
+        _targetScale = _originalScale;
+        if (tooltipPanel != null) tooltipPanel.SetActive(false);
     }
 
     private void Update()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, hoverSpeed * Time.unscaledDeltaTime);
+        transform.localScale = Vector3.Lerp(transform.localScale, _targetScale, hoverSpeed * Time.unscaledDeltaTime);
     }
 
-    public void Setup(UpgradeData upgradeData, System.Action<UpgradeData> onSelectedCallback)
+    public void Setup(UpgradeData data, System.Action<UpgradeData> onSelected)
     {
-        data = upgradeData;
-        onSelected = onSelectedCallback;
+        _data = data;
+        _onSelected = onSelected;
 
         if (nameText != null) nameText.text = data.upgradeName;
         if (descriptionText != null) descriptionText.text = data.description;
         if (iconImage != null && data.icon != null) iconImage.sprite = data.icon;
         if (tooltipText != null) tooltipText.text = data.tooltip;
-
-        // Actualiza el color del borde según la rareza de esta mejora
-        if (rarityAnimator != null)
-            rarityAnimator.SetRarity(data.rarity);
+        if (rarityAnimator != null) rarityAnimator.SetRarity(data.rarity);
     }
 
-    public void SetInteractable(bool value)
-    {
-        interactable = value;
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (!interactable) return;
-        if (data == null) return;
-        onSelected?.Invoke(data);
-    }
+    public void SetInteractable(bool value) => _interactable = value;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!interactable) return;
-        targetScale = originalScale * hoverScale;
-        if (tooltipPanel != null)
-            tooltipPanel.SetActive(true);
+        Debug.Log($"[UpgradeCard] OnPointerEnter — {gameObject.name} — interactable: {_interactable}");
+        if (!_interactable) return;
+        _targetScale = _originalScale * hoverScale;
+        if (tooltipPanel != null) tooltipPanel.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        targetScale = originalScale;
-        if (tooltipPanel != null)
-            tooltipPanel.SetActive(false);
+        _targetScale = _originalScale;
+        if (tooltipPanel != null) tooltipPanel.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!_interactable || _data == null) return;
+        _onSelected?.Invoke(_data);
     }
 }

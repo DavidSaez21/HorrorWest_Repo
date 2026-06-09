@@ -11,12 +11,21 @@ public class UpgradePanel : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float inputDelay = 0.8f;
 
+    private void Awake()
+    {
+        // Busca el panelRoot como hijo directo si la referencia se ha roto
+        if (panelRoot == null)
+            panelRoot = transform.Find("UpgradePanel")?.gameObject;
+    }
+
     private void Start()
     {
+        if (panelRoot != null) panelRoot.SetActive(false);
+
         if (ExperienceManager.Instance != null)
             ExperienceManager.Instance.OnLevelUp += ShowPanel;
         else
-            Debug.LogError("UpgradePanel: ExperienceManager no encontrado");
+            Debug.LogError("[UpgradePanel] ExperienceManager no encontrado");
     }
 
     private void OnDestroy()
@@ -27,11 +36,11 @@ public class UpgradePanel : MonoBehaviour
 
     private void ShowPanel(int level)
     {
-        if (panelRoot == null) { Debug.LogError("panelRoot es NULL"); return; }
+        if (panelRoot == null) { Debug.LogError("[UpgradePanel] panelRoot es NULL"); return; }
 
         Time.timeScale = 0f;
 
-        float luck = PlayerManager.Instance?.Stats != null ? PlayerManager.Instance.Stats.GetLuckMultiplier() : 1f;
+        float luck = PlayerManager.Instance?.Stats?.GetLuckMultiplier() ?? 1f;
         List<UpgradeData> upgrades = UpgradePool.Instance.GetRandomUpgrades(3, luck);
 
         foreach (UpgradeCard card in cards)
