@@ -166,9 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useDamageFalloff: 0
-  plagueDamagePerSecond: 5
+  plagueDamagePerSecond: 2
   plagueDuration: 3
-  explosionRadius: 1.5
+  explosionRadius: 1.99
   explosionDamage: 15
   enemyLayer:
     serializedVersion: 2

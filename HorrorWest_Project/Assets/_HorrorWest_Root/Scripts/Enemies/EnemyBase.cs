@@ -15,6 +15,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [Header("VFX")]
     [SerializeField] private GameObject bloodSplatterPrefab;
     [SerializeField] private GameObject plagueVFXPrefab;
+    [SerializeField] private Transform plagueVFXSpawnPoint;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 5f;
@@ -165,6 +166,14 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount) => TakeDamage(amount, Vector2.zero);
 
+    // Para daño de plaga/veneno — sin flash ni knockback ni daño mínimo
+    public void TakeDamageSilent(float amount)
+    {
+        if (isDead) return;
+        currentHealth -= amount;
+        if (currentHealth <= 0f) Die();
+    }
+
     public virtual void TakeDamage(float amount, Vector2 hitDirection)
     {
         if (isDead) return;
@@ -226,6 +235,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected void ResetAttackCooldown() => lastAttackTime = Time.time;
     public float GetHealthPercent() => currentHealth / data.maxHealth;
     public GameObject GetPlagueVFXPrefab() => plagueVFXPrefab;
+    public Transform GetPlagueVFXSpawnPoint() => plagueVFXSpawnPoint != null ? plagueVFXSpawnPoint : transform;
 
     private void TryInstantReload()
     {

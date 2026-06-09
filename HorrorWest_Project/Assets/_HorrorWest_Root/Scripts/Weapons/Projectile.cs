@@ -76,6 +76,8 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+        // Cancela el timer de auto-destrucción antes de explotar
+        CancelInvoke();
         TryExplode();
         Destroy(gameObject);
     }

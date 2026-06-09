@@ -9,7 +9,7 @@ public class PlagueEffect : MonoBehaviour
 
     [SerializeField] private GameObject plagueVFXPrefab;
 
-    public void Init(float dps, float duration, GameObject vfxPrefab = null)
+    public void Init(float dps, float duration, GameObject vfxPrefab = null, Transform spawnPoint = null)
     {
         _damagePerSecond = dps;
         _duration = duration;
@@ -17,9 +17,10 @@ public class PlagueEffect : MonoBehaviour
         if (vfxPrefab != null)
             plagueVFXPrefab = vfxPrefab;
 
-        // Instancia el VFX encima del enemigo
+        Transform anchor = spawnPoint != null ? spawnPoint : transform;
+
         if (plagueVFXPrefab != null)
-            _vfxInstance = Instantiate(plagueVFXPrefab, transform.position, Quaternion.identity, transform);
+            _vfxInstance = Instantiate(plagueVFXPrefab, anchor.position, Quaternion.identity, anchor);
 
         StartCoroutine(PlagueRoutine());
     }
@@ -27,16 +28,15 @@ public class PlagueEffect : MonoBehaviour
     private IEnumerator PlagueRoutine()
     {
         float elapsed = 0f;
-        IDamageable target = GetComponent<IDamageable>();
+        EnemyBase enemy = GetComponent<EnemyBase>();
 
         while (elapsed < _duration)
         {
             elapsed += Time.deltaTime;
-            target?.TakeDamage(_damagePerSecond * Time.deltaTime);
+            enemy?.TakeDamageSilent(_damagePerSecond * Time.deltaTime);
             yield return null;
         }
 
-        // Destruye el VFX al terminar
         if (_vfxInstance != null)
             Destroy(_vfxInstance);
 
