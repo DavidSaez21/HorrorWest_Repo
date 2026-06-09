@@ -234,6 +234,7 @@ MonoBehaviour:
   pelletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
   spreadAngle: 30
+  muzzleFlashPrefab: {fileID: 3645981831799876457, guid: 0156c88c1b62ecc409aa9f397e160a75, type: 3}
 --- !u!1 &1545801812125040986
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +411,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 341262d85748e624f9e5bf281dfb3195, type: 3}
   reloadSound: {fileID: 8300000, guid: 8d8ac10dbc6f47a448e9dc8fb1568e26, type: 3}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
+  muzzleFlashPrefab: {fileID: 3645981831799876457, guid: 0156c88c1b62ecc409aa9f397e160a75, type: 3}
 --- !u!1 &2795937732679501469
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +526,7 @@ MonoBehaviour:
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
+  muzzleFlashPrefab: {fileID: 0}
 --- !u!1 &3317338373783985497
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,7 +785,7 @@ MonoBehaviour:
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
-  muzzleFlashFX: {fileID: 0}
+  muzzleFlashPrefab: {fileID: 0}
 --- !u!1 &5611437559755866753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1294,7 @@ MonoBehaviour:
   pelletPrefab: {fileID: 5987934868915588522, guid: b38d6f5089fd26345aff77464bb3dd9b, type: 3}
   pelletsPerShot: 5
   spreadAngle: 30
+  muzzleFlashPrefab: {fileID: 0}
 --- !u!1 &7851942882041436313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,7 +1587,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 52bbe19ed06d0ab4e9c2b22d118679b2, type: 3}
   reloadSound: {fileID: 8300000, guid: bf623ebe48083e64db8997ca4f5d9474, type: 3}
   bulletPrefab: {fileID: 1611564316635216822, guid: e31b4298792e1014c928fac6dbc9ed6a, type: 3}
-  muzzleFlashFX: {fileID: 7657518198234982648, guid: 0156c88c1b62ecc409aa9f397e160a75, type: 3}
+  muzzleFlashPrefab: {fileID: 3645981831799876457, guid: 0156c88c1b62ecc409aa9f397e160a75, type: 3}
 --- !u!1 &8592333604545297650
 GameObject:
   m_ObjectHideFlags: 0
