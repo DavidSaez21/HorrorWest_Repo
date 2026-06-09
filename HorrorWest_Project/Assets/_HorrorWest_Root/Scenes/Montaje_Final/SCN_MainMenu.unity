@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 23756831}
   - component: {fileID: 23756834}
   - component: {fileID: 23756833}
-  - component: {fileID: 23756832}
+  - component: {fileID: 23756835}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -329,23 +329,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 356768040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &23756832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23756830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Aim
-  bindingIndex: 0
-  keySprite: {fileID: 1654071195}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &23756833
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -447,6 +430,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &23756835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23756830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Aim
+  bindingIndex: 0
+  keySprite: {fileID: 1654071195}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &141069210
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &189580214
 Transform:
   m_ObjectHideFlags: 0
@@ -890,11 +890,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.4171119, y: -1.0737863}
+  m_Offset: {x: -0.14346313, y: -0.007836342}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -904,7 +904,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 14.649068, y: 8.635817}
+  m_Size: {x: 18.125938, y: 11.651674}
   m_EdgeRadius: 0
 --- !u!212 &189580216
 SpriteRenderer:
@@ -2009,7 +2009,7 @@ Transform:
   m_GameObject: {fileID: 356768039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2899999, y: -0.37999994, z: 0.027093}
+  m_LocalPosition: {x: -0.2899999, y: -1.4, z: 0.027093}
   m_LocalScale: {x: 8.30062, y: 8.30062, z: 8.30062}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2496,11 +2496,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.4613657, y: -1.3034716}
+  m_Offset: {x: -0.0059947968, y: 0.074468136}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2510,7 +2510,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 14.716135, y: 9.033712}
+  m_Size: {x: 18.095512, y: 11.789592}
   m_EdgeRadius: 0
 --- !u!212 &526853485
 SpriteRenderer:
@@ -2620,6 +2620,12 @@ MonoBehaviour:
   panelControls: {fileID: 1846790425}
   panelAudio: {fileID: 526853483}
   buttonSound: {fileID: 0}
+  btnPlay: {fileID: 1924637333}
+  btnOptions: {fileID: 1043629461}
+  btnExit: {fileID: 1543953213}
+  btnControls: {fileID: 297699811}
+  btnAudio: {fileID: 2110003389}
+  btnCloseOptions: {fileID: 1562112426}
 --- !u!4 &564077645
 Transform:
   m_ObjectHideFlags: 0
@@ -3480,7 +3486,7 @@ Transform:
   m_GameObject: {fileID: 814001159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29, y: -0.37999994, z: 0.027093}
+  m_LocalPosition: {x: -0.29, y: -1.6299999, z: 0.027093}
   m_LocalScale: {x: 8.30062, y: 8.30062, z: 8.30062}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4598,7 +4604,7 @@ GameObject:
   - component: {fileID: 998621362}
   - component: {fileID: 998621365}
   - component: {fileID: 998621364}
-  - component: {fileID: 998621363}
+  - component: {fileID: 998621366}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -4621,23 +4627,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 814001160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &998621363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998621361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Fire
-  bindingIndex: 0
-  keySprite: {fileID: 1849345818}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &998621364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4739,6 +4728,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &998621366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998621361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Fire
+  bindingIndex: 0
+  keySprite: {fileID: 1849345818}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &1043629460
 GameObject:
   m_ObjectHideFlags: 0
@@ -4948,7 +4954,7 @@ GameObject:
   - component: {fileID: 1098141017}
   - component: {fileID: 1098141020}
   - component: {fileID: 1098141019}
-  - component: {fileID: 1098141018}
+  - component: {fileID: 1098141021}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -4971,23 +4977,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1738437729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1098141018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098141016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Reload
-  bindingIndex: 0
-  keySprite: {fileID: 1542876057}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &1098141019
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5089,6 +5078,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1098141021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098141016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Reload
+  bindingIndex: 0
+  keySprite: {fileID: 1542876057}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &1142979239
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,7 +5151,7 @@ GameObject:
   - component: {fileID: 1222919628}
   - component: {fileID: 1222919631}
   - component: {fileID: 1222919630}
-  - component: {fileID: 1222919629}
+  - component: {fileID: 1222919632}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -5168,23 +5174,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 288025165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1222919629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222919627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Move
-  bindingIndex: 1
-  keySprite: {fileID: 258044150}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &1222919630
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5286,6 +5275,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1222919632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222919627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Move
+  bindingIndex: 1
+  keySprite: {fileID: 258044150}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &1285642990
 GameObject:
   m_ObjectHideFlags: 0
@@ -7302,7 +7308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSlider: {fileID: 0}
   sfxSource: {fileID: 0}
-  musicSlider: {fileID: 931033332}
+  musicSlider: {fileID: 0}
   musicSource: {fileID: 1686361268}
 --- !u!82 &1686361268
 AudioSource:
@@ -7474,7 +7480,7 @@ Transform:
   m_GameObject: {fileID: 1738437728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.009, y: -0.37999994, z: 0.027093}
+  m_LocalPosition: {x: 3.009, y: 2.2, z: 0.027093}
   m_LocalScale: {x: 8.30062, y: 8.30062, z: 8.30062}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7893,11 +7899,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.4616776, y: -1.3018534}
+  m_Offset: {x: -0.030126572, y: -0.0001270771}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7907,7 +7913,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 14.592533, y: 8.910311}
+  m_Size: {x: 18.408775, y: 12.108625}
   m_EdgeRadius: 0
 --- !u!212 &1846790428
 SpriteRenderer:
@@ -8194,7 +8200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f704f185b5e71145ae3450628ae225d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSlider: {fileID: 780830224}
+  sfxSlider: {fileID: 0}
   sfxSource: {fileID: 1884247362}
   musicSlider: {fileID: 0}
   musicSource: {fileID: 0}
@@ -8209,7 +8215,7 @@ GameObject:
   - component: {fileID: 1914785909}
   - component: {fileID: 1914785912}
   - component: {fileID: 1914785911}
-  - component: {fileID: 1914785910}
+  - component: {fileID: 1914785913}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -8232,23 +8238,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1733312164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1914785910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914785908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Move
-  bindingIndex: 4
-  keySprite: {fileID: 1739883645}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &1914785911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8350,6 +8339,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1914785913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914785908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Move
+  bindingIndex: 4
+  keySprite: {fileID: 1739883645}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &1924637332
 GameObject:
   m_ObjectHideFlags: 0
@@ -8734,7 +8740,7 @@ GameObject:
   - component: {fileID: 1999620920}
   - component: {fileID: 1999620923}
   - component: {fileID: 1999620922}
-  - component: {fileID: 1999620921}
+  - component: {fileID: 1999620924}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -8757,23 +8763,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 292308568}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1999620921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999620919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Move
-  bindingIndex: 3
-  keySprite: {fileID: 259360863}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &1999620922
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8875,6 +8864,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1999620924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999620919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Move
+  bindingIndex: 3
+  keySprite: {fileID: 259360863}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &2012403038
 GameObject:
   m_ObjectHideFlags: 0
@@ -9100,7 +9106,7 @@ GameObject:
   - component: {fileID: 2109169318}
   - component: {fileID: 2109169321}
   - component: {fileID: 2109169320}
-  - component: {fileID: 2109169319}
+  - component: {fileID: 2109169322}
   m_Layer: 0
   m_Name: Btn_Remap
   m_TagString: Untagged
@@ -9123,23 +9129,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 236646843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2109169319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109169317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537f3f26d150ab4b9503a4faa59203d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Move
-  bindingIndex: 2
-  keySprite: {fileID: 1959286138}
-  spritesPath: Keys
-  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!61 &2109169320
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9241,6 +9230,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2109169322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109169317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070b0b63079aca8409d250542eb8232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Move
+  bindingIndex: 2
+  keySprite: {fileID: 1959286138}
+  spritesPath: Keys
+  inputActions: {fileID: -944628639613478452, guid: c74b4345c63a7e2498538f3abf87a3af, type: 3}
 --- !u!1 &2110003387
 GameObject:
   m_ObjectHideFlags: 0
