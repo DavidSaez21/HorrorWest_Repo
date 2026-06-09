@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TentacleAttack : MonoBehaviour
 {
+    [Header("Animation Clips")]
+    [SerializeField] private string idleClipName = "AC_Idle_TentaculoIZQ";
+    [SerializeField] private string attackClipName = "AC_Attacking_TentaculoIZQ";
+
     [Header("Game Feel")]
     [SerializeField] private float hitStopFrames = 3f;
     [SerializeField] private GameObject impactParticlePrefab;
@@ -29,44 +33,33 @@ public class TentacleAttack : MonoBehaviour
         if (_animator != null)
         {
             _animator.enabled = true;
-            _animator.Play("AC_Idle_TentaculoIZQ", 0, 0f);
+            _animator.Play(idleClipName, 0, 0f);
         }
         StartCoroutine(RunSequence(onComplete));
     }
 
     private IEnumerator RunSequence(Action onComplete)
     {
-        // Espera un frame para que el Animator procese el Play()
         yield return null;
-
-        // Espera a que el clip Idle termine
-        yield return WaitForClipEnd("AC_Idle_TentaculoIZQ");
-
-        // Lanza el clip de ataque
+        yield return WaitForClipEnd(idleClipName);
         _animator.ResetTrigger(AnimAttack);
         _animator.SetTrigger(AnimAttack);
-
         yield return null;
-
-        // Espera a que el clip Attack termine
-        yield return WaitForClipEnd("AC_Attacking_TentaculoIZQ");
-
-        // Fin
+        yield return WaitForClipEnd(attackClipName);
+        yield return null;
+        yield return null;
         if (_sr != null) _sr.enabled = false;
         if (_animator != null) _animator.enabled = false;
-
         onComplete?.Invoke();
     }
 
     private IEnumerator WaitForClipEnd(string clipName)
     {
-        // Espera a que el Animator entre en ese estado
         while (!_animator.GetCurrentAnimatorStateInfo(0).IsName(clipName))
             yield return null;
 
-        // Espera a que ese estado llegue al final
         while (_animator.GetCurrentAnimatorStateInfo(0).IsName(clipName) &&
-               _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+               _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.95f)
             yield return null;
     }
 
