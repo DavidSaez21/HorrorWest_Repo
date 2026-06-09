@@ -11,12 +11,18 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Image healthBarFill;
+    [SerializeField] private Image ghostBarFill;
+    [SerializeField] private float ghostDelay = 0.5f;
+    [SerializeField] private float ghostSpeed = 0.8f;
 
     public event System.Action<float, float> OnHealthChanged;
     public event System.Action OnDeath;
 
     private float currentHealth;
     private float lastDamageTime = -999f;
+    private float _ghostAmount = 1f;
+    private float _delayTimer = 0f;
+    private bool _draining = false;
     private PlayerHitFlash _hitFlash;
 
     private void Awake()
@@ -32,6 +38,24 @@ public class PlayerHealth : MonoBehaviour
         _hitFlash = GetComponentInChildren<PlayerHitFlash>(true);
     }
 
+    private void Update()
+    {
+        if (ghostBarFill == null) return;
+        float targetFill = healthBarFill != null ? healthBarFill.fillAmount : 0f;
+        if (_ghostAmount <= targetFill) return;
+
+        if (!_draining)
+        {
+            _delayTimer -= Time.deltaTime;
+            if (_delayTimer <= 0f) _draining = true;
+        }
+        else
+        {
+            _ghostAmount = Mathf.MoveTowards(_ghostAmount, targetFill, ghostSpeed * Time.deltaTime);
+            ghostBarFill.fillAmount = _ghostAmount;
+        }
+    }
+
     public void TakeDamage(float amount)
     {
         if (Time.time < lastDamageTime + invincibilityTime) return;
@@ -44,11 +68,14 @@ public class PlayerHealth : MonoBehaviour
         CameraShaker.Instance?.Shake(0.08f, 0.15f);
         _hitFlash?.StartInvincibilityFlash(invincibilityTime);
 
+        // Resetea el delay del ghost
+        _delayTimer = ghostDelay;
+        _draining = false;
+
         UpdateUI();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        if (currentHealth <= 0f)
-            Die();
+        if (currentHealth <= 0f) Die();
     }
 
     public void Heal(float amount)

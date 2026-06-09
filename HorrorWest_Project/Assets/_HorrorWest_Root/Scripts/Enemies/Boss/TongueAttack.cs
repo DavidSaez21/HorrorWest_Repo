@@ -3,15 +3,12 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Dos ataques de lengua: Mordida y Barrido.
-/// El Animator gestiona animaciones y hitbox (configurado en Animation window).
-/// El script lanza los triggers y notifica al BossActionQueue cuando termina.
-/// Daños y duraciones configurables desde ChurchBoss via ChurchBossData.
+/// Tongue attack for the Church Boss.
+/// Este script va en el mismo GameObject que el Animator de Tongue.
+/// Las animaciones terminan mediante Animation Events — sin duraciones hardcodeadas.
 /// </summary>
 public class TongueAttack : MonoBehaviour
 {
-    // ── Inspector ──────────────────────────────────────────────────────────────
-
     [Header("Referencias")]
     [SerializeField] private Animator tongueAnimator;
 
@@ -19,21 +16,14 @@ public class TongueAttack : MonoBehaviour
     [SerializeField] private float hitStopFrames = 4f;
     [SerializeField] private GameObject impactParticlePrefab;
 
-    // Configurados por ChurchBoss desde ChurchBossData
+    // Daños configurados por ChurchBoss desde ChurchBossData
     [HideInInspector] public float biteDamage = 25f;
     [HideInInspector] public float sweepDamage = 20f;
-    [HideInInspector] public float biteDuration = 0.8f;
-    [HideInInspector] public float sweepDuration = 1.0f;
-
-    // ── Animator hashes ───────────────────────────────────────────────────────
 
     private static readonly int AnimBite = Animator.StringToHash("Bite");
     private static readonly int AnimSweep = Animator.StringToHash("Sweep");
 
-    // ── Runtime ───────────────────────────────────────────────────────────────
-
     private Action _onComplete;
-    private Coroutine _attackCoroutine;
     private float _currentDamage;
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -42,26 +32,22 @@ public class TongueAttack : MonoBehaviour
     {
         _currentDamage = biteDamage;
         _onComplete = onComplete;
-        if (_attackCoroutine != null) StopCoroutine(_attackCoroutine);
-        _attackCoroutine = StartCoroutine(AttackRoutine(AnimBite, biteDuration));
+        tongueAnimator?.SetTrigger(AnimBite);
     }
 
     public void ExecuteSweep(Action onComplete)
     {
         _currentDamage = sweepDamage;
         _onComplete = onComplete;
-        if (_attackCoroutine != null) StopCoroutine(_attackCoroutine);
-        _attackCoroutine = StartCoroutine(AttackRoutine(AnimSweep, sweepDuration));
+        tongueAnimator?.SetTrigger(AnimSweep);
     }
 
-    // ── Coroutine ─────────────────────────────────────────────────────────────
+    // ── Animation Event — llamado desde el último frame de Bite y Sweep ───────
 
-    private IEnumerator AttackRoutine(int animTrigger, float duration)
+    public void OnAttackAnimationEnd()
     {
-        tongueAnimator?.SetTrigger(animTrigger);
-        yield return new WaitForSeconds(duration);
-        _attackCoroutine = null;
         _onComplete?.Invoke();
+        _onComplete = null;
     }
 
     // ── Daño al player ────────────────────────────────────────────────────────
@@ -75,8 +61,6 @@ public class TongueAttack : MonoBehaviour
         StartCoroutine(HitStop());
         SpawnImpactParticles(other.transform.position);
     }
-
-    // ── Game feel ─────────────────────────────────────────────────────────────
 
     private IEnumerator HitStop()
     {
