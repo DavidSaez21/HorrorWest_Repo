@@ -10,11 +10,14 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseCanvas;
 
     private bool _isPaused = false;
+    private CustomCursor _customCursor;
 
     private string[] _noPauseScenes = { "SCN_MainMenu", "SCN_Tienda" };
 
     void Start()
     {
+        _customCursor = FindFirstObjectByType<CustomCursor>();
+
         if (IsNoPauseScene())
             pauseCanvas.SetActive(false);
     }
@@ -41,6 +44,8 @@ public class PauseManager : MonoBehaviour
         panelPause.SetActive(true);
         Time.timeScale = 0f;
         _isPaused = true;
+        if (_customCursor == null) _customCursor = FindFirstObjectByType<CustomCursor>();
+        _customCursor?.SetHandCursor();
     }
 
     public void Resume()
@@ -51,6 +56,7 @@ public class PauseManager : MonoBehaviour
         if (panelAudio != null) panelAudio.SetActive(false);
         Time.timeScale = 1f;
         _isPaused = false;
+        _customCursor?.RestoreCursor();
     }
 
     public void ClickOptions() { panelOptions.SetActive(true); }

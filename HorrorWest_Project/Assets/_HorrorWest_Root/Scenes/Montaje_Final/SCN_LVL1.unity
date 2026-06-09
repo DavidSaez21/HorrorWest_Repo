@@ -26378,17 +26378,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1651738862727392744, guid: 6d2f5f544aba26a408798bb5913ce15d, type: 3}
   m_PrefabInstance: {fileID: 878831632}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &902582686 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9173335634966341006, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
-  m_PrefabInstance: {fileID: 1470575826}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &947009754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27777,7 +27766,7 @@ PrefabInstance:
     - target: {fileID: 2604335714088740721, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
       propertyPath: healthBarFill
       value: 
-      objectReference: {fileID: 902582686}
+      objectReference: {fileID: 0}
     - target: {fileID: 3464290680750344901, guid: 3c7d91af2db8e4248ae005be8db602a7, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -29344,6 +29333,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b5a1d8064cc0085428666f41018752bc, type: 3}
+    - target: {fileID: 4272471472496736790, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 8568063941464378930, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Pivot.x
       value: 0

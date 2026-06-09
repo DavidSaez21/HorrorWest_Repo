@@ -11,6 +11,7 @@ public class ButtonSound : MonoBehaviour
 
     public void PlayClick()
     {
+        Debug.Log("PlayClick llamado - clip: " + clickSound + " source: " + audioSource + " volumen: " + (audioManager != null ? audioManager.GetSFXVolume() : PlayerPrefs.GetFloat("sfxVolume", 1f)));
         if (clickSound != null && audioSource != null)
         {
             audioSource.volume = audioManager != null ? audioManager.GetSFXVolume() : PlayerPrefs.GetFloat("sfxVolume", 1f);
