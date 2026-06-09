@@ -14,6 +14,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     [Header("VFX")]
     [SerializeField] private GameObject bloodSplatterPrefab;
+    [SerializeField] private GameObject plagueVFXPrefab;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 5f;
@@ -224,6 +225,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected bool CanAttack() => Time.time >= lastAttackTime + data.attackCooldown;
     protected void ResetAttackCooldown() => lastAttackTime = Time.time;
     public float GetHealthPercent() => currentHealth / data.maxHealth;
+    public GameObject GetPlagueVFXPrefab() => plagueVFXPrefab;
 
     private void TryInstantReload()
     {
