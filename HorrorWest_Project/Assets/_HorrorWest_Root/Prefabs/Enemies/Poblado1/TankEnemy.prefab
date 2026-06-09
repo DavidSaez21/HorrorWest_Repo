@@ -457,7 +457,7 @@ MonoBehaviour:
   - {fileID: 7229546448470543570, guid: 7d95ee8484fa9894eb86c83e62598919, type: 3}
   - {fileID: 4657357222584236683, guid: ae1f4c3a1cee56143a802275448600bd, type: 3}
   bloodSplatterPrefab: {fileID: 1186194621453547535, guid: 503d37b53419691478678b16274c87ad, type: 3}
-  plagueVFXPrefab: {fileID: 14063569395263707, guid: c453402571b0ed94ba991d39b2393cf9, type: 3}
+  plagueVFXPrefab: {fileID: 6728048740147977068, guid: 9e196a914ca60c14e91b5dfc2fa3d47b, type: 3}
   plagueVFXSpawnPoint: {fileID: 6280944367853066416}
   knockbackForce: 4
   knockbackDuration: 0.15
