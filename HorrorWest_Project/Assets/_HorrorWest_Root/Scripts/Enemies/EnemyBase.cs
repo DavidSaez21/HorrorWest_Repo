@@ -12,6 +12,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [Header("Drops")]
     [SerializeField] protected GameObject[] coinPrefabs;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject bloodSplatterPrefab;
+
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.18f;
@@ -171,6 +174,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         // Flash blanco al recibir daño
         if (_hitFlash == null) _hitFlash = GetComponentInChildren<HitFlash>(true);
         _hitFlash?.Flash();
+
+        // Salpicadura de sangre
+        if (bloodSplatterPrefab != null)
+            Instantiate(bloodSplatterPrefab, transform.position, Quaternion.identity);
 
         if (hitDirection != Vector2.zero)
         {
