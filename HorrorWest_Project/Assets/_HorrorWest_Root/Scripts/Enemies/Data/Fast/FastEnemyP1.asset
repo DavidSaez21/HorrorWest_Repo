@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1a0d4f5a79bd644ba1f089e4054f101, type: 3}
-  m_Name: RatEnemy
+  m_Name: FastEnemyP1
   m_EditorClassIdentifier: 
-  enemyName: Rat
+  enemyName: Fast P1
   maxHealth: 15
   moveSpeed: 3
-  damage: 10
+  damage: 15
   defense: 0
   attackRange: 1.5
   attackCooldown: 1

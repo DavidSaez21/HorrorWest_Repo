@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1a0d4f5a79bd644ba1f089e4054f101, type: 3}
-  m_Name: FastEnemy
+  m_Name: BasicEnemyP3
   m_EditorClassIdentifier: 
-  enemyName: Enemy
-  maxHealth: 100
+  enemyName: Basic P3
+  maxHealth: 80
   moveSpeed: 3
-  damage: 10
+  damage: 15
   defense: 0
   attackRange: 1.5
   attackCooldown: 1
-  xpReward: 20
+  xpReward: 30
   dropChance: 0.8
   dropChanceCoinOne: 70
   dropChanceCoinFive: 25

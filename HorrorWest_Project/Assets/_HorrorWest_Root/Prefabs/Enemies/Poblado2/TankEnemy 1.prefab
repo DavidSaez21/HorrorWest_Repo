@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 7313811940161950066}
   - component: {fileID: 5815645126712709339}
   m_Layer: 6
-  m_Name: TankEnemy
+  m_Name: TankEnemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80b589052f08e14788ac131c1244fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 4b31cada8f05e9a4b82c5536fc4e736e, type: 2}
+  data: {fileID: 11400000, guid: 8040836df267c5c48a36d1db78b50328, type: 2}
   animators:
   - {fileID: 6334077091789903248}
   - {fileID: 6685942521233529472}
@@ -457,6 +457,7 @@ MonoBehaviour:
   - {fileID: 7229546448470543570, guid: 7d95ee8484fa9894eb86c83e62598919, type: 3}
   - {fileID: 4657357222584236683, guid: ae1f4c3a1cee56143a802275448600bd, type: 3}
   bloodSplatterPrefab: {fileID: 1186194621453547535, guid: 503d37b53419691478678b16274c87ad, type: 3}
+  plagueVFXPrefab: {fileID: 14063569395263707, guid: c453402571b0ed94ba991d39b2393cf9, type: 3}
   knockbackForce: 4
   knockbackDuration: 0.15
   separationRadius: 0.6

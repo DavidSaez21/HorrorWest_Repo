@@ -1,35 +1,44 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Se añade dinámicamente al enemigo al impactarle una bala con peste.
-/// Aplica daño progresivo durante X segundos y luego se destruye.
-/// </summary>
 public class PlagueEffect : MonoBehaviour
 {
-    private float damagePerSecond;
-    private float duration;
-    private float tickInterval = 0.5f;  // Daño cada 0.5 segundos
+    private float _damagePerSecond;
+    private float _duration;
+    private GameObject _vfxInstance;
 
-    public void Init(float damagePerSecond, float duration)
+    [SerializeField] private GameObject plagueVFXPrefab;
+
+    public void Init(float dps, float duration, GameObject vfxPrefab = null)
     {
-        this.damagePerSecond = damagePerSecond;
-        this.duration = duration;
-        StartCoroutine(PlagueCoroutine());
+        _damagePerSecond = dps;
+        _duration = duration;
+
+        if (vfxPrefab != null)
+            plagueVFXPrefab = vfxPrefab;
+
+        // Instancia el VFX encima del enemigo
+        if (plagueVFXPrefab != null)
+            _vfxInstance = Instantiate(plagueVFXPrefab, transform.position, Quaternion.identity, transform);
+
+        StartCoroutine(PlagueRoutine());
     }
 
-    private IEnumerator PlagueCoroutine()
+    private IEnumerator PlagueRoutine()
     {
         float elapsed = 0f;
+        IDamageable target = GetComponent<IDamageable>();
 
-        while (elapsed < duration)
+        while (elapsed < _duration)
         {
-            yield return new WaitForSeconds(tickInterval);
-            elapsed += tickInterval;
-
-            if (TryGetComponent(out IDamageable target))
-                target.TakeDamage(damagePerSecond * tickInterval);
+            elapsed += Time.deltaTime;
+            target?.TakeDamage(_damagePerSecond * Time.deltaTime);
+            yield return null;
         }
+
+        // Destruye el VFX al terminar
+        if (_vfxInstance != null)
+            Destroy(_vfxInstance);
 
         Destroy(this);
     }
