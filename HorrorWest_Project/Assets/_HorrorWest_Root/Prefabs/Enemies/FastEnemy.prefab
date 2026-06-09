@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 588685913458174170}
   - component: {fileID: 3237797795894647684}
   - component: {fileID: 7564991092234194484}
+  - component: {fileID: 215442265771389127}
   m_Layer: 0
   m_Name: Brazos
   m_TagString: Untagged
@@ -125,6 +126,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.1
   flashMaterial: {fileID: 0}
+--- !u!114 &215442265771389127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53380276731214851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cd0000fb1558540b8eb9b318731ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1173720992789210640
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +545,7 @@ MonoBehaviour:
   - {fileID: 3237797795894647684}
   - {fileID: 4510518630998111884}
   coinPrefabs: []
+  bloodSplatterPrefab: {fileID: 0}
   knockbackForce: 4
   knockbackDuration: 0.15
   separationRadius: 0.6
