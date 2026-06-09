@@ -48,14 +48,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useDamageFalloff: 1
-  plagueDamagePerSecond: 5
+  plagueDamagePerSecond: 2
   plagueDuration: 3
-  explosionRadius: 1.5
+  explosionRadius: 2
   explosionDamage: 15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  explosionVFXPrefab: {fileID: 0}
+  explosionVFXPrefab: {fileID: 8870712479947488689, guid: b364852db1cfddf43aea4ca5d6645ad7, type: 3}
 --- !u!212 &1567978048005853813
 SpriteRenderer:
   m_ObjectHideFlags: 0
