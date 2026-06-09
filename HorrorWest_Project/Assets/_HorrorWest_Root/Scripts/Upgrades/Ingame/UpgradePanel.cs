@@ -68,7 +68,6 @@ public class UpgradePanel : MonoBehaviour
 
         PlayerManager.Instance?.ApplyUpgrade(upgrade);
 
-        // Añade el icono al panel de mejoras activas
         if (UpgradeIconUI.Instance != null && upgrade.activeIcon != null)
             UpgradeIconUI.Instance.AddIcon(upgrade.upgradeType, upgrade.activeIcon);
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -10,7 +9,6 @@ public class PauseManager : MonoBehaviour
     public GameObject panelAudio;
 
     private bool _isPaused = false;
-    private PlayerInput _playerInput;
 
     void Awake()
     {
@@ -33,29 +31,20 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
-        if (_playerInput == null)
-            _playerInput = FindFirstObjectByType<PlayerInput>();
-
+        if (Time.timeScale == 0f) return;
         panelPause.SetActive(true);
         Time.timeScale = 0f;
         _isPaused = true;
-
-        if (_playerInput != null) _playerInput.DeactivateInput();
     }
 
     public void Resume()
     {
-        if (_playerInput == null)
-            _playerInput = FindFirstObjectByType<PlayerInput>();
-
         panelPause.SetActive(false);
         if (panelOptions != null) panelOptions.SetActive(false);
         if (panelControls != null) panelControls.SetActive(false);
         if (panelAudio != null) panelAudio.SetActive(false);
         Time.timeScale = 1f;
         _isPaused = false;
-
-        if (_playerInput != null) _playerInput.ActivateInput();
     }
 
     public void ClickOptions() { panelOptions.SetActive(true); }
