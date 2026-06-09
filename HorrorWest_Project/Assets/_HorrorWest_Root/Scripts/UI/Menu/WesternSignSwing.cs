@@ -1,18 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
-public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class WesternSignSwing : MonoBehaviour
 {
-    [Header("Balanceo idle")]
-    public float idleAngle = 1.5f;
-    public float idleSpeed = 0.8f;
-
     [Header("Balanceo al pasar el raton")]
     public float hoverAngle = 12f;
     public float swingSpeed = 2.2f;
     public float decaySpeed = 1.5f;
-
     [Range(0f, 1f)]
     public float smoothness = 0.92f;
 
@@ -28,15 +22,24 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private bool _isHovered = false;
     private Vector3 _originalScale;
     private Quaternion _originalRotation;
+    private Collider2D _col;
 
     void Start()
     {
         _originalScale = transform.localScale;
         _originalRotation = transform.localRotation;
+        _col = GetComponent<Collider2D>();
     }
 
     void Update()
     {
+        // Detección manual con Physics2D
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _isHovered = _col != null && _col.OverlapPoint(mousePos);
+
+        if (_isHovered && Input.GetMouseButtonDown(0))
+            onClicked.Invoke();
+
         if (_isHovered)
         {
             _phase += Time.unscaledDeltaTime * swingSpeed;
@@ -50,10 +53,7 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         transform.localRotation = _originalRotation * Quaternion.Euler(0f, 0f, _currentAngle);
 
-        Vector3 targetScale = _isHovered
-            ? _originalScale * hoverScaleMultiplier
-            : _originalScale;
-
+        Vector3 targetScale = _isHovered ? _originalScale * hoverScaleMultiplier : _originalScale;
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.unscaledDeltaTime * scaleSpeed);
     }
 
@@ -62,20 +62,5 @@ public class WesternSignSwing : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _isHovered = false;
         transform.localScale = _originalScale;
         transform.localRotation = _originalRotation;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        _isHovered = true;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        _isHovered = false;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        onClicked.Invoke();
     }
 }
