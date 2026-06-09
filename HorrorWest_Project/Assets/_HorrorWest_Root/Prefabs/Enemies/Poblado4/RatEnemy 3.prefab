@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 7313811940161950066}
   - component: {fileID: 334400774497007794}
   m_Layer: 6
-  m_Name: RatEnemy
+  m_Name: RatEnemy 3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,8 +275,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  coinPrefabs: []
+  coinPrefabs:
+  - {fileID: 8305550355391945417, guid: ef2444d64f35f7c45bb7112a132ca9fa, type: 3}
+  - {fileID: 7229546448470543570, guid: 7d95ee8484fa9894eb86c83e62598919, type: 3}
+  - {fileID: 4657357222584236683, guid: ae1f4c3a1cee56143a802275448600bd, type: 3}
   bloodSplatterPrefab: {fileID: 1186194621453547535, guid: 503d37b53419691478678b16274c87ad, type: 3}
+  plagueVFXPrefab: {fileID: 14063569395263707, guid: c453402571b0ed94ba991d39b2393cf9, type: 3}
   knockbackForce: 4
   knockbackDuration: 0.15
   separationRadius: 0.6

@@ -34,15 +34,24 @@ public class BossActionQueue : MonoBehaviour
     [SerializeField] private float mouthStillThreshold = 2f;
     [SerializeField] private float playerStillSpeed = 0.5f;
 
-    public enum AttackId { TongueBite, TongueSweep, Tentacle, GroundMouth, Minion }
+    public enum AttackId
+    {
+        TongueBite,
+        TongueSweep,
+        TentacleLeft,
+        TentacleRight,
+        GroundMouth,
+        Minion
+    }
 
     private readonly Dictionary<AttackId, float> _lastUsed = new()
     {
-        { AttackId.TongueBite,  -999f },
-        { AttackId.TongueSweep, -999f },
-        { AttackId.Tentacle,    -999f },
-        { AttackId.GroundMouth, -999f },
-        { AttackId.Minion,      -999f },
+        { AttackId.TongueBite,     -999f },
+        { AttackId.TongueSweep,    -999f },
+        { AttackId.TentacleLeft,   -999f },
+        { AttackId.TentacleRight,  -999f },
+        { AttackId.GroundMouth,    -999f },
+        { AttackId.Minion,         -999f },
     };
 
     private readonly HashSet<AttackId> _activeAttacks = new();
@@ -60,9 +69,6 @@ public class BossActionQueue : MonoBehaviour
     private GroundMouthAttack _groundMouth;
     private MinionSpawner _minionSpawner;
     private BossEyeTracker _eyeTracker;
-
-    // Contador de tentáculos activos para sincronizar el callback
-    private int _tentaclesActive = 0;
 
     public void Initialise(
         Transform player,
@@ -114,7 +120,8 @@ public class BossActionQueue : MonoBehaviour
         var candidates = new List<(AttackId id, int weight)>();
         TryAddCandidate(candidates, AttackId.TongueBite, ComputeTongueBiteWeight(), tongueBiteCooldown);
         TryAddCandidate(candidates, AttackId.TongueSweep, ComputeTongueSweepWeight(), tongueSweepCooldown);
-        TryAddCandidate(candidates, AttackId.Tentacle, ComputeTentacleWeight(), tentacleCooldown);
+        TryAddCandidate(candidates, AttackId.TentacleLeft, ComputeTentacleLeftWeight(), tentacleCooldown);
+        TryAddCandidate(candidates, AttackId.TentacleRight, ComputeTentacleRightWeight(), tentacleCooldown);
         TryAddCandidate(candidates, AttackId.Minion, ComputeMinionWeight(), minionCooldown);
 
         if (candidates.Count == 0) return;
@@ -168,11 +175,21 @@ public class BossActionQueue : MonoBehaviour
         return w;
     }
 
-    private int ComputeTentacleWeight()
+    private int ComputeTentacleLeftWeight()
     {
         int w = tentacleWeight;
-        if (_player != null && Mathf.Abs(_player.position.x) > tongueDistanceCentreThreshold)
-            w += 1;
+        // Más peso cuando el jugador está a la izquierda (x negativo)
+        if (_player != null && _player.position.x < 0f)
+            w += 2;
+        return w;
+    }
+
+    private int ComputeTentacleRightWeight()
+    {
+        int w = tentacleWeight;
+        // Más peso cuando el jugador está a la derecha (x positivo)
+        if (_player != null && _player.position.x > 0f)
+            w += 2;
         return w;
     }
 
@@ -209,14 +226,16 @@ public class BossActionQueue : MonoBehaviour
                 _tongue.ExecuteSweep(() => OnAttackComplete(AttackId.TongueSweep));
                 break;
 
-            case AttackId.Tentacle:
-                if (_tentacleLeft == null && _tentacleRight == null) return;
+            case AttackId.TentacleLeft:
+                if (_tentacleLeft == null) return;
                 _activeAttacks.Add(id);
-                _tentaclesActive = 0;
-                if (_tentacleLeft != null) _tentaclesActive++;
-                if (_tentacleRight != null) _tentaclesActive++;
-                if (_tentacleLeft != null) _tentacleLeft.Execute(OnTentacleComplete);
-                if (_tentacleRight != null) _tentacleRight.Execute(OnTentacleComplete);
+                _tentacleLeft.Execute(() => OnAttackComplete(AttackId.TentacleLeft));
+                break;
+
+            case AttackId.TentacleRight:
+                if (_tentacleRight == null) return;
+                _activeAttacks.Add(id);
+                _tentacleRight.Execute(() => OnAttackComplete(AttackId.TentacleRight));
                 break;
 
             case AttackId.GroundMouth:
@@ -231,13 +250,6 @@ public class BossActionQueue : MonoBehaviour
                 _minionSpawner.Execute(() => OnAttackComplete(AttackId.Minion));
                 break;
         }
-    }
-
-    private void OnTentacleComplete()
-    {
-        _tentaclesActive--;
-        if (_tentaclesActive <= 0)
-            OnAttackComplete(AttackId.Tentacle);
     }
 
     public void OnAttackComplete(AttackId id)
