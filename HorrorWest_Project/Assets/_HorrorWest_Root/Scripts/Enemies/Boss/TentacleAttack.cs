@@ -18,26 +18,39 @@ public class TentacleAttack : MonoBehaviour
     private bool _idleDone;
     private bool _attackDone;
 
+    private Collider2D _col;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
+        _col = GetComponent<Collider2D>();
         if (_sr != null) _sr.enabled = false;
+        if (_col != null) _col.enabled = false;
     }
 
     public void Execute(Action onComplete)
     {
         _onComplete = onComplete;
+
+        // Reset flags en cada ejecución
         _idleDone = false;
         _attackDone = false;
 
-        if (_sr != null) _sr.enabled = true;
+        if (_col != null) _col.enabled = false;
+
         if (_animator != null)
         {
             _animator.speed = 1f;
             _animator.Play("AC_Idle_TentaculoIZQ", 0, 0f);
         }
+
+        if (_sr != null) _sr.enabled = true;
     }
+
+    // Animation Event — llamar en el frame del golpe del clip AC_Attacking
+    public void EnableCollider() { if (_col != null) _col.enabled = true; }
+    public void DisableCollider() { if (_col != null) _col.enabled = false; }
 
     // Animation Event — último frame del clip AC_Idle_TentaculoIZQ
     public void OnIdleAnimationEnd()
@@ -53,6 +66,7 @@ public class TentacleAttack : MonoBehaviour
         if (_attackDone) return;
         _attackDone = true;
         if (_sr != null) _sr.enabled = false;
+        if (_col != null) _col.enabled = false;
         _onComplete?.Invoke();
         _onComplete = null;
     }
