@@ -10,6 +10,7 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private Image rarityBorder;
+    [SerializeField] private RarityBorderAnimator rarityAnimator;
     [SerializeField] private GameObject tooltipPanel;
     [SerializeField] private TextMeshProUGUI tooltipText;
 
@@ -23,19 +24,10 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private System.Action<UpgradeData> onSelected;
     private bool interactable = false;
 
-    private static readonly Color ColorCommon = new Color(0.75f, 0.75f, 0.75f);
-    private static readonly Color ColorUncommon = new Color(0.12f, 0.56f, 1f);
-    private static readonly Color ColorRare = new Color(0.63f, 0.13f, 0.94f);
-    private static readonly Color ColorLegendary = new Color(1f, 0.75f, 0f);
-
-    // Color semitransparente cuando no es interactuable
-    private static readonly Color ColorDisabled = new Color(1f, 1f, 1f, 0.4f);
-
     private void Awake()
     {
         originalScale = transform.localScale;
         targetScale = originalScale;
-
         if (tooltipPanel != null)
             tooltipPanel.SetActive(false);
     }
@@ -52,21 +44,17 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (nameText != null) nameText.text = data.upgradeName;
         if (descriptionText != null) descriptionText.text = data.description;
+        if (iconImage != null && data.icon != null) iconImage.sprite = data.icon;
+        if (tooltipText != null) tooltipText.text = data.tooltip;
 
-        if (iconImage != null && data.icon != null)
-            iconImage.sprite = data.icon;
-
-        if (rarityBorder != null)
-            rarityBorder.color = GetRarityColor(data.rarity);
-
-        if (tooltipText != null)
-            tooltipText.text = data.tooltip;
+        // Actualiza el color del borde según la rareza de esta mejora
+        if (rarityAnimator != null)
+            rarityAnimator.SetRarity(data.rarity);
     }
 
     public void SetInteractable(bool value)
     {
         interactable = value;
-
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -89,17 +77,5 @@ public class UpgradeCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         targetScale = originalScale;
         if (tooltipPanel != null)
             tooltipPanel.SetActive(false);
-    }
-
-    private Color GetRarityColor(UpgradeRarity rarity)
-    {
-        return rarity switch
-        {
-            UpgradeRarity.Common => ColorCommon,
-            UpgradeRarity.Uncommon => ColorUncommon,
-            UpgradeRarity.Rare => ColorRare,
-            UpgradeRarity.Legendary => ColorLegendary,
-            _ => Color.white
-        };
     }
 }
