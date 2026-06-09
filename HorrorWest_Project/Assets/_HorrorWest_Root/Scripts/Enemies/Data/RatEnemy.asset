@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a0d4f5a79bd644ba1f089e4054f101, type: 3}
   m_Name: RatEnemy
   m_EditorClassIdentifier: 
-  enemyName: Basic
+  enemyName: Rat
   maxHealth: 100
   moveSpeed: 3
   damage: 10
   defense: 0
-  detectionRange: 8
   attackRange: 1.5
   attackCooldown: 1
   xpReward: 20
