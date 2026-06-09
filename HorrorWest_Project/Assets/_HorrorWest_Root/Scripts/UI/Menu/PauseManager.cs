@@ -7,17 +7,16 @@ public class PauseManager : MonoBehaviour
     public GameObject panelOptions;
     public GameObject panelControls;
     public GameObject panelAudio;
+    public GameObject pauseCanvas;
 
     private bool _isPaused = false;
 
-    void Awake()
+    private string[] _noPauseScenes = { "SCN_MainMenu", "SCN_Tienda" };
+
+    void Start()
     {
-        if (FindObjectsOfType<PauseManager>().Length > 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
+        if (IsNoPauseScene())
+            pauseCanvas.SetActive(false);
     }
 
     void Update()
@@ -29,9 +28,16 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    private bool IsNoPauseScene()
+    {
+        string current = SceneManager.GetActiveScene().name;
+        return System.Array.Exists(_noPauseScenes, s => s == current);
+    }
+
     public void Pause()
     {
         if (Time.timeScale == 0f) return;
+        if (IsNoPauseScene()) return;
         panelPause.SetActive(true);
         Time.timeScale = 0f;
         _isPaused = true;
@@ -75,6 +81,6 @@ public class PauseManager : MonoBehaviour
     public void Surrender()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("SCN_Tienda");
+        SceneManager.LoadScene("SCN_MainMenu");
     }
 }
