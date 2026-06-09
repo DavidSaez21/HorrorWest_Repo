@@ -102227,6 +102227,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3958136086038895966, guid: 92b2bf2e45a21b64f9f68b037494ce85, type: 3}
+      propertyPath: baseXPRequired
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8496021889884858710, guid: 92b2bf2e45a21b64f9f68b037494ce85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -104116,13 +104120,13 @@ MonoBehaviour:
   - waveName: ' Wave 1'
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
-      count: 0
+      count: 2
     - enemyPrefab: {fileID: 7781392927723494484, guid: f9908e3d246d08b47bab786a06d90f91, type: 3}
-      count: 0
+      count: 2
     - enemyPrefab: {fileID: 7781392927723494484, guid: 7f44fcc943196f545a0d5af733b1e44a, type: 3}
-      count: 0
+      count: 2
     - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
-      count: 1
+      count: 2
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 1784582222}
