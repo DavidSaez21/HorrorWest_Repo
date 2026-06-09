@@ -24,19 +24,9 @@ MonoBehaviour:
   dropChanceCoinOne: 70
   dropChanceCoinFive: 25
   dropChanceCoinTen: 5
-  tongueDamage: 25
+  tongueBiteDamage: 25
+  tongueSweepDamage: 20
   tentacleDamage: 18
   mouthBiteDamage: 30
   mouthOpenDPS: 10
-  tongueWindupDuration: 0.5
-  tongueLungeDuration: 0.25
-  tongueLingerDuration: 0.15
-  tongueRetractDuration: 0.4
-  tongueLungeDistance: 8
-  tentacleTelegraphDuration: 0.4
-  tentacleSweepDuration: 0.35
-  tentacleRetractDuration: 0.5
-  mouthCrackDuration: 0.6
-  mouthOpenDuration: 0.8
-  mouthBiteDuration: 0.3
   minionSpawnStagger: 0.3

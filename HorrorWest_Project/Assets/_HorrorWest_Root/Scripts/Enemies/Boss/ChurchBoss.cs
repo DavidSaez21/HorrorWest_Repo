@@ -1,19 +1,13 @@
 using UnityEngine;
 
-/// <summary>
-/// Script principal del Church Boss — La Iglesia.
-/// Hereda de EnemyBase (vida, daño, muerte, drops, XP).
-/// Toda la configuración de ataques se hace desde el Inspector.
-/// </summary>
 [RequireComponent(typeof(BossActionQueue))]
 public class ChurchBoss : EnemyBase
 {
-    // ── Inspector ──────────────────────────────────────────────────────────────
-
     [Header("── Componentes de ataque ───────────────────")]
     [SerializeField] private BossEyeTracker eyeTracker;
     [SerializeField] private TongueAttack tongueAttack;
-    [SerializeField] private TentacleAttack tentacleAttack;
+    [SerializeField] private TentacleAttack tentacleLeft;
+    [SerializeField] private TentacleAttack tentacleRight;
     [SerializeField] private GroundMouthAttack groundMouthAttack;
     [SerializeField] private MinionSpawner minionSpawner;
 
@@ -22,13 +16,9 @@ public class ChurchBoss : EnemyBase
     [SerializeField] private float flashDuration = 0.08f;
     [SerializeField] private Color flashColor = Color.white;
 
-    // ── Cached ────────────────────────────────────────────────────────────────
-
     private BossActionQueue _actionQueue;
     private ChurchBossData _bossData;
     private Coroutine _flashCoroutine;
-
-    // ── EnemyBase overrides ───────────────────────────────────────────────────
 
     protected override void Awake()
     {
@@ -51,7 +41,7 @@ public class ChurchBoss : EnemyBase
         InitialiseAttacks();
 
         _actionQueue.Initialise(
-            player, tongueAttack, tentacleAttack,
+            player, tongueAttack, tentacleLeft, tentacleRight,
             groundMouthAttack, minionSpawner, eyeTracker);
 
         eyeTracker?.Initialise(player);
@@ -65,15 +55,10 @@ public class ChurchBoss : EnemyBase
 
     public override void TakeDamage(float amount, Vector2 hitDirection)
     {
-        // Sin knockback — el boss es estático
         base.TakeDamage(amount, Vector2.zero);
     }
 
-    protected override void UpdateSteering()
-    {
-        DesiredVelocity = Vector2.zero;
-    }
-
+    protected override void UpdateSteering() => DesiredVelocity = Vector2.zero;
     protected override void PerformAttack() { }
 
     protected override void OnDamageReceived(float damage)
@@ -82,46 +67,29 @@ public class ChurchBoss : EnemyBase
         _flashCoroutine = StartCoroutine(FlashRoutine());
     }
 
-    protected override void OnDeath()
-    {
-        _actionQueue.StopAll();
-    }
-
-    // ── Inicialización de ataques ─────────────────────────────────────────────
+    protected override void OnDeath() => _actionQueue.StopAll();
 
     private void InitialiseAttacks()
     {
+        // Solo daños — las duraciones se configuran en el Inspector de cada componente
         if (tongueAttack != null)
         {
             tongueAttack.biteDamage = _bossData.tongueBiteDamage;
             tongueAttack.sweepDamage = _bossData.tongueSweepDamage;
-            tongueAttack.biteDuration = _bossData.tongueBiteDuration;
-            tongueAttack.sweepDuration = _bossData.tongueSweepDuration;
         }
 
-        if (tentacleAttack != null)
-        {
-            tentacleAttack.damage = _bossData.tentacleDamage;
-            tentacleAttack.emergeDuration = _bossData.tentacleEmergeDuration;
-            tentacleAttack.waitAtTargetDuration = _bossData.tentacleWaitAtTargetDuration;
-            tentacleAttack.attackAnimDuration = _bossData.tentacleAttackAnimDuration;
-            tentacleAttack.retractDuration = _bossData.tentacleRetractDuration;
-        }
+        if (tentacleLeft != null) tentacleLeft.damage = _bossData.tentacleDamage;
+        if (tentacleRight != null) tentacleRight.damage = _bossData.tentacleDamage;
 
         if (groundMouthAttack != null)
         {
-            groundMouthAttack.crackDuration = _bossData.mouthCrackDuration;
-            groundMouthAttack.openDuration = _bossData.mouthOpenDuration;
-            groundMouthAttack.biteDuration = _bossData.mouthBiteDuration;
-            groundMouthAttack.openTickDPS = _bossData.mouthOpenDPS;
             groundMouthAttack.biteDamage = _bossData.mouthBiteDamage;
+            groundMouthAttack.openTickDPS = _bossData.mouthOpenDPS;
         }
 
         if (minionSpawner != null)
             minionSpawner.staggerOverride = _bossData.minionSpawnStagger;
     }
-
-    // ── Hit flash ─────────────────────────────────────────────────────────────
 
     private System.Collections.IEnumerator FlashRoutine()
     {

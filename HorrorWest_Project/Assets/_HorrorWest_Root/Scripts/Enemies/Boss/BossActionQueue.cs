@@ -1,17 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Weighted action queue for the Church Boss.
-/// Cada ataque tiene peso, cooldown y presupuesto de presión independientes.
-/// Todo configurable desde el Inspector del boss.
-/// </summary>
 public class BossActionQueue : MonoBehaviour
 {
-    // ── Inspector ──────────────────────────────────────────────────────────────
-
     [Header("Pressure Budget")]
-    [Tooltip("Máximo de ataques activos simultáneamente (sin contar bocas de suelo).")]
     [SerializeField] private int maxSimultaneousAttacks = 2;
 
     [Header("Tongue Bite")]
@@ -35,7 +27,6 @@ public class BossActionQueue : MonoBehaviour
     [SerializeField] private float minionCooldown = 20f;
 
     [Header("Global Cooldown")]
-    [Tooltip("Pausa obligatoria entre ciclos de ataque.")]
     [SerializeField] private float globalCooldownDuration = 1.5f;
 
     [Header("Context Thresholds")]
@@ -43,11 +34,7 @@ public class BossActionQueue : MonoBehaviour
     [SerializeField] private float mouthStillThreshold = 2f;
     [SerializeField] private float playerStillSpeed = 0.5f;
 
-    // ── Attack IDs ────────────────────────────────────────────────────────────
-
     public enum AttackId { TongueBite, TongueSweep, Tentacle, GroundMouth, Minion }
-
-    // ── Runtime ───────────────────────────────────────────────────────────────
 
     private readonly Dictionary<AttackId, float> _lastUsed = new()
     {
@@ -60,6 +47,7 @@ public class BossActionQueue : MonoBehaviour
 
     private readonly HashSet<AttackId> _activeAttacks = new();
     private AttackId? _lastChosen = null;
+    private int _lastChosenCount = 0;
     private float _globalCooldownEnd = 0f;
 
     private Transform _player;
@@ -67,41 +55,40 @@ public class BossActionQueue : MonoBehaviour
     private float _playerStillTimer = 0f;
 
     private TongueAttack _tongue;
-    private TentacleAttack _tentacle;
+    private TentacleAttack _tentacleLeft;
+    private TentacleAttack _tentacleRight;
     private GroundMouthAttack _groundMouth;
     private MinionSpawner _minionSpawner;
     private BossEyeTracker _eyeTracker;
 
-    // ── Initialisation ────────────────────────────────────────────────────────
+    // Contador de tentáculos activos para sincronizar el callback
+    private int _tentaclesActive = 0;
 
     public void Initialise(
         Transform player,
         TongueAttack tongue,
-        TentacleAttack tentacle,
+        TentacleAttack tentacleLeft,
+        TentacleAttack tentacleRight,
         GroundMouthAttack groundMouth,
         MinionSpawner minionSpawner,
         BossEyeTracker eyeTracker)
     {
         _player = player;
         _tongue = tongue;
-        _tentacle = tentacle;
+        _tentacleLeft = tentacleLeft;
+        _tentacleRight = tentacleRight;
         _groundMouth = groundMouth;
         _minionSpawner = minionSpawner;
         _eyeTracker = eyeTracker;
         _lastPlayerPos = player != null ? player.position : Vector3.zero;
     }
 
-    // ── Main tick ─────────────────────────────────────────────────────────────
-
     public void Tick()
     {
         if (_player == null) return;
-
         UpdateContextTracking();
-
         if (Time.time < _globalCooldownEnd) return;
 
-        // Contar ataques activos (bocas no cuentan)
         int activePressure = 0;
         foreach (var id in _activeAttacks)
             if (id != AttackId.GroundMouth) activePressure++;
@@ -112,8 +99,6 @@ public class BossActionQueue : MonoBehaviour
             TryLaunchForeground();
     }
 
-    // ── Context tracking ──────────────────────────────────────────────────────
-
     private void UpdateContextTracking()
     {
         if (_player == null) return;
@@ -123,8 +108,6 @@ public class BossActionQueue : MonoBehaviour
             ? _playerStillTimer + Time.deltaTime
             : 0f;
     }
-
-    // ── Attack selection ──────────────────────────────────────────────────────
 
     private void TryLaunchForeground()
     {
@@ -138,7 +121,18 @@ public class BossActionQueue : MonoBehaviour
 
         AttackId chosen = WeightedRandom(candidates);
         Launch(chosen);
-        _lastChosen = chosen;
+
+        if (_lastChosen == chosen)
+        {
+            _lastChosenCount++;
+            if (_lastChosenCount >= 2) { _lastChosen = null; _lastChosenCount = 0; }
+        }
+        else
+        {
+            _lastChosen = chosen;
+            _lastChosenCount = 1;
+        }
+
         _globalCooldownEnd = Time.time + globalCooldownDuration;
     }
 
@@ -146,11 +140,8 @@ public class BossActionQueue : MonoBehaviour
     {
         if (_activeAttacks.Contains(AttackId.GroundMouth)) return;
         if (!IsCooledDown(AttackId.GroundMouth, mouthCooldown)) return;
-        if (_lastChosen == AttackId.GroundMouth) return;
         if (ComputeMouthWeight() <= 0) return;
-
         Launch(AttackId.GroundMouth);
-        _lastChosen = AttackId.GroundMouth;
     }
 
     private void TryAddCandidate(List<(AttackId, int)> list, AttackId id, int weight, float cooldown)
@@ -158,11 +149,9 @@ public class BossActionQueue : MonoBehaviour
         if (weight <= 0) return;
         if (_activeAttacks.Contains(id)) return;
         if (!IsCooledDown(id, cooldown)) return;
-        if (_lastChosen == id) return;
+        if (_lastChosen == id && _lastChosenCount >= 2) return;
         list.Add((id, weight));
     }
-
-    // ── Pesos ─────────────────────────────────────────────────────────────────
 
     private int ComputeTongueBiteWeight()
     {
@@ -175,7 +164,6 @@ public class BossActionQueue : MonoBehaviour
     private int ComputeTongueSweepWeight()
     {
         int w = tongueSweepWeight;
-        // Bonus si el jugador lleva quieto un rato
         if (_playerStillTimer >= mouthStillThreshold) w += 1;
         return w;
     }
@@ -202,37 +190,61 @@ public class BossActionQueue : MonoBehaviour
         return Mathf.Max(0, w);
     }
 
-    // ── Launch ────────────────────────────────────────────────────────────────
-
     private void Launch(AttackId id)
     {
         _lastUsed[id] = Time.time;
-        _activeAttacks.Add(id);
         _eyeTracker?.TelegraphAttack(id);
 
         switch (id)
         {
             case AttackId.TongueBite:
-                _tongue?.ExecuteBite(() => OnAttackComplete(AttackId.TongueBite));
+                if (_tongue == null) return;
+                _activeAttacks.Add(id);
+                _tongue.ExecuteBite(() => OnAttackComplete(AttackId.TongueBite));
                 break;
+
             case AttackId.TongueSweep:
-                _tongue?.ExecuteSweep(() => OnAttackComplete(AttackId.TongueSweep));
+                if (_tongue == null) return;
+                _activeAttacks.Add(id);
+                _tongue.ExecuteSweep(() => OnAttackComplete(AttackId.TongueSweep));
                 break;
+
             case AttackId.Tentacle:
-                _tentacle?.Execute(() => OnAttackComplete(AttackId.Tentacle));
+                if (_tentacleLeft == null && _tentacleRight == null) return;
+                _activeAttacks.Add(id);
+                _tentaclesActive = 0;
+                if (_tentacleLeft != null) _tentaclesActive++;
+                if (_tentacleRight != null) _tentaclesActive++;
+                if (_tentacleLeft != null) _tentacleLeft.Execute(OnTentacleComplete);
+                if (_tentacleRight != null) _tentacleRight.Execute(OnTentacleComplete);
                 break;
+
             case AttackId.GroundMouth:
-                _groundMouth?.Execute(() => OnAttackComplete(AttackId.GroundMouth));
+                if (_groundMouth == null) return;
+                _activeAttacks.Add(id);
+                _groundMouth.Execute(() => OnAttackComplete(AttackId.GroundMouth));
                 break;
+
             case AttackId.Minion:
-                _minionSpawner?.Execute(() => OnAttackComplete(AttackId.Minion));
+                if (_minionSpawner == null) return;
+                _activeAttacks.Add(id);
+                _minionSpawner.Execute(() => OnAttackComplete(AttackId.Minion));
                 break;
         }
     }
 
-    public void OnAttackComplete(AttackId id) => _activeAttacks.Remove(id);
+    private void OnTentacleComplete()
+    {
+        _tentaclesActive--;
+        if (_tentaclesActive <= 0)
+            OnAttackComplete(AttackId.Tentacle);
+    }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    public void OnAttackComplete(AttackId id)
+    {
+        _activeAttacks.Remove(id);
+        Debug.Log($"OnAttackComplete: {id} — activos: {string.Join(", ", _activeAttacks)}");
+    }
 
     private bool IsCooledDown(AttackId id, float cooldown)
         => Time.time >= _lastUsed[id] + cooldown;
@@ -251,11 +263,7 @@ public class BossActionQueue : MonoBehaviour
         return candidates[^1].id;
     }
 
-    public void StopAll()
-    {
-        _activeAttacks.Clear();
-    }
-
+    public void StopAll() => _activeAttacks.Clear();
     public bool IsAttackActive(AttackId id) => _activeAttacks.Contains(id);
 
     private void OnDrawGizmosSelected()
