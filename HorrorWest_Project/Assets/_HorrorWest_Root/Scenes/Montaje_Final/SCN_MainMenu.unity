@@ -495,8 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 1.5
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
@@ -840,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &189580214
 Transform:
   m_ObjectHideFlags: 0
@@ -850,8 +848,8 @@ Transform:
   m_GameObject: {fileID: 189580213}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.029163988, y: -0.008387634, z: -5.2193513}
-  m_LocalScale: {x: 0.96577996, y: 0.82588, z: 0.82588}
+  m_LocalPosition: {x: 0.029164076, y: -0.008387804, z: -5.219352}
+  m_LocalScale: {x: 0.96577996, y: 0.82588005, z: 0.82588005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 263448738}
@@ -896,7 +894,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.1004319, y: -1.0737863}
+  m_Offset: {x: 1.4171119, y: -1.0737863}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -906,7 +904,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 14.015708, y: 8.635817}
+  m_Size: {x: 14.649068, y: 8.635817}
   m_EdgeRadius: 0
 --- !u!212 &189580216
 SpriteRenderer:
@@ -1836,8 +1834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 1.5
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
@@ -4775,8 +4771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 0.8
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 2
@@ -5947,8 +5941,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 1.5
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
@@ -6397,8 +6389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 0.8
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 2
@@ -6613,8 +6603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 1.5
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
@@ -8394,8 +8382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 0.8
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 2
@@ -9303,8 +9289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f11ca8968397b54bbfc26aa4f089888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAngle: 1.5
-  idleSpeed: 1.5
   hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
@@ -9463,10 +9447,10 @@ SceneRoots:
   - {fileID: 825944008}
   - {fileID: 1980255971}
   - {fileID: 778930718}
-  - {fileID: 189580214}
   - {fileID: 1924637336}
   - {fileID: 1043629464}
   - {fileID: 1543953216}
+  - {fileID: 189580214}
   - {fileID: 278862197}
   - {fileID: 1884247363}
   - {fileID: 1686361269}

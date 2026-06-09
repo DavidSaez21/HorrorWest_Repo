@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RemapButton : MonoBehaviour, IPointerDownHandler
 {
     [Header("Configuracion")]
     public string actionName;
     public int bindingIndex;
-    public SpriteRenderer keySprite;
+    public Image keyImage;
 
     [Header("Sprites")]
     public string spritesPath = "Keys";
@@ -49,7 +50,6 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
                 string bindings = inputActions.SaveBindingOverridesAsJson();
                 PlayerPrefs.SetString("rebindings", bindings);
                 PlayerPrefs.Save();
-                Debug.Log("Guardado: " + bindings);
 
                 string path = action.bindings[bindingIndex].effectivePath;
                 string keyName = path.Split('/')[1].ToLower();
@@ -57,17 +57,14 @@ public class RemapButton : MonoBehaviour, IPointerDownHandler
                 Sprite[] sprites = Resources.LoadAll<Sprite>(spritesPath + "/" + keyName.ToUpper());
                 Sprite newSprite = sprites.Length > 0 ? sprites[0] : null;
 
-                if (newSprite != null)
-                    keySprite.sprite = newSprite;
-                else
-                    Debug.Log("Sprite no encontrado: " + keyName);
+                if (newSprite != null && keyImage != null)
+                    keyImage.sprite = newSprite;
             })
             .OnCancel(operation =>
             {
                 operation.Dispose();
                 action.Enable();
                 _isWaiting = false;
-                Debug.Log("Rebinding cancelado");
             })
             .Start();
     }
