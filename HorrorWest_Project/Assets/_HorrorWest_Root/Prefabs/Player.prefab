@@ -1737,6 +1737,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5095351698640236086, guid: 8bad5a0b4ac133748b60656ff9784841, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095351698640236086, guid: 8bad5a0b4ac133748b60656ff9784841, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095351698640236086, guid: 8bad5a0b4ac133748b60656ff9784841, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6857835
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684911135223981448, guid: 8bad5a0b4ac133748b60656ff9784841, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7983367339921563362, guid: 8bad5a0b4ac133748b60656ff9784841, type: 3}
       propertyPath: m_Pivot.x
       value: 0
