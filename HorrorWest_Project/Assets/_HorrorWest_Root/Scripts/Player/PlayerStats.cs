@@ -262,6 +262,25 @@ public class PlayerStats : MonoBehaviour
     public float GetExecuteThreshold() => executeThreshold;
     public float GetBulletSizeBonus() => bulletSizeBonus;
 
+    public void ReRegisterUniqueUpgrades()
+    {
+        if (UpgradePool.Instance == null) return;
+        if (hasPiercingBullets) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.PiercingBullets);
+        if (hasCoinMagnet) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.CoinMagnet);
+        if (hasReloadOnKill) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.ReloadOnKill);
+        if (hasExecute) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.Execute);
+        if (hasDoubleShot) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.DoubleShot);
+        if (hasPlagueBullets) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.PlagueBullets);
+        if (hasPlagueChain) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.PlagueChain);
+        if (hasExplosiveBullets) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.ExplosiveBullets);
+        if (hasDualWield) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.DualWield);
+        if (hasTotalPlague) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.TotalPlague);
+        if (hasSpecter) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.Specter);
+        if (hasLastBullet) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.LastBullet);
+        if (hasGunfightersCurse) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.GunfightersCurse);
+        if (hasInfiniteAmmo) UpgradePool.Instance.RegisterUniqueUpgrade(UpgradeType.InfiniteAmmo);
+    }
+
     #region Debug
     [Header("Debug — Stats en tiempo real (solo lectura)")]
     [SerializeField] private float _currentDamage;

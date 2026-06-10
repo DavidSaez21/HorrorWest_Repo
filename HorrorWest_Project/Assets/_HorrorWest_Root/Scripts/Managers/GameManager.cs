@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float levelCompleteDelay = 2f;
 
     public int CurrentLevel { get; private set; } = 0;
-    public bool IsPaused { get; private set; } = false;
     public bool IsGameOver { get; private set; } = false;
     public bool IsRunActive { get; private set; } = false;
 
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CurrentLevel = GetCurrentLevelIndex();
+        Debug.Log($"[GameManager] Escena: {SceneManager.GetActiveScene().name} — Nivel detectado: {CurrentLevel}");
         StartRun();
     }
 
@@ -46,19 +46,17 @@ public class GameManager : MonoBehaviour
         if (PlayerManager.Instance != null)
             PlayerManager.Instance.Health.OnDeath += HandlePlayerDeath;
 
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-        if (waveManager != null)
-            waveManager.OnAllWavesCompleted += HandleLevelCompleted;
-
         if (CurrentLevel == 0)
         {
+            // Run nueva — resetea todo
             PlayerManager.Instance?.ResetForNewRun();
             UpgradePool.Instance?.ResetPool();
         }
-
-        // Aplicar mejoras permanentes compradas en tienda
-        if (PermanentUpgradeManager.Instance != null && PlayerManager.Instance?.Stats != null)
-            PermanentUpgradeManager.Instance.ApplyToPlayerStats(PlayerManager.Instance.Stats);
+        else
+        {
+            // Nivel siguiente — re-registra únicas para que no vuelvan a salir
+            PlayerManager.Instance?.Stats?.ReRegisterUniqueUpgrades();
+        }
 
         // Curación al inicio de escena (vendas)
         if (PermanentUpgradeManager.Instance != null && PlayerManager.Instance != null)
@@ -115,7 +113,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator GoToNextLevelAfterDelay()
     {
         yield return new WaitForSeconds(levelCompleteDelay);
-
         int nextLevel = CurrentLevel + 1;
         if (nextLevel >= levelScenes.Length)
         {
