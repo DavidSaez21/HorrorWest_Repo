@@ -2339,6 +2339,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1265937049}
   - {fileID: 1574142538}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3626,6 +3627,61 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.61255836, y: 14.290901}
   m_EdgeRadius: 0
+--- !u!1 &1265937048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265937049}
+  - component: {fileID: 1265937050}
+  m_Layer: 0
+  m_Name: ShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265937049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265937048}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.25972, y: -28.31301, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 855104528}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265937050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265937048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99eeb8420687d1545941699301e99dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelScenes:
+  - SCN_LVL1
+  - SCN_LVL2
+  - SCN_LVL3
+  - SCN_LVL4
+  - SCN_BOSS
+  shopScene: SCN_Tienda
+  menuScene: SCN_MainMenu
+  deathToShopDelay: 1.5
+  levelCompleteDelay: 2
+  debugMode: 0
 --- !u!1 &1286066611
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,11 +5620,6 @@ MonoBehaviour:
   menuScene: SCN_Menu
   deathToShopDelay: 1.5
   levelCompleteDelay: 2
-  pausePanel: {fileID: 0}
-  optionsPanel: {fileID: 0}
-  controlsPanel: {fileID: 0}
-  audioPanel: {fileID: 0}
-  levelCompletePanel: {fileID: 0}
   debugMode: 0
 --- !u!1 &1731735781
 GameObject:
