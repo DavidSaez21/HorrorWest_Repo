@@ -24,16 +24,13 @@ public class Coin : MonoBehaviour
     {
         col = GetComponent<Collider2D>();
         col.enabled = false;
-
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
-
         StartCoroutine(DropAnimation());
     }
 
     private void Update()
     {
-        // Si el imán está activo vuela hacia el player
         if (isBeingMagneted && player != null)
         {
             Vector2 direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
@@ -44,7 +41,6 @@ public class Coin : MonoBehaviour
     private IEnumerator DropAnimation()
     {
         Vector3 startPos = transform.position;
-
         Vector2 randomDir = Random.insideUnitCircle.normalized * Random.Range(0.2f, 0.5f);
         Vector3 peakPos = startPos + new Vector3(randomDir.x, jumpHeight, 0f);
         Vector3 landPos = startPos + new Vector3(randomDir.x, 0f, 0f);
@@ -67,14 +63,12 @@ public class Coin : MonoBehaviour
 
         col.enabled = true;
         canPickup = true;
-
-        // Si el player ya tiene imán activo al aterrizar, activa el modo imán
         CheckMagnet();
     }
 
     public void CheckMagnet()
     {
-        if (PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasCoinMagnet)
+        if (PlayerManager.Instance?.Stats != null && PlayerManager.Instance.Stats.hasCoinMagnet)
         {
             isBeingMagneted = true;
             col.enabled = true;
@@ -87,7 +81,16 @@ public class Coin : MonoBehaviour
         if (!canPickup) return;
         if (!other.CompareTag("Player")) return;
 
-        CurrencyManager.Instance.AddCoins((int)coinValue);
+        int baseValue = (int)coinValue;
+
+        // Aplica bonus de botín permanente
+        // Nivel 1 = +0.4, Nivel 2 = +0.8, ... Nivel 5 = +2.0
+        // Moneda de 1 con nivel 5 da 3 (1 + 2)
+        float lootBonus = PlayerManager.Instance?.Stats?.GetLootBonus() ?? 0f;
+        int finalValue = Mathf.RoundToInt(baseValue + lootBonus);
+        finalValue = Mathf.Max(baseValue, finalValue); // nunca menos que el valor base
+
+        CurrencyManager.Instance?.AddCoins(finalValue);
         Destroy(gameObject);
     }
 }
