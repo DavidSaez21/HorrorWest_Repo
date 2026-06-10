@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -25,16 +26,16 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private ButtonSound buySound;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        Debug.Log($"[ShopManager] Coins: {CurrencyManager.Instance?.GetCoins()} | PermanentUpgradeManager: {PermanentUpgradeManager.Instance != null}");
+        // Espera a que los managers estén listos
+        yield return new WaitUntil(() => CurrencyManager.Instance != null && PermanentUpgradeManager.Instance != null);
 
         playButton?.onClick.AddListener(OnPlayClicked);
         backButton?.onClick.AddListener(OnBackClicked);
 
         UpdateCoinsText();
-        if (CurrencyManager.Instance != null)
-            CurrencyManager.Instance.OnCoinsChanged += _ => UpdateCoinsText();
+        CurrencyManager.Instance.OnCoinsChanged += _ => UpdateCoinsText();
 
         SetupWeaponCards();
 
@@ -44,8 +45,7 @@ public class ShopManager : MonoBehaviour
         foreach (var card in upgradeCards)
             card?.SetBuySound(buySound);
 
-        if (PermanentUpgradeManager.Instance != null)
-            PermanentUpgradeManager.Instance.OnWeaponChanged += RefreshWeaponCards;
+        PermanentUpgradeManager.Instance.OnWeaponChanged += RefreshWeaponCards;
     }
 
     private void OnDestroy()

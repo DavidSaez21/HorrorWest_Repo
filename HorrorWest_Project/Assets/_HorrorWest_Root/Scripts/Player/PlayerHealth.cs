@@ -62,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTime = Time.time;
 
         float armor = PlayerManager.Instance?.Stats?.GetArmor() ?? 0f;
-        float reduced = Mathf.Max(0f, amount - armor);
+        float reduced = amount * (1f - Mathf.Clamp01(armor));
         currentHealth = Mathf.Max(0f, currentHealth - reduced);
 
         CameraShaker.Instance?.Shake(0.08f, 0.15f);
