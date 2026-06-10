@@ -153,19 +153,15 @@ public class EnemyShooter : EnemyBase
         if (_bulletPrefab == null) return;
 
         Transform origin = _muzzle != null ? _muzzle : transform;
-        // Shoot in the exact direction the enemy is currently facing (not perfect aimbot)
-        Vector2 shootDir = new Vector2(
-            Mathf.Cos(_facingAngle * Mathf.Deg2Rad),
-            Mathf.Sin(_facingAngle * Mathf.Deg2Rad));
-        float angle = _facingAngle;
+
+        Vector2 shootDir = DirectionToPlayer();
+        float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90f;
 
         Instantiate(_bulletPrefab, origin.position, Quaternion.Euler(0f, 0f, angle));
 
-        // Brief pause after shooting before wandering again
         _pauseTimer = _postShotPause;
         _state = MoveState.PausedToShoot;
     }
-
     // ── Movement ──────────────────────────────────────────────────────────────
 
     protected override void UpdateSteering()
