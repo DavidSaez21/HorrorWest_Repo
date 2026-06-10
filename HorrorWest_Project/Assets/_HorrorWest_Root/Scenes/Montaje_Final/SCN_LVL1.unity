@@ -27683,7 +27683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6003f53581abc439061e0b28dc654d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: SCN_LVL2
+  sceneName: SCN_S2
 --- !u!4 &1250984171
 Transform:
   m_ObjectHideFlags: 0

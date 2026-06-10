@@ -9,14 +9,26 @@ EditorBuildSettings:
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_MainMenu.unity
     guid: 45e52710924e91e4a8ced9225ef88cff
   - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_S1.unity
+    guid: e2c2455a160cbe1418a4e528b867242b
+  - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_LVL1.unity
     guid: 05eee0c1c6f47ea488cdf2404dcf2cc7
+  - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_S2.unity
+    guid: c38ce2ff662979b4dac76643a1e16489
   - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_LVL2.unity
     guid: 20538b232908dbc4db03a5a2486e2c00
   - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_S3.unity
+    guid: 11f57df914c88c94bad2e268f00de077
+  - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_LVL3.unity
     guid: 80886408eaa848d4aa4e548dc33be43f
+  - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_S4.unity
+    guid: 6744b28eb6046e945a26e11434086ed9
   - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_LVL4.unity
     guid: e9929d77793cd854bb4d502b9f9a3db3
