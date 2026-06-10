@@ -29,10 +29,15 @@ public class BarEntrance : MonoBehaviour
     [SerializeField] private Vector2 barCamMin;
     [SerializeField] private Vector2 barCamMax;
 
+    [Header("Música")]
+    [SerializeField] private AudioClip barMusic;
+
     private bool _insideBar = false;
     private bool _streetCleared = false;
     private bool _barCleared = false;
     private CameraConfiner _confiner;
+    private AudioManager _audioManager;
+    private AudioClip _streetMusic;
 
     private void Start()
     {
@@ -48,6 +53,10 @@ public class BarEntrance : MonoBehaviour
 
         if (streetWaveManager != null)
             streetWaveManager.OnAllWavesCompleted += OnStreetCleared;
+
+        _audioManager = FindFirstObjectByType<AudioManager>();
+        if (_audioManager != null && _audioManager.musicSource != null)
+            _streetMusic = _audioManager.musicSource.clip;
     }
 
     private void OnStreetCleared()
@@ -55,7 +64,6 @@ public class BarEntrance : MonoBehaviour
         _streetCleared = true;
         if (streetDoorBlocker != null) streetDoorBlocker.SetActive(false);
 
-        // Si no hay interior activa el trigger directamente al limpiar la calle
         if (barWaveManager == null && sceneChangeTrigger != null)
             sceneChangeTrigger.SetActive(true);
     }
@@ -86,6 +94,12 @@ public class BarEntrance : MonoBehaviour
             barWaveManager.OnAllWavesCompleted += OnBarCleared;
             barWaveManager.StartWaves();
         }
+
+        if (_audioManager != null && barMusic != null)
+        {
+            _audioManager.musicSource.clip = barMusic;
+            _audioManager.musicSource.Play();
+        }
     }
 
     private void OnBarCleared()
@@ -96,7 +110,6 @@ public class BarEntrance : MonoBehaviour
 
         if (!reactivateStreetOnClear)
         {
-            // Bar normal — activa el scene changer directamente
             if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(true);
         }
 
@@ -104,7 +117,6 @@ public class BarEntrance : MonoBehaviour
             barWaveManager.OnAllWavesCompleted -= OnBarCleared;
     }
 
-    // Llamar desde el trigger de salida de la puerta
     public void ExitInterior()
     {
         if (!_barCleared) return;
@@ -120,11 +132,16 @@ public class BarEntrance : MonoBehaviour
             if (_confiner != null)
                 _confiner.SetBounds(streetCamMin, streetCamMax);
 
-            // Relanzar oleadas de la calle
             if (streetWaveManager != null)
             {
                 streetWaveManager.ResetWaves();
                 streetWaveManager.StartWaves();
+            }
+
+            if (_audioManager != null && _streetMusic != null)
+            {
+                _audioManager.musicSource.clip = _streetMusic;
+                _audioManager.musicSource.Play();
             }
         }
 

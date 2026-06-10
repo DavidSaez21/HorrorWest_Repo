@@ -27130,6 +27130,7 @@ MonoBehaviour:
   streetCamMax: {x: 15.4, y: 27.1}
   barCamMin: {x: 0, y: 0}
   barCamMax: {x: 0, y: 0}
+  barMusic: {fileID: 0}
 --- !u!1001 &1039565602
 PrefabInstance:
   m_ObjectHideFlags: 0

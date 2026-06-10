@@ -4607,6 +4607,7 @@ MonoBehaviour:
   streetCamMax: {x: 21.78, y: 66.97}
   barCamMin: {x: -45.9, y: -8.63}
   barCamMax: {x: -16.3, y: 12.3}
+  barMusic: {fileID: 8300000, guid: 663e2162e57ed3540b46acb1ccfdc5d2, type: 3}
 --- !u!4 &796519802
 Transform:
   m_ObjectHideFlags: 0
