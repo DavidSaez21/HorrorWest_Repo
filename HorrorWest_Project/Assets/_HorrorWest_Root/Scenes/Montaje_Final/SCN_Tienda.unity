@@ -4002,7 +4002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSceneName: SCN_S1
-  menuSceneName: SCN_Menu
+  menuSceneName: SCN_MainMenu
   coinsText: {fileID: 707266853}
   revolverCard: {fileID: 154293667}
   shotgunCard: {fileID: 1688930718}

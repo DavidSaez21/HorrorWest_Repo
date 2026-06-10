@@ -427,7 +427,7 @@ MonoBehaviour:
   - {fileID: 1989487991}
   - {fileID: 530964424}
   fadeDuration: 1
-  nextSceneName: SCN_LVL3
+  nextSceneName: SCN_LVL2
 --- !u!4 &1004159087
 Transform:
   m_ObjectHideFlags: 0
