@@ -3,38 +3,70 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    public enum AudioManagerMode { Full, SFXOnly, MusicOnly }
+
+    [Header("Modo")]
+    public AudioManagerMode mode = AudioManagerMode.Full;
+
     [Header("SFX")]
     public AudioSource sfxSource;
+    public Slider sfxSlider;
 
     [Header("Música")]
     public AudioSource musicSource;
-
-    [Header("Sliders UI (solo en escenas con Canvas)")]
-    public Slider sfxSlider;
     public Slider musicSlider;
+    public AudioClip musicClip;
 
     void Start()
     {
-        ApplySavedVolumes();
-        InitSliders();
+        if (mode == AudioManagerMode.SFXOnly || mode == AudioManagerMode.Full)
+        {
+            ApplySFXVolume();
+            InitSFXSlider();
+        }
+
+        if (mode == AudioManagerMode.MusicOnly || mode == AudioManagerMode.Full)
+        {
+            ApplyMusicVolume();
+            InitMusicSlider();
+
+            if (musicSource != null && musicClip != null)
+            {
+                musicSource.clip = musicClip;
+                musicSource.loop = true;
+                musicSource.Play();
+            }
+        }
     }
 
     void OnEnable()
     {
-        ApplySavedVolumes();
-        InitSliders();
+        if (mode == AudioManagerMode.SFXOnly || mode == AudioManagerMode.Full)
+        {
+            ApplySFXVolume();
+            InitSFXSlider();
+        }
+
+        if (mode == AudioManagerMode.MusicOnly || mode == AudioManagerMode.Full)
+        {
+            ApplyMusicVolume();
+            InitMusicSlider();
+        }
     }
 
-    private void ApplySavedVolumes()
+    private void ApplySFXVolume()
     {
-        float savedSFX = PlayerPrefs.GetFloat("sfxVolume", 1f);
-        float savedMusic = PlayerPrefs.GetFloat("musicVolume", 1f);
-
-        if (sfxSource != null) sfxSource.volume = savedSFX;
-        if (musicSource != null) musicSource.volume = savedMusic;
+        if (sfxSource != null)
+            sfxSource.volume = PlayerPrefs.GetFloat("sfxVolume", 1f);
     }
 
-    private void InitSliders()
+    private void ApplyMusicVolume()
+    {
+        if (musicSource != null)
+            musicSource.volume = PlayerPrefs.GetFloat("musicVolume", 1f);
+    }
+
+    private void InitSFXSlider()
     {
         if (sfxSlider != null)
         {
@@ -42,7 +74,10 @@ public class AudioManager : MonoBehaviour
             sfxSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("sfxVolume", 1f));
             sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         }
+    }
 
+    private void InitMusicSlider()
+    {
         if (musicSlider != null)
         {
             musicSlider.onValueChanged.RemoveAllListeners();
