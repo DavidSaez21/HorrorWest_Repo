@@ -101,7 +101,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(deathToShopDelay);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(shopScene);
+        Destroy(PlayerManager.Instance?.gameObject);
+        SceneManager.LoadScene("SCN_Death");
     }
 
     private void HandleLevelCompleted()

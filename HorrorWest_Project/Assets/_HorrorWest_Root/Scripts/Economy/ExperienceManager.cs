@@ -17,11 +17,7 @@ public class ExperienceManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
@@ -33,8 +29,10 @@ public class ExperienceManager : MonoBehaviour
 
     public void AddXP(float amount)
     {
-        currentXP += amount;
-        Debug.Log($"XP añadida: {amount} | XP actual: {currentXP} / {xpToNextLevel}");
+        // Aplica bonus de XP permanente (1.0 = sin bonus, 1.1 = +10%, etc.)
+        float xpMultiplier = 1f + (PlayerManager.Instance?.Stats?.GetXPBonus() ?? 0f);
+        currentXP += amount * xpMultiplier;
+
         OnXPChanged?.Invoke(currentXP, xpToNextLevel);
 
         while (currentXP >= xpToNextLevel)
@@ -49,9 +47,7 @@ public class ExperienceManager : MonoBehaviour
     }
 
     private float CalculateXPForLevel(int level)
-    {
-        return baseXPRequired * Mathf.Pow(exponentialFactor, level - 1);
-    }
+        => baseXPRequired * Mathf.Pow(exponentialFactor, level - 1);
 
     public void ResetXP()
     {

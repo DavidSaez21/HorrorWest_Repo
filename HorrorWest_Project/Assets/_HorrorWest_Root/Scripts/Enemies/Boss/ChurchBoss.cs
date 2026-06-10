@@ -67,7 +67,11 @@ public class ChurchBoss : EnemyBase
         _flashCoroutine = StartCoroutine(FlashRoutine());
     }
 
-    protected override void OnDeath() => _actionQueue.StopAll();
+    protected override void OnDeath()
+    {
+        _actionQueue.StopAll();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SCN_Victory");
+    }
 
     private void InitialiseAttacks()
     {
