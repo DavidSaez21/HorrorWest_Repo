@@ -84,9 +84,9 @@ public class UpgradePool : MonoBehaviour
         pickedUniqueUpgrades.Add(type);
     }
 
-    // Resetea al morir
     public void ResetPool()
     {
+        Debug.Log($"[UpgradePool] Reset — únicas borradas: {pickedUniqueUpgrades.Count}");
         pickedUniqueUpgrades.Clear();
     }
 }
