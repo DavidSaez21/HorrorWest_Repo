@@ -14,11 +14,10 @@ public class AimCamera : MonoBehaviour
     [Header("Follow Settings")]
     [SerializeField] private float smoothTime = 0.05f;
 
-    [Header("References")]
+    [Header("References (opcional — se autoasignan)")]
     [SerializeField] private Transform target;
     [SerializeField] private Rigidbody2D targetRb;
 
-    // ── Estado interno ────────────────────────────────────────────────────────
     private Camera cam;
     private float targetSize;
     private Vector3 targetPosition;
@@ -26,7 +25,6 @@ public class AimCamera : MonoBehaviour
     private Vector3 currentAimOffset = Vector3.zero;
     private bool isAiming = false;
 
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
     private void Awake()
     {
         cam = GetComponent<Camera>();
@@ -34,20 +32,35 @@ public class AimCamera : MonoBehaviour
         cam.orthographicSize = normalSize;
     }
 
+    private void Start()
+    {
+        FindPlayer();
+    }
+
+    private void FindPlayer()
+    {
+        if (target != null && targetRb != null) return;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            if (target == null) target = player.transform;
+            if (targetRb == null) targetRb = player.GetComponent<Rigidbody2D>();
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (target == null) return;
+        // Reintenta encontrar al player si no está asignado
+        if (target == null) { FindPlayer(); return; }
 
         isAiming = PlayerAiming.Instance != null && PlayerAiming.Instance.IsAiming;
 
-        // ── Zoom ──────────────────────────────────────────────────────────────
         targetSize = isAiming ? aimSize : normalSize;
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, zoomSpeed * Time.fixedDeltaTime);
 
-        // ✅ Posición del Rigidbody2D — va al mismo ritmo que la física
         Vector2 playerPos = targetRb != null ? targetRb.position : (Vector2)target.position;
 
-        // ── Offset de aim ─────────────────────────────────────────────────────
         if (isAiming)
         {
             Vector2 aimDir = PlayerAiming.Instance.GetAimDirection();
@@ -65,7 +78,6 @@ public class AimCamera : MonoBehaviour
             transform.position.z
         );
 
-        // ✅ SmoothDamp con fixedDeltaTime — sincronizado con la física
         transform.position = Vector3.SmoothDamp(
             transform.position,
             targetPosition,
@@ -83,7 +95,6 @@ public class AimCamera : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (!debugDrawTarget || target == null) return;
-
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(transform.position, target.position);
         Gizmos.DrawWireSphere(target.position, 0.2f);
