@@ -18,10 +18,9 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Start()
     {
-        // Move in the direction the prefab is facing (set by EnemyShooter on Instantiate)
-        Vector2 dir = transform.right; // right = forward for angle-based rotation
+        // Usa up en lugar de right — la rotación del juego usa -90 como base
+        Vector2 dir = transform.up;
         _rb.linearVelocity = dir * _speed;
-
         Destroy(gameObject, _range / _speed);
     }
 
