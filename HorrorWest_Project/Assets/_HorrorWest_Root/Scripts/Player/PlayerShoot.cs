@@ -31,8 +31,19 @@ public class PlayerShoot : MonoBehaviour
         foreach (WeaponBase w in secondaryWeapons)
             w.gameObject.SetActive(false);
 
+        int selectedIndex = PermanentUpgradeManager.Instance != null
+            ? PermanentUpgradeManager.Instance.SelectedWeaponIndex
+            : 0;
+
+        if (selectedIndex == 1 && PermanentUpgradeManager.Instance != null
+            && !PermanentUpgradeManager.Instance.IsShotgunUnlocked())
+            selectedIndex = 0;
+        if (selectedIndex == 2 && PermanentUpgradeManager.Instance != null
+            && !PermanentUpgradeManager.Instance.IsRifleUnlocked())
+            selectedIndex = 0;
+
         if (weapons.Length > 0)
-            EquipWeapon(0);
+            EquipWeapon(selectedIndex);
     }
 
     private void Update()

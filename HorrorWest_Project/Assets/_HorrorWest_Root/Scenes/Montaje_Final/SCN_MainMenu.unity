@@ -1664,10 +1664,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f704f185b5e71145ae3450628ae225d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   sfxSource: {fileID: 274159800}
-  musicSource: {fileID: 274159799}
   sfxSlider: {fileID: 780830224}
+  musicSource: {fileID: 274159799}
   musicSlider: {fileID: 931033332}
+  musicClip: {fileID: 0}
 --- !u!82 &274159799
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8087,9 +8089,21 @@ PrefabInstance:
       propertyPath: normalColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: gameplayScenes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432364922805266619, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: 'gameplayScenes.Array.data[4]'
+      value: SCN_BOSS
+      objectReference: {fileID: 0}
     - target: {fileID: 2305825977858000336, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Name
       value: Cursor_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4272471472496736790, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8568063941464378930, guid: 2d0ebd96538d47a4c9703c1af1bb976a, type: 3}
       propertyPath: m_Pivot.x

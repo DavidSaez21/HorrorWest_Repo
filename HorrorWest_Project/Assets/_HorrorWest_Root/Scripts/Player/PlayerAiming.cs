@@ -59,13 +59,13 @@ public class PlayerAiming : MonoBehaviour
 
     private void UpdateAim()
     {
+        if (mainCamera == null) mainCamera = Camera.main;
         if (mainCamera == null) return;
 
         Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
         targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         currentAngle = Mathf.LerpAngle(currentAngle, targetAngle, aimSmoothSpeed * Time.deltaTime);
-
         transform.rotation = Quaternion.AngleAxis(currentAngle - 90f, Vector3.forward);
 
         if (weaponOrbitPivot != null)
@@ -75,12 +75,10 @@ public class PlayerAiming : MonoBehaviour
                 Mathf.Sin(currentAngle * Mathf.Deg2Rad)
             );
             weaponOrbitPivot.position = (Vector2)transform.position + smoothDir * orbitRadius;
-
             if (weaponTransform != null)
                 weaponTransform.rotation = Quaternion.AngleAxis(currentAngle - 90f, Vector3.forward);
         }
 
-        // ✅ Animación del torso
         if (torsoAnimator != null && playerMovement != null)
             torsoAnimator.SetBool("isWalking", playerMovement.IsMoving());
     }
