@@ -965,7 +965,7 @@ MonoBehaviour:
   - {fileID: 9009415993746530401}
   secondWeaponPivot: {fileID: 8867845449062668232}
   playerAiming: {fileID: 7380865841193798963}
-  debugMode: 1
+  debugMode: 0
 --- !u!61 &2653382081904224013
 BoxCollider2D:
   m_ObjectHideFlags: 0
