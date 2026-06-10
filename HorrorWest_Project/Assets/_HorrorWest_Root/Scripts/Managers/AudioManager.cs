@@ -95,9 +95,22 @@ public class AudioManager : MonoBehaviour
 
     public void OnMusicVolumeChanged(float value)
     {
-        if (musicSource != null) musicSource.volume = value;
         PlayerPrefs.SetFloat("musicVolume", value);
         PlayerPrefs.Save();
+
+        if (musicSource != null)
+        {
+            musicSource.volume = value;
+        }
+        else
+        {
+            AudioManager[] managers = FindObjectsByType<AudioManager>(FindObjectsSortMode.None);
+            foreach (AudioManager m in managers)
+            {
+                if (m != this && m.musicSource != null)
+                    m.musicSource.volume = value;
+            }
+        }
     }
 
     public float GetSFXVolume() => PlayerPrefs.GetFloat("sfxVolume", 1f);
