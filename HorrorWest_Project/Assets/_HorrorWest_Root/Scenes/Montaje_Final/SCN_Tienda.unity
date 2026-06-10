@@ -4001,7 +4001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3908ad525e07c4989a10ed8028bc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: SCN_LVL1
+  gameSceneName: SCN_S1
   menuSceneName: SCN_Menu
   coinsText: {fileID: 707266853}
   revolverCard: {fileID: 154293667}
