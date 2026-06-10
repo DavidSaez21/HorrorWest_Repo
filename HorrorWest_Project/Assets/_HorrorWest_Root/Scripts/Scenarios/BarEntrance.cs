@@ -54,6 +54,10 @@ public class BarEntrance : MonoBehaviour
     {
         _streetCleared = true;
         if (streetDoorBlocker != null) streetDoorBlocker.SetActive(false);
+
+        // Si no hay interior activa el trigger directamente al limpiar la calle
+        if (barWaveManager == null && sceneChangeTrigger != null)
+            sceneChangeTrigger.SetActive(true);
     }
 
     public void EnterBar()
@@ -88,8 +92,13 @@ public class BarEntrance : MonoBehaviour
     {
         _barCleared = true;
 
-        // Solo desbloquea la puerta — el player sale manualmente
         if (doorBlocker != null) doorBlocker.SetActive(false);
+
+        if (!reactivateStreetOnClear)
+        {
+            // Bar normal — activa el scene changer directamente
+            if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(true);
+        }
 
         if (barWaveManager != null)
             barWaveManager.OnAllWavesCompleted -= OnBarCleared;
@@ -120,6 +129,12 @@ public class BarEntrance : MonoBehaviour
         }
 
         if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        ExitInterior();
     }
 
     private void OnDestroy()

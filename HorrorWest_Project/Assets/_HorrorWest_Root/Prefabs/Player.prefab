@@ -1114,8 +1114,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Fire[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerAim, Assembly-CSharp
+      - m_Target: {fileID: 7380865841193798963}
+        m_TargetAssemblyTypeName: PlayerAiming, Assembly-CSharp
         m_MethodName: OnAim
         m_Mode: 0
         m_Arguments:
