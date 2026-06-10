@@ -91,6 +91,11 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(LoadAfterSound("SCN_MainMenu"));
     }
 
+    public void ClickRestart()
+    {
+        SceneManager.LoadScene("SCN_LVL1");
+    }
+
     private IEnumerator LoadAfterSound(string sceneName)
     {
         if (buttonSound != null)
