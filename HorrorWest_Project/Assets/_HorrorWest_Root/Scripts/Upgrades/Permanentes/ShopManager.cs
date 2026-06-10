@@ -27,6 +27,8 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"[ShopManager] Coins: {CurrencyManager.Instance?.GetCoins()} | PermanentUpgradeManager: {PermanentUpgradeManager.Instance != null}");
+
         playButton?.onClick.AddListener(OnPlayClicked);
         backButton?.onClick.AddListener(OnBackClicked);
 

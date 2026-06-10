@@ -147,7 +147,19 @@ public class GameManager : MonoBehaviour
     public void Surrender()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(menuScene);
+
+        PlayerManager.Instance?.Stats?.ResetStats();
+        ExperienceManager.Instance?.ResetXP();
+        UpgradePool.Instance?.ResetPool();
+
+        var canvas = FindObjectOfType<PersistentCanvas>();
+        Debug.Log($"[Surrender] Canvas encontrado: {canvas != null}");
+        if (canvas != null) DestroyImmediate(canvas.gameObject);
+
+        Debug.Log($"[Surrender] Player encontrado: {PlayerManager.Instance != null}");
+        if (PlayerManager.Instance != null) DestroyImmediate(PlayerManager.Instance.gameObject);
+
+        SceneManager.LoadScene("SCN_MainMenu");
     }
 
     private int GetCurrentLevelIndex()

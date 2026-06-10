@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_Tienda.unity
     guid: 9239ee8319dd7924c992c2a3f0ee1ff7
+  - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_Victory.unity
+    guid: d8e95db43ad4f184c9868aa15bc54047
+  - enabled: 1
+    path: Assets/_HorrorWest_Root/Scenes/Montaje_Final/SCN_Death.unity
+    guid: cbc363edd7424d84f89c2472203e0114
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

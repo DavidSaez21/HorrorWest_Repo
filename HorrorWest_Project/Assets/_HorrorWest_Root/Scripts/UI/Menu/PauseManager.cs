@@ -87,6 +87,6 @@ public class PauseManager : MonoBehaviour
     public void Surrender()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("SCN_MainMenu");
+        GameManager.Instance?.Surrender();
     }
 }

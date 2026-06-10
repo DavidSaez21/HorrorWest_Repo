@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FinalBoss
   m_EditorClassIdentifier: 
   enemyName: Enemy
-  maxHealth: 1000
+  maxHealth: 1
   moveSpeed: 0
   damage: 0
   defense: 0

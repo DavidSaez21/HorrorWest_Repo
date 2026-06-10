@@ -70,12 +70,11 @@ public class ChurchBoss : EnemyBase
     protected override void OnDeath()
     {
         _actionQueue.StopAll();
+        Time.timeScale = 1f;
 
-        // Destruye el Canvas persistente para que no tape la victoria
         var canvas = FindObjectOfType<PersistentCanvas>();
         if (canvas != null) Destroy(canvas.gameObject);
 
-        // Destruye el Player
         if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("SCN_Victory");

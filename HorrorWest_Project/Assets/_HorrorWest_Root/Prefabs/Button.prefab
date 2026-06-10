@@ -133,10 +133,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6655e18e1d065408ecd22a4466061b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeData: {fileID: 0}
   iconImage: {fileID: 0}
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}
   levelText: {fileID: 0}
+  romanLevelText: {fileID: 0}
   priceText: {fileID: 0}
   buyButton: {fileID: 0}
   cardBackground: {fileID: 0}
