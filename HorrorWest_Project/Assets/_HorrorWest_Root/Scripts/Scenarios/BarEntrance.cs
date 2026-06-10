@@ -54,7 +54,16 @@ public class BarEntrance : MonoBehaviour
         if (streetWaveManager != null)
             streetWaveManager.OnAllWavesCompleted += OnStreetCleared;
 
-        _audioManager = FindFirstObjectByType<AudioManager>();
+        AudioManager[] managers = FindObjectsByType<AudioManager>(FindObjectsSortMode.None);
+        foreach (AudioManager m in managers)
+        {
+            if (m.musicSource != null)
+            {
+                _audioManager = m;
+                break;
+            }
+        }
+
         if (_audioManager != null && _audioManager.musicSource != null)
             _streetMusic = _audioManager.musicSource.clip;
     }
