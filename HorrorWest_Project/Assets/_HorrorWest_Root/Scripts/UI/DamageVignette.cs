@@ -13,13 +13,13 @@ public class DamageVignette : MonoBehaviour
 
     private void Start()
     {
-        if (vignetteImage != null)
-            SetAlpha(0f);
-
         if (PlayerHealth.Instance != null)
+        {
             PlayerHealth.Instance.OnHealthChanged += OnHealthChanged;
+            // Fuerza la actualización al inicio con la vida actual
+            OnHealthChanged(PlayerHealth.Instance.GetCurrentHealth(), PlayerHealth.Instance.GetMaxHealth());
+        }
     }
-
     private void OnDestroy()
     {
         if (PlayerHealth.Instance != null)

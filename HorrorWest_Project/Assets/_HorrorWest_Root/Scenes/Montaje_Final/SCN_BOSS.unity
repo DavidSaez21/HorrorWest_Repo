@@ -12834,6 +12834,7 @@ GameObject:
   - component: {fileID: 2063064987}
   - component: {fileID: 2063064986}
   - component: {fileID: 2063064983}
+  - component: {fileID: 2063064992}
   m_Layer: 0
   m_Name: FinalBoss
   m_TagString: Untagged
@@ -13078,6 +13079,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2063064992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063064981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9739ee1bf64e7f141947ba27561e04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashMaterial: {fileID: 2100000, guid: a304c27fc6d662544a67c81175fa0de1, type: 2}
 --- !u!1 &2068703591
 GameObject:
   m_ObjectHideFlags: 0
