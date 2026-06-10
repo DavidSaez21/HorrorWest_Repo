@@ -101,7 +101,23 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(deathToShopDelay);
         Time.timeScale = 1f;
-        Destroy(PlayerManager.Instance?.gameObject);
+
+        // Limpia mejoras in-run
+        PlayerManager.Instance?.Stats?.ResetStats();
+
+        // Limpia XP de la run
+        ExperienceManager.Instance?.ResetXP();
+
+        // Limpia pool de mejoras únicas
+        UpgradePool.Instance?.ResetPool();
+
+        // Destruye el Canvas persistente
+        var canvas = GameObject.FindObjectOfType<PersistentCanvas>();
+        if (canvas != null) Destroy(canvas.gameObject);
+
+        // Destruye el Player
+        if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
+
         SceneManager.LoadScene("SCN_Death");
     }
 
