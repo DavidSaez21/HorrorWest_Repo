@@ -25,6 +25,9 @@ public class AudioManager : MonoBehaviour
             InitSFXSlider();
         }
 
+        if (mode == AudioManagerMode.SFXOnly)
+            InitMusicSlider();
+
         if (mode == AudioManagerMode.MusicOnly || mode == AudioManagerMode.Full)
         {
             ApplyMusicVolume();
@@ -46,6 +49,9 @@ public class AudioManager : MonoBehaviour
             ApplySFXVolume();
             InitSFXSlider();
         }
+
+        if (mode == AudioManagerMode.SFXOnly)
+            InitMusicSlider();
 
         if (mode == AudioManagerMode.MusicOnly || mode == AudioManagerMode.Full)
         {
