@@ -8,8 +8,6 @@ public class SceneChangeTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(sceneName);
-        }
+            SceneFader.Instance?.FadeToScene(sceneName);
     }
 }

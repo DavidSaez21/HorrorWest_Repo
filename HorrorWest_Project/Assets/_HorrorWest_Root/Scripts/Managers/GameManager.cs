@@ -48,17 +48,14 @@ public class GameManager : MonoBehaviour
 
         if (CurrentLevel == 0)
         {
-            // Run nueva — resetea todo
             PlayerManager.Instance?.ResetForNewRun();
             UpgradePool.Instance?.ResetPool();
         }
         else
         {
-            // Nivel siguiente — re-registra únicas para que no vuelvan a salir
             PlayerManager.Instance?.Stats?.ReRegisterUniqueUpgrades();
         }
 
-        // Curación al inicio de escena (vendas)
         if (PermanentUpgradeManager.Instance != null && PlayerManager.Instance != null)
         {
             float healAmount = PermanentUpgradeManager.Instance.GetHealOnRunStart();
@@ -66,7 +63,6 @@ public class GameManager : MonoBehaviour
                 PlayerManager.Instance.Heal(healAmount);
         }
 
-        // Regeneración pasiva (pipa)
         if (PermanentUpgradeManager.Instance != null)
         {
             float regenPerSecond = PermanentUpgradeManager.Instance.GetHealthRegenPerSecond();
@@ -93,7 +89,7 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
         IsRunActive = false;
         OnPlayerDied?.Invoke();
-        Debug.Log("[GameManager] Jugador muerto. Cargando tienda...");
+        Debug.Log("[GameManager] Jugador muerto.");
         StartCoroutine(GoToShopAfterDelay());
     }
 
@@ -102,23 +98,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(deathToShopDelay);
         Time.timeScale = 1f;
 
-        // Limpia mejoras in-run
         PlayerManager.Instance?.Stats?.ResetStats();
-
-        // Limpia XP de la run
         ExperienceManager.Instance?.ResetXP();
-
-        // Limpia pool de mejoras únicas
         UpgradePool.Instance?.ResetPool();
 
-        // Destruye el Canvas persistente
         var canvas = GameObject.FindObjectOfType<PersistentCanvas>();
         if (canvas != null) Destroy(canvas.gameObject);
-
-        // Destruye el Player
         if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
 
-        SceneManager.LoadScene("SCN_Death");
+        SceneManager.LoadScene("SCN_Death"); // SCN_Death gestiona su propia transición
     }
 
     private void HandleLevelCompleted()
@@ -135,12 +123,12 @@ public class GameManager : MonoBehaviour
         {
             IsRunActive = false;
             OnRunCompleted?.Invoke();
-            SceneManager.LoadScene(menuScene);
+            SceneFader.Instance?.FadeToScene(menuScene);
         }
         else
         {
             OnLevelChanged?.Invoke(nextLevel);
-            SceneManager.LoadScene(levelScenes[nextLevel]);
+            SceneFader.Instance?.FadeToScene(levelScenes[nextLevel]);
         }
     }
 
@@ -153,13 +141,10 @@ public class GameManager : MonoBehaviour
         UpgradePool.Instance?.ResetPool();
 
         var canvas = FindObjectOfType<PersistentCanvas>();
-        Debug.Log($"[Surrender] Canvas encontrado: {canvas != null}");
         if (canvas != null) DestroyImmediate(canvas.gameObject);
-
-        Debug.Log($"[Surrender] Player encontrado: {PlayerManager.Instance != null}");
         if (PlayerManager.Instance != null) DestroyImmediate(PlayerManager.Instance.gameObject);
 
-        SceneManager.LoadScene("SCN_MainMenu");
+        SceneFader.Instance?.FadeToScene("SCN_MainMenu");
     }
 
     private int GetCurrentLevelIndex()

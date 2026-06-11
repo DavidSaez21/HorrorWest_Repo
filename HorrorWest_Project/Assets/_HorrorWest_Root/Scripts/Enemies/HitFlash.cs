@@ -4,18 +4,14 @@ using UnityEngine;
 public class HitFlash : MonoBehaviour
 {
     [SerializeField] private float flashDuration = 0.1f;
-    [SerializeField] private Material flashMaterial;  // asigna el material FlashWhite aquí
+    [SerializeField] private Material flashMaterial;
 
     private SpriteRenderer[] _renderers;
-    private Material[] _originalMaterials;
     private Coroutine _flashCoroutine;
 
     private void Awake()
     {
         _renderers = GetComponentsInChildren<SpriteRenderer>(true);
-        _originalMaterials = new Material[_renderers.Length];
-        for (int i = 0; i < _renderers.Length; i++)
-            _originalMaterials[i] = _renderers[i].material;
     }
 
     public void Flash()
@@ -28,13 +24,20 @@ public class HitFlash : MonoBehaviour
 
     private IEnumerator FlashRoutine()
     {
+        // Guarda los materiales actuales justo antes de flashear
+        Material[] currentMaterials = new Material[_renderers.Length];
+        for (int i = 0; i < _renderers.Length; i++)
+            currentMaterials[i] = _renderers[i] != null ? _renderers[i].material : null;
+
         foreach (var sr in _renderers)
             if (sr != null) sr.material = flashMaterial;
 
         yield return new WaitForSeconds(flashDuration);
 
+        // Restaura los materiales que había antes del flash
         for (int i = 0; i < _renderers.Length; i++)
-            if (_renderers[i] != null) _renderers[i].material = _originalMaterials[i];
+            if (_renderers[i] != null && currentMaterials[i] != null)
+                _renderers[i].material = currentMaterials[i];
 
         _flashCoroutine = null;
     }

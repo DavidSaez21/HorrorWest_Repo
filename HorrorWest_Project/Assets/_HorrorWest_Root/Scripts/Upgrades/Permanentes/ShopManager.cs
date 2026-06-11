@@ -7,8 +7,8 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     [Header("Navegación")]
-    [SerializeField] private string gameSceneName = "Level_1";
-    [SerializeField] private string menuSceneName = "SCN_Menu";
+    [SerializeField] private string gameSceneName = "SCN_LVL1";
+    [SerializeField] private string menuSceneName = "SCN_MainMenu";
 
     [Header("Monedas")]
     [SerializeField] private TextMeshProUGUI coinsText;
@@ -28,7 +28,6 @@ public class ShopManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // Espera a que los managers estén listos
         yield return new WaitUntil(() => CurrencyManager.Instance != null && PermanentUpgradeManager.Instance != null);
 
         playButton?.onClick.AddListener(OnPlayClicked);
@@ -64,29 +63,20 @@ public class ShopManager : MonoBehaviour
     {
         if (PermanentUpgradeManager.Instance == null) return;
 
-        revolverCard?.Setup(
-            weaponIndex: 0,
-            isUnlocked: true,
-            price: 0,
-            onBuy: null,
-            onSelect: () => PermanentUpgradeManager.Instance.SelectWeapon(0)
-        );
+        revolverCard?.Setup(weaponIndex: 0, isUnlocked: true, price: 0, onBuy: null,
+            onSelect: () => PermanentUpgradeManager.Instance.SelectWeapon(0));
 
-        shotgunCard?.Setup(
-            weaponIndex: 1,
+        shotgunCard?.Setup(weaponIndex: 1,
             isUnlocked: PermanentUpgradeManager.Instance.IsShotgunUnlocked(),
             price: PermanentUpgradeManager.Instance.GetShotgunCost(),
             onBuy: TryBuyShotgun,
-            onSelect: () => PermanentUpgradeManager.Instance.SelectWeapon(1)
-        );
+            onSelect: () => PermanentUpgradeManager.Instance.SelectWeapon(1));
 
-        rifleCard?.Setup(
-            weaponIndex: 2,
+        rifleCard?.Setup(weaponIndex: 2,
             isUnlocked: PermanentUpgradeManager.Instance.IsRifleUnlocked(),
             price: PermanentUpgradeManager.Instance.GetRifleCost(),
             onBuy: TryBuyRifle,
-            onSelect: () => PermanentUpgradeManager.Instance.SelectWeapon(2)
-        );
+            onSelect: () => PermanentUpgradeManager.Instance.SelectWeapon(2));
 
         RefreshWeaponCards();
     }
@@ -122,8 +112,8 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void OnPlayClicked() => SceneManager.LoadScene(gameSceneName);
-    private void OnBackClicked() => SceneManager.LoadScene(menuSceneName);
+    private void OnPlayClicked() => SceneFader.Instance?.FadeToScene(gameSceneName);
+    private void OnBackClicked() => SceneFader.Instance?.FadeToScene(menuSceneName);
 
     #region Debug
     [Header("Debug")]
@@ -131,13 +121,10 @@ public class ShopManager : MonoBehaviour
 
     [ContextMenu("Debug — Añadir 100 monedas")]
     private void DebugAdd100() => CurrencyManager.Instance?.AddCoins(100);
-
     [ContextMenu("Debug — Añadir 500 monedas")]
     private void DebugAdd500() => CurrencyManager.Instance?.AddCoins(500);
-
     [ContextMenu("Debug — Añadir 1000 monedas")]
     private void DebugAdd1000() => CurrencyManager.Instance?.AddCoins(1000);
-
     [ContextMenu("Debug — Reset monedas")]
     private void DebugResetCoins()
     {

@@ -223,7 +223,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 250
   m_TargetDisplay: 0
 --- !u!1 &530964421
 GameObject:
@@ -583,6 +583,8 @@ MonoBehaviour:
   - {fileID: 1537738610}
   - {fileID: 1003291687}
   fadeDuration: 1
+  displayDuration: 2
+  delayAfterLast: 2
   nextSceneName: SCN_LVL1
 --- !u!4 &1004159087
 Transform:
