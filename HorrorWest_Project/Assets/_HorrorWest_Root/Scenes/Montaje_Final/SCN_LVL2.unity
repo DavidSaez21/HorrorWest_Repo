@@ -107095,6 +107095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: silla_Bar_Sangre
       objectReference: {fileID: 0}
+    - target: {fileID: 5535680744967515317, guid: 8532caa1f10f06b4c8c6dcb7926917a0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8186299971678280598, guid: 8532caa1f10f06b4c8c6dcb7926917a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.25157
