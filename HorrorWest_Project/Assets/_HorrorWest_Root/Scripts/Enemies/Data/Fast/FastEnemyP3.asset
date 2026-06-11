@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Fast P3
   maxHealth: 35
-  moveSpeed: 3
+  moveSpeed: 6
   damage: 13
   defense: 0
   attackRange: 1.5

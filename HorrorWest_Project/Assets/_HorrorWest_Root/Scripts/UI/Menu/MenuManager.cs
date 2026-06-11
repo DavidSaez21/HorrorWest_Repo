@@ -101,7 +101,7 @@ public class MenuManager : MonoBehaviour
 
     public void ClickRestart()
     {
-        SceneManager.LoadScene("SCN_LVL1");
+        SceneManager.LoadScene("SCN_S1");
     }
 
     private IEnumerator LoadAfterSound(string sceneName)

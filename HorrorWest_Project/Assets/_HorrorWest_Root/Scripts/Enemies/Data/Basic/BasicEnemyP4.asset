@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Basic P4
   maxHealth: 90
-  moveSpeed: 3
+  moveSpeed: 4
   damage: 20
   defense: 0
   attackRange: 1.5

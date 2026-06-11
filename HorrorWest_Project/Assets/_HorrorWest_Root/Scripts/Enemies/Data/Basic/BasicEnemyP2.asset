@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Basic P2
   maxHealth: 45
-  moveSpeed: 3
+  moveSpeed: 4
   damage: 12
   defense: 0
   attackRange: 1.5

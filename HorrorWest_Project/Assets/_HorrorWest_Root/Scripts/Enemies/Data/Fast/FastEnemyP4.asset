@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Fast P4
   maxHealth: 50
-  moveSpeed: 3
+  moveSpeed: 6
   damage: 18
   defense: 0
   attackRange: 1.5

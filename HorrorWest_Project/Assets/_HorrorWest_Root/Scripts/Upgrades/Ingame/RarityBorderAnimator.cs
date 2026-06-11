@@ -5,13 +5,13 @@ public class RarityBorderAnimator : MonoBehaviour
 {
     [Header("Configuración")]
     [SerializeField] private Image borderImage;
-    [SerializeField] private UpgradeRarity rarity;
+    private UpgradeRarity rarity;
 
     [Header("Velocidad")]
     [SerializeField] private float shimmerSpeed = 1.5f;
 
-    [Header("Colores Common")]
-    [SerializeField] private Color[] commonColors = new Color[1];
+    [Header("Color Common (fijo)")]
+    [SerializeField] private Color commonColor = Color.gray;
 
     [Header("Colores Uncommon")]
     [SerializeField] private Color[] uncommonColors = new Color[6];
@@ -23,24 +23,30 @@ public class RarityBorderAnimator : MonoBehaviour
     [SerializeField] private Color[] legendaryColors = new Color[6];
 
     private Color[] _activeColors;
+    private bool _isStatic = false;
     private float _phase = 0f;
 
     private void Awake()
     {
         if (borderImage == null)
             borderImage = GetComponent<Image>();
-
-        UpdateActiveColors();
     }
 
     private void Update()
     {
+        if (borderImage == null) return;
+
+        if (_isStatic)
+        {
+            borderImage.color = commonColor;
+            return;
+        }
+
         if (_activeColors == null || _activeColors.Length < 2) return;
 
         _phase += Time.unscaledDeltaTime * shimmerSpeed;
 
-        // Cicla entre los 5 colores suavemente
-        float t = (_phase % _activeColors.Length);
+        float t = _phase % _activeColors.Length;
         int indexA = Mathf.FloorToInt(t) % _activeColors.Length;
         int indexB = (indexA + 1) % _activeColors.Length;
         float blend = t - Mathf.Floor(t);
@@ -51,18 +57,22 @@ public class RarityBorderAnimator : MonoBehaviour
     public void SetRarity(UpgradeRarity newRarity)
     {
         rarity = newRarity;
-        UpdateActiveColors();
-    }
 
-    private void UpdateActiveColors()
-    {
-        _activeColors = rarity switch
+        if (rarity == UpgradeRarity.Common)
         {
-            UpgradeRarity.Common => commonColors,
-            UpgradeRarity.Uncommon => uncommonColors,
-            UpgradeRarity.Rare => rareColors,
-            UpgradeRarity.Legendary => legendaryColors,
-            _ => commonColors
-        };
+            _isStatic = true;
+            _activeColors = null;
+        }
+        else
+        {
+            _isStatic = false;
+            _activeColors = rarity switch
+            {
+                UpgradeRarity.Uncommon => uncommonColors,
+                UpgradeRarity.Rare => rareColors,
+                UpgradeRarity.Legendary => legendaryColors,
+                _ => uncommonColors
+            };
+        }
     }
 }

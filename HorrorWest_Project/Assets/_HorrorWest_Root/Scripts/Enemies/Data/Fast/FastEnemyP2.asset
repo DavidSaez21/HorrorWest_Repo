@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Fast P2
   maxHealth: 30
-  moveSpeed: 3
+  moveSpeed: 6
   damage: 20
   defense: 0
   attackRange: 1.5

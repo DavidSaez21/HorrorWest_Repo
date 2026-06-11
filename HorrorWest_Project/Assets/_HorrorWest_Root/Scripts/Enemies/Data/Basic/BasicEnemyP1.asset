@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Basic P1
   maxHealth: 30
-  moveSpeed: 3
+  moveSpeed: 4
   damage: 8
   defense: 0
   attackRange: 1.5
