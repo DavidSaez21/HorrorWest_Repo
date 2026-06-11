@@ -522,7 +522,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -634,7 +634,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -787,9 +787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab2960df95915f4d9158451d94b70c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 0}
-  audioSource: {fileID: 0}
-  audioManager: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 349fde663730bd04284f2a4c94218f32, type: 3}
+  audioSource: {fileID: 597305034}
+  audioManager: {fileID: 597305033}
   volume: 1
 --- !u!114 &715401771
 MonoBehaviour:
@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19748ce35920e0445947a02a8ad93f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverAngle: 12
+  hoverAngle: 3
   swingSpeed: 2.2
   decaySpeed: 1.5
   smoothness: 0.92
