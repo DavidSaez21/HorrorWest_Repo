@@ -2830,6 +2830,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1735901433302111715, guid: 0ded1c64c706cb24cb2d484f5a8c50e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -18.700073
+      objectReference: {fileID: 0}
     - target: {fileID: 2574278540286511022, guid: 0ded1c64c706cb24cb2d484f5a8c50e3, type: 3}
       propertyPath: mode
       value: 1
@@ -2877,6 +2881,10 @@ PrefabInstance:
     - target: {fileID: 5143190303159781812, guid: 0ded1c64c706cb24cb2d484f5a8c50e3, type: 3}
       propertyPath: m_Name
       value: NewPauseSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284632361647459758, guid: 0ded1c64c706cb24cb2d484f5a8c50e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -18.700073
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11837,24 +11845,42 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812002673}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2ae936ec78be164583f77e7fc663b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
   - waveName: ' Wave 1'
-    enemies: []
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: e2c1232c6183a2a46b8958e017a515b4, type: 3}
+      count: 5
     timeLimit: 30
     timeBetweenSpawns: 0.8
-  spawnAreaCenter: {fileID: 0}
-  spawnRadius: 10.45
-  minSpawnDistance: 4
+  - waveName: ' Wave 3'
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 5ad871afad9882e42907ecdcb33229ec, type: 3}
+      count: 1
+    - enemyPrefab: {fileID: 7781392927723494484, guid: ed2c822839319ee41af329d9d1127c90, type: 3}
+      count: 5
+    timeLimit: 30
+    timeBetweenSpawns: 0.8
+  - waveName: ' Wave 2'
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: e2c1232c6183a2a46b8958e017a515b4, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: ed2c822839319ee41af329d9d1127c90, type: 3}
+      count: 5
+    timeLimit: 30
+    timeBetweenSpawns: 0.8
+  spawnAreaCenter: {fileID: 1021531793}
+  spawnRadius: 3.53
+  minSpawnDistance: 0.82
   timeBetweenWaves: 3
   autoStart: 1
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   obstacleCheckRadius: 0.5
 --- !u!4 &1812002675
 Transform:
