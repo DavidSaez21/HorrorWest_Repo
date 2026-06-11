@@ -87,7 +87,7 @@ public class PlayerManager : MonoBehaviour
     public void ResetForNewRun()
     {
         stats?.ResetStats();
-        // GameManager llamará a esto al iniciar cada run
+        health?.Heal(health.GetMaxHealth());//resetea vida a maxima
     }
 
     /// <summary>True si el jugador existe y está vivo.</summary>
