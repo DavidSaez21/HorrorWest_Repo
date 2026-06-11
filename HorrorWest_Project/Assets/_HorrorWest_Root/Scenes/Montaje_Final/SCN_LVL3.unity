@@ -1873,8 +1873,8 @@ MonoBehaviour:
   waves:
   - waveName: ' Wave 1'
     enemies:
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
-      count: 2
+    - enemyPrefab: {fileID: 7781392927723494484, guid: fd4f841f5b4aab94e8862d56090bd92d, type: 3}
+      count: 3
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 1834073059}
@@ -67364,8 +67364,16 @@ MonoBehaviour:
   waves:
   - waveName: ' Wave 1'
     enemies:
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 5e0bc4b5c9d091146a0b0b7e3bf95f08, type: 3}
+      count: 6
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 74e5124ca110d864db1b2c5178fb15e7, type: 3}
       count: 2
+    timeLimit: 30
+    timeBetweenSpawns: 0.8
+  - waveName: ' Wave 1'
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 5e0bc4b5c9d091146a0b0b7e3bf95f08, type: 3}
+      count: 8
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 2082272967}

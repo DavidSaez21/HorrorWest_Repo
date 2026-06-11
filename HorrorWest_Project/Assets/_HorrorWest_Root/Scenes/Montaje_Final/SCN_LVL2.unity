@@ -836,7 +836,19 @@ MonoBehaviour:
   waves:
   - waveName: ' Wave 1'
     enemies:
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
+      count: 2
+    timeLimit: 30
+    timeBetweenSpawns: 0.8
+  - waveName: ' Wave 1'
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
+      count: 4
+    timeLimit: 30
+    timeBetweenSpawns: 0.8
+  - waveName: ' Wave 1'
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: bce2d2f3cfc069345965622fab562450, type: 3}
       count: 2
     timeLimit: 30
     timeBetweenSpawns: 0.8
@@ -104251,14 +104263,26 @@ MonoBehaviour:
   waves:
   - waveName: ' Wave 1'
     enemies:
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
-      count: 0
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
+      count: 4
     - enemyPrefab: {fileID: 7781392927723494484, guid: f9908e3d246d08b47bab786a06d90f91, type: 3}
       count: 0
     - enemyPrefab: {fileID: 7781392927723494484, guid: bce2d2f3cfc069345965622fab562450, type: 3}
       count: 0
     - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
-      count: 1
+      count: 0
+    timeLimit: 30
+    timeBetweenSpawns: 0.8
+  - waveName: ' Wave 1'
+    enemies:
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: f9908e3d246d08b47bab786a06d90f91, type: 3}
+      count: 0
+    - enemyPrefab: {fileID: 7781392927723494484, guid: bce2d2f3cfc069345965622fab562450, type: 3}
+      count: 0
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
+      count: 0
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 1784582222}
