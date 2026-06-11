@@ -17,6 +17,6 @@ MonoBehaviour:
   icon: {fileID: 0}
   upgradeType: 5
   maxLevel: 3
-  valuePerLevel: 5
-  baseCost: 0
+  valuePerLevel: 0.05
+  baseCost: 45
   costScaleMultiplier: 2

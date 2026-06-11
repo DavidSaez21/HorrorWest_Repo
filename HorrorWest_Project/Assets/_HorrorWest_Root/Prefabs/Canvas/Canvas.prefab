@@ -931,10 +931,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7983367339921563362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.013438543, y: 0.8871111}
-  m_AnchorMax: {x: 0.42700002, y: 0.9760001}
-  m_AnchoredPosition: {x: 0.5336914, y: 6}
-  m_SizeDelta: {x: -6.932007, y: 4}
+  m_AnchorMin: {x: 0.012396877, y: 0.8658178}
+  m_AnchorMax: {x: 0.42700002, y: 0.95652044}
+  m_AnchoredPosition: {x: 1.5336914, y: -1}
+  m_SizeDelta: {x: -8.932007, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &605256764328750855
 MonoBehaviour:
@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 4697848552383652935}
   - component: {fileID: 3575128810343278277}
   - component: {fileID: 6901656132775368460}
-  - component: {fileID: 4091264706758355878}
+  - component: {fileID: 2715987472152400890}
   m_Layer: 5
   m_Name: RarityBorder
   m_TagString: Untagged
@@ -997,7 +997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -12}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3575128810343278277
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f4bf1043b2106c4a998cf28b26bc70c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f373714636911824a95b00e0d4c8d8f9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4091264706758355878
+--- !u!114 &2715987472152400890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1052,8 +1052,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   borderImage: {fileID: 6901656132775368460}
   rarity: 0
-  shimmerSpeed: 1
-  shimmerIntensity: 0.15
+  shimmerSpeed: 2
+  commonColors:
+  - {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 1}
+  uncommonColors:
+  - {r: 0, g: 0.6509804, b: 0.8, a: 1}
+  - {r: 0, g: 0.57254905, b: 0.9019608, a: 1}
+  - {r: 0, g: 0.4509804, b: 0.9529412, a: 1}
+  - {r: 0.047058824, g: 0.3372549, b: 1, a: 1}
+  - {r: 0, g: 0.4509804, b: 0.9529412, a: 1}
+  - {r: 0, g: 0.57254905, b: 0.9019608, a: 1}
+  rareColors:
+  - {r: 0.7019608, g: 0.047058824, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 1, a: 1}
+  - {r: 0.5176471, g: 0, b: 1, a: 1}
+  - {r: 0.41960785, g: 0, b: 0.8509804, a: 1}
+  - {r: 0.5176471, g: 0, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 1, a: 1}
+  legendaryColors:
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.84313726, b: 0.1882353, a: 1}
+  - {r: 1, g: 0.6862745, b: 0.2509804, a: 1}
+  - {r: 1, g: 0.627451, b: 0.050980393, a: 1}
+  - {r: 1, g: 0.6862745, b: 0.2509804, a: 1}
+  - {r: 1, g: 0.84313726, b: 0.1882353, a: 1}
 --- !u!1 &1718529481077172200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2031,7 @@ GameObject:
   - component: {fileID: 3601763284391617031}
   - component: {fileID: 5579474418316515556}
   - component: {fileID: 4633028293627688059}
-  - component: {fileID: 3025380859765231105}
+  - component: {fileID: 6750208788951211914}
   m_Layer: 5
   m_Name: RarityBorder
   m_TagString: Untagged
@@ -2033,7 +2055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5579474418316515556
@@ -2064,7 +2086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 24aaa428bec84074381eaefa91a447ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ef0f3b2b17c52546aaf2673f48f3b31, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2074,7 +2096,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3025380859765231105
+--- !u!114 &6750208788951211914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2088,8 +2110,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   borderImage: {fileID: 4633028293627688059}
   rarity: 0
-  shimmerSpeed: 1
-  shimmerIntensity: 0.15
+  shimmerSpeed: 2
+  commonColors:
+  - {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 1}
+  uncommonColors:
+  - {r: 0, g: 0.6509804, b: 0.8, a: 1}
+  - {r: 0, g: 0.57254905, b: 0.9019608, a: 1}
+  - {r: 0, g: 0.4509804, b: 0.9529412, a: 1}
+  - {r: 0.047058824, g: 0.3372549, b: 1, a: 1}
+  - {r: 0, g: 0.4509804, b: 0.9529412, a: 1}
+  - {r: 0, g: 0.57254905, b: 0.9019608, a: 1}
+  rareColors:
+  - {r: 0.7019608, g: 0.047058824, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 1, a: 1}
+  - {r: 0.5176471, g: 0, b: 1, a: 1}
+  - {r: 0.41960785, g: 0, b: 0.8509804, a: 1}
+  - {r: 0.5176471, g: 0, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 1, a: 1}
+  legendaryColors:
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.84313726, b: 0.1882353, a: 1}
+  - {r: 1, g: 0.6862745, b: 0.2509804, a: 1}
+  - {r: 1, g: 0.627451, b: 0.050980393, a: 1}
+  - {r: 1, g: 0.6862745, b: 0.2509804, a: 1}
+  - {r: 1, g: 0.84313726, b: 0.1882353, a: 1}
 --- !u!1 &4576680958761513460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,7 +2306,7 @@ MonoBehaviour:
   iconImage: {fileID: 2766597390877868376}
   nameText: {fileID: 2416348687421026407}
   descriptionText: {fileID: 2351480380010554088}
-  rarityAnimator: {fileID: 4091264706758355878}
+  rarityAnimator: {fileID: 2715987472152400890}
   tooltipPanel: {fileID: 0}
   tooltipText: {fileID: 0}
   hoverScale: 1.08
@@ -3367,7 +3411,7 @@ MonoBehaviour:
   iconImage: {fileID: 7461172690951166601}
   nameText: {fileID: 138228656134680937}
   descriptionText: {fileID: 6676772212758768201}
-  rarityAnimator: {fileID: 3025380859765231105}
+  rarityAnimator: {fileID: 6750208788951211914}
   tooltipPanel: {fileID: 0}
   tooltipText: {fileID: 0}
   hoverScale: 1.08
@@ -3788,7 +3832,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 318354c7338c4094682cc5db8adbee0d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ddd2636784aa8d43a37714dd71de988, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3812,8 +3856,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   borderImage: {fileID: 2630229218012327838}
   rarity: 0
-  shimmerSpeed: 1
-  shimmerIntensity: 0.15
+  shimmerSpeed: 2
+  commonColors:
+  - {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 1}
+  uncommonColors:
+  - {r: 0, g: 0.6509804, b: 0.8, a: 1}
+  - {r: 0, g: 0.57254905, b: 0.9019608, a: 1}
+  - {r: 0, g: 0.4509804, b: 0.9529412, a: 1}
+  - {r: 0.047058824, g: 0.3372549, b: 1, a: 1}
+  - {r: 0, g: 0.4509804, b: 0.9529412, a: 1}
+  - {r: 0, g: 0.57254905, b: 0.9019608, a: 1}
+  rareColors:
+  - {r: 0.7019608, g: 0.047058824, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 1, a: 1}
+  - {r: 0.5176471, g: 0, b: 1, a: 1}
+  - {r: 0.41960785, g: 0, b: 0.8509804, a: 1}
+  - {r: 0.5176471, g: 0, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 1, a: 1}
+  legendaryColors:
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.84313726, b: 0.1882353, a: 1}
+  - {r: 1, g: 0.6862745, b: 0.2509804, a: 1}
+  - {r: 1, g: 0.627451, b: 0.050980393, a: 1}
+  - {r: 1, g: 0.6862745, b: 0.2509804, a: 1}
+  - {r: 1, g: 0.84313726, b: 0.1882353, a: 1}
 --- !u!1 &8177061506655036025
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: TankEnemyP2
   m_EditorClassIdentifier: 
   enemyName: Tank P2
-  maxHealth: 1000
+  maxHealth: 100
   moveSpeed: 3
-  damage: 15
+  damage: 18
   defense: 0
   attackRange: 1
   attackCooldown: 1
-  xpReward: 40
-  dropChance: 0.8
-  dropChanceCoinOne: 70
-  dropChanceCoinFive: 25
-  dropChanceCoinTen: 5
+  xpReward: 18
+  dropChance: 0.6
+  dropChanceCoinOne: 0
+  dropChanceCoinFive: 100
+  dropChanceCoinTen: 0

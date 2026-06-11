@@ -15,6 +15,9 @@ public class Coin : MonoBehaviour
     [Header("Imán")]
     [SerializeField] private float magnetSpeed = 15f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip pickupSound;
+
     private bool canPickup = false;
     private Collider2D col;
     private Transform player;
@@ -82,15 +85,15 @@ public class Coin : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         int baseValue = (int)coinValue;
-
-        // Aplica bonus de botín permanente
-        // Nivel 1 = +0.4, Nivel 2 = +0.8, ... Nivel 5 = +2.0
-        // Moneda de 1 con nivel 5 da 3 (1 + 2)
         float lootBonus = PlayerManager.Instance?.Stats?.GetLootBonus() ?? 0f;
         int finalValue = Mathf.RoundToInt(baseValue + lootBonus);
-        finalValue = Mathf.Max(baseValue, finalValue); // nunca menos que el valor base
+        finalValue = Mathf.Max(baseValue, finalValue);
 
         CurrencyManager.Instance?.AddCoins(finalValue);
+
+        if (pickupSound != null)
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position, PlayerPrefs.GetFloat("sfxVolume", 1f));
+
         Destroy(gameObject);
     }
 }

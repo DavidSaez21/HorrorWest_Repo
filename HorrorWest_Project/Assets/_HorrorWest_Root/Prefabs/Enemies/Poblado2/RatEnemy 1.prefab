@@ -188,7 +188,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: -938983111, guid: 8780d08caa1348f49855798ebf1b2505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -295,6 +295,7 @@ MonoBehaviour:
   bloodSplatterPrefab: {fileID: 1186194621453547535, guid: 503d37b53419691478678b16274c87ad, type: 3}
   plagueVFXPrefab: {fileID: 6728048740147977068, guid: 9e196a914ca60c14e91b5dfc2fa3d47b, type: 3}
   plagueVFXSpawnPoint: {fileID: 6536260797568846353}
+  plagueMaterial: {fileID: 2100000, guid: b727fe294864ada4a84beb9f176f4437, type: 2}
   knockbackForce: 4
   knockbackDuration: 0.15
   separationRadius: 0.6

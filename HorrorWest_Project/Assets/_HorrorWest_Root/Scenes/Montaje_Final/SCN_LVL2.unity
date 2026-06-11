@@ -837,13 +837,21 @@ MonoBehaviour:
   - waveName: ' Wave 1'
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
-      count: 2
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: fe103e1f80299cb42bef28673738125d, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 815cb5c3fc1f2fd4bb5c5455a2ed0545, type: 3}
+      count: 1
     timeLimit: 30
     timeBetweenSpawns: 0.8
   - waveName: ' Wave 1'
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
-      count: 4
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: fe103e1f80299cb42bef28673738125d, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 815cb5c3fc1f2fd4bb5c5455a2ed0545, type: 3}
+      count: 1
     timeLimit: 30
     timeBetweenSpawns: 0.8
   - waveName: ' Wave 1'
@@ -853,7 +861,7 @@ MonoBehaviour:
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 635621214}
-  spawnRadius: 25.33
+  spawnRadius: 23.5
   minSpawnDistance: 4
   timeBetweenWaves: 3
   autoStart: 0
@@ -5639,7 +5647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1039223811
 Transform:
   m_ObjectHideFlags: 0
@@ -104265,24 +104273,20 @@ MonoBehaviour:
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
       count: 4
-    - enemyPrefab: {fileID: 7781392927723494484, guid: f9908e3d246d08b47bab786a06d90f91, type: 3}
-      count: 0
+    - enemyPrefab: {fileID: 7781392927723494484, guid: fe103e1f80299cb42bef28673738125d, type: 3}
+      count: 3
     - enemyPrefab: {fileID: 7781392927723494484, guid: bce2d2f3cfc069345965622fab562450, type: 3}
-      count: 0
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
-      count: 0
+      count: 1
     timeLimit: 30
     timeBetweenSpawns: 0.8
-  - waveName: ' Wave 1'
+  - waveName: Wave 2
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 0dfba34c9294bc341a900fa55c4f0aa4, type: 3}
+      count: 4
+    - enemyPrefab: {fileID: 7781392927723494484, guid: fe103e1f80299cb42bef28673738125d, type: 3}
       count: 3
-    - enemyPrefab: {fileID: 7781392927723494484, guid: f9908e3d246d08b47bab786a06d90f91, type: 3}
-      count: 0
     - enemyPrefab: {fileID: 7781392927723494484, guid: bce2d2f3cfc069345965622fab562450, type: 3}
-      count: 0
-    - enemyPrefab: {fileID: 7781392927723494484, guid: 979f903898c7a3049a09c51ec013950a, type: 3}
-      count: 0
+      count: 1
     timeLimit: 30
     timeBetweenSpawns: 0.8
   spawnAreaCenter: {fileID: 1784582222}

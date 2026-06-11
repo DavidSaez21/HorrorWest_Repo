@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 1201236537, guid: 31e20268a97c0cb4eb7b9e1498f25f61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -215,7 +215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 725513235, guid: 31e20268a97c0cb4eb7b9e1498f25f61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -339,7 +339,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 259104108, guid: 31e20268a97c0cb4eb7b9e1498f25f61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -442,7 +442,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_Sprite: {fileID: -1013754591, guid: 31e20268a97c0cb4eb7b9e1498f25f61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -551,6 +551,7 @@ MonoBehaviour:
   bloodSplatterPrefab: {fileID: 1186194621453547535, guid: 503d37b53419691478678b16274c87ad, type: 3}
   plagueVFXPrefab: {fileID: 6728048740147977068, guid: 9e196a914ca60c14e91b5dfc2fa3d47b, type: 3}
   plagueVFXSpawnPoint: {fileID: 8525582835199993183}
+  plagueMaterial: {fileID: 2100000, guid: b727fe294864ada4a84beb9f176f4437, type: 2}
   knockbackForce: 4
   knockbackDuration: 0.15
   separationRadius: 0.6

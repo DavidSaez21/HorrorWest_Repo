@@ -16,6 +16,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private GameObject bloodSplatterPrefab;
     [SerializeField] private GameObject plagueVFXPrefab;
     [SerializeField] private Transform plagueVFXSpawnPoint;
+    [SerializeField] private Material plagueMaterial;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 5f;
@@ -71,8 +72,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             player = playerObj.transform;
     }
 
-
-
     protected virtual void Update()
     {
         if (isDead || player == null) return;
@@ -121,15 +120,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void PerformAttack()
     {
-        // Solo lanza la animación — el daño se aplica desde el Animation Event
         SetAnimTrigger("isAttacking");
     }
 
-    // Llamar desde Animation Event en el frame del golpe
     public void DealDamageToPlayer()
     {
         if (isDead) return;
-        if (DistanceToPlayer() > data.attackRange * 1.5f) return; // margen de seguridad
+        if (DistanceToPlayer() > data.attackRange * 1.5f) return;
         if (player.TryGetComponent(out PlayerHealth ph))
             ph.TakeDamage(data.damage);
     }
@@ -166,7 +163,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount) => TakeDamage(amount, Vector2.zero);
 
-    // Para daño de plaga/veneno — sin flash ni knockback ni daño mínimo
     public void TakeDamageSilent(float amount)
     {
         if (isDead) return;
@@ -181,11 +177,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         float finalDamage = Mathf.Max(1f, amount - data.defense);
         currentHealth -= finalDamage;
 
-        // Flash blanco al recibir daño
         if (_hitFlash == null) _hitFlash = GetComponentInChildren<HitFlash>(true);
         _hitFlash?.Flash();
 
-        // Salpicadura de sangre
         if (bloodSplatterPrefab != null)
             Instantiate(bloodSplatterPrefab, transform.position, Quaternion.identity);
 
@@ -236,6 +230,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public float GetHealthPercent() => currentHealth / data.maxHealth;
     public GameObject GetPlagueVFXPrefab() => plagueVFXPrefab;
     public Transform GetPlagueVFXSpawnPoint() => plagueVFXSpawnPoint != null ? plagueVFXSpawnPoint : transform;
+    public Material GetPlagueMaterial() => plagueMaterial;
 
     private void TryInstantReload()
     {

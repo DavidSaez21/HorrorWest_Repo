@@ -27972,6 +27972,8 @@ MonoBehaviour:
   - waveName: ' Wave 1'
     enemies:
     - enemyPrefab: {fileID: 7781392927723494484, guid: 12cccbbe4c744b54e87ba79abc3451fa, type: 3}
+      count: 5
+    - enemyPrefab: {fileID: 7781392927723494484, guid: 827371717e3a5f14d94fb6a8a2ba0076, type: 3}
       count: 4
     timeLimit: 30
     timeBetweenSpawns: 0.8

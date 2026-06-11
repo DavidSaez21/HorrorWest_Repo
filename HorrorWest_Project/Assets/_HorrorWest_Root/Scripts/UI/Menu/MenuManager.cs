@@ -8,11 +8,9 @@ public class MenuManager : MonoBehaviour
     public GameObject panelControls;
     public GameObject panelAudio;
     public ButtonSound buttonSound;
-
     public WesternSignSwing btnPlay;
     public WesternSignSwing btnOptions;
     public WesternSignSwing btnExit;
-
     public WesternSignSwing btnControls;
     public WesternSignSwing btnAudio;
     public WesternSignSwing btnCloseOptions;
@@ -33,7 +31,16 @@ public class MenuManager : MonoBehaviour
 
     public void ClickPlay()
     {
-        SceneManager.LoadScene("SCN_Tienda");
+        if (PlayerPrefs.GetInt("HasPlayed", 0) == 0)
+        {
+            PlayerPrefs.SetInt("HasPlayed", 1);
+            PlayerPrefs.Save();
+            StartCoroutine(LoadAfterSound("SCN_S1"));
+        }
+        else
+        {
+            StartCoroutine(LoadAfterSound("SCN_Tienda"));
+        }
     }
 
     public void ClickQuit()

@@ -6751,8 +6751,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c750bc19922815841b3b111d7633037c, type: 2}
   - {fileID: 11400000, guid: d0ea5d896c35eca41955ec8848ce3cb1, type: 2}
   - {fileID: 11400000, guid: 80e0184980ee4c74080ba768af322472, type: 2}
-  shotgunCost: 150
-  rifleCost: 300
+  shotgunCost: 300
+  rifleCost: 150
   _debugUpgrade: {fileID: 0}
   _debugTargetLevel: 0
 --- !u!4 &1091915769

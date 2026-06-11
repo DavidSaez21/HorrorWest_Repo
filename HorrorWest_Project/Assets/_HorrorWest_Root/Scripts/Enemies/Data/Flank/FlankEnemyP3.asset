@@ -15,12 +15,12 @@ MonoBehaviour:
   enemyName: Flanker P3
   maxHealth: 80
   moveSpeed: 3
-  damage: 30
+  damage: 20
   defense: 0
   attackRange: 5
   attackCooldown: 1
-  xpReward: 40
-  dropChance: 0.8
-  dropChanceCoinOne: 70
-  dropChanceCoinFive: 25
-  dropChanceCoinTen: 5
+  xpReward: 14
+  dropChance: 0.6
+  dropChanceCoinOne: 0
+  dropChanceCoinFive: 100
+  dropChanceCoinTen: 0

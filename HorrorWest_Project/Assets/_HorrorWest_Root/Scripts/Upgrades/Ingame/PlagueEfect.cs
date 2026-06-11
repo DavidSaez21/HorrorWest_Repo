@@ -6,31 +6,35 @@ public class PlagueEffect : MonoBehaviour
     private float _damagePerSecond;
     private float _duration;
     private GameObject _vfxInstance;
-    private Transform _anchor;
+    private SpriteRenderer[] _renderers;
+    private Material[] _originalMaterials;
 
     [SerializeField] private GameObject plagueVFXPrefab;
+    [SerializeField] private Material plagueMaterial;
 
-    public void Init(float dps, float duration, GameObject vfxPrefab = null, Transform spawnPoint = null)
+    public void Init(float dps, float duration, GameObject vfxPrefab = null, Transform spawnPoint = null, Material mat = null)
     {
         _damagePerSecond = dps;
         _duration = duration;
-        _anchor = spawnPoint != null ? spawnPoint : transform;
 
-        if (vfxPrefab != null)
-            plagueVFXPrefab = vfxPrefab;
+        if (vfxPrefab != null) plagueVFXPrefab = vfxPrefab;
+        if (mat != null) plagueMaterial = mat;
 
-        // Instancia sin padre, en la raíz de la escena
+        // Aplica material verde a todos los renderers
+        _renderers = GetComponentsInChildren<SpriteRenderer>(true);
+        _originalMaterials = new Material[_renderers.Length];
+        for (int i = 0; i < _renderers.Length; i++)
+            _originalMaterials[i] = _renderers[i].material;
+
+        if (plagueMaterial != null)
+            foreach (var sr in _renderers)
+                if (sr != null) sr.material = plagueMaterial;
+
+        Transform anchor = spawnPoint != null ? spawnPoint : transform;
         if (plagueVFXPrefab != null)
-            _vfxInstance = Instantiate(plagueVFXPrefab, _anchor.position, Quaternion.identity);
+            _vfxInstance = Instantiate(plagueVFXPrefab, anchor.position, Quaternion.identity, anchor);
 
         StartCoroutine(PlagueRoutine());
-    }
-
-    private void Update()
-    {
-        // Sigue al enemigo manualmente
-        if (_vfxInstance != null && _anchor != null)
-            _vfxInstance.transform.position = _anchor.position;
     }
 
     private IEnumerator PlagueRoutine()
@@ -44,6 +48,10 @@ public class PlagueEffect : MonoBehaviour
             enemy?.TakeDamageSilent(_damagePerSecond * Time.deltaTime);
             yield return null;
         }
+
+        // Restaura materiales originales
+        for (int i = 0; i < _renderers.Length; i++)
+            if (_renderers[i] != null) _renderers[i].material = _originalMaterials[i];
 
         if (_vfxInstance != null)
             Destroy(_vfxInstance);

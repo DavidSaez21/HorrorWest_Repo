@@ -7,53 +7,62 @@ public class RarityBorderAnimator : MonoBehaviour
     [SerializeField] private Image borderImage;
     [SerializeField] private UpgradeRarity rarity;
 
-    [Header("Animación")]
+    [Header("Velocidad")]
     [SerializeField] private float shimmerSpeed = 1.5f;
-    [SerializeField] private float shimmerIntensity = 0.15f; // cuanto varía el brillo
 
-    // Colores base por rareza
-    private static readonly Color ColorCommon = new Color(0.6f, 0.6f, 0.6f);
-    private static readonly Color ColorUncommon = new Color(0.12f, 0.56f, 1f);
-    private static readonly Color ColorRare = new Color(0.63f, 0.13f, 0.94f);
-    private static readonly Color ColorLegendary = new Color(1f, 0.75f, 0f);
+    [Header("Colores Common")]
+    [SerializeField] private Color[] commonColors = new Color[1];
 
-    private Color _baseColor;
+    [Header("Colores Uncommon")]
+    [SerializeField] private Color[] uncommonColors = new Color[6];
+
+    [Header("Colores Rare")]
+    [SerializeField] private Color[] rareColors = new Color[6];
+
+    [Header("Colores Legendary")]
+    [SerializeField] private Color[] legendaryColors = new Color[6];
+
+    private Color[] _activeColors;
+    private float _phase = 0f;
 
     private void Awake()
     {
         if (borderImage == null)
             borderImage = GetComponent<Image>();
 
-        _baseColor = GetBaseColor(rarity);
+        UpdateActiveColors();
     }
 
     private void Update()
     {
-        float shimmer = Mathf.Sin(Time.unscaledTime * shimmerSpeed * Mathf.PI) * shimmerIntensity;
-        Color animated = new Color(
-            Mathf.Clamp01(_baseColor.r + shimmer),
-            Mathf.Clamp01(_baseColor.g + shimmer),
-            Mathf.Clamp01(_baseColor.b + shimmer),
-            1f
-        );
-        borderImage.color = animated;
+        if (_activeColors == null || _activeColors.Length < 2) return;
+
+        _phase += Time.unscaledDeltaTime * shimmerSpeed;
+
+        // Cicla entre los 5 colores suavemente
+        float t = (_phase % _activeColors.Length);
+        int indexA = Mathf.FloorToInt(t) % _activeColors.Length;
+        int indexB = (indexA + 1) % _activeColors.Length;
+        float blend = t - Mathf.Floor(t);
+
+        borderImage.color = Color.Lerp(_activeColors[indexA], _activeColors[indexB], blend);
     }
 
     public void SetRarity(UpgradeRarity newRarity)
     {
         rarity = newRarity;
-        _baseColor = GetBaseColor(rarity);
+        UpdateActiveColors();
     }
 
-    private Color GetBaseColor(UpgradeRarity r)
+    private void UpdateActiveColors()
     {
-        return r switch
+        _activeColors = rarity switch
         {
-            UpgradeRarity.Common => ColorCommon,
-            UpgradeRarity.Uncommon => ColorUncommon,
-            UpgradeRarity.Rare => ColorRare,
-            UpgradeRarity.Legendary => ColorLegendary,
-            _ => Color.white
+            UpgradeRarity.Common => commonColors,
+            UpgradeRarity.Uncommon => uncommonColors,
+            UpgradeRarity.Rare => rareColors,
+            UpgradeRarity.Legendary => legendaryColors,
+            _ => commonColors
         };
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7553316573295605139}
   - component: {fileID: 7458961719194955673}
-  - component: {fileID: 8024615434811064109}
+  - component: {fileID: 6559139051856272145}
   m_Layer: 7
   m_Name: carne ojos
   m_TagString: Untagged
@@ -88,8 +88,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &8024615434811064109
-PolygonCollider2D:
+--- !u!58 &6559139051856272145
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,49 +122,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.95, y: 1.63}
-    newSize: {x: 1.95, y: 1.63}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.42499998, y: -0.565}
-      - {x: 0.515, y: -0.545}
-      - {x: 0.765, y: -0.465}
-      - {x: 0.97499996, y: -0.21499999}
-      - {x: 0.97499996, y: -0.065}
-      - {x: 0.945, y: -0.015}
-      - {x: 0.85499996, y: 0.055}
-      - {x: 0.895, y: 0.16499999}
-      - {x: 0.885, y: 0.255}
-      - {x: 0.655, y: 0.465}
-      - {x: 0.48499998, y: 0.585}
-      - {x: 0.315, y: 0.655}
-      - {x: 0.16499999, y: 0.705}
-      - {x: -0.044999998, y: 0.815}
-      - {x: -0.315, y: 0.815}
-      - {x: -0.385, y: 0.765}
-      - {x: -0.42499998, y: 0.705}
-      - {x: -0.565, y: 0.545}
-      - {x: -0.705, y: 0.39499998}
-      - {x: -0.79499996, y: 0.285}
-      - {x: -0.935, y: 0.145}
-      - {x: -0.97499996, y: 0.065}
-      - {x: -0.97499996, y: -0.035}
-      - {x: -0.885, y: -0.125}
-      - {x: -0.865, y: -0.305}
-      - {x: -0.575, y: -0.555}
-      - {x: -0.445, y: -0.645}
-      - {x: -0.445, y: -0.775}
-      - {x: -0.385, y: -0.815}
-      - {x: -0.225, y: -0.815}
-      - {x: -0.065, y: -0.695}
-      - {x: 0.074999996, y: -0.705}
-      - {x: 0.235, y: -0.695}
-  m_UseDelaunayMesh: 0
+  m_Offset: {x: -0.09027606, y: 0.014442444}
+  m_Radius: 0.72584534

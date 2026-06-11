@@ -76,7 +76,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // Cancela el timer de auto-destrucción antes de explotar
         CancelInvoke();
         TryExplode();
         Destroy(gameObject);
@@ -123,8 +122,13 @@ public class Projectile : MonoBehaviour
 
         if (!other.TryGetComponent(out PlagueEffect _))
         {
+            EnemyBase enemy = other.GetComponent<EnemyBase>();
+            GameObject vfx = enemy != null ? enemy.GetPlagueVFXPrefab() : null;
+            Transform spawnPoint = enemy != null ? enemy.GetPlagueVFXSpawnPoint() : other.transform;
+            Material mat = enemy != null ? enemy.GetPlagueMaterial() : null;
+
             PlagueEffect plague = other.gameObject.AddComponent<PlagueEffect>();
-            plague.Init(plagueDamagePerSecond, plagueDuration);
+            plague.Init(plagueDamagePerSecond, plagueDuration, vfx, spawnPoint, mat);
         }
     }
 
@@ -132,7 +136,6 @@ public class Projectile : MonoBehaviour
     {
         if (PlayerManager.Instance.Stats == null || !PlayerManager.Instance.Stats.hasExplosiveBullets) return;
 
-        // VFX de explosión
         if (explosionVFXPrefab != null)
             Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity);
 

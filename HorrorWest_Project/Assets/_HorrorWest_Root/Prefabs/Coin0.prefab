@@ -142,3 +142,4 @@ MonoBehaviour:
   jumpDuration: 0.3
   landDuration: 0.15
   magnetSpeed: 15
+  pickupSound: {fileID: 8300000, guid: b4efcea053a567143bcd5f12edec8e5c, type: 3}

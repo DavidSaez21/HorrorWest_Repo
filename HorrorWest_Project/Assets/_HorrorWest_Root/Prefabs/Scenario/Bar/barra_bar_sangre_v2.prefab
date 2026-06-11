@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7942890334000937874}
   - component: {fileID: 4735091284819437292}
-  - component: {fileID: 2500336337262988169}
+  - component: {fileID: 8516367198395472151}
+  - component: {fileID: 8136558565639103386}
   m_Layer: 7
   m_Name: barra_bar_sangre_v2
   m_TagString: Untagged
@@ -88,8 +89,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2500336337262988169
-PolygonCollider2D:
+--- !u!61 &8516367198395472151
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,7 +123,7 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.78877604, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -132,28 +133,51 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.089999996, y: -1.64}
-      - {x: -0.08, y: -1.31}
-      - {x: -0.089999996, y: -1.05}
-      - {x: -0.099999994, y: -1.05}
-      - {x: -0.099999994, y: 1.14}
-      - {x: -0.08, y: 1.49}
-      - {x: 0.24, y: 1.49}
-      - {x: 1.12, y: 1.48}
-      - {x: 1.42, y: 1.4599999}
-      - {x: 1.4699999, y: 1.55}
-      - {x: 1.49, y: 1.62}
-      - {x: 1.5, y: 1.88}
-      - {x: 1.5, y: 2.3899999}
-      - {x: 1.4699999, y: 2.3999999}
-      - {x: -1.49, y: 2.3999999}
-      - {x: -1.5, y: 2.3899999}
-      - {x: -1.5, y: -2.3799999}
-      - {x: -1.48, y: -2.3999999}
-      - {x: -0.29, y: -2.3999999}
-      - {x: -0.11, y: -2.27}
-      - {x: -0.08, y: -2.22}
-      - {x: -0.08, y: -1.92}
-  m_UseDelaunayMesh: 0
+  m_Size: {x: 1.3755562, y: 4.8}
+  m_EdgeRadius: 0
+--- !u!61 &8136558565639103386
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118787323596583551}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.00961864, y: 1.9623215}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.8, y: 4.8}
+    newSize: {x: 4.8, y: 4.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.933871, y: 0.87535715}
+  m_EdgeRadius: 0

@@ -19,8 +19,8 @@ MonoBehaviour:
   defense: 0
   attackRange: 1.5
   attackCooldown: 1
-  xpReward: 15
-  dropChance: 0.8
-  dropChanceCoinOne: 70
-  dropChanceCoinFive: 25
-  dropChanceCoinTen: 5
+  xpReward: 4
+  dropChance: 0.6
+  dropChanceCoinOne: 100
+  dropChanceCoinFive: 0
+  dropChanceCoinTen: 0
