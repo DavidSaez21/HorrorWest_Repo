@@ -38,6 +38,7 @@ public class MenuManager : MonoBehaviour
 
     public void ClickQuit()
     {
+        Application.Quit();
         Debug.Log("Has cerrado el juego");
     }
 
