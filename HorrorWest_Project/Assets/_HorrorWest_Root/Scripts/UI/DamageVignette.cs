@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class DamageVignette : MonoBehaviour
@@ -11,32 +12,55 @@ public class DamageVignette : MonoBehaviour
     [SerializeField] private float minAlpha = 0.1f;             // opacidad mínima al 35%
     [SerializeField] private float maxAlpha = 0.85f;            // opacidad máxima al 0%
 
-    private void Start()
+    private PlayerHealth _subscribedHealth;
+
+    private void OnEnable()
     {
-        if (PlayerHealth.Instance != null)
+        StartCoroutine(KeepConnected());
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    // Vigila si el PlayerHealth cambia (player nuevo en cada run) y se reconecta
+    private IEnumerator KeepConnected()
+    {
+        while (true)
         {
-            PlayerHealth.Instance.OnHealthChanged += OnHealthChanged;
-            // Fuerza la actualización al inicio con la vida actual
-            OnHealthChanged(PlayerHealth.Instance.GetCurrentHealth(), PlayerHealth.Instance.GetMaxHealth());
+            if (PlayerHealth.Instance != _subscribedHealth)
+            {
+                Unsubscribe();
+                if (PlayerHealth.Instance != null)
+                {
+                    _subscribedHealth = PlayerHealth.Instance;
+                    _subscribedHealth.OnHealthChanged += OnHealthChanged;
+                    // Sincroniza con la vida actual del nuevo player
+                    OnHealthChanged(_subscribedHealth.GetCurrentHealth(), _subscribedHealth.GetMaxHealth());
+                }
+            }
+            yield return new WaitForSeconds(0.5f);
         }
     }
-    private void OnDestroy()
+
+    private void Unsubscribe()
     {
-        if (PlayerHealth.Instance != null)
-            PlayerHealth.Instance.OnHealthChanged -= OnHealthChanged;
+        if (_subscribedHealth != null)
+        {
+            _subscribedHealth.OnHealthChanged -= OnHealthChanged;
+            _subscribedHealth = null;
+        }
     }
 
     private void OnHealthChanged(float current, float max)
     {
         float percent = current / max;
-
         if (percent >= activationThreshold)
         {
             SetAlpha(0f);
             return;
         }
-
-        // Mapea 0% vida → maxAlpha, 35% vida → minAlpha
         float t = 1f - (percent / activationThreshold);
         float alpha = Mathf.Lerp(minAlpha, maxAlpha, t);
         SetAlpha(alpha);

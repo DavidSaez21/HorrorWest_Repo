@@ -1,9 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PersistentCanvas : MonoBehaviour
 {
+    public static PersistentCanvas HUDInstance { get; private set; }
+
     [SerializeField] private string canvasId = "default";
-    private static System.Collections.Generic.Dictionary<string, PersistentCanvas> _instances = new();
+    private static Dictionary<string, PersistentCanvas> _instances = new();
 
     private void Awake()
     {
@@ -14,5 +17,8 @@ public class PersistentCanvas : MonoBehaviour
         }
         _instances[canvasId] = this;
         DontDestroyOnLoad(gameObject);
+
+        if (canvasId == "hud")
+            HUDInstance = this;
     }
 }

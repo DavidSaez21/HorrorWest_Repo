@@ -5,7 +5,6 @@ using TMPro;
 public class WeaponUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private PlayerShoot playerShoot;
     [SerializeField] private Image weaponIcon;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private GameObject reloadPanel;
@@ -16,23 +15,39 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private Color mediumAmmoColor = Color.yellow;
     [SerializeField] private Color lowAmmoColor = Color.red;
 
+    private PlayerShoot _playerShoot;
     private WeaponBase subscribedWeapon;
     private bool isReloading = false;
     private float reloadTime = 0f;
     private float reloadTimer = 0f;
 
-    private void Start()
+    private void OnEnable()
     {
+        // Busca el PlayerShoot automáticamente cada vez que se activa
+        StartCoroutine(FindAndSubscribe());
+    }
+
+    private System.Collections.IEnumerator FindAndSubscribe()
+    {
+        yield return new WaitUntil(() => PlayerManager.Instance != null && PlayerManager.Instance.Shoot != null);
+        _playerShoot = PlayerManager.Instance.Shoot;
         if (reloadPanel != null) reloadPanel.SetActive(false);
         RefreshWeapon();
     }
 
     private void Update()
     {
-        if (playerShoot != null && playerShoot.GetCurrentWeapon() != subscribedWeapon)
+        if (_playerShoot == null)
+        {
+            if (PlayerManager.Instance?.Shoot != null)
+                _playerShoot = PlayerManager.Instance.Shoot;
+            return;
+        }
+
+        if (_playerShoot.GetCurrentWeapon() != subscribedWeapon)
             RefreshWeapon();
 
-        if (PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo)
+        if (PlayerManager.Instance?.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo)
             SetInfiniteAmmoUI();
 
         if (isReloading && reloadCircle != null && reloadTime > 0f)
@@ -45,9 +60,9 @@ public class WeaponUI : MonoBehaviour
     private void RefreshWeapon()
     {
         Unsubscribe();
-        if (playerShoot == null) return;
+        if (_playerShoot == null) return;
 
-        subscribedWeapon = playerShoot.GetCurrentWeapon();
+        subscribedWeapon = _playerShoot.GetCurrentWeapon();
         if (subscribedWeapon == null) return;
 
         if (weaponIcon != null && subscribedWeapon.icon != null)
@@ -72,35 +87,25 @@ public class WeaponUI : MonoBehaviour
     private void UpdateAmmo(int current)
     {
         if (ammoText == null) return;
-
-        if (PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo)
+        if (PlayerManager.Instance?.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo)
         {
             SetInfiniteAmmoUI();
             return;
         }
-
         int maxAmmo = subscribedWeapon != null ? subscribedWeapon.GetMagazineSize() : 0;
         float ammoPercent = maxAmmo > 0 ? (float)current / maxAmmo : 1f;
-
         ammoText.text = $"{current} / {maxAmmo}";
-
-        // Blanco > 50%, Amarillo entre 25-50%, Rojo < 25%
-        if (ammoPercent > 0.5f)
-            ammoText.color = fullAmmoColor;
-        else if (ammoPercent > 0.25f)
-            ammoText.color = mediumAmmoColor;
-        else
-            ammoText.color = lowAmmoColor;
+        if (ammoPercent > 0.5f) ammoText.color = fullAmmoColor;
+        else if (ammoPercent > 0.25f) ammoText.color = mediumAmmoColor;
+        else ammoText.color = lowAmmoColor;
     }
 
     private void ShowReloading()
     {
-        if (PlayerManager.Instance.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo) return;
-
+        if (PlayerManager.Instance?.Stats != null && PlayerManager.Instance.Stats.hasInfiniteAmmo) return;
         isReloading = true;
         reloadTime = subscribedWeapon != null ? subscribedWeapon.GetReloadTime() : 1f;
         reloadTimer = 0f;
-
         if (ammoText != null) ammoText.gameObject.SetActive(false);
         if (reloadPanel != null)
         {
@@ -127,16 +132,6 @@ public class WeaponUI : MonoBehaviour
         if (reloadPanel != null) reloadPanel.SetActive(false);
     }
 
+    private void OnDisable() => Unsubscribe();
     private void OnDestroy() => Unsubscribe();
-
-    #region Debug
-    [Header("Debug")]
-    [SerializeField] private bool debugLogWeaponChange = false;
-
-    private void LogWeaponChange(string weaponName)
-    {
-        if (debugLogWeaponChange)
-            Debug.Log($"[WeaponUI] Arma cambiada a: {weaponName}");
-    }
-    #endregion
 }

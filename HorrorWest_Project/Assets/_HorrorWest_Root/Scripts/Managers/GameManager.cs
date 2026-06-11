@@ -34,6 +34,10 @@ public class GameManager : MonoBehaviour
     {
         CurrentLevel = GetCurrentLevelIndex();
         Debug.Log($"[GameManager] Escena: {SceneManager.GetActiveScene().name} — Nivel detectado: {CurrentLevel}");
+
+        // Reactiva el HUD al entrar en un nivel
+        SetHUDActive(true);
+
         StartRun();
     }
 
@@ -102,11 +106,12 @@ public class GameManager : MonoBehaviour
         ExperienceManager.Instance?.ResetXP();
         UpgradePool.Instance?.ResetPool();
 
-        var canvas = GameObject.FindObjectOfType<PersistentCanvas>();
-        if (canvas != null) Destroy(canvas.gameObject);
+        // Desactiva el HUD para que no tape la pantalla de muerte
+        SetHUDActive(false);
+
         if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
 
-        SceneManager.LoadScene("SCN_Death"); // SCN_Death gestiona su propia transición
+        SceneManager.LoadScene("SCN_Death");
     }
 
     private void HandleLevelCompleted()
@@ -123,12 +128,12 @@ public class GameManager : MonoBehaviour
         {
             IsRunActive = false;
             OnRunCompleted?.Invoke();
-            SceneFader.Instance?.FadeToScene(menuScene);
+            SceneFader.LoadScene(menuScene);
         }
         else
         {
             OnLevelChanged?.Invoke(nextLevel);
-            SceneFader.Instance?.FadeToScene(levelScenes[nextLevel]);
+            SceneFader.LoadScene(levelScenes[nextLevel]);
         }
     }
 
@@ -140,11 +145,17 @@ public class GameManager : MonoBehaviour
         ExperienceManager.Instance?.ResetXP();
         UpgradePool.Instance?.ResetPool();
 
-        var canvas = FindObjectOfType<PersistentCanvas>();
-        if (canvas != null) DestroyImmediate(canvas.gameObject);
+        SetHUDActive(false);
+
         if (PlayerManager.Instance != null) DestroyImmediate(PlayerManager.Instance.gameObject);
 
-        SceneFader.Instance?.FadeToScene("SCN_MainMenu");
+        SceneFader.LoadScene("SCN_MainMenu");
+    }
+
+    private void SetHUDActive(bool active)
+    {
+        if (PersistentCanvas.HUDInstance != null)
+            PersistentCanvas.HUDInstance.gameObject.SetActive(active);
     }
 
     private int GetCurrentLevelIndex()

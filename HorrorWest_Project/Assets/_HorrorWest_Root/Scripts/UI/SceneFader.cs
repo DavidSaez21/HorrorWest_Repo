@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -10,19 +10,18 @@ public class SceneFader : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private Image fadeImage;
 
-    [Header("Configuraci�n")]
+    [Header("Configuración")]
     [SerializeField] private float fadeDuration = 0.5f;
 
-    // Escenas que gestionan sus propias transiciones
     private readonly string[] _skipFadeScenes = { "SCN_Victory", "SCN_Death" };
+
+    private bool _isFading = false;
 
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        // Empieza transparente
         SetAlpha(0f);
     }
 
@@ -38,12 +37,31 @@ public class SceneFader : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (ShouldSkip(scene.name)) return;
+        // Resetea el estado SIEMPRE al cargar una escena
+        StopAllCoroutines();
+        _isFading = false;
+
+        if (ShouldSkip(scene.name))
+        {
+            SetAlpha(0f);
+            return;
+        }
+
         StartCoroutine(FadeIn());
+    }
+
+    public static void LoadScene(string sceneName)
+    {
+        if (Instance != null)
+            Instance.FadeToScene(sceneName);
+        else
+            SceneManager.LoadScene(sceneName);
     }
 
     public void FadeToScene(string sceneName)
     {
+        if (_isFading) return;
+
         if (ShouldSkip(sceneName))
         {
             SceneManager.LoadScene(sceneName);
@@ -54,7 +72,9 @@ public class SceneFader : MonoBehaviour
 
     private IEnumerator FadeOutAndLoad(string sceneName)
     {
-        yield return StartCoroutine(FadeOut());
+        _isFading = true;
+        yield return StartCoroutine(Fade(0f, 1f));
+        // _isFading se resetea en OnSceneLoaded al cargar la nueva escena
         SceneManager.LoadScene(sceneName);
     }
 
@@ -62,11 +82,7 @@ public class SceneFader : MonoBehaviour
     {
         SetAlpha(1f);
         yield return StartCoroutine(Fade(1f, 0f));
-    }
-
-    private IEnumerator FadeOut()
-    {
-        yield return StartCoroutine(Fade(0f, 1f));
+        SetAlpha(0f);
     }
 
     private IEnumerator Fade(float from, float to)

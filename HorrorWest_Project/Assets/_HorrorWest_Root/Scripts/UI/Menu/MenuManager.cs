@@ -101,7 +101,10 @@ public class MenuManager : MonoBehaviour
 
     public void ClickRestart()
     {
-        SceneFader.Instance?.FadeToScene("SCN_S1");
+        PlayerManager.Instance?.ResetForNewRun();
+        UpgradePool.Instance?.ResetPool();
+        ExperienceManager.Instance?.ResetXP();
+        SceneFader.LoadScene("SCN_S1");
     }
 
     private IEnumerator LoadAfterSound(string sceneName)
@@ -111,6 +114,6 @@ public class MenuManager : MonoBehaviour
             buttonSound.PlayClick();
             yield return new WaitForSeconds(buttonSound.clickSound.length);
         }
-        SceneFader.Instance?.FadeToScene(sceneName);
+        SceneFader.LoadScene(sceneName);
     }
 }

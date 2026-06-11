@@ -36,6 +36,42 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         UpdateUI();
         _hitFlash = GetComponentInChildren<PlayerHitFlash>(true);
+
+        // Busca las barras de vida en el HUD siempre (el Player puede ser nuevo)
+        StartCoroutine(FindHealthBars());
+    }
+
+    private System.Collections.IEnumerator FindHealthBars()
+    {
+        yield return new WaitUntil(() => PersistentCanvas.HUDInstance != null);
+
+        // Busca por nombre dentro del HUDCanva
+        Transform hud = PersistentCanvas.HUDInstance.transform;
+
+        if (healthBarFill == null)
+        {
+            Transform fill = FindDeepChild(hud, "Fill");
+            if (fill != null) healthBarFill = fill.GetComponent<Image>();
+        }
+
+        if (ghostBarFill == null)
+        {
+            Transform gris = FindDeepChild(hud, "Gris");
+            if (gris != null) ghostBarFill = gris.GetComponent<Image>();
+        }
+
+        UpdateUI();
+    }
+
+    private Transform FindDeepChild(Transform parent, string childName)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName) return child;
+            Transform found = FindDeepChild(child, childName);
+            if (found != null) return found;
+        }
+        return null;
     }
 
     private void Update()
@@ -43,7 +79,6 @@ public class PlayerHealth : MonoBehaviour
         if (ghostBarFill == null) return;
         float targetFill = healthBarFill != null ? healthBarFill.fillAmount : 0f;
         if (_ghostAmount <= targetFill) return;
-
         if (!_draining)
         {
             _delayTimer -= Time.deltaTime;
@@ -60,21 +95,15 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Time.time < lastDamageTime + invincibilityTime) return;
         lastDamageTime = Time.time;
-
         float armor = PlayerManager.Instance?.Stats?.GetArmor() ?? 0f;
         float reduced = amount * (1f - Mathf.Clamp01(armor));
         currentHealth = Mathf.Max(0f, currentHealth - reduced);
-
         CameraShaker.Instance?.Shake(0.08f, 0.15f);
         _hitFlash?.StartInvincibilityFlash(invincibilityTime);
-
-        // Resetea el delay del ghost
         _delayTimer = ghostDelay;
         _draining = false;
-
         UpdateUI();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
-
         if (currentHealth <= 0f) Die();
     }
 
@@ -111,7 +140,6 @@ public class PlayerHealth : MonoBehaviour
     #region Debug
     [Header("Debug")]
     [SerializeField] private bool debugLogDamage = false;
-
     public void DebugTakeDamage(float amount)
     {
         if (!debugLogDamage) return;

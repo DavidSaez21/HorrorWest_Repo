@@ -112,8 +112,15 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void OnPlayClicked() => SceneFader.Instance?.FadeToScene(gameSceneName);
-    private void OnBackClicked() => SceneFader.Instance?.FadeToScene(menuSceneName);
+    private void OnPlayClicked()
+    {
+        // Resetea stats in-run antes de empezar
+        PlayerManager.Instance?.ResetForNewRun();
+        UpgradePool.Instance?.ResetPool();
+        ExperienceManager.Instance?.ResetXP();
+        SceneFader.LoadScene(gameSceneName);
+    }
+    private void OnBackClicked() => SceneFader.LoadScene(menuSceneName);
 
     #region Debug
     [Header("Debug")]
