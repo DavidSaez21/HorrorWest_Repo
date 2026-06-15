@@ -34,10 +34,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentLevel = GetCurrentLevelIndex();
         Debug.Log($"[GameManager] Escena: {SceneManager.GetActiveScene().name} — Nivel detectado: {CurrentLevel}");
-
-        // Reactiva el HUD al entrar en un nivel
         SetHUDActive(true);
-
         StartRun();
     }
 
@@ -54,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerManager.Instance?.ResetForNewRun();
             UpgradePool.Instance?.ResetPool();
+            UpgradeIconUI.Instance?.ClearIcons();
         }
         else
         {
@@ -106,12 +104,27 @@ public class GameManager : MonoBehaviour
         ExperienceManager.Instance?.ResetXP();
         UpgradePool.Instance?.ResetPool();
 
-        // Desactiva el HUD para que no tape la pantalla de muerte
         SetHUDActive(false);
 
         if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
 
         SceneManager.LoadScene("SCN_Death");
+    }
+
+    // ── Victoria — llamado por el ChurchBoss al morir ────────────────────────
+    public void TriggerVictory()
+    {
+        Time.timeScale = 1f;
+
+        PlayerManager.Instance?.Stats?.ResetStats();
+        ExperienceManager.Instance?.ResetXP();
+        UpgradePool.Instance?.ResetPool();
+
+        SetHUDActive(false);
+
+        if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
+
+        SceneManager.LoadScene("SCN_Victory");
     }
 
     private void HandleLevelCompleted()
@@ -144,6 +157,7 @@ public class GameManager : MonoBehaviour
         PlayerManager.Instance?.Stats?.ResetStats();
         ExperienceManager.Instance?.ResetXP();
         UpgradePool.Instance?.ResetPool();
+        UpgradeIconUI.Instance?.ClearIcons();
 
         SetHUDActive(false);
 
@@ -181,5 +195,8 @@ public class GameManager : MonoBehaviour
 
     [ContextMenu("Debug — Simular nivel completado")]
     private void DebugSimulateLevelComplete() => HandleLevelCompleted();
+
+    [ContextMenu("Debug — Simular victoria")]
+    private void DebugSimulateVictory() => TriggerVictory();
     #endregion
 }

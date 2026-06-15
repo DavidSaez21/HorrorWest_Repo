@@ -1477,12 +1477,13 @@ MonoBehaviour:
   doorBlocker: {fileID: 1678083184}
   barWaveManager: {fileID: 177862860}
   sceneChangeTrigger: {fileID: 2111357485}
+  exitGuideParticles: {fileID: 0}
   reactivateStreetOnClear: 0
   streetCamMin: {x: -18.8, y: -14.3}
   streetCamMax: {x: 18.8, y: 69.5}
   barCamMin: {x: 12, y: 17.91}
   barCamMax: {x: 64.52, y: 69.3}
-  barMusic: {fileID: 8300000, guid: 0d0541c401359d044b050e788307e093, type: 3}
+  barMusic: {fileID: 0}
 --- !u!4 &350335540
 Transform:
   m_ObjectHideFlags: 0

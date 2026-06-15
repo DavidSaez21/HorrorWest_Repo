@@ -37,12 +37,14 @@ public class SceneFader : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Resetea el estado SIEMPRE al cargar una escena
         StopAllCoroutines();
         _isFading = false;
 
+        // Desactiva el HUD en las escenas de victoria y muerte
         if (ShouldSkip(scene.name))
         {
+            if (PersistentCanvas.HUDInstance != null)
+                PersistentCanvas.HUDInstance.gameObject.SetActive(false);
             SetAlpha(0f);
             return;
         }

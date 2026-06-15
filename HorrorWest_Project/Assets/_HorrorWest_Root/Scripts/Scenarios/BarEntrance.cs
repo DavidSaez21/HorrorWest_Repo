@@ -18,6 +18,9 @@ public class BarEntrance : MonoBehaviour
     [SerializeField] private WaveManager barWaveManager;
     [SerializeField] private GameObject sceneChangeTrigger;
 
+    [Header("Partículas guía (se activan al salir del interior)")]
+    [SerializeField] private GameObject exitGuideParticles;
+
     [Header("Al salir del interior (solo cárcel)")]
     [SerializeField] private bool reactivateStreetOnClear = false;
 
@@ -46,6 +49,7 @@ public class BarEntrance : MonoBehaviour
         if (doorBlocker != null) doorBlocker.SetActive(false);
         if (streetDoorBlocker != null) streetDoorBlocker.SetActive(true);
         if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(false);
+        if (exitGuideParticles != null) exitGuideParticles.SetActive(false);
 
         _confiner = Camera.main.GetComponent<CameraConfiner>();
         if (_confiner != null)
@@ -155,6 +159,9 @@ public class BarEntrance : MonoBehaviour
         }
 
         if (sceneChangeTrigger != null) sceneChangeTrigger.SetActive(true);
+
+        // Activa las partículas guía que indican por dónde seguir
+        if (exitGuideParticles != null) exitGuideParticles.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
