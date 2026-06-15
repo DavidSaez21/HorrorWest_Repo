@@ -4961,6 +4961,7 @@ MonoBehaviour:
   doorBlocker: {fileID: 0}
   barWaveManager: {fileID: 0}
   sceneChangeTrigger: {fileID: 0}
+  exitGuideParticles: {fileID: 0}
   reactivateStreetOnClear: 0
   streetCamMin: {x: -11.59, y: -6.26}
   streetCamMax: {x: 11.59, y: 7.07}
@@ -12900,7 +12901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbdd336ed13e9a4fa92b5e96bce0064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
+  enemyPrefabs:
+  - {fileID: 7781392927723494484, guid: ed2c822839319ee41af329d9d1127c90, type: 3}
+  - {fileID: 7781392927723494484, guid: e2c1232c6183a2a46b8958e017a515b4, type: 3}
   spawnPoint: {fileID: 1313129287}
   maxMinionsPerSpawn: 2
   spawnStagger: 0.3
@@ -13034,6 +13037,7 @@ MonoBehaviour:
   bloodSplatterPrefab: {fileID: 0}
   plagueVFXPrefab: {fileID: 0}
   plagueVFXSpawnPoint: {fileID: 0}
+  plagueMaterial: {fileID: 0}
   knockbackForce: 5
   knockbackDuration: 0.18
   separationRadius: 0.55

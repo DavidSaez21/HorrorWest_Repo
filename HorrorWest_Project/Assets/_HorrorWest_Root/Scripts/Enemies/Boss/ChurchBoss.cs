@@ -70,10 +70,18 @@ public class ChurchBoss : EnemyBase
     protected override void OnDeath()
     {
         _actionQueue.StopAll();
-        Time.timeScale = 1f;
 
-        var canvas = FindObjectOfType<PersistentCanvas>();
-        if (canvas != null) Destroy(canvas.gameObject);
+        // Desactiva el HUD específico (no destruyas con FindObjectOfType, puede coger el SceneFader)
+        if (PersistentCanvas.HUDInstance != null)
+            PersistentCanvas.HUDInstance.gameObject.SetActive(false);
+
+        // Resetea stats y mejoras para la siguiente run
+        PlayerManager.Instance?.Stats?.ResetStats();
+        ExperienceManager.Instance?.ResetXP();
+        UpgradePool.Instance?.ResetPool();
+        UpgradeIconUI.Instance?.ClearIcons();
+
+        Time.timeScale = 1f;
 
         if (PlayerManager.Instance != null) Destroy(PlayerManager.Instance.gameObject);
 
